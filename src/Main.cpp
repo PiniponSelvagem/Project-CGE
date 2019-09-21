@@ -1,13 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-
-#include "structs.h"
-
-#include <GLAD/glad.h>
-#include <GLFW/glfw3.h>
-#include <SOIL/SOIL.h>
+#include "libs.h"
 
 
 // SETTINGS
@@ -19,14 +10,14 @@ Vertex vertices[] = {
 	//Position							//Color							//Texcoords
 	glm::vec3(-0.5f, 0.5f, 0.0f),		glm::vec3(1.f, 1.f, 0.f),		glm::vec2(0.f, 1.f),
 	glm::vec3(-0.5f,-0.5f, 0.0f),		glm::vec3(0.f, 1.f, 0.f),		glm::vec2(0.f, 0.f),
-	glm::vec3( 0.5f, 0.5f, 0.0f),		glm::vec3(1.f, 0.f, 0.f),		glm::vec2(1.f, 0.f),
-	glm::vec3( 0.5f,-0.5f, 0.0f),		glm::vec3(0.f, 0.f, 1.f),		glm::vec2(1.f, 0.f)
+	glm::vec3( 0.5f,-0.5f, 0.0f),		glm::vec3(1.f, 0.f, 0.f),		glm::vec2(1.f, 0.f),
+	glm::vec3( 0.5f, 0.5f, 0.0f),		glm::vec3(0.f, 0.f, 1.f),		glm::vec2(1.f, 1.f)
 };
 unsigned nrOfVertices = sizeof(vertices) / sizeof(Vertex);
 
 GLuint indices[] = {
 	0, 1, 2,	//Tri 1
-	2, 1, 3		//Tri 2
+	0, 2, 3		//Tri 2
 };
 unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
 
@@ -147,6 +138,32 @@ void processInput(GLFWwindow *window) {
 
 
 
+void loadTexture(GLuint &texture, const char* fileName) {
+	int image_width, image_height;
+	unsigned char* image = SOIL_load_image(fileName, &image_width, &image_height, NULL, SOIL_LOAD_RGBA);
+	const char* soil_log = SOIL_last_result();
+
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //S -> x axis
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); //T -> y axis
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	if (image) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else {
+		std::cout << "Failed to load texture. " << soil_log << std::endl;
+	}
+
+	glActiveTexture(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	SOIL_free_image_data(image);
+}
+
 
 
 int main() {
@@ -227,13 +244,12 @@ int main() {
 	glBindVertexArray(0);
 
 
-	// INIT TEXTURE
-	int image_width, image_height;
-	unsigned char* image = SOIL_load_image("resources/png/crate.png", &image_width, &image_height, NULL, SOIL_LOAD_RGBA);
-
+	// TEXTURE 0
 	GLuint texture0;
-	glGenTextures(1, &texture0);
-
+	loadTexture(texture0, "resources/png/fragile.png");
+	// TEXTURE 1
+	GLuint texture1;
+	loadTexture(texture1, "resources/png/crate.png");
 
 
 	// MAIN LOOP
@@ -250,6 +266,17 @@ int main() {
 
 		// DRAW
 		glUseProgram(core_program);
+
+		// -- update uniforms
+		glUniform1i(glGetUniformLocation(core_program, "texture0"), 0);
+		glUniform1i(glGetUniformLocation(core_program, "texture1"), 1);
+
+		// -- activate texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
 		//glDrawArrays(GL_TRIANGLES, 0, nrOfVertices);
@@ -258,6 +285,11 @@ int main() {
 		// END
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
+		glBindVertexArray(0);
+		glUseProgram(0);
+		glActiveTexture(0);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	glfwTerminate();

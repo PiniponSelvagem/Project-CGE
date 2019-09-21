@@ -20,14 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\GLAD\glad.c" />
-    <ClCompile Include="Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="structs.h" />
+    <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_core.glsl" />
     <None Include="resources\shaders\vertex_core.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\libs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
