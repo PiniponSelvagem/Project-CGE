@@ -8,10 +8,12 @@ out vec3 vs_position;
 out vec3 vs_color;
 out vec2 vs_texcoord;
 
+uniform mat4 ModelMatrix;
+
 void main() {
-	vs_position = vx_position;
+	vs_position = vec4(ModelMatrix * vec4(vx_position, 1.f)).xyz;
 	vs_color    = vx_color;
 	vs_texcoord = vec2(vx_texcoord.x, vx_texcoord.y * -1.f);
 
-	gl_Position = vec4(vx_position, 1.f);
+	gl_Position = ModelMatrix * vec4(vx_position, 1.f);
 }
