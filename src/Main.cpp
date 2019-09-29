@@ -5,13 +5,15 @@
 const unsigned int SCR_WIDTH  = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+const float FOV = 90.f;
+
 
 Vertex vertices[] = {
-	//Position							//Color							//Texcoords
-	glm::vec3(-0.5f, 0.5f, 0.0f),		glm::vec3(1.f, 1.f, 0.f),		glm::vec2(0.f, 1.f),
-	glm::vec3(-0.5f,-0.5f, 0.0f),		glm::vec3(0.f, 1.f, 0.f),		glm::vec2(0.f, 0.f),
-	glm::vec3( 0.5f,-0.5f, 0.0f),		glm::vec3(1.f, 0.f, 0.f),		glm::vec2(1.f, 0.f),
-	glm::vec3( 0.5f, 0.5f, 0.0f),		glm::vec3(0.f, 0.f, 1.f),		glm::vec2(1.f, 1.f)
+	//Position							//Color							//Texcoords					//Normals				
+	glm::vec3(-0.5f, 0.5f, 0.0f),		glm::vec3(1.f, 1.f, 0.f),		glm::vec2(0.f, 1.f), 		glm::vec3(0.f, 0.f, -1.f),
+	glm::vec3(-0.5f,-0.5f, 0.0f),		glm::vec3(0.f, 1.f, 0.f),		glm::vec2(0.f, 0.f),		glm::vec3(0.f, 0.f, -1.f),
+	glm::vec3( 0.5f,-0.5f, 0.0f),		glm::vec3(1.f, 0.f, 0.f),		glm::vec2(1.f, 0.f),		glm::vec3(0.f, 0.f, -1.f),
+	glm::vec3( 0.5f, 0.5f, 0.0f),		glm::vec3(0.f, 0.f, 1.f),		glm::vec2(1.f, 1.f),		glm::vec3(0.f, 0.f, -1.f)
 };
 unsigned nrOfVertices = sizeof(vertices) / sizeof(Vertex);
 
@@ -117,7 +119,6 @@ bool loadShader(GLuint &program) {
 
 
 
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	// make sure the viewport matches the new window dimensions
 	glViewport(0, 0, width, height);
@@ -164,6 +165,33 @@ void loadTexture(GLuint &texture, const char* fileName) {
 	SOIL_free_image_data(image);
 }
 
+
+void updateInput(GLFWwindow* window, glm::vec3 &position, glm::vec3 &rotation, glm::vec3 &scale) {
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		position.z -= 0.01f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+		position.z += 0.01f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+		position.x -= 0.01f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+		position.x += 0.01f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		rotation.y -= 1.f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+		rotation.y += 1.f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+		scale -= 0.1f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+		scale += 0.1f;
+	}
+}
 
 
 int main() {
@@ -239,6 +267,9 @@ int main() {
 	// -- texcoord
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texcoord));
 	glEnableVertexAttribArray(2);
+	// -- normal
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, normal));
+	glEnableVertexAttribArray(3);
 
 	// BIND VAO
 	glBindVertexArray(0);
@@ -252,24 +283,54 @@ int main() {
 	loadTexture(texture1, "resources/png/crate.png");
 
 
-	glm::mat4 ModelMatrix(1.f);
-	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0.f, 0.f, 0.f));
-	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f));	//X
-	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f));	//Y
-	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z
-	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1.f));
+	// INIT MATRIX
+	glm::vec3 position(0.f);
+	glm::vec3 rotation(0.f);
+	glm::vec3 scale(1.f);
 
+	glm::mat4 ModelMatrix(1.f);
+	ModelMatrix = glm::translate(ModelMatrix, position);
+	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));	//X
+	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));	//Y
+	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
+	ModelMatrix = glm::scale(ModelMatrix, scale);
+
+	glm::vec3 camPosition(0.f, 0.f, 1.f);
+	glm::vec3 worldUp(0.f, 1.f, 0.f);
+	glm::vec3 camFront(0.f, 0.f, -1.f);
+	glm::mat4 ViewMatrix(1.f);
+	ViewMatrix = glm::lookAt(camPosition, camPosition + camFront, worldUp);
+
+	float nearPane = 0.1f;
+	float farPlane = 1000.f;
+	glm::mat4 ProjectionMatrix(1.f);
+	ProjectionMatrix = glm::perspective(
+		glm::radians(FOV),
+		static_cast<float>(SCR_WIDTH) / SCR_HEIGHT,	//static_cast<float>(framebufferWidth) / frameBufferHeight,
+		nearPane,
+		farPlane
+	);
+
+	// LIGHT
+	glm::vec3 lightPos0(0.f, 0.f, 0.05f);
+
+	// INIT UNIFORMS
 	glUseProgram(core_program);
 	glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
+	glUniformMatrix4fv(glGetUniformLocation(core_program, "ViewMatrix"), 1, GL_FALSE, glm::value_ptr(ViewMatrix));
+	glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
+	glUniform3fv(glGetUniformLocation(core_program, "lightPos0"), 1, glm::value_ptr(lightPos0));
 	glUseProgram(0);
 
 
 	// MAIN LOOP
 	while (!glfwWindowShouldClose(window)) {
 		// UPDATE INPUT
-		processInput(window);
+		glfwPollEvents();
 
 		// UPDATE
+		updateInput(window, position, rotation, scale);
+		processInput(window);
 
 
 		// CLEAR
@@ -284,12 +345,27 @@ int main() {
 		glUniform1i(glGetUniformLocation(core_program, "texture1"), 1);
 
 		// MOVE, ROTATE, SCALE
-		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0.f, 0.f, 0.f));
-		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f));	//X
-		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f));	//Y
-		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z
-		ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1.f));
+		//position.z -= 0.01f;
+		//rotation.y += 2.f;
+
+		ModelMatrix = glm::mat4(1.f);
+		ModelMatrix = glm::translate(ModelMatrix, position);
+		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));	//X
+		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));	//Y
+		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
+		ModelMatrix = glm::scale(ModelMatrix, scale);
+		
 		glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
+		//* move this below to a place where only when window is resized
+		//glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);)
+		ProjectionMatrix = glm::perspective(
+			glm::radians(FOV),
+			static_cast<float>(SCR_WIDTH) / SCR_HEIGHT,	//static_cast<float>(framebufferWidth) / frameBufferHeight,
+			nearPane,
+			farPlane
+		);
+		glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
+		//*/
 
 		// -- activate texture
 		glActiveTexture(GL_TEXTURE0);
@@ -304,7 +380,7 @@ int main() {
 
 		// END
 		glfwSwapBuffers(window);
-		glfwPollEvents();
+		glFlush();
 
 		glBindVertexArray(0);
 		glUseProgram(0);
