@@ -27,6 +27,7 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\libs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

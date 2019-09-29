@@ -25,99 +25,6 @@ unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
 
 
 
-bool loadShader(GLuint &program) {
-	bool loadSuccess = true;
-
-	char infoLog[512];
-	GLint success;
-
-	std::string temp = "";
-	std::string src = "";
-
-	std::ifstream in_file;
-
-	// VERTEX
-	in_file.open("resources/shaders/vertex_core.glsl");
-
-	if (in_file.is_open()) {
-		while (std::getline(in_file, temp)) {
-			src += temp + "\n";
-		}
-	}
-	else {
-		std::cout << "Failed to load vertex file." << std::endl;
-		loadSuccess = false;
-	}
-
-	in_file.close();
-
-	GLuint vxShader = glCreateShader(GL_VERTEX_SHADER);
-	const GLchar* vertSrc = src.c_str();
-	glShaderSource(vxShader, 1, &vertSrc, NULL);
-	glCompileShader(vxShader);
-	glGetShaderiv(vxShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(vxShader, 512, NULL, infoLog);
-		std::cout << "Failed to compile vertex file." << std::endl;
-		std::cout << infoLog << std::endl;
-		loadSuccess = false;
-	}
-
-	// ----------
-
-	temp = "";
-	src = "";
-
-	// FRAGMENT
-	in_file.open("resources/shaders/fragment_core.glsl");
-
-	if (in_file.is_open()) {
-		while (std::getline(in_file, temp)) {
-			src += temp + "\n";
-		}
-	}
-	else {
-		std::cout << "Failed to load fragment file." << std::endl;
-		loadSuccess = false;
-	}
-
-	in_file.close();
-
-	GLuint fgShader = glCreateShader(GL_FRAGMENT_SHADER);
-	const GLchar* fragSrc = src.c_str();
-	glShaderSource(fgShader, 1, &fragSrc, NULL);
-	glCompileShader(fgShader);
-	glGetShaderiv(fgShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(fgShader, 512, NULL, infoLog);
-		std::cout << "Failed to compile fragment file." << std::endl;
-		std::cout << infoLog << std::endl;
-		loadSuccess = false;
-	}
-
-	// PROGRAM
-	program = glCreateProgram();
-	glAttachShader(program, vxShader);
-	glAttachShader(program, fgShader);
-	glLinkProgram(program);
-
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(program, 512, NULL, infoLog);
-		std::cout << "Failed to link program." << std::endl;
-		std::cout << infoLog << std::endl;
-		loadSuccess = false;
-	}
-
-	// END
-	glUseProgram(0);
-	glDeleteShader(vxShader);
-	glDeleteShader(fgShader);
-
-	return loadSuccess;
-}
-
-
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	// make sure the viewport matches the new window dimensions
@@ -232,11 +139,7 @@ int main() {
 
 	
 	// INIT SHADER
-	GLuint core_program;
-	if (!loadShader(core_program)) {
-		glfwTerminate();
-	}
-
+	Shader core_program("resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl");
 
 
 	// VAO, VBO, EBO
@@ -277,10 +180,10 @@ int main() {
 
 	// TEXTURE 0
 	GLuint texture0;
-	loadTexture(texture0, "resources/png/fragile.png");
+	loadTexture(texture0, "resources/png/crate.png");
 	// TEXTURE 1
 	GLuint texture1;
-	loadTexture(texture1, "resources/png/crate.png");
+	loadTexture(texture1, "resources/png/fragile.png");
 
 
 	// INIT MATRIX
@@ -295,11 +198,11 @@ int main() {
 	ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
 	ModelMatrix = glm::scale(ModelMatrix, scale);
 
-	glm::vec3 camPosition(0.f, 0.f, 1.f);
+	glm::vec3 cameraPos(0.f, 0.f, 1.f);
 	glm::vec3 worldUp(0.f, 1.f, 0.f);
 	glm::vec3 camFront(0.f, 0.f, -1.f);
 	glm::mat4 ViewMatrix(1.f);
-	ViewMatrix = glm::lookAt(camPosition, camPosition + camFront, worldUp);
+	ViewMatrix = glm::lookAt(cameraPos, cameraPos + camFront, worldUp);
 
 	float nearPane = 0.1f;
 	float farPlane = 1000.f;
@@ -312,15 +215,19 @@ int main() {
 	);
 
 	// LIGHT
-	glm::vec3 lightPos0(0.f, 0.f, 0.05f);
+	glm::vec3 lightPos0(0.f, 0.f, 1.f);
 
 	// INIT UNIFORMS
-	glUseProgram(core_program);
-	glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
-	glUniformMatrix4fv(glGetUniformLocation(core_program, "ViewMatrix"), 1, GL_FALSE, glm::value_ptr(ViewMatrix));
-	glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
-	glUniform3fv(glGetUniformLocation(core_program, "lightPos0"), 1, glm::value_ptr(lightPos0));
-	glUseProgram(0);
+	core_program.use();
+
+	core_program.setMat4fv(ModelMatrix, "ModelMatrix");
+	core_program.setMat4fv(ViewMatrix, "ViewMatrix");
+	core_program.setMat4fv(ProjectionMatrix, "ProjectionMatrix");
+
+	core_program.setVec3f(lightPos0, "lightPos0");
+	core_program.setVec3f(cameraPos, "cameraPos");
+
+	core_program.unuse();
 
 
 	// MAIN LOOP
@@ -337,17 +244,10 @@ int main() {
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		// DRAW
-		glUseProgram(core_program);
-
 		// -- update uniforms
-		glUniform1i(glGetUniformLocation(core_program, "texture0"), 0);
-		glUniform1i(glGetUniformLocation(core_program, "texture1"), 1);
-
-		// MOVE, ROTATE, SCALE
-		//position.z -= 0.01f;
-		//rotation.y += 2.f;
-
+		core_program.set1i(0, "texture0");
+		core_program.set1i(1, "texture1");
+		
 		ModelMatrix = glm::mat4(1.f);
 		ModelMatrix = glm::translate(ModelMatrix, position);
 		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));	//X
@@ -355,7 +255,7 @@ int main() {
 		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
 		ModelMatrix = glm::scale(ModelMatrix, scale);
 		
-		glUniformMatrix4fv(glGetUniformLocation(core_program, "ModelMatrix"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
+		core_program.setMat4fv(ModelMatrix, "ModelMatrix");
 		//* move this below to a place where only when window is resized
 		//glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);)
 		ProjectionMatrix = glm::perspective(
@@ -364,8 +264,11 @@ int main() {
 			nearPane,
 			farPlane
 		);
-		glUniformMatrix4fv(glGetUniformLocation(core_program, "ProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
+		core_program.setMat4fv(ProjectionMatrix, "ProjectionMatrix");
 		//*/
+
+		// DRAW
+		core_program.use();
 
 		// -- activate texture
 		glActiveTexture(GL_TEXTURE0);
@@ -389,7 +292,6 @@ int main() {
 	}
 
 	glfwTerminate();
-	glDeleteProgram(core_program);
 
 	return 0;
 }

@@ -10,6 +10,8 @@
 #include <GLM/gtc/type_ptr.hpp>
 #include <SOIL/SOIL.h>
 
+#include "Shader.h"
+
 struct Vertex {
 	glm::vec3 position;
 	glm::vec3 color;
