@@ -1,12 +1,3 @@
-#pragma once
-
-#include <iostream>
-#include <string>
-
-#include <GLAD/glad.h>
-#include <GLFW/glfw3.h>
-//#include <GLM/glm.hpp>
-#include <SOIL/SOIL.h>
 
 class Texture {
 	private:

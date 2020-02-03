@@ -173,8 +173,10 @@ int main() {
 	// TEXTURE 0
 	Texture texture0("resources/png/crate.png", GL_TEXTURE_2D, 0);
 	// TEXTURE 1
-	//Texture texture1("resources/png/fragile.png", GL_TEXTURE_2D, 1);
+	Texture texture1("resources/png/fragile.png", GL_TEXTURE_2D, 1);
 
+	// MATERIAL 0
+	Material material0(glm::vec3(0.1f), glm::vec3(1.f), glm::vec3(1.f), texture0.getTextureUnit(), texture1.getTextureUnit());
 
 	// INIT MATRIX
 	glm::vec3 position(0.f);
@@ -236,7 +238,8 @@ int main() {
 
 		// -- update uniforms
 		core_program.set1i(texture0.getTextureUnit(), "texture0");
-		//core_program.set1i(texture1.getTextureUnit(), "texture1");
+		core_program.set1i(texture1.getTextureUnit(), "texture1");
+		material0.sendToShader(core_program);
 		
 		ModelMatrix = glm::mat4(1.f);
 		ModelMatrix = glm::translate(ModelMatrix, position);
