@@ -8,9 +8,11 @@
 #include <GLM/glm.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
 #include <GLM/gtc/type_ptr.hpp>
+
 #include <SOIL/SOIL.h>
 
 #include "Shader.h"
+#include "Texture.h"
 
 struct Vertex {
 	glm::vec3 position;

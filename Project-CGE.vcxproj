@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\libs.h" />
+    <ClInclude Include="src\Texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

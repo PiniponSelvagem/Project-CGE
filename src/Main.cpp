@@ -10,16 +10,36 @@ const float FOV = 90.f;
 
 Vertex vertices[] = {
 	//Position							//Color							//Texcoords					//Normals				
-	glm::vec3(-0.5f, 0.5f, 0.0f),		glm::vec3(1.f, 1.f, 0.f),		glm::vec2(0.f, 1.f), 		glm::vec3(0.f, 0.f, -1.f),
-	glm::vec3(-0.5f,-0.5f, 0.0f),		glm::vec3(0.f, 1.f, 0.f),		glm::vec2(0.f, 0.f),		glm::vec3(0.f, 0.f, -1.f),
-	glm::vec3( 0.5f,-0.5f, 0.0f),		glm::vec3(1.f, 0.f, 0.f),		glm::vec2(1.f, 0.f),		glm::vec3(0.f, 0.f, -1.f),
-	glm::vec3( 0.5f, 0.5f, 0.0f),		glm::vec3(0.f, 0.f, 1.f),		glm::vec2(1.f, 1.f),		glm::vec3(0.f, 0.f, -1.f)
+	glm::vec3(-0.5f, 0.5f, 0.5f),		glm::vec3(1.f, 1.f, 0.f),		glm::vec2(0.f, 1.f), 		glm::vec3(0.f, 0.f, -1.f),
+	glm::vec3(-0.5f,-0.5f, 0.5f),		glm::vec3(0.f, 1.f, 0.f),		glm::vec2(0.f, 0.f),		glm::vec3(0.f, 0.f, -1.f),
+	glm::vec3( 0.5f,-0.5f, 0.5f),		glm::vec3(1.f, 0.f, 0.f),		glm::vec2(1.f, 0.f),		glm::vec3(0.f, 0.f, -1.f),
+	glm::vec3( 0.5f, 0.5f, 0.5f),		glm::vec3(0.f, 0.f, 1.f),		glm::vec2(1.f, 1.f),		glm::vec3(0.f, 0.f, -1.f),
+
+	glm::vec3( 0.5f, 0.5f,-0.5f),		glm::vec3(1.f, 1.f, 0.f),		glm::vec2(0.f, 1.f), 		glm::vec3(0.f, 0.f,  1.f),
+	glm::vec3( 0.5f,-0.5f,-0.5f),		glm::vec3(0.f, 1.f, 0.f),		glm::vec2(0.f, 0.f),		glm::vec3(0.f, 0.f,  1.f),
+	glm::vec3(-0.5f,-0.5f,-0.5f),		glm::vec3(1.f, 0.f, 0.f),		glm::vec2(1.f, 0.f),		glm::vec3(0.f, 0.f,  1.f),
+	glm::vec3(-0.5f, 0.5f,-0.5f),		glm::vec3(0.f, 0.f, 1.f),		glm::vec2(1.f, 1.f),		glm::vec3(0.f, 0.f,  1.f)
 };
 unsigned nrOfVertices = sizeof(vertices) / sizeof(Vertex);
 
 GLuint indices[] = {
 	0, 1, 2,	//Tri 1
-	0, 2, 3		//Tri 2
+	0, 2, 3,	//Tri 2
+
+	7, 6, 1,
+	7, 1, 0,
+	
+	1, 6, 5,
+	1, 2, 5,
+	
+	3, 2, 4,
+	4, 2, 5,
+	
+	7, 0, 3,
+	7, 3, 4,
+	
+	4, 5, 7,
+	5, 6, 7
 };
 unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
 
@@ -42,34 +62,6 @@ void processInput(GLFWwindow *window) {
 
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-}
-
-
-
-void loadTexture(GLuint &texture, const char* fileName) {
-	int image_width, image_height;
-	unsigned char* image = SOIL_load_image(fileName, &image_width, &image_height, NULL, SOIL_LOAD_RGBA);
-	const char* soil_log = SOIL_last_result();
-
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //S -> x axis
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); //T -> y axis
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	if (image) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else {
-		std::cout << "Failed to load texture. " << soil_log << std::endl;
-	}
-
-	glActiveTexture(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	SOIL_free_image_data(image);
 }
 
 
@@ -179,11 +171,9 @@ int main() {
 
 
 	// TEXTURE 0
-	GLuint texture0;
-	loadTexture(texture0, "resources/png/crate.png");
+	Texture texture0("resources/png/crate.png", GL_TEXTURE_2D, 0);
 	// TEXTURE 1
-	GLuint texture1;
-	loadTexture(texture1, "resources/png/fragile.png");
+	//Texture texture1("resources/png/fragile.png", GL_TEXTURE_2D, 1);
 
 
 	// INIT MATRIX
@@ -229,7 +219,7 @@ int main() {
 
 	core_program.unuse();
 
-
+	int i = 0;
 	// MAIN LOOP
 	while (!glfwWindowShouldClose(window)) {
 		// UPDATE INPUT
@@ -245,8 +235,8 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		// -- update uniforms
-		core_program.set1i(0, "texture0");
-		core_program.set1i(1, "texture1");
+		core_program.set1i(texture0.getTextureUnit(), "texture0");
+		//core_program.set1i(texture1.getTextureUnit(), "texture1");
 		
 		ModelMatrix = glm::mat4(1.f);
 		ModelMatrix = glm::translate(ModelMatrix, position);
@@ -271,10 +261,8 @@ int main() {
 		core_program.use();
 
 		// -- activate texture
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture0);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, texture1);
+		texture0.bind();
+		//texture1.bind();
 
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
@@ -289,6 +277,7 @@ int main() {
 		glUseProgram(0);
 		glActiveTexture(0);
 		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindTexture(GL_TEXTURE_2D, 1);
 	}
 
 	glfwTerminate();
