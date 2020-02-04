@@ -65,30 +65,30 @@ void processInput(GLFWwindow *window) {
 }
 
 
-void updateInput(GLFWwindow* window, glm::vec3 &position, glm::vec3 &rotation, glm::vec3 &scale) {
+void updateInput(GLFWwindow* window, Mesh &mesh) {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-		position.z -= 0.01f;
+		mesh.changePosition(glm::vec3(0.f, 0.f, -0.01f));
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-		position.z += 0.01f;
+		mesh.changePosition(glm::vec3(0.f, 0.f, 0.01f));
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-		position.x -= 0.01f;
+		mesh.changePosition(glm::vec3(-0.01f, 0.f, 0.f));
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-		position.x += 0.01f;
+		mesh.changePosition(glm::vec3(0.01f, 0.f, 0.f));
 	}
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-		rotation.y -= 1.f;
+		mesh.changeRotation(glm::vec3(0.f, -1.f, 0.f));
 	}
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
-		rotation.y += 1.f;
+		mesh.changeRotation(glm::vec3(0.f, 1.f, 0.f));
 	}
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
-		scale -= 0.1f;
+		mesh.changeRotation(glm::vec3(-0.1f));
 	}
 	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
-		scale += 0.1f;
+		mesh.changeRotation(glm::vec3(0.1f));
 	}
 }
 
@@ -147,10 +147,6 @@ int main() {
 	Material material0(glm::vec3(0.1f), glm::vec3(1.f), glm::vec3(1.f), texture0.getTextureUnit(), texture1.getTextureUnit());
 
 	// INIT MATRIX
-	glm::vec3 position(0.f);
-	glm::vec3 rotation(0.f);
-	glm::vec3 scale(1.f);
-
 	glm::vec3 cameraPos(0.f, 0.f, 1.f);
 	glm::vec3 worldUp(0.f, 1.f, 0.f);
 	glm::vec3 camFront(0.f, 0.f, -1.f);
@@ -173,7 +169,6 @@ int main() {
 	// INIT UNIFORMS
 	core_program.use();
 
-	//core_program.setMat4fv(ModelMatrix, "ModelMatrix");
 	core_program.setMat4fv(ViewMatrix, "ViewMatrix");
 	core_program.setMat4fv(ProjectionMatrix, "ProjectionMatrix");
 
@@ -189,8 +184,7 @@ int main() {
 		glfwPollEvents();
 
 		// UPDATE
-		updateInput(window, position, rotation, scale);
-		mesh1.update(position, rotation, scale);
+		updateInput(window, mesh1);
 		processInput(window);
 
 
@@ -204,8 +198,9 @@ int main() {
 		material0.sendToShader(core_program);
 		
 
+		//TODO:
 		//* move this below to a place where only when window is resized
-		//glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);)
+		//glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
 		ProjectionMatrix = glm::perspective(
 			glm::radians(FOV),
 			static_cast<float>(SCR_WIDTH) / SCR_HEIGHT,	//static_cast<float>(framebufferWidth) / frameBufferHeight,
@@ -222,11 +217,8 @@ int main() {
 		texture0.bind();
 		//texture1.bind();
 
-		//glBindVertexArray(VAO);
-		//glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
-		////glDrawArrays(GL_TRIANGLES, 0, nrOfVertices);
 		mesh1.render(&core_program);
-
+		mesh2.render(&core_program);
 
 		// END
 		glfwSwapBuffers(window);
