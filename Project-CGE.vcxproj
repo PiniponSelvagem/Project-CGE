@@ -27,10 +27,12 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\Material.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\libs.h" />
     <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Vertex.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
