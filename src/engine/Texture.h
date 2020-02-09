@@ -65,7 +65,7 @@ class Texture {
 		}
 
 		void bind(const GLint textureUnit) {
-			glActiveTexture(GL_TEXTURE + textureUnit);
+			glActiveTexture(GL_TEXTURE0 + textureUnit);
 			glBindTexture(this->type, this->id);
 		}
 
