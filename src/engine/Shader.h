@@ -1,7 +1,9 @@
+#pragma once
 
 class Shader {
 	private:
 		GLuint id;
+		const int glMajorVer, glMinorVer;
 
 		std::string loadShaderSource(const char* fileName) {
 			std::string temp = "";
@@ -22,6 +24,9 @@ class Shader {
 			}
 
 			in_file.close();
+
+			std::string version = std::to_string(this->glMajorVer) + std::to_string(this->glMinorVer) + "0";
+			src.replace(src.find("#version"), 12, "#version " + version);
 
 			return src;
 		}
@@ -64,7 +69,7 @@ class Shader {
 			glGetProgramiv(this->id, GL_LINK_STATUS, &success);
 			if (!success) {
 				glGetProgramInfoLog(this->id, 512, NULL, infoLog);
-				std::cout << "ERROR::SHADER::COULD_NOT_LINK_PROGRTAM" << std::endl;
+				std::cout << "ERROR::SHADER::COULD_NOT_LINK_PROGRAM" << std::endl;
 				std::cout << infoLog << std::endl;
 			}
 
@@ -72,7 +77,8 @@ class Shader {
 		}
 
 	public:
-		Shader(const char* vertexFile, const char* fragmentFile, const char* geometryFile = "") {
+		Shader(const int glMajorVer, const int glMinorVer, const char* vertexFile, const char* fragmentFile, const char* geometryFile = "") 
+		: glMajorVer(glMajorVer), glMinorVer(glMinorVer) {
 			GLuint vertexShader = 0;
 			GLuint geometryShader = 0;
 			GLuint fragmentShader = 0;
@@ -107,7 +113,7 @@ class Shader {
 
 		void set1i(GLint value, const GLchar* name) {
 			this->use();
-			glUniform1i(glGetUniformLocation(this->id, name), 0);
+			glUniform1i(glGetUniformLocation(this->id, name), value);
 			this->unuse();
 		}
 

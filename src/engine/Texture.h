@@ -1,10 +1,10 @@
+#pragma once
 
 class Texture {
 	private:
 		GLuint id;
 		int width, height;
 		unsigned int type;
-		GLint textureUnit;
 
 		void deleteTextureIfThisExists() {
 			if (this->id) {
@@ -14,11 +14,10 @@ class Texture {
 		
 
 	public:
-		Texture(const char* fileName, GLenum type, GLint textureUnit) {
+		Texture(const char* fileName, GLenum type) {
 			deleteTextureIfThisExists();
 
 			this->type = type;
-			this->textureUnit = textureUnit;
 
 			loadTexture(fileName);
 		}
@@ -29,10 +28,6 @@ class Texture {
 
 		inline GLuint getID() const {
 			return this->id;
-		}
-
-		inline GLint getTextureUnit() const {
-			return this->textureUnit;
 		}
 
 		void loadTexture(const char* fileName) {
@@ -69,8 +64,8 @@ class Texture {
 			SOIL_free_image_data(image);
 		}
 
-		void bind() {
-			glActiveTexture(GL_TEXTURE + this->textureUnit);
+		void bind(const GLint textureUnit) {
+			glActiveTexture(GL_TEXTURE + textureUnit);
 			glBindTexture(this->type, this->id);
 		}
 

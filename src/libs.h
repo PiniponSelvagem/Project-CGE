@@ -11,8 +11,9 @@
 
 #include <SOIL/SOIL.h>
 
-#include "Vertex.h"
-#include "Shader.h"
-#include "Texture.h"
-#include "Material.h"
-#include "Mesh.h"
+#include "engine/Vertex.h"
+#include "engine/Shader.h"
+#include "engine/Texture.h"
+#include "engine/Material.h"
+#include "engine/Primitives.h"
+#include "engine/Mesh.h"

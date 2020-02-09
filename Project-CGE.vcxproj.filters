@@ -16,6 +16,15 @@
     <Filter Include="Source Files\src">
       <UniqueIdentifier>{d5a8cfb1-6b62-4cb0-b27b-cb6fe60e4855}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine">
+      <UniqueIdentifier>{a78b6ac9-d0da-4996-979b-366d47d26069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\game">
+      <UniqueIdentifier>{da6a464e-5a4e-4a01-9cb1-1e6cafc283a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{c2384796-defe-4c0f-8eb9-6fe61ca4b93b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\GLAD\glad.c">
@@ -23,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Game.cpp">
+      <Filter>Source Files\src\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,20 +49,26 @@
     <ClInclude Include="src\libs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Shader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\engine\Material.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Texture.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\engine\Mesh.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Material.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\engine\Shader.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Vertex.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\engine\Texture.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\engine\Vertex.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Primitives.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Game.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

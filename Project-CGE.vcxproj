@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="include\GLAD\glad.c" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
@@ -27,12 +28,14 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Mesh.h" />
-    <ClInclude Include="src\Material.h" />
-    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\game\Game.h" />
+    <ClInclude Include="src\engine\Primitives.h" />
+    <ClInclude Include="src\engine\Mesh.h" />
+    <ClInclude Include="src\engine\Material.h" />
+    <ClInclude Include="src\engine\Shader.h" />
     <ClInclude Include="src\libs.h" />
-    <ClInclude Include="src\Texture.h" />
-    <ClInclude Include="src\Vertex.h" />
+    <ClInclude Include="src\engine\Texture.h" />
+    <ClInclude Include="src\engine\Vertex.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

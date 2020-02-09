@@ -1,3 +1,4 @@
+#pragma once
 
 class Material {
 	private:
@@ -22,8 +23,8 @@ class Material {
 
 		void sendToShader(Shader &program) {
 			program.setVec3f(this->ambient,  "material.ambient");
-			program.setVec3f(this->specular, "material.specular");
 			program.setVec3f(this->diffuse,  "material.diffuse");
+			program.setVec3f(this->specular, "material.specular");
 			program.set1i(this->diffuseTex,  "material.diffuseTex");
 			program.set1i(this->specularTex, "material.specularTex");
 		}
