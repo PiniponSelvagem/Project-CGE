@@ -22,10 +22,10 @@ class Material {
 		~Material() { }
 
 		void sendToShader(Shader &program) {
-			program.setVec3f(this->ambient,  "material.ambient");
-			program.setVec3f(this->diffuse,  "material.diffuse");
-			program.setVec3f(this->specular, "material.specular");
-			program.set1i(this->diffuseTex,  "material.diffuseTex");
-			program.set1i(this->specularTex, "material.specularTex");
+			program.setVec3f(ambient,  "material.ambient");
+			program.setVec3f(diffuse,  "material.diffuse");
+			program.setVec3f(specular, "material.specular");
+			program.set1i(diffuseTex,  "material.diffuseTex");
+			program.set1i(specularTex, "material.specularTex");
 		}
 };

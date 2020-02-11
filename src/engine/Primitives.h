@@ -21,19 +21,19 @@ class Primitive {
 		}
 
 		inline Vertex * getVertices() {
-			return this->vertices.data();
+			return vertices.data();
 		}
 
 		inline GLuint * getIndices() {
-			return this->indices.data();
+			return indices.data();
 		}
 
 		inline const unsigned getNrVertices() {
-			return this->vertices.size();
+			return vertices.size();
 		}
 
 		inline const unsigned getNrIndices() {
-			return this->indices.size();
+			return indices.size();
 		}
 };
 
@@ -54,10 +54,9 @@ class Triangle : public Primitive {
 		};
 		unsigned nIndices = sizeof(indices) / sizeof(GLuint);
 
-		this->set(vertices, nVertices, indices, nIndices);
+		set(vertices, nVertices, indices, nIndices);
 	}
 };
-
 class Quad : public Primitive {
 	public:
 		Quad() : Primitive() {
@@ -76,10 +75,9 @@ class Quad : public Primitive {
 			};
 			unsigned nIndices = sizeof(indices) / sizeof(GLuint);
 
-			this->set(vertices, nVertices, indices, nIndices);
+			set(vertices, nVertices, indices, nIndices);
 		}
 };
-
 class Cube : public Primitive {
 	public:
 		Cube() : Primitive() {
@@ -147,6 +145,6 @@ class Cube : public Primitive {
 			};
 			unsigned nVertices = sizeof(vertices) / sizeof(Vertex);
 
-			this->set(vertices, nVertices, nullptr, 0);
+			set(vertices, nVertices, nullptr, 0);
 		}
 };

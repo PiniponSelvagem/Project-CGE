@@ -7,8 +7,8 @@ class Texture {
 		unsigned int type;
 
 		void deleteTextureIfThisExists() {
-			if (this->id) {
-				glDeleteTextures(1, &this->id);
+			if (id) {
+				glDeleteTextures(1, &id);
 			}
 		}
 		
@@ -23,11 +23,11 @@ class Texture {
 		}
 
 		~Texture() {
-			glDeleteTextures(1, &this->id);
+			glDeleteTextures(1, &id);
 		}
 
 		inline GLuint getID() const {
-			return this->id;
+			return id;
 		}
 
 		void loadTexture(const char* fileName) {
@@ -40,37 +40,37 @@ class Texture {
 			much sense if a new opengl texture object is created every time, then it would be more logical to just create
 			multiple Texture instances by the constructor. 
 			*/
-			unsigned char* image = SOIL_load_image(fileName, &this->width, &this->height, NULL, SOIL_LOAD_RGBA);
+			unsigned char* image = SOIL_load_image(fileName, &width, &height, NULL, SOIL_LOAD_RGBA);
 			const char* soil_log = SOIL_last_result();
 
-			glGenTextures(1, &this->id);
-			glBindTexture(this->type, this->id);
+			glGenTextures(1, &id);
+			glBindTexture(type, id);
 
-			glTexParameteri(this->type, GL_TEXTURE_WRAP_S, GL_REPEAT); //S -> x axis
-			glTexParameteri(this->type, GL_TEXTURE_WRAP_T, GL_REPEAT); //T -> y axis
-			glTexParameteri(this->type, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			glTexParameteri(this->type, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT); //S -> x axis
+			glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT); //T -> y axis
+			glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 			if (image) {
-				glTexImage2D(this->type, 0, GL_RGBA, this->width, this->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-				glGenerateMipmap(this->type);
+				glTexImage2D(type, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+				glGenerateMipmap(type);
 			}
 			else {
 				std::cout << "ERROR: [Texture] Failed to load texture " << fileName << ". " << soil_log << std::endl;
 			}
 
 			glActiveTexture(0);
-			glBindTexture(this->type, 0);
+			glBindTexture(type, 0);
 			SOIL_free_image_data(image);
 		}
 
 		void bind(const GLint textureUnit) {
 			glActiveTexture(GL_TEXTURE0 + textureUnit);
-			glBindTexture(this->type, this->id);
+			glBindTexture(type, id);
 		}
 
 		void unbind() {
 			glActiveTexture(0);
-			glBindTexture(this->type, 0);
+			glBindTexture(type, 0);
 		}
 };

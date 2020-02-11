@@ -21,18 +21,18 @@ class Mesh {
 			this->nIndices = nIndices;
 
 			// - VAO
-			glGenVertexArrays(1, &this->VAO);
-			glBindVertexArray(this->VAO);
+			glGenVertexArrays(1, &VAO);
+			glBindVertexArray(VAO);
 
 			// - VBO
-			glGenBuffers(1, &this->VBO);
-			glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+			glGenBuffers(1, &VBO);
+			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferData(GL_ARRAY_BUFFER, this->nVertices*sizeof(Vertex), vertexArray, GL_STATIC_DRAW); //GL_DYNAMIC_DRAW if changes more often
 
 			// - EBO
 			if (this->nIndices > 0) {
-				glGenBuffers(1, &this->EBO);
-				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+				glGenBuffers(1, &EBO);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->nIndices * sizeof(GLuint), indexArray, GL_STATIC_DRAW);
 			}
 
@@ -58,18 +58,18 @@ class Mesh {
 			this->nIndices = primitive->getNrIndices();;
 
 			// - VAO
-			glGenVertexArrays(1, &this->VAO);
-			glBindVertexArray(this->VAO);
+			glGenVertexArrays(1, &VAO);
+			glBindVertexArray(VAO);
 
 			// - VBO
-			glGenBuffers(1, &this->VBO);
-			glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+			glGenBuffers(1, &VBO);
+			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferData(GL_ARRAY_BUFFER, this->nVertices * sizeof(Vertex), primitive->getVertices(), GL_STATIC_DRAW); //GL_DYNAMIC_DRAW if changes more often
 
 			// - EBO
 			if (this->nIndices > 0) {
-				glGenBuffers(1, &this->EBO);
-				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+				glGenBuffers(1, &EBO);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->nIndices * sizeof(GLuint), primitive->getIndices(), GL_STATIC_DRAW);
 			}
 			
@@ -92,16 +92,16 @@ class Mesh {
 		}
 		
 		void updateUniforms(Shader * shader) {
-			shader->setMat4fv(this->ModelMatrix, "ModelMatrix");
+			shader->setMat4fv(ModelMatrix, "ModelMatrix");
 		}
 
 		void updateModelMatrix() {
 			this->ModelMatrix = glm::mat4(1.f);
-			this->ModelMatrix = glm::translate(ModelMatrix, this->position);
-			this->ModelMatrix = glm::rotate(this->ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));	//X
-			this->ModelMatrix = glm::rotate(this->ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));	//Y
-			this->ModelMatrix = glm::rotate(this->ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
-			this->ModelMatrix = glm::scale(this->ModelMatrix, this->scale);
+			this->ModelMatrix = glm::translate(ModelMatrix, position);
+			this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));	//X
+			this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));	//Y
+			this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
+			this->ModelMatrix = glm::scale(ModelMatrix, scale);
 		}
 
 		
@@ -114,8 +114,8 @@ class Mesh {
 			this->rotation = rotation;
 			this->scale = scale;
 
-			this->initVAO(vertexArray, nVertices, indexArray, nIndices);
-			this->updateModelMatrix();
+			initVAO(vertexArray, nVertices, indexArray, nIndices);
+			updateModelMatrix();
 		}
 
 		Mesh(Primitive * primitive,
@@ -125,15 +125,15 @@ class Mesh {
 			this->rotation = rotation;
 			this->scale = scale;
 
-			this->initVAO(primitive);
-			this->updateModelMatrix();
+			initVAO(primitive);
+			updateModelMatrix();
 		}
 
 		~Mesh() {
-			glDeleteVertexArrays(1, &this->VAO);
-			glDeleteBuffers(1, &this->VBO);
-			if (this->nIndices > 0) {
-				glDeleteBuffers(1, &this->EBO);
+			glDeleteVertexArrays(1, &VAO);
+			glDeleteBuffers(1, &VBO);
+			if (nIndices > 0) {
+				glDeleteBuffers(1, &EBO);
 			}
 		}
 
@@ -173,14 +173,14 @@ class Mesh {
 		}
 
 		void render(Shader * shader) {
-			this->updateModelMatrix();
-			this->updateUniforms(shader);
+			updateModelMatrix();
+			updateUniforms(shader);
 			shader->use();
 
-			glBindVertexArray(this->VAO);
-			if (this->nIndices == 0)
-				glDrawArrays(GL_TRIANGLES, 0, this->nVertices);
+			glBindVertexArray(VAO);
+			if (nIndices == 0)
+				glDrawArrays(GL_TRIANGLES, 0, nVertices);
 			else
-				glDrawElements(GL_TRIANGLES, this->nIndices, GL_UNSIGNED_INT, 0);
+				glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
 		}
 };
