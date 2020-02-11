@@ -42,6 +42,8 @@ void Game::initOpenGLoptions() {
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 void Game::initMatrices() {
 	this->viewMatrix = glm::mat4(1.f);
@@ -108,19 +110,23 @@ void Game::initUniforms() {
 }
 
 void Game::updateUniforms() {
-	//TODO: (maybe)
-	//* move this below to a place where only when window is resized
+	// Update viewMatrix (camera)
+	this->viewMatrix = glm::lookAt(this->camPosition, this->camPosition + this->camFront, this->worldUp);
+	this->shaders[SHADER_CORE_PROGRAM]->setMat4fv(this->viewMatrix, "ViewMatrix");
+
+	// Update frameBuffer size and projectionMatrix
+	//TODO: maybe only do this when window size changes?
 	glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
 	this->projectionMatrix = glm::perspective(
 		glm::radians(this->fov),
 		static_cast<float>(this->framebufferWidth) / this->framebufferHeight,
-		nearPlane,
-		farPlane
+		this->nearPlane,
+		this->farPlane
 	);
 	this->shaders[SHADER_CORE_PROGRAM]->setMat4fv(this->projectionMatrix, "ProjectionMatrix");
-	//*/
 }
 
+/*
 void Game::updateInput() {
 	if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS) //if not pressed == GLFW_RELEASE
 		glfwSetWindowShouldClose(this->window, GLFW_TRUE);
@@ -163,7 +169,51 @@ void Game::updateInput(Mesh &mesh) {
 		mesh.changeScale(glm::vec3(0.1f));
 	}
 }
+*/
 
+void Game::updateDTime() {
+	this->curTime = static_cast<float>(glfwGetTime());
+	this->dTime = this->curTime - this->lastTime;
+	this->lastTime = this->curTime;
+}
+void Game::updateMouseInput() {
+	glfwGetCursorPos(window, &mouseX, &mouseY);
+
+	if (firstMouse) {
+		lastMouseX = mouseX;
+		lastMouseY = mouseY;
+		firstMouse = false;
+	}
+
+	mouseOffsetX = mouseX - lastMouseX;
+	mouseOffsetY = mouseY - lastMouseY;
+
+	lastMouseX = mouseX;
+	lastMouseY = mouseY;
+}
+void Game::updateKeyboardInput() {
+	if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS) //if not pressed == GLFW_RELEASE
+		glfwSetWindowShouldClose(this->window, GLFW_TRUE);
+
+	if (glfwGetKey(this->window, GLFW_KEY_M) == GLFW_PRESS)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	if (glfwGetKey(this->window, GLFW_KEY_N) == GLFW_PRESS)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	if (glfwGetKey(this->window, GLFW_KEY_W) == GLFW_PRESS)
+		this->camPosition.z -= 0.05f;
+	if (glfwGetKey(this->window, GLFW_KEY_S) == GLFW_PRESS)
+		this->camPosition.z += 0.05f;
+	if (glfwGetKey(this->window, GLFW_KEY_A) == GLFW_PRESS)
+		this->camPosition.x -= 0.05f;
+	if (glfwGetKey(this->window, GLFW_KEY_D) == GLFW_PRESS)
+		this->camPosition.x += 0.05f;
+
+	if (glfwGetKey(this->window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+		this->camPosition.y -= 0.05f;
+	if (glfwGetKey(this->window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		this->camPosition.y += 0.05f;
+}
 
 
 void Game::framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -184,6 +234,18 @@ Game::Game(const char* title, const int width, const int height, const int glMaj
 	this->nearPlane = 0.1f;
 	this->farPlane = 1000.f;
 	this->projectionMatrix = glm::mat4(1.f);
+
+	this->dTime = 0.f;
+	this->curTime = 0.f;
+	this->lastTime = 0.f;
+
+	this->lastMouseX = 0.f;
+	this->lastMouseY = 0.f;
+	this->mouseX = 0.f;
+	this->mouseY = 0.f;
+	this->mouseOffsetX = 0.f;
+	this->mouseOffsetY = 0.f;
+	this->firstMouse = true;
 	
 	this->initGLFW();
 	this->initWindow(title, resizable);
@@ -218,17 +280,25 @@ int Game::getWindowShouldClose() {
 	return glfwWindowShouldClose(this->window);
 }
 
+void Game::updateInput() {
+	glfwPollEvents();
+	this->updateMouseInput();
+	this->updateKeyboardInput();
+}
+
 void Game::update() {
 	// UPDATE INPUT
-	glfwPollEvents();
-
-	updateInput(*this->meshes[MESH_CUBE]);
+	//updateInput(*this->meshes[MESH_CUBE]);
+	updateDTime();
 	updateInput();
 
+	std::cout
+		<< "DT: " << dTime << std::endl
+		<< "Mouse offset X: " << mouseOffsetX << std::endl
+		<< "Mouse offset Y: " << mouseOffsetY << std::endl;
 }
 
 void Game::render() {
-
 	// CLEAR
 	glClearColor(0.f, 0.f, 0.f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);

@@ -33,6 +33,17 @@ class Game {
 		// OpenGL Context
 		const int GL_MAJOR_VER, GL_MINOR_VER;
 
+		// Delta Time
+		float dTime;
+		float curTime;
+		float lastTime;
+
+		// Mouse Input
+		double lastMouseX, lastMouseY;
+		double mouseX, mouseY;
+		double mouseOffsetX, mouseOffsetY;
+		bool firstMouse;
+
 		// Matrices
 		glm::mat4 viewMatrix;
 		glm::vec3 camPosition;
@@ -75,10 +86,15 @@ class Game {
 
 		void updateUniforms();
 
+		/*
 		void updateInput();
 		void updateInput(Mesh &mesh);
-
+		*/
 		
+		void updateDTime();
+		void updateMouseInput();
+		void updateKeyboardInput();
+
 
 	public:
 		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -90,6 +106,8 @@ class Game {
 
 		void setWindowShouldClose();
 		
+		void updateInput();
+
 		void update();
 		void render();
 };
