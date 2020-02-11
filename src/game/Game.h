@@ -3,7 +3,7 @@
 #include "../libs.h"
 
 enum shader_enum{
-	SHADER_CORE_PROGRAM = 0
+	SHADER_CORE_PROGRAM
 };
 
 enum texture_enum {
@@ -12,13 +12,13 @@ enum texture_enum {
 };
 
 enum material_enum {
-	MAT_CRATE = 0,
-	MAT_FRAGILE = 1
+	MAT_CRATE,
+	MAT_FRAGILE
 };
 
 enum mesh_enum {
-	MESH_QUAD = 0,
-	MESH_CUBE = 1
+	MESH_QUAD,
+	MESH_CUBE
 };
 
 
@@ -44,11 +44,14 @@ class Game {
 		double mouseOffsetX, mouseOffsetY;
 		bool firstMouse;
 
+		// Camera
+		Camera camera;
+
 		// Matrices
-		glm::mat4 viewMatrix;
+		//glm::mat4 viewMatrix;
 		glm::vec3 camPosition;
-		glm::vec3 worldUp;
-		glm::vec3 camFront;
+		//glm::vec3 worldUp;
+		//glm::vec3 camFront;
 
 		glm::mat4 projectionMatrix;
 		float fov;

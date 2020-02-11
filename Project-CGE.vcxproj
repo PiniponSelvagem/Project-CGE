@@ -28,6 +28,7 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\Camera.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\engine\Primitives.h" />
     <ClInclude Include="src\engine\Mesh.h" />

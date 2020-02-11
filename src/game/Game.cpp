@@ -46,6 +46,7 @@ void Game::initOpenGLoptions() {
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 void Game::initMatrices() {
+	/*
 	viewMatrix = glm::mat4(1.f);
 	viewMatrix = glm::lookAt(camPosition, camPosition + camFront, worldUp);
 
@@ -56,6 +57,7 @@ void Game::initMatrices() {
 		nearPlane,
 		farPlane
 	);
+	*/
 }
 
 void Game::initShaders() {
@@ -102,17 +104,16 @@ void Game::initLights() {
 	lights.push_back(new glm::vec3(0.f, 0.f, 1.f));
 }
 void Game::initUniforms() {
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(viewMatrix, "ViewMatrix");
+	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getViewMatrix(), "ViewMatrix");
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(projectionMatrix, "ProjectionMatrix");
 
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(*lights[0], "lightPos0");
-	shaders[SHADER_CORE_PROGRAM]->setVec3f(camPosition, "cameraPos");
 }
 
 void Game::updateUniforms() {
 	// Update viewMatrix (camera)
-	viewMatrix = glm::lookAt(camPosition, camPosition + camFront, worldUp);
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(viewMatrix, "ViewMatrix");
+	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getViewMatrix(), "ViewMatrix");
+	shaders[SHADER_CORE_PROGRAM]->setVec3f(camera.getPosition(), "cameraPos");
 
 	// Update frameBuffer size and projectionMatrix
 	//TODO: maybe only do this when window size changes?
@@ -176,6 +177,7 @@ void Game::updateDTime() {
 	dTime = curTime - lastTime;
 	lastTime = curTime;
 }
+//TODO: improve INPUT handling. Suggestion: https://gamedev.stackexchange.com/questions/150157/how-to-improve-my-input-handling-in-glfw
 void Game::updateMouseInput() {
 	glfwGetCursorPos(window, &mouseX, &mouseY);
 
@@ -186,7 +188,7 @@ void Game::updateMouseInput() {
 	}
 
 	mouseOffsetX = mouseX - lastMouseX;
-	mouseOffsetY = mouseY - lastMouseY;
+	mouseOffsetY = lastMouseY - mouseY;
 
 	lastMouseX = mouseX;
 	lastMouseY = mouseY;
@@ -201,13 +203,13 @@ void Game::updateKeyboardInput() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camPosition.z -= 0.05f;
+		camera.move(dTime, FORWARD);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camPosition.z += 0.05f;
+		camera.move(dTime, BACKWARD);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camPosition.x -= 0.05f;
+		camera.move(dTime, LEFT);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camPosition.x += 0.05f;
+		camera.move(dTime, RIGHT);
 
 	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
 		camPosition.y -= 0.05f;
@@ -222,13 +224,15 @@ void Game::framebuffer_size_callback(GLFWwindow* window, int width, int height) 
 }
 
 Game::Game(const char* title, const int width, const int height, const int glMajorVer, const int glMinorVer, bool resizable) 
-: WINDOW_WIDTH(width), WINDOW_HEIGHT(height), GL_MAJOR_VER(glMajorVer), GL_MINOR_VER(glMinorVer) {
+: WINDOW_WIDTH(width), WINDOW_HEIGHT(height), GL_MAJOR_VER(glMajorVer), GL_MINOR_VER(glMinorVer),
+camera(glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 1.f, 0.f)) {
+
 	framebufferWidth  = WINDOW_WIDTH;
 	framebufferHeight = WINDOW_HEIGHT;
 	
 	camPosition = glm::vec3(0.f, 0.f, 1.f);
-	worldUp = glm::vec3(0.f, 1.f, 0.f);
-	camFront = glm::vec3(0.f, 0.f, -1.f);
+	//worldUp = glm::vec3(0.f, 1.f, 0.f);
+	//camFront = glm::vec3(0.f, 0.f, -1.f);
 
 	fov = 90.f;
 	nearPlane = 0.1f;
@@ -259,6 +263,8 @@ Game::Game(const char* title, const int width, const int height, const int glMaj
 	initMeshes();
 	initLights();
 	initUniforms();
+
+	meshes[MESH_CUBE]->setPosition(glm::vec3(0.f, 0.f, -1.f));
 }
 
 Game::~Game() {
@@ -284,6 +290,7 @@ void Game::updateInput() {
 	glfwPollEvents();
 	updateMouseInput();
 	updateKeyboardInput();
+	camera.updateInput(dTime, -1, mouseOffsetX, mouseOffsetY);
 }
 
 void Game::update() {
@@ -292,10 +299,7 @@ void Game::update() {
 	updateDTime();
 	updateInput();
 
-	std::cout
-		<< "DT: " << dTime << std::endl
-		<< "Mouse offset X: " << mouseOffsetX << std::endl
-		<< "Mouse offset Y: " << mouseOffsetY << std::endl;
+	meshes[MESH_CUBE]->changeRotation(glm::vec3(0.4f, 0.8f, 1.f));
 }
 
 void Game::render() {
