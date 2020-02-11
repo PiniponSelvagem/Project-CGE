@@ -30,9 +30,11 @@ class Mesh {
 			glBufferData(GL_ARRAY_BUFFER, this->nVertices*sizeof(Vertex), vertexArray, GL_STATIC_DRAW); //GL_DYNAMIC_DRAW if changes more often
 
 			// - EBO
-			glGenBuffers(1, &this->EBO);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->nIndices*sizeof(GLuint), indexArray, GL_STATIC_DRAW);
+			if (this->nIndices > 0) {
+				glGenBuffers(1, &this->EBO);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->nIndices * sizeof(GLuint), indexArray, GL_STATIC_DRAW);
+			}
 
 			// SET VERTEXATTRIBPOINTERS AND ENABLE
 			// -- position
@@ -65,10 +67,12 @@ class Mesh {
 			glBufferData(GL_ARRAY_BUFFER, this->nVertices * sizeof(Vertex), primitive->getVertices(), GL_STATIC_DRAW); //GL_DYNAMIC_DRAW if changes more often
 
 			// - EBO
-			glGenBuffers(1, &this->EBO);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->nIndices * sizeof(GLuint), primitive->getIndices(), GL_STATIC_DRAW);
-
+			if (this->nIndices > 0) {
+				glGenBuffers(1, &this->EBO);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->nIndices * sizeof(GLuint), primitive->getIndices(), GL_STATIC_DRAW);
+			}
+			
 			// SET VERTEXATTRIBPOINTERS AND ENABLE
 			// -- position
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
@@ -128,7 +132,9 @@ class Mesh {
 		~Mesh() {
 			glDeleteVertexArrays(1, &this->VAO);
 			glDeleteBuffers(1, &this->VBO);
-			glDeleteBuffers(1, &this->EBO);
+			if (this->nIndices > 0) {
+				glDeleteBuffers(1, &this->EBO);
+			}
 		}
 
 		void setPosition(const glm::vec3 position) {
@@ -171,10 +177,10 @@ class Mesh {
 			this->updateUniforms(shader);
 			shader->use();
 
-			glBindVertexArray(VAO);
-			//if (this->indices.empty())
-			//	glDrawArrays(GL_TRIANGLES, 0, this->vertices.size());
-			//else
+			glBindVertexArray(this->VAO);
+			if (this->nIndices == 0)
+				glDrawArrays(GL_TRIANGLES, 0, this->nVertices);
+			else
 				glDrawElements(GL_TRIANGLES, this->nIndices, GL_UNSIGNED_INT, 0);
 		}
 };

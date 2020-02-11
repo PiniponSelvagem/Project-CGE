@@ -7,16 +7,18 @@ enum shader_enum{
 };
 
 enum texture_enum {
-	TEX_CRATE_0 = 0,
-	TEX_FRAGILE_1 = 1
+	TEX_CRATE, TEX_CRATE_SPECULAR,
+	TEX_FRAGILE, TEX_FRAGILE_SPECULAR
 };
 
 enum material_enum {
-	MAT_0 = 0
+	MAT_CRATE = 0,
+	MAT_FRAGILE = 1
 };
 
 enum mesh_enum {
-	MESH_QUAD = 0
+	MESH_QUAD = 0,
+	MESH_CUBE = 1
 };
 
 
@@ -26,6 +28,7 @@ class Game {
 		// Window
 		GLFWwindow * window;
 		const int WINDOW_WIDTH, WINDOW_HEIGHT;
+		int framebufferWidth, framebufferHeight;
 
 		// OpenGL Context
 		const int GL_MAJOR_VER, GL_MINOR_VER;
@@ -75,6 +78,7 @@ class Game {
 		void updateInput();
 		void updateInput(Mesh &mesh);
 
+		
 
 	public:
 		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
