@@ -17,4 +17,5 @@
 #include "engine/Material.h"
 #include "engine/Primitives.h"
 #include "engine/Mesh.h"
+#include "engine/Model.h"
 #include "engine/Camera.h"

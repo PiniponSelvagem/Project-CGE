@@ -82,11 +82,11 @@ void Game::initMaterials() {
 		TEX_FRAGILE_SPECULAR
 	));
 }
-void Game::initMeshes() {
+void Game::initModels() {
 	meshes.push_back(
 		new Mesh(
-			&Quad(),
-			glm::vec3(0.f),
+			&Cube(),
+			glm::vec3(-1.f),
 			glm::vec3(0.f),
 			glm::vec3(1.f)
 		)
@@ -99,6 +99,20 @@ void Game::initMeshes() {
 			glm::vec3(1.f)
 		)
 	);
+
+	models.push_back(new Model(
+		glm::vec3(0.f),
+		materials[MAT_CRATE],
+		textures[TEX_CRATE],
+		textures[TEX_CRATE_SPECULAR],
+		meshes
+	));
+
+	for (auto *&i : meshes) {
+		delete i;
+	}
+
+	meshes.clear();
 }
 void Game::initLights() {
 	lights.push_back(new glm::vec3(0.f, 0.f, 1.f));
@@ -260,11 +274,9 @@ camera(glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 1.f, 0
 	initShaders();
 	initTextures();
 	initMaterials();
-	initMeshes();
+	initModels();
 	initLights();
 	initUniforms();
-
-	meshes[MESH_CUBE]->setPosition(glm::vec3(0.f, 0.f, -1.f));
 }
 
 Game::~Game() {
@@ -274,7 +286,7 @@ Game::~Game() {
 	for (size_t i = 0; i < shaders.size();  ++i)  { delete shaders[i];   }
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }
 	for (size_t i = 0; i < materials.size(); ++i) { delete materials[i]; }
-	for (size_t i = 0; i < meshes.size(); ++i)    { delete meshes[i];    }
+	for (auto *&i : models) { delete i; }
 	for (size_t i = 0; i < lights.size(); ++i)    { delete lights[i];    }
 }
 
@@ -299,7 +311,7 @@ void Game::update() {
 	updateDTime();
 	updateInput();
 
-	meshes[MESH_CUBE]->changeRotation(glm::vec3(0.4f, 0.8f, 1.f));
+	models[MESH_CUBE]->changeRotation(glm::vec3(0.4f, 0.8f, 1.f));
 }
 
 void Game::render() {
@@ -308,6 +320,7 @@ void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	updateUniforms();
+	/*
 	materials[MAT_CRATE]->sendToShader(*shaders[SHADER_CORE_PROGRAM]);
 
 	shaders[SHADER_CORE_PROGRAM]->use();
@@ -318,6 +331,8 @@ void Game::render() {
 
 	// DRAW
 	meshes[MESH_CUBE]->render(shaders[SHADER_CORE_PROGRAM]);
+	*/
+	models[0]->render(this->shaders[SHADER_CORE_PROGRAM]);
 
 	// END
 	glfwSwapBuffers(window);

@@ -17,8 +17,8 @@ enum material_enum {
 };
 
 enum mesh_enum {
-	MESH_QUAD,
-	MESH_CUBE
+	MESH_CUBE,
+	MESH_QUAD
 };
 
 
@@ -70,6 +70,9 @@ class Game {
 		// Meshes
 		std::vector<Mesh*> meshes;
 		
+		// Models
+		std::vector<Model*> models;
+		
 		// Lights
 		std::vector<glm::vec3*> lights;
 
@@ -83,7 +86,7 @@ class Game {
 		void initShaders();
 		void initTextures();
 		void initMaterials();
-		void initMeshes();
+		void initModels();
 		void initLights();
 		void initUniforms();
 
