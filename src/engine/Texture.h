@@ -48,8 +48,12 @@ class Texture {
 
 			glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT); //S -> x axis
 			glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT); //T -> y axis
+
+			//Texture Filtering
 			glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 			glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			//glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			//glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 			if (image) {
 				glTexImage2D(type, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
