@@ -1,6 +1,6 @@
 #pragma once
 
-enum Direction { FORWARD, BACKWARD, LEFT, RIGHT };
+enum Direction { FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN};
 
 class Camera {
 	private:
@@ -23,7 +23,7 @@ class Camera {
 		void updateCameraVectors() {
 			front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 			front.y = sin(glm::radians(pitch));
-			front.z = sin(glm::radians(yaw) * cos(glm::radians(pitch)));
+			front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
 			front = glm::normalize(front);
 			right = glm::normalize(glm::cross(front, worldUp));
@@ -78,6 +78,12 @@ class Camera {
 			case RIGHT:
 				position += right * movementSpeed * dTime;
 				break;
+			case UP:
+				position += up * movementSpeed * dTime;
+				break;
+			case DOWN:
+				position -= up * movementSpeed * dTime;
+				break;
 			}
 		}
 
@@ -93,7 +99,7 @@ class Camera {
 			if (yaw > 360.f || yaw < -360.f)
 				yaw = 0.f;
 
-			std::cout << "pitch: " << pitch << " yaw: " << yaw << std::endl;
+			//std::cout << "pitch: " << pitch << " yaw: " << yaw << std::endl;
 		}
 
 		void updateInput(const float &dTime, const int direction, const double &offsetX, const double &offsetY) {
