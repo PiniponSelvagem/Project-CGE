@@ -70,10 +70,13 @@
     <ClInclude Include="src\game\Game.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\Model.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ObjLoader.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Camera.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>

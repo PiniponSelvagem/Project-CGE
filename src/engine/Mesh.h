@@ -12,6 +12,7 @@ class Mesh {
 		GLuint EBO;
 
 		glm::vec3 position;
+		glm::vec3 origin;
 		glm::vec3 rotation;
 		glm::vec3 scale;
 		glm::mat4 ModelMatrix;
@@ -58,10 +59,11 @@ class Mesh {
 
 		void updateModelMatrix() {
 			this->ModelMatrix = glm::mat4(1.f);
-			this->ModelMatrix = glm::translate(ModelMatrix, position);
+			this->ModelMatrix = glm::translate(ModelMatrix, origin);
 			this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));	//X
 			this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));	//Y
 			this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
+			this->ModelMatrix = glm::translate(ModelMatrix, position - origin);
 			this->ModelMatrix = glm::scale(ModelMatrix, scale);
 		}
 
@@ -69,9 +71,13 @@ class Mesh {
 
 	public:
 		Mesh(Vertex * vertexArray, const unsigned &nVertices, GLuint * indexArray, const unsigned &nIndices,
-				glm::vec3 position = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f)
+				glm::vec3 position = glm::vec3(0.f),
+				glm::vec3 origin = glm::vec3(0.f),
+				glm::vec3 rotation = glm::vec3(0.f),
+				glm::vec3 scale = glm::vec3(1.f)
 			) {
 			this->position = position;
+			this->origin = origin;
 			this->rotation = rotation;
 			this->scale = scale;
 
@@ -93,9 +99,13 @@ class Mesh {
 		}
 
 		Mesh(Primitive * primitive,
-			glm::vec3 position = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f)
+			glm::vec3 position = glm::vec3(0.f),
+			glm::vec3 origin = glm::vec3(0.f),
+			glm::vec3 rotation = glm::vec3(0.f),
+			glm::vec3 scale = glm::vec3(1.f)
 		) {
 			this->position = position;
+			this->origin = origin;
 			this->rotation = rotation;
 			this->scale = scale;
 
@@ -149,6 +159,9 @@ class Mesh {
 			delete[] indexArray;
 		}
 
+		void setOrigin(const glm::vec3 origin) {
+			this->origin = origin;
+		}
 		void setPosition(const glm::vec3 position) {
 			this->position = position;
 		}

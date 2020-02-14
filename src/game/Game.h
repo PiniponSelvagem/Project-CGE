@@ -8,7 +8,8 @@ enum shader_enum{
 
 enum texture_enum {
 	TEX_CRATE, TEX_CRATE_SPECULAR,
-	TEX_FRAGILE, TEX_FRAGILE_SPECULAR
+	TEX_FRAGILE, TEX_FRAGILE_SPECULAR,
+	TEX_GRASS, TEX_GRASS_SPECULAR
 };
 
 enum material_enum {
@@ -66,9 +67,6 @@ class Game {
 
 		// Materials
 		std::vector<Material*> materials;
-
-		// Meshes
-		std::vector<Mesh*> meshes;
 		
 		// Models
 		std::vector<Model*> models;
