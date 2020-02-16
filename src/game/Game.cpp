@@ -45,20 +45,6 @@ void Game::initOpenGLoptions() {
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
-void Game::initMatrices() {
-	/*
-	viewMatrix = glm::mat4(1.f);
-	viewMatrix = glm::lookAt(camPosition, camPosition + camFront, worldUp);
-
-	//this->projectionMatrix = glm::mat4(1.f);
-	projectionMatrix = glm::perspective(
-		glm::radians(fov),
-		static_cast<float>(framebufferWidth) / framebufferHeight,
-		nearPlane,
-		farPlane
-	);
-	*/
-}
 
 void Game::initShaders() {
 	shaders.push_back(new Shader(GL_MAJOR_VER, GL_MINOR_VER, "resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
@@ -139,6 +125,7 @@ void Game::initModels() {
 		meshFloor
 	));
 
+	/*
 	models.push_back(new Model(
 		glm::vec3(0.f, 0.f, -20.f),
 		materials[MAT_CRATE],
@@ -146,6 +133,7 @@ void Game::initModels() {
 		textures[TEX_CRATE_SPECULAR],
 		"resources/obj/teapot.obj"
 	));
+	*/
 
 	for (auto *&i : meshes) {
 		delete i;
@@ -182,16 +170,6 @@ void Game::updateUniforms() {
 }
 
 /*
-void Game::updateInput() {
-	if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS) //if not pressed == GLFW_RELEASE
-		glfwSetWindowShouldClose(this->window, GLFW_TRUE);
-
-	if (glfwGetKey(this->window, GLFW_KEY_M) == GLFW_PRESS)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	if (glfwGetKey(this->window, GLFW_KEY_N) == GLFW_PRESS)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-}
 void Game::updateInput(Mesh &mesh) {
 	if (glfwGetKey(this->window, GLFW_KEY_W) == GLFW_PRESS) {
 		mesh.changePosition(glm::vec3(0.f, 0.f, -0.01f));
@@ -255,7 +233,7 @@ void Game::updateKeyboardInput() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
+	
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera.move(dTime, FORWARD);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -269,6 +247,11 @@ void Game::updateKeyboardInput() {
 		camera.move(dTime, UP);
 	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
 		camera.move(dTime, DOWN);
+
+	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
+		models[0]->changePosition(glm::vec3(0.f, 0.f, 1.f));
+	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
+		models[0]->changePosition(glm::vec3(0.f, 0.f,-1.f));
 }
 
 
@@ -283,10 +266,6 @@ camera(glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 1.f, 0
 
 	framebufferWidth  = WINDOW_WIDTH;
 	framebufferHeight = WINDOW_HEIGHT;
-	
-	camPosition = glm::vec3(0.f, 0.f, 1.f);
-	//worldUp = glm::vec3(0.f, 1.f, 0.f);
-	//camFront = glm::vec3(0.f, 0.f, -1.f);
 
 	fov = 90.f;
 	nearPlane = 0.1f;
@@ -309,7 +288,6 @@ camera(glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 1.f, 0
 	initWindow(title, resizable);
 	initGLAD();
 	initOpenGLoptions();
-	initMatrices();
 
 	initShaders();
 	initTextures();
@@ -363,18 +341,6 @@ void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	updateUniforms();
-	/*
-	materials[MAT_CRATE]->sendToShader(*shaders[SHADER_CORE_PROGRAM]);
-
-	shaders[SHADER_CORE_PROGRAM]->use();
-
-	// -- activate texture
-	textures[TEX_CRATE]->bind(0);
-	textures[TEX_CRATE_SPECULAR]->bind(1);
-
-	// DRAW
-	meshes[MESH_CUBE]->render(shaders[SHADER_CORE_PROGRAM]);
-	*/
 	for (auto *i : models) {
 		i->render(this->shaders[SHADER_CORE_PROGRAM]);
 	}

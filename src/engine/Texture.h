@@ -72,7 +72,6 @@ class Texture {
 			glActiveTexture(GL_TEXTURE0 + textureUnit);
 			glBindTexture(type, id);
 		}
-
 		void unbind() {
 			glActiveTexture(0);
 			glBindTexture(type, 0);

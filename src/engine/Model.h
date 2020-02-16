@@ -66,6 +66,11 @@ class Model {
 				i->changeRotation(rotation);
 			}
 		}
+		void changePosition(const glm::vec3 position) {
+			for (auto &i : meshes) {
+				i->changePosition(position);
+			}
+		}
 
 		void update() {
 			updateUniforms();

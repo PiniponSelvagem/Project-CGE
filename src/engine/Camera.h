@@ -1,6 +1,6 @@
 #pragma once
 
-enum Direction { FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN};
+enum Direction { FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN };
 
 class Camera {
 	private:

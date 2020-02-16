@@ -49,11 +49,6 @@ class Game {
 		Camera camera;
 
 		// Matrices
-		//glm::mat4 viewMatrix;
-		glm::vec3 camPosition;
-		//glm::vec3 worldUp;
-		//glm::vec3 camFront;
-
 		glm::mat4 projectionMatrix;
 		float fov;
 		float nearPlane;
@@ -79,7 +74,6 @@ class Game {
 		void initGLFW();
 		void initGLAD();	//AFTER CONTEXT CREATION
 		void initOpenGLoptions();
-		void initMatrices();
 
 		void initShaders();
 		void initTextures();
@@ -91,7 +85,6 @@ class Game {
 		void updateUniforms();
 
 		/*
-		void updateInput();
 		void updateInput(Mesh &mesh);
 		*/
 		

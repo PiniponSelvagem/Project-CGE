@@ -17,6 +17,33 @@ class Mesh {
 		glm::vec3 scale;
 		glm::mat4 ModelMatrix;
 
+		void Mesh_AuxCtor(Vertex * vertexArray, const unsigned &nVertices, GLuint * indexArray, const unsigned &nIndices,
+			glm::vec3 position = glm::vec3(0.f),
+			glm::vec3 origin = glm::vec3(0.f),
+			glm::vec3 rotation = glm::vec3(0.f),
+			glm::vec3 scale = glm::vec3(1.f)
+		) {
+			this->position = position;
+			this->origin = origin;
+			this->rotation = rotation;
+			this->scale = scale;
+
+			this->nVertices = nVertices;
+			this->nIndices = nIndices;
+
+			this->vertexArray = new Vertex[this->nVertices];
+			for (size_t i = 0; i < nVertices; ++i) {
+				this->vertexArray[i] = vertexArray[i];
+			}
+
+			this->indexArray = new GLuint[this->nIndices];
+			for (size_t i = 0; i < nIndices; ++i) {
+				this->indexArray[i] = indexArray[i];
+			}
+
+			initVAO();
+			updateModelMatrix();
+		}
 		
 		void initVAO() {
 			// - VAO
@@ -75,27 +102,11 @@ class Mesh {
 				glm::vec3 origin = glm::vec3(0.f),
 				glm::vec3 rotation = glm::vec3(0.f),
 				glm::vec3 scale = glm::vec3(1.f)
-			) {
-			this->position = position;
-			this->origin = origin;
-			this->rotation = rotation;
-			this->scale = scale;
-
-			this->nVertices = nVertices;
-			this->nIndices = nIndices;
-
-			this->vertexArray = new Vertex[this->nVertices];
-			for (size_t i = 0; i < nVertices; ++i) {
-				this->vertexArray[i] = vertexArray[i];
-			}
-
-			this->indexArray = new GLuint[this->nIndices];
-			for (size_t i = 0; i < nIndices; ++i) {
-				this->indexArray[i] = indexArray[i];
-			}
-
-			initVAO();
-			updateModelMatrix();
+		) {
+			Mesh_AuxCtor(
+				vertexArray, nVertices, indexArray, nIndices,
+				position, origin, rotation, scale
+			);
 		}
 
 		Mesh(Primitive * primitive,
@@ -104,48 +115,17 @@ class Mesh {
 			glm::vec3 rotation = glm::vec3(0.f),
 			glm::vec3 scale = glm::vec3(1.f)
 		) {
-			this->position = position;
-			this->origin = origin;
-			this->rotation = rotation;
-			this->scale = scale;
-
-			nVertices = primitive->getNrVertices();
-			nIndices = primitive->getNrIndices();
-
-			this->vertexArray = new Vertex[nVertices];
-			for (size_t i = 0; i < nVertices; ++i) {
-				this->vertexArray[i] = primitive->getVertices()[i];
-			}
-
-			this->indexArray = new GLuint[nIndices];
-			for (size_t i = 0; i < nIndices; ++i) {
-				this->indexArray[i] = primitive->getIndices()[i];
-			}
-
-			initVAO();
-			updateModelMatrix();
+			Mesh_AuxCtor(
+				primitive->getVertices(), primitive->getNrVertices(), primitive->getIndices(), primitive->getNrIndices(),
+				position, origin, rotation, scale
+			);
 		}
 
 		Mesh(const Mesh &mesh) {
-			this->position = mesh.position;
-			this->rotation = mesh.rotation;
-			this->scale = mesh.scale;
-
-			nVertices = mesh.nVertices;
-			nIndices = mesh.nIndices;
-
-			this->vertexArray = new Vertex[nVertices];
-			for (size_t i = 0; i < nVertices; ++i) {
-				this->vertexArray[i] = mesh.vertexArray[i];
-			}
-
-			this->indexArray = new GLuint[nIndices];
-			for (size_t i = 0; i < nIndices; ++i) {
-				this->indexArray[i] = mesh.indexArray[i];
-			}
-
-			initVAO();
-			updateModelMatrix();
+			Mesh_AuxCtor(
+				mesh.vertexArray, mesh.nVertices, mesh.indexArray, mesh.nIndices,
+				mesh.position, mesh.origin, mesh.rotation, mesh.scale
+			);
 		}
 
 		~Mesh() {
@@ -174,6 +154,7 @@ class Mesh {
 
 		void changePosition(const glm::vec3 position) {
 			this->position += position;
+			this->origin += position;
 		}
 		void changeRotation(const glm::vec3 rotation) {
 			this->rotation += rotation;
