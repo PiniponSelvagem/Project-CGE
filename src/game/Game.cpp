@@ -160,12 +160,37 @@ void Game::updateUniforms() {
 	// Update frameBuffer size and projectionMatrix
 	//TODO: maybe only do this when window size changes?
 	glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
+
+
+
+
+
+	// TODO: this should be in camera class.
+	// TODO: this should be in camera class.
+	// TODO: this should be in camera class.
+	// TODO: this should be in camera class.
 	projectionMatrix = glm::perspective(
 		glm::radians(fov),
 		static_cast<float>(framebufferWidth) / framebufferHeight,
-		nearPlane,
-		farPlane
+		nearPlane, farPlane
 	);
+	/*
+	// TODO: axis should be changed so camera does not move like in prespective view, but only along the X and Z axis (maybe Y should be a fixed value???)
+	float fov = 10.f;
+	float aspectRatioWidth  = ((static_cast<float>(framebufferWidth) / framebufferHeight) / 2.f ) * fov;
+	float aspectRatioHeight = 0.5f * fov;
+	projectionMatrix = glm::ortho(
+		-aspectRatioWidth, aspectRatioWidth,
+		-aspectRatioHeight, aspectRatioHeight,
+		nearPlane, farPlane
+	);
+	*/
+
+
+
+
+
+
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(projectionMatrix, "ProjectionMatrix");
 }
 
@@ -233,7 +258,7 @@ void Game::updateKeyboardInput() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	
+
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera.move(dTime, FORWARD);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)

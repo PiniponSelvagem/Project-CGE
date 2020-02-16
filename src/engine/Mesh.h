@@ -156,6 +156,9 @@ class Mesh {
 			this->position += position;
 			this->origin += position;
 		}
+		void changePosition_keepOrigin(const glm::vec3 position) { // Useful to create orbiting objects
+			this->position += position;
+		}
 		void changeRotation(const glm::vec3 rotation) {
 			this->rotation += rotation;
 			if (this->rotation.x > 360)
