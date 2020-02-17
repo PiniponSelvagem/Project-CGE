@@ -25,6 +25,21 @@
     <Filter Include="Header Files\game">
       <UniqueIdentifier>{c2384796-defe-4c0f-8eb9-6fe61ca4b93b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine\models">
+      <UniqueIdentifier>{3798424f-97ea-4117-8a6b-7641b82396cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\engine">
+      <UniqueIdentifier>{714a3609-e817-4f1b-9c6d-74dac29ac0c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\engine\models">
+      <UniqueIdentifier>{7a073601-0379-4234-8d63-c33405a04c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\engine\models\primitives">
+      <UniqueIdentifier>{62f62350-cebc-4c13-8bf7-4dec089273b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\models\primitives">
+      <UniqueIdentifier>{86607a2d-b2cf-42f7-9d82-fc13ecb40467}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\GLAD\glad.c">
@@ -35,6 +50,39 @@
     </ClCompile>
     <ClCompile Include="src\game\Game.cpp">
       <Filter>Source Files\src\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Camera.cpp">
+      <Filter>Source Files\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Shader.cpp">
+      <Filter>Source Files\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\Material.cpp">
+      <Filter>Source Files\src\engine\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\Mesh.cpp">
+      <Filter>Source Files\src\engine\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\Model.cpp">
+      <Filter>Source Files\src\engine\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\Texture.cpp">
+      <Filter>Source Files\src\engine\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\ObjLoader.cpp">
+      <Filter>Source Files\src\engine\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\primitives\Primitive.cpp">
+      <Filter>Source Files\src\engine\models\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\primitives\Triangle.cpp">
+      <Filter>Source Files\src\engine\models\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\primitives\Quad.cpp">
+      <Filter>Source Files\src\engine\models\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\primitives\Cube.cpp">
+      <Filter>Source Files\src\engine\models\primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,35 +97,35 @@
     <ClInclude Include="src\libs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\Material.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Mesh.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\Shader.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Texture.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Vertex.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Primitives.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
     <ClInclude Include="src\game\Game.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\Model.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\ObjLoader.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\Camera.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Material.h">
+      <Filter>Header Files\engine\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Mesh.h">
+      <Filter>Header Files\engine\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Model.h">
+      <Filter>Header Files\engine\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\ObjLoader.h">
+      <Filter>Header Files\engine\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Texture.h">
+      <Filter>Header Files\engine\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Vertex.h">
+      <Filter>Header Files\engine\models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\primitives\Primitive.h">
+      <Filter>Header Files\engine\models\primitives</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

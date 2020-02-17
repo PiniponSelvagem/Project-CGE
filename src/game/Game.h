@@ -1,6 +1,15 @@
 #pragma once
-
 #include "../libs.h"
+
+#include "../engine/models/Vertex.h"
+#include "../engine/Shader.h"
+#include "../engine/models/Texture.h"
+#include "../engine/models/Material.h"
+#include "../engine/models/primitives/Primitive.h"
+#include "../engine/models/Mesh.h"
+#include "../engine/models/Model.h"
+#include "../engine/Camera.h"
+#include "../engine/models/ObjLoader.h"
 
 enum shader_enum{
 	SHADER_CORE_PROGRAM

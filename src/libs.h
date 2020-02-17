@@ -11,13 +11,3 @@
 #include <GLM/gtc/type_ptr.hpp>
 
 #include <SOIL/SOIL.h>
-
-#include "engine/Vertex.h"
-#include "engine/Shader.h"
-#include "engine/Texture.h"
-#include "engine/Material.h"
-#include "engine/Primitives.h"
-#include "engine/Mesh.h"
-#include "engine/Model.h"
-#include "engine/Camera.h"
-#include "engine/ObjLoader.h"

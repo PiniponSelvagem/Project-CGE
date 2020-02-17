@@ -19,6 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\Camera.cpp" />
+    <ClCompile Include="src\engine\models\Material.cpp" />
+    <ClCompile Include="src\engine\models\Mesh.cpp" />
+    <ClCompile Include="src\engine\models\Model.cpp" />
+    <ClCompile Include="src\engine\models\ObjLoader.cpp" />
+    <ClCompile Include="src\engine\models\primitives\Cube.cpp" />
+    <ClCompile Include="src\engine\models\primitives\Primitive.cpp" />
+    <ClCompile Include="src\engine\models\primitives\Quad.cpp" />
+    <ClCompile Include="src\engine\models\primitives\Triangle.cpp" />
+    <ClCompile Include="src\engine\models\Texture.cpp" />
+    <ClCompile Include="src\engine\Shader.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="include\GLAD\glad.c" />
     <ClCompile Include="src\Main.cpp" />
@@ -28,17 +39,17 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\engine\ObjLoader.h" />
-    <ClInclude Include="src\engine\Model.h" />
+    <ClInclude Include="src\engine\models\ObjLoader.h" />
+    <ClInclude Include="src\engine\models\Model.h" />
     <ClInclude Include="src\engine\Camera.h" />
     <ClInclude Include="src\game\Game.h" />
-    <ClInclude Include="src\engine\Primitives.h" />
-    <ClInclude Include="src\engine\Mesh.h" />
-    <ClInclude Include="src\engine\Material.h" />
+    <ClInclude Include="src\engine\models\primitives\Primitive.h" />
+    <ClInclude Include="src\engine\models\Mesh.h" />
+    <ClInclude Include="src\engine\models\Material.h" />
     <ClInclude Include="src\engine\Shader.h" />
     <ClInclude Include="src\libs.h" />
-    <ClInclude Include="src\engine\Texture.h" />
-    <ClInclude Include="src\engine\Vertex.h" />
+    <ClInclude Include="src\engine\models\Texture.h" />
+    <ClInclude Include="src\engine\models\Vertex.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
