@@ -152,6 +152,22 @@ void Game::initUniforms() {
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(*lights[0], "lightPos0");
 }
 
+void Game::initKeyInput() {
+	//glfwSetWindowUserPointer(window, this);
+	input = new Input(window);
+	glfwSetWindowUserPointer(window, input);
+	Game* game = this;
+	input->addKeyCallback(GLFW_KEY_ESCAPE, [this](void) { this->func(); });
+
+	/*
+	auto lambda = [this]() { this->func; };
+	input->addKeyCallback(GLFW_KEY_ESCAPE, lambda);
+	*/
+}
+void Game::func() {
+	camera.move(dTime, FORWARD);
+}
+
 void Game::updateUniforms() {
 	// Update viewMatrix (camera)
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getViewMatrix(), "ViewMatrix");
@@ -259,8 +275,16 @@ void Game::updateKeyboardInput() {
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		double time = glfwGetTime();
+		camera.move(dTime, FORWARD);
+		double time2 = glfwGetTime() - time;
+		std::cout << "updateKeyboardInput: " << time2 << std::endl;
+	}
+	/*
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera.move(dTime, FORWARD);
+	*/
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		camera.move(dTime, BACKWARD);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
@@ -320,11 +344,15 @@ camera(glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 1.f, 0
 	initModels();
 	initLights();
 	initUniforms();
+
+	initKeyInput();
 }
 
 Game::~Game() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
+
+	delete input;
 
 	for (size_t i = 0; i < shaders.size();  ++i)  { delete shaders[i];   }
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }

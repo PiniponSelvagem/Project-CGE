@@ -40,6 +40,12 @@
     <Filter Include="Header Files\engine\models\primitives">
       <UniqueIdentifier>{86607a2d-b2cf-42f7-9d82-fc13ecb40467}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\engine\input">
+      <UniqueIdentifier>{a31ceae5-1b93-4372-be6c-829b3b0a6a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\input">
+      <UniqueIdentifier>{565afb65-7180-4709-9967-8829e0e97291}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\GLAD\glad.c">
@@ -84,6 +90,12 @@
     <ClCompile Include="src\engine\models\primitives\Cube.cpp">
       <Filter>Source Files\src\engine\models\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\input\Input.cpp">
+      <Filter>Source Files\src\engine\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\input\Func.cpp">
+      <Filter>Source Files\src\engine\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_core.glsl">
@@ -126,6 +138,12 @@
     </ClInclude>
     <ClInclude Include="src\engine\models\primitives\Primitive.h">
       <Filter>Header Files\engine\models\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\Input.h">
+      <Filter>Header Files\engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\Func.h">
+      <Filter>Header Files\engine\input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

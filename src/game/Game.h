@@ -11,6 +11,8 @@
 #include "../engine/Camera.h"
 #include "../engine/models/ObjLoader.h"
 
+#include "../engine/input/Input.h"
+
 enum shader_enum{
 	SHADER_CORE_PROGRAM
 };
@@ -36,7 +38,7 @@ enum mesh_enum {
 class Game {
 	private:
 		// Window
-		GLFWwindow * window;
+		GLFWwindow* window;
 		const int WINDOW_WIDTH, WINDOW_HEIGHT;
 		int framebufferWidth, framebufferHeight;
 
@@ -47,6 +49,9 @@ class Game {
 		float dTime;
 		float curTime;
 		float lastTime;
+
+		// Keyboard Input
+		Input* input;
 
 		// Mouse Input
 		double lastMouseX, lastMouseY;
@@ -90,6 +95,9 @@ class Game {
 		void initModels();
 		void initLights();
 		void initUniforms();
+
+		void initKeyInput();
+		void func();
 
 		void updateUniforms();
 

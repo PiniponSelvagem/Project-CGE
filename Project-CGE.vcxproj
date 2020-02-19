@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\input\Func.cpp" />
+    <ClCompile Include="src\engine\input\Input.cpp" />
     <ClCompile Include="src\engine\Camera.cpp" />
     <ClCompile Include="src\engine\models\Material.cpp" />
     <ClCompile Include="src\engine\models\Mesh.cpp" />
@@ -39,6 +41,8 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\input\Func.h" />
+    <ClInclude Include="src\engine\input\Input.h" />
     <ClInclude Include="src\engine\models\ObjLoader.h" />
     <ClInclude Include="src\engine\models\Model.h" />
     <ClInclude Include="src\engine\Camera.h" />
