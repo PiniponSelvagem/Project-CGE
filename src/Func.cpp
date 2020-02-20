@@ -1,5 +1,5 @@
 #include "Func.h"
-#include "../../game/Game.h"
+//#include "../../game/Game.h"
 
 
 Func::Func(int key, std::function<void()> callback) {

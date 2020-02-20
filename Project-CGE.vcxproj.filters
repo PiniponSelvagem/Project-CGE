@@ -90,14 +90,11 @@
     <ClCompile Include="src\engine\models\primitives\Cube.cpp">
       <Filter>Source Files\src\engine\models\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\input\Input.cpp">
-      <Filter>Source Files\src\engine\input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\input\Func.cpp">
-      <Filter>Source Files\src\engine\input</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\input\KeyInput.cpp">
       <Filter>Source Files\src\engine\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Func.cpp">
+      <Filter>Source Files\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,14 +139,11 @@
     <ClInclude Include="src\engine\models\primitives\Primitive.h">
       <Filter>Header Files\engine\models\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\input\Input.h">
-      <Filter>Header Files\engine\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\input\Func.h">
-      <Filter>Header Files\engine\input</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\input\KeyInput.h">
       <Filter>Header Files\engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Func.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

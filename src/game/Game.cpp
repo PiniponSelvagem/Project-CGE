@@ -163,6 +163,7 @@ void Game::initKeyInput() {
 
 	std::vector<int> keys;
 	keys.push_back(GLFW_KEY_ESCAPE);
+
 	keys.push_back(GLFW_KEY_M);
 	keys.push_back(GLFW_KEY_N);
 
@@ -285,6 +286,48 @@ void Game::updateMouseInput() {
 	lastMouseX = mouseX;
 	lastMouseY = mouseY;
 }
+
+/*
+void Game::updateKeyboardInput() {
+	double time = glfwGetTime();
+
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) //if not pressed == GLFW_RELEASE
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+
+	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		double time = glfwGetTime();
+		camera.move(dTime, FORWARD);
+		double time2 = glfwGetTime() - time;
+		std::cout << "updateKeyboardInput: " << time2 << std::endl;
+	}
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		camera.move(dTime, FORWARD);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camera.move(dTime, BACKWARD);
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camera.move(dTime, LEFT);
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camera.move(dTime, RIGHT);
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		camera.move(dTime, UP);
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+		camera.move(dTime, DOWN);
+
+	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
+		models[0]->changePosition(glm::vec3(0.f, 0.f, 1.f));
+	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
+		models[0]->changePosition(glm::vec3(0.f, 0.f, -1.f));
+
+	double time2 = glfwGetTime() - time;
+	std::cout << "updateKeyboardInput: " << time2 << std::endl;
+}
+*/
 void Game::updateKeyboardInput() {
 	if (keyInput->isKeyActive(GLFW_KEY_ESCAPE)) //if not pressed == GLFW_RELEASE
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -293,7 +336,6 @@ void Game::updateKeyboardInput() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	if (keyInput->isKeyActive(GLFW_KEY_N))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
 	
 	if (keyInput->isKeyActive(GLFW_KEY_W))
 		camera.move(dTime, FORWARD);
