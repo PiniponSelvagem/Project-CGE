@@ -147,20 +147,11 @@ void Game::initLights() {
 }
 void Game::initUniforms() {
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getViewMatrix(), "ViewMatrix");
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(projectionMatrix, "ProjectionMatrix");
-
+	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getProjectionMatrix(), "ProjectionMatrix");
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(*lights[0], "lightPos0");
 }
 
 void Game::initKeyInput() {
-	//glfwSetWindowUserPointer(window, this);
-	/*
-	input = new Input(window);
-	glfwSetWindowUserPointer(window, input);
-	Game* game = this;
-	input->addKeyCallback(new Func(GLFW_KEY_W, [this](void) { this->func(); }));
-	*/
-
 	std::vector<int> keys;
 	keys.push_back(GLFW_KEY_ESCAPE);
 
@@ -178,14 +169,6 @@ void Game::initKeyInput() {
 	keys.push_back(GLFW_KEY_PAGE_DOWN);
 	keyInput = new KeyInput(keys);
 	keyInput->setKeyCallback(window);
-
-	/*
-	auto lambda = [this]() { this->func; };
-	input->addKeyCallback(GLFW_KEY_ESCAPE, lambda);
-	*/
-}
-void Game::func() {
-	camera.move(dTime, FORWARD);
 }
 
 void Game::updateUniforms() {
@@ -196,38 +179,9 @@ void Game::updateUniforms() {
 	// Update frameBuffer size and projectionMatrix
 	//TODO: maybe only do this when window size changes?
 	glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
+	camera.updateProjectionMatrix(static_cast<float>(framebufferWidth) / framebufferHeight);
 
-
-
-
-
-	// TODO: this should be in camera class.
-	// TODO: this should be in camera class.
-	// TODO: this should be in camera class.
-	// TODO: this should be in camera class.
-	projectionMatrix = glm::perspective(
-		glm::radians(fov),
-		static_cast<float>(framebufferWidth) / framebufferHeight,
-		nearPlane, farPlane
-	);
-	/*
-	// TODO: axis should be changed so camera does not move like in prespective view, but only along the X and Z axis (maybe Y should be a fixed value???)
-	float fov = 10.f;
-	float aspectRatioWidth  = ((static_cast<float>(framebufferWidth) / framebufferHeight) / 2.f ) * fov;
-	float aspectRatioHeight = 0.5f * fov;
-	projectionMatrix = glm::ortho(
-		-aspectRatioWidth, aspectRatioWidth,
-		-aspectRatioHeight, aspectRatioHeight,
-		nearPlane, farPlane
-	);
-	*/
-
-
-
-
-
-
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(projectionMatrix, "ProjectionMatrix");
+	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getProjectionMatrix(), "ProjectionMatrix");
 }
 
 /*
@@ -365,15 +319,10 @@ void Game::framebuffer_size_callback(GLFWwindow* window, int width, int height) 
 
 Game::Game(const char* title, const int width, const int height, const int glMajorVer, const int glMinorVer, bool resizable) 
 : WINDOW_WIDTH(width), WINDOW_HEIGHT(height), GL_MAJOR_VER(glMajorVer), GL_MINOR_VER(glMinorVer),
-camera(glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 1.f, 0.f)) {
-
+camera(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 1.f), true)
+{
 	framebufferWidth  = WINDOW_WIDTH;
 	framebufferHeight = WINDOW_HEIGHT;
-
-	fov = 90.f;
-	nearPlane = 0.1f;
-	farPlane = 1000.f;
-	projectionMatrix = glm::mat4(1.f);
 
 	dTime = 0.f;
 	curTime = 0.f;

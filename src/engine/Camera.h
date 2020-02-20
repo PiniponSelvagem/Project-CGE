@@ -5,7 +5,13 @@ enum Direction { FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN };
 
 class Camera {
 	private:
+		bool is3D;
+
 		glm::mat4 viewMatrix;
+		glm::mat4 projectionMatrix;
+		float fov;
+		float nearPlane;
+		float farPlane;
 
 		GLfloat movementSpeed;
 		GLfloat sensivity;
@@ -26,14 +32,14 @@ class Camera {
 
 
 	public:
-		Camera(glm::vec3 position, glm::vec3 direction, glm::vec3 worldUp);
+		Camera(float fov, float nearPlane, float farPlane, glm::vec3 position, glm::vec3 direction, bool is3D);
 		~Camera();
 
 		const glm::mat4 getViewMatrix();
-
+		const glm::mat4 getProjectionMatrix();
 		const glm::vec3 getPosition();
 
-
+		void updateProjectionMatrix(float aspectRatio);
 
 		void move(const float &dTime, const int direction);
 

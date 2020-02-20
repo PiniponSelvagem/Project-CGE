@@ -62,12 +62,6 @@ class Game {
 		// Camera
 		Camera camera;
 
-		// Matrices
-		glm::mat4 projectionMatrix;
-		float fov;
-		float nearPlane;
-		float farPlane;
-
 		// Shaders
 		std::vector<Shader*> shaders;
 
