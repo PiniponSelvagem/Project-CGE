@@ -154,10 +154,29 @@ void Game::initUniforms() {
 
 void Game::initKeyInput() {
 	//glfwSetWindowUserPointer(window, this);
+	/*
 	input = new Input(window);
 	glfwSetWindowUserPointer(window, input);
 	Game* game = this;
-	input->addKeyCallback(GLFW_KEY_ESCAPE, [this](void) { this->func(); });
+	input->addKeyCallback(new Func(GLFW_KEY_W, [this](void) { this->func(); }));
+	*/
+
+	std::vector<int> keys;
+	keys.push_back(GLFW_KEY_ESCAPE);
+	keys.push_back(GLFW_KEY_M);
+	keys.push_back(GLFW_KEY_N);
+
+	keys.push_back(GLFW_KEY_W);
+	keys.push_back(GLFW_KEY_S);
+	keys.push_back(GLFW_KEY_A);
+	keys.push_back(GLFW_KEY_D);
+	keys.push_back(GLFW_KEY_SPACE);
+	keys.push_back(GLFW_KEY_LEFT_CONTROL);
+
+	keys.push_back(GLFW_KEY_PAGE_UP);
+	keys.push_back(GLFW_KEY_PAGE_DOWN);
+	keyInput = new KeyInput(keys);
+	keyInput->setKeyCallback(window);
 
 	/*
 	auto lambda = [this]() { this->func; };
@@ -267,39 +286,32 @@ void Game::updateMouseInput() {
 	lastMouseY = mouseY;
 }
 void Game::updateKeyboardInput() {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) //if not pressed == GLFW_RELEASE
+	if (keyInput->isKeyActive(GLFW_KEY_ESCAPE)) //if not pressed == GLFW_RELEASE
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 
-	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_M))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_N))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-		double time = glfwGetTime();
+	
+	if (keyInput->isKeyActive(GLFW_KEY_W))
 		camera.move(dTime, FORWARD);
-		double time2 = glfwGetTime() - time;
-		std::cout << "updateKeyboardInput: " << time2 << std::endl;
-	}
-	/*
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camera.move(dTime, FORWARD);
-	*/
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_S))
 		camera.move(dTime, BACKWARD);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_A))
 		camera.move(dTime, LEFT);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_D))
 		camera.move(dTime, RIGHT);
 
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_SPACE))
 		camera.move(dTime, UP);
-	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
 		camera.move(dTime, DOWN);
 
-	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_PAGE_UP))
 		models[0]->changePosition(glm::vec3(0.f, 0.f, 1.f));
-	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
+	if (keyInput->isKeyActive(GLFW_KEY_PAGE_DOWN))
 		models[0]->changePosition(glm::vec3(0.f, 0.f,-1.f));
 }
 
@@ -352,7 +364,7 @@ Game::~Game() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
 
-	delete input;
+	delete keyInput;
 
 	for (size_t i = 0; i < shaders.size();  ++i)  { delete shaders[i];   }
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }

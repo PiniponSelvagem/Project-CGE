@@ -2,7 +2,8 @@
 #include "../../game/Game.h"
 
 
-Func::Func(std::function<void()> callback) {
+Func::Func(int key, std::function<void()> callback) {
+	this->key = key;
 	this->callback = callback;
 }
 

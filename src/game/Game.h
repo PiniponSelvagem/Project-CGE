@@ -11,7 +11,7 @@
 #include "../engine/Camera.h"
 #include "../engine/models/ObjLoader.h"
 
-#include "../engine/input/Input.h"
+#include "../engine/input/KeyInput.h"
 
 enum shader_enum{
 	SHADER_CORE_PROGRAM
@@ -51,7 +51,7 @@ class Game {
 		float lastTime;
 
 		// Keyboard Input
-		Input* input;
+		KeyInput* keyInput;
 
 		// Mouse Input
 		double lastMouseX, lastMouseY;
