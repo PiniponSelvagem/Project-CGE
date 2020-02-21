@@ -8,7 +8,7 @@
 #include "../engine/models/primitives/Primitive.h"
 #include "../engine/models/Mesh.h"
 #include "../engine/models/Model.h"
-#include "../engine/Camera.h"
+#include "../engine/camera/Camera.h"
 #include "../engine/models/ObjLoader.h"
 
 #include "../engine/input/KeyInput.h"
@@ -60,7 +60,7 @@ class Game {
 		bool firstMouse;
 
 		// Camera
-		Camera camera;
+		Camera3D camera;
 
 		// Shaders
 		std::vector<Shader*> shaders;

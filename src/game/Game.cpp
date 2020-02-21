@@ -319,7 +319,7 @@ void Game::framebuffer_size_callback(GLFWwindow* window, int width, int height) 
 
 Game::Game(const char* title, const int width, const int height, const int glMajorVer, const int glMinorVer, bool resizable) 
 : WINDOW_WIDTH(width), WINDOW_HEIGHT(height), GL_MAJOR_VER(glMajorVer), GL_MINOR_VER(glMinorVer),
-camera(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 1.f), true)
+camera(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, -90.f, 0.f))
 {
 	framebufferWidth  = WINDOW_WIDTH;
 	framebufferHeight = WINDOW_HEIGHT;
@@ -376,7 +376,7 @@ void Game::updateInput() {
 	glfwPollEvents();
 	updateMouseInput();
 	updateKeyboardInput();
-	camera.updateInput(dTime, -1, mouseOffsetX, mouseOffsetY);
+	camera.updateMouseInput(dTime, mouseOffsetX, mouseOffsetY);
 }
 
 void Game::update() {

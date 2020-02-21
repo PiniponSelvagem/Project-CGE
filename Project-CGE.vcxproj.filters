@@ -46,6 +46,12 @@
     <Filter Include="Header Files\engine\input">
       <UniqueIdentifier>{565afb65-7180-4709-9967-8829e0e97291}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\engine\camera">
+      <UniqueIdentifier>{558c9ef4-7fa6-41a3-a593-4c8acb6f55e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\camera">
+      <UniqueIdentifier>{4806b46a-80dd-4199-8fae-637d358193c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\GLAD\glad.c">
@@ -56,9 +62,6 @@
     </ClCompile>
     <ClCompile Include="src\game\Game.cpp">
       <Filter>Source Files\src\game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\Camera.cpp">
-      <Filter>Source Files\src\engine</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\Shader.cpp">
       <Filter>Source Files\src\engine</Filter>
@@ -96,6 +99,15 @@
     <ClCompile Include="src\Func.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\camera\Camera.cpp">
+      <Filter>Source Files\src\engine\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\camera\Camera3D.cpp">
+      <Filter>Source Files\src\engine\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\camera\Camera2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_core.glsl">
@@ -114,9 +126,6 @@
     </ClInclude>
     <ClInclude Include="src\game\Game.h">
       <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Camera.h">
-      <Filter>Header Files\engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\models\Material.h">
       <Filter>Header Files\engine\models</Filter>
@@ -144,6 +153,9 @@
     </ClInclude>
     <ClInclude Include="src\Func.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\camera\Camera.h">
+      <Filter>Header Files\engine\camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\camera\Camera2D.cpp" />
+    <ClCompile Include="src\engine\camera\Camera3D.cpp" />
     <ClCompile Include="src\engine\input\KeyInput.cpp" />
     <ClCompile Include="src\Func.cpp" />
-    <ClCompile Include="src\engine\Camera.cpp" />
+    <ClCompile Include="src\engine\camera\Camera.cpp" />
     <ClCompile Include="src\engine\models\Material.cpp" />
     <ClCompile Include="src\engine\models\Mesh.cpp" />
     <ClCompile Include="src\engine\models\Model.cpp" />
@@ -45,7 +47,7 @@
     <ClInclude Include="src\Func.h" />
     <ClInclude Include="src\engine\models\ObjLoader.h" />
     <ClInclude Include="src\engine\models\Model.h" />
-    <ClInclude Include="src\engine\Camera.h" />
+    <ClInclude Include="src\engine\camera\Camera.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\engine\models\primitives\Primitive.h" />
     <ClInclude Include="src\engine\models\Mesh.h" />
