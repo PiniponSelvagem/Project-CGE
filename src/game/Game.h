@@ -91,7 +91,6 @@ class Game {
 		void initUniforms();
 
 		void initKeyInput();
-		void func();
 
 		void updateUniforms();
 

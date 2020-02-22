@@ -70,10 +70,10 @@ void Camera::moveWalk(const float &dTime, const int direction) {
 			position += right * movementSpeed * dTime;
 			break;
 		case UP:
-			position += glm::normalize(up * glm::vec3(0.f, 1.f, 0.f)) * movementSpeed * dTime;
+			position += worldUp * movementSpeed * dTime;
 			break;
 		case DOWN:
-			position -= glm::normalize(up * glm::vec3(0.f, 1.f, 0.f)) * movementSpeed * dTime;
+			position -= worldUp * movementSpeed * dTime;
 			break;
 	}
 }
