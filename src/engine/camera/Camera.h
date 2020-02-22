@@ -40,9 +40,10 @@ class Camera {
 		virtual void updateProjectionMatrix(float aspectRatio) = 0;
 
 		void setPosition(glm::vec3 position);
-		virtual void move(const float &dTime, const int direction) = 0;
+		void moveFly(const float &dTime, const int direction);
+		void moveWalk(const float &dTime, const int direction);
 
-		virtual void updateMouseInput(const float &dTime, const double &offsetX, const double &offsetY) = 0;
+		void updateMouseInput(const float &dTime, const double &offsetX, const double &offsetY);
 };
 
 class Camera2D : public Camera {
@@ -55,10 +56,6 @@ class Camera2D : public Camera {
 		~Camera2D();
 
 		void updateProjectionMatrix(float aspectRatio);
-
-		void move(const float &dTime, const int direction);
-
-		void updateMouseInput(const float &dTime, const double &offsetX, const double &offsetY);
 };
 class Camera3D : public Camera {
 	private:
@@ -70,8 +67,4 @@ class Camera3D : public Camera {
 		~Camera3D();
 
 		void updateProjectionMatrix(float aspectRatio);
-
-		void move(const float &dTime, const int direction);
-
-		void updateMouseInput(const float &dTime, const double &offsetX, const double &offsetY);
 };

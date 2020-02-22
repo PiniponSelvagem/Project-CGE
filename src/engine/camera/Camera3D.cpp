@@ -38,39 +38,3 @@ void Camera3D::updateProjectionMatrix(float aspectRatio) {
 		nearPlane, farPlane
 	);
 }
-
-void Camera3D::move(const float &dTime, const int direction) {
-	switch (direction) {
-		case FORWARD:
-			position += front * movementSpeed * dTime;
-			break;
-		case BACKWARD:
-			position -= front * movementSpeed * dTime;
-			break;
-		case LEFT:
-			position -= right * movementSpeed * dTime;
-			break;
-		case RIGHT:
-			position += right * movementSpeed * dTime;
-			break;
-		case UP:
-			position += up * movementSpeed * dTime;
-			break;
-		case DOWN:
-			position -= up * movementSpeed * dTime;
-			break;
-	}
-}
-
-void Camera3D::updateMouseInput(const float &dTime, const double &offsetX, const double &offsetY) {
-	pitch += static_cast<GLfloat>(offsetY) * sensivity * dTime;
-	yaw   += static_cast<GLfloat>(offsetX) * sensivity * dTime;
-
-	if (pitch > 80.f)
-		pitch = 80.f;
-	else if (pitch < -80.f)
-		pitch = -80.f;
-	
-	if (yaw > 360.f || yaw < -360.f)
-		yaw = 0.f;
-}

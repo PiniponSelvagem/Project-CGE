@@ -292,18 +292,18 @@ void Game::updateKeyboardInput() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
 	if (keyInput->isKeyActive(GLFW_KEY_W))
-		camera.move(dTime, FORWARD);
+		camera.moveWalk(dTime, FORWARD);
 	if (keyInput->isKeyActive(GLFW_KEY_S))
-		camera.move(dTime, BACKWARD);
+		camera.moveWalk(dTime, BACKWARD);
 	if (keyInput->isKeyActive(GLFW_KEY_A))
-		camera.move(dTime, LEFT);
+		camera.moveWalk(dTime, LEFT);
 	if (keyInput->isKeyActive(GLFW_KEY_D))
-		camera.move(dTime, RIGHT);
+		camera.moveWalk(dTime, RIGHT);
 
 	if (keyInput->isKeyActive(GLFW_KEY_SPACE))
-		camera.move(dTime, UP);
+		camera.moveWalk(dTime, UP);
 	if (keyInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
-		camera.move(dTime, DOWN);
+		camera.moveWalk(dTime, DOWN);
 
 	if (keyInput->isKeyActive(GLFW_KEY_PAGE_UP))
 		models[0]->changePosition(glm::vec3(0.f, 0.f, 1.f));
