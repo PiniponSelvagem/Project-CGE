@@ -30,6 +30,10 @@ const glm::vec3 Camera::getPosition() {
 	return position;
 }
 
+void Camera::setAspectRatio(float aspectRatio) {
+	this->aspectRatio = aspectRatio;
+}
+
 void Camera::setPosition(glm::vec3 position) {
 	this->position = position;
 }
@@ -78,7 +82,7 @@ void Camera::moveWalk(const float &dTime, const int direction) {
 	}
 }
 
-void Camera::updateMouseInput(const float &dTime, const double &offsetX, const double &offsetY) {
+void Camera::changePanTilt(const float &dTime, const double &offsetX, const double &offsetY) {
 	pitch += static_cast<GLfloat>(offsetY) * sensivity * dTime;
 	yaw += static_cast<GLfloat>(offsetX) * sensivity * dTime;
 

@@ -5,6 +5,8 @@ enum Direction { FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN };
 
 class Camera {
 	protected:
+		float aspectRatio = 1.333; // 1.333 -> 4:3
+
 		glm::mat4 viewMatrix;
 		glm::mat4 projectionMatrix;
 		float fov;
@@ -24,9 +26,7 @@ class Camera {
 		GLfloat yaw;
 		GLfloat roll;
 
-
 		virtual void updateCameraVectors() = 0;
-
 
 
 	public:
@@ -37,13 +37,14 @@ class Camera {
 		const glm::mat4 getProjectionMatrix();
 		const glm::vec3 getPosition();
 
-		virtual void updateProjectionMatrix(float aspectRatio) = 0;
+		void setAspectRatio(float aspectRatio);
+		virtual void updateProjectionMatrix() = 0;
 
 		void setPosition(glm::vec3 position);
 		void moveFly(const float &dTime, const int direction);
 		void moveWalk(const float &dTime, const int direction);
 
-		void updateMouseInput(const float &dTime, const double &offsetX, const double &offsetY);
+		void changePanTilt(const float &dTime, const double &offsetX, const double &offsetY);
 };
 
 class Camera2D : public Camera {
@@ -55,7 +56,7 @@ class Camera2D : public Camera {
 		Camera2D(float fov, float nearPlane, float farPlane, glm::vec3 position, glm::vec3 direction);
 		~Camera2D();
 
-		void updateProjectionMatrix(float aspectRatio);
+		void updateProjectionMatrix();
 };
 class Camera3D : public Camera {
 	private:
@@ -66,5 +67,5 @@ class Camera3D : public Camera {
 		Camera3D(float fov, float nearPlane, float farPlane, glm::vec3 position, glm::vec3 direction);
 		~Camera3D();
 
-		void updateProjectionMatrix(float aspectRatio);
+		void updateProjectionMatrix();
 };

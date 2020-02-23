@@ -1,4 +1,6 @@
+#pragma once
 #include "KeyInput.h"
+#include "../WindowUserPointer.h"
 
 
 
@@ -20,7 +22,6 @@ void KeyInput::removeKey(int key) {
 
 
 void KeyInput::setKeyCallback(GLFWwindow* window) {
-	glfwSetWindowUserPointer(window, this);
 	glfwSetKeyCallback(window, callback);
 }
 
@@ -42,7 +43,7 @@ void KeyInput::setKeyState(int key, bool isActive) {
 
 void KeyInput::callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (action != GLFW_REPEAT) {
-		KeyInput* input = static_cast<KeyInput*>(glfwGetWindowUserPointer(window));
-		input->setKeyState(key, action != GLFW_RELEASE);
+		WindowUserPointer* wup = static_cast<WindowUserPointer*>(glfwGetWindowUserPointer(window));
+		wup->keyInput->setKeyState(key, action != GLFW_RELEASE);
 	}
 }

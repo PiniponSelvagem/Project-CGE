@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\scene\Playground.cpp" />
+    <ClCompile Include="src\engine\scene\Scene.cpp" />
+    <ClCompile Include="src\game\player\Player.cpp" />
     <ClCompile Include="src\engine\camera\Camera2D.cpp" />
     <ClCompile Include="src\engine\camera\Camera3D.cpp" />
     <ClCompile Include="src\engine\input\KeyInput.cpp" />
@@ -43,6 +46,10 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\WindowUserPointer.h" />
+    <ClInclude Include="src\game\scene\Playground.h" />
+    <ClInclude Include="src\engine\scene\Scene.h" />
+    <ClInclude Include="src\game\player\Player.h" />
     <ClInclude Include="src\engine\input\KeyInput.h" />
     <ClInclude Include="src\Func.h" />
     <ClInclude Include="src\engine\models\ObjLoader.h" />

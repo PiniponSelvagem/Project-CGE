@@ -2,8 +2,8 @@
 
 
 void Game::initWindow(const char * title, bool resizable) {
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, this->GL_MAJOR_VER);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, this->GL_MINOR_VER);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, resizable);
 
@@ -16,6 +16,8 @@ void Game::initWindow(const char * title, bool resizable) {
 	}
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, Game::framebuffer_size_callback);
+
+	glfwSetWindowUserPointer(window, this);
 }
 void Game::initGLFW() {
 	if (glfwInit() == GLFW_FALSE) {
@@ -46,111 +48,6 @@ void Game::initOpenGLoptions() {
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
-void Game::initShaders() {
-	shaders.push_back(new Shader(GL_MAJOR_VER, GL_MINOR_VER, "resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
-}
-void Game::initTextures() {
-	// TEXTURE 0
-	textures.push_back(new Texture("resources/png/crate.png", GL_TEXTURE_2D));
-	textures.push_back(new Texture("resources/png/crate_specular.png", GL_TEXTURE_2D));
-
-	// TEXTURE 1
-	textures.push_back(new Texture("resources/png/fragile.png", GL_TEXTURE_2D));
-	textures.push_back(new Texture("resources/png/fragile_specular.png", GL_TEXTURE_2D));
-
-	// TEXTURE 1
-	textures.push_back(new Texture("resources/png/grass.png", GL_TEXTURE_2D));
-	textures.push_back(new Texture("resources/png/grass_specular.png", GL_TEXTURE_2D));
-}
-void Game::initMaterials() {
-	materials.push_back(new Material(glm::vec3(0.1f), glm::vec3(1.f), glm::vec3(2.f), 
-		0,
-		1
-	));
-}
-void Game::initModels() {
-	std::vector<Mesh*> meshes;
-	std::vector<Mesh*> meshFloor;
-
-	meshes.push_back(
-		new Mesh(
-			&Cube(),
-			glm::vec3(0.f),
-			glm::vec3(0.f),
-			glm::vec3(0.f),
-			glm::vec3(1.f)
-		)
-	);
-
-	meshFloor.push_back(
-		new Mesh(
-			&Quad(),
-			glm::vec3(0.f, 0.f, -2.f),
-			glm::vec3(0.f),
-			glm::vec3(-90.f, 0.f, 0.f),
-			glm::vec3(20.f)
-		)
-	);
-
-
-	models.push_back(new Model(
-		glm::vec3(0.f),
-		materials[MAT_CRATE],
-		textures[TEX_CRATE],
-		textures[TEX_CRATE_SPECULAR],
-		meshes
-	));
-
-	models.push_back(new Model(
-		glm::vec3(0.f, 2.f, 2.f),
-		materials[MAT_CRATE],
-		textures[TEX_FRAGILE],
-		textures[TEX_FRAGILE_SPECULAR],
-		meshes
-	));
-
-	models.push_back(new Model(
-		glm::vec3(-2.f, 2.f, 0.f),
-		materials[MAT_CRATE],
-		textures[TEX_FRAGILE],
-		textures[TEX_FRAGILE_SPECULAR],
-		meshes
-	));
-
-	models.push_back(new Model(
-		glm::vec3(0.f, 0.f, 0.f),
-		materials[MAT_CRATE],
-		textures[TEX_GRASS],
-		textures[TEX_GRASS_SPECULAR],
-		meshFloor
-	));
-
-	/*
-	models.push_back(new Model(
-		glm::vec3(0.f, 0.f, -20.f),
-		materials[MAT_CRATE],
-		textures[TEX_CRATE],
-		textures[TEX_CRATE_SPECULAR],
-		"resources/obj/teapot.obj"
-	));
-	*/
-
-	for (auto *&i : meshes) {
-		delete i;
-	}
-	for (auto *&i : meshFloor) {
-		delete i;
-	}
-}
-void Game::initLights() {
-	lights.push_back(new glm::vec3(0.f, 0.f, 1.f));
-}
-void Game::initUniforms() {
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getViewMatrix(), "ViewMatrix");
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getProjectionMatrix(), "ProjectionMatrix");
-	shaders[SHADER_CORE_PROGRAM]->setVec3f(*lights[0], "lightPos0");
-}
-
 void Game::initKeyInput() {
 	std::vector<int> keys;
 	keys.push_back(GLFW_KEY_ESCAPE);
@@ -169,19 +66,7 @@ void Game::initKeyInput() {
 	keys.push_back(GLFW_KEY_PAGE_DOWN);
 	keyInput = new KeyInput(keys);
 	keyInput->setKeyCallback(window);
-}
-
-void Game::updateUniforms() {
-	// Update viewMatrix (camera)
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getViewMatrix(), "ViewMatrix");
-	shaders[SHADER_CORE_PROGRAM]->setVec3f(camera.getPosition(), "cameraPos");
-
-	// Update frameBuffer size and projectionMatrix
-	//TODO: maybe only do this when window size changes?
-	glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
-	camera.updateProjectionMatrix(static_cast<float>(framebufferWidth) / framebufferHeight);
-
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera.getProjectionMatrix(), "ProjectionMatrix");
+	wuPointer->keyInput = keyInput;
 }
 
 /*
@@ -224,7 +109,7 @@ void Game::updateDTime() {
 	dTime = curTime - lastTime;
 	lastTime = curTime;
 }
-//TODO: improve INPUT handling. Suggestion: https://gamedev.stackexchange.com/questions/150157/how-to-improve-my-input-handling-in-glfw
+
 void Game::updateMouseInput() {
 	glfwGetCursorPos(window, &mouseX, &mouseY);
 
@@ -292,38 +177,41 @@ void Game::updateKeyboardInput() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
 	if (keyInput->isKeyActive(GLFW_KEY_W))
-		camera.moveWalk(dTime, FORWARD);
+		scene->cameraFoward(dTime);
 	if (keyInput->isKeyActive(GLFW_KEY_S))
-		camera.moveWalk(dTime, BACKWARD);
+		scene->cameraBackward(dTime);
 	if (keyInput->isKeyActive(GLFW_KEY_A))
-		camera.moveWalk(dTime, LEFT);
+		scene->cameraLeft(dTime);
 	if (keyInput->isKeyActive(GLFW_KEY_D))
-		camera.moveWalk(dTime, RIGHT);
+		scene->cameraRight(dTime);
 
 	if (keyInput->isKeyActive(GLFW_KEY_SPACE))
-		camera.moveWalk(dTime, UP);
+		scene->cameraUp(dTime);
 	if (keyInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
-		camera.moveWalk(dTime, DOWN);
-
-	if (keyInput->isKeyActive(GLFW_KEY_PAGE_UP))
-		models[0]->changePosition(glm::vec3(0.f, 0.f, 1.f));
-	if (keyInput->isKeyActive(GLFW_KEY_PAGE_DOWN))
-		models[0]->changePosition(glm::vec3(0.f, 0.f,-1.f));
+		scene->cameraDown(dTime);
 }
+
+void Game::updateInput() {
+	glfwPollEvents();
+	updateMouseInput();
+	scene->cameraPanTilt(dTime, mouseOffsetX, mouseOffsetY);
+	updateKeyboardInput();
+}
+
 
 
 void Game::framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-	// make sure the viewport matches the new window dimensions
+	WindowUserPointer* wup = static_cast<WindowUserPointer*>(glfwGetWindowUserPointer(window));
+	int fbWidth, fbHeight;
+	glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
+	if (wup->camera != nullptr) {
+		wup->camera->setAspectRatio(static_cast<float>(fbWidth) / fbHeight);
+	}
 	glViewport(0, 0, width, height);
 }
 
-Game::Game(const char* title, const int width, const int height, const int glMajorVer, const int glMinorVer, bool resizable) 
-: WINDOW_WIDTH(width), WINDOW_HEIGHT(height), GL_MAJOR_VER(glMajorVer), GL_MINOR_VER(glMinorVer),
-camera(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, -90.f, 0.f))
-{
-	framebufferWidth  = WINDOW_WIDTH;
-	framebufferHeight = WINDOW_HEIGHT;
-
+Game::Game(const char* title, const int width, const int height, bool resizable) 
+: WINDOW_WIDTH(width), WINDOW_HEIGHT(height) {
 	dTime = 0.f;
 	curTime = 0.f;
 	lastTime = 0.f;
@@ -340,28 +228,24 @@ camera(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, -90.f, 0.f))
 	initWindow(title, resizable);
 	initGLAD();
 	initOpenGLoptions();
-
-	initShaders();
-	initTextures();
-	initMaterials();
-	initModels();
-	initLights();
-	initUniforms();
+	
+	wuPointer = new WindowUserPointer();
+	glfwSetWindowUserPointer(window, wuPointer);
 
 	initKeyInput();
+
+	scene = new Playground();
+	scene->initScene();
+	wuPointer->camera = scene->getMainCamera();
+	framebuffer_size_callback(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 Game::~Game() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
-
+	delete scene;
 	delete keyInput;
-
-	for (size_t i = 0; i < shaders.size();  ++i)  { delete shaders[i];   }
-	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }
-	for (size_t i = 0; i < materials.size(); ++i) { delete materials[i]; }
-	for (auto *&i : models) { delete i; }
-	for (size_t i = 0; i < lights.size(); ++i)    { delete lights[i];    }
+	delete wuPointer;
 }
 
 void Game::setWindowShouldClose() {
@@ -372,12 +256,6 @@ int Game::getWindowShouldClose() {
 	return glfwWindowShouldClose(window);
 }
 
-void Game::updateInput() {
-	glfwPollEvents();
-	updateMouseInput();
-	updateKeyboardInput();
-	camera.updateMouseInput(dTime, mouseOffsetX, mouseOffsetY);
-}
 
 void Game::update() {
 	// UPDATE INPUT
@@ -385,10 +263,7 @@ void Game::update() {
 	updateDTime();
 	updateInput();
 
-	//models[0]->changeRotation(glm::vec3(0.4f, 0.8f, 1.f));
-	models[0]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
-	models[1]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
-	models[2]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
+	scene->update();
 }
 
 void Game::render() {
@@ -396,11 +271,8 @@ void Game::render() {
 	glClearColor(0.f, 0.f, 0.f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	updateUniforms();
-	for (auto *i : models) {
-		i->render(this->shaders[SHADER_CORE_PROGRAM]);
-	}
-
+	scene->render();
+	
 	// END
 	glfwSwapBuffers(window);
 	glFlush();

@@ -21,9 +21,6 @@ std::string Shader::loadShaderSource(const char* fileName) {
 
 	in_file.close();
 
-	std::string version = std::to_string(glMajorVer) + std::to_string(glMinorVer) + "0";
-	src.replace(src.find("#version"), 12, "#version " + version);
-
 	return src;
 }
 
@@ -75,8 +72,7 @@ void Shader::linkProgram(GLuint vertexShader, GLuint fragmentShader, GLuint geom
 
 
 
-Shader::Shader(const int glMajorVer, const int glMinorVer, const char* vertexFile, const char* fragmentFile, const char* geometryFile)
-	: glMajorVer(glMajorVer), glMinorVer(glMinorVer) {
+Shader::Shader(const char* vertexFile, const char* fragmentFile, const char* geometryFile) {
 	GLuint vertexShader = 0;
 	GLuint geometryShader = 0;
 	GLuint fragmentShader = 0;

@@ -52,6 +52,24 @@
     <Filter Include="Header Files\engine\camera">
       <UniqueIdentifier>{4806b46a-80dd-4199-8fae-637d358193c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\game\player">
+      <UniqueIdentifier>{81eea010-29e5-4dda-8d67-475a19669408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\player">
+      <UniqueIdentifier>{b97c13aa-9c4e-48d8-b85f-ed0e306a11fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\scene">
+      <UniqueIdentifier>{27f5c181-84bd-433d-bc78-2366d66e2d6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\engine\scene">
+      <UniqueIdentifier>{4960ac43-bbb3-499f-80a0-9469e623ed4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\scene">
+      <UniqueIdentifier>{671bca45-07ea-43ca-92fb-07b40f59be37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\game\scene">
+      <UniqueIdentifier>{8bce73b8-877e-4341-861c-ae4979059fe7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\GLAD\glad.c">
@@ -108,6 +126,15 @@
     <ClCompile Include="src\engine\camera\Camera2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\player\Player.cpp">
+      <Filter>Source Files\src\game\player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\scene\Scene.cpp">
+      <Filter>Source Files\src\engine\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\scene\Playground.cpp">
+      <Filter>Source Files\src\game\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_core.glsl">
@@ -156,6 +183,18 @@
     </ClInclude>
     <ClInclude Include="src\engine\camera\Camera.h">
       <Filter>Header Files\engine\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\Player.h">
+      <Filter>Header Files\game\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\scene\Scene.h">
+      <Filter>Header Files\engine\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\scene\Playground.h">
+      <Filter>Header Files\game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\WindowUserPointer.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

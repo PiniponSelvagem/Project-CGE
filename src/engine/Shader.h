@@ -4,7 +4,6 @@
 class Shader {
 	private:
 		GLuint id;
-		const int glMajorVer, glMinorVer;
 
 		std::string loadShaderSource(const char* fileName);
 
@@ -13,7 +12,7 @@ class Shader {
 		void linkProgram(GLuint vertexShader, GLuint fragmentShader, GLuint geometryShader);
 
 	public:
-		Shader(const int glMajorVer, const int glMinorVer, const char* vertexFile, const char* fragmentFile, const char* geometryFile = "");
+		Shader(const char* vertexFile, const char* fragmentFile, const char* geometryFile = "");
 
 		~Shader();
 
