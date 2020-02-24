@@ -1,7 +1,7 @@
 #pragma once
 #include "Mesh.h"
 
-void Mesh::Mesh_AuxCtor(Vertex * vertexArray, const unsigned &nVertices, GLuint * indexArray, const unsigned &nIndices,
+void Mesh::Mesh_AuxCtor(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices,
 				  glm::vec3 position,
 				  glm::vec3 origin,
 				  glm::vec3 rotation,
@@ -64,7 +64,7 @@ void Mesh::initVAO() {
 	glBindVertexArray(0);
 }
 
-void Mesh::updateUniforms(Shader * shader) {
+void Mesh::updateUniforms(Shader* shader) {
 	shader->setMat4fv(ModelMatrix, "ModelMatrix");
 }
 
@@ -80,7 +80,7 @@ void Mesh::updateModelMatrix() {
 
 
 
-Mesh::Mesh(Vertex * vertexArray, const unsigned &nVertices, GLuint * indexArray, const unsigned &nIndices,
+Mesh::Mesh(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices,
 		glm::vec3 position,
 		glm::vec3 origin,
 		glm::vec3 rotation,
@@ -92,7 +92,7 @@ Mesh::Mesh(Vertex * vertexArray, const unsigned &nVertices, GLuint * indexArray,
 	);
 }
 
-Mesh::Mesh(Primitive * primitive,
+Mesh::Mesh(Primitive* primitive,
 		glm::vec3 position,
 		glm::vec3 origin,
 		glm::vec3 rotation,
@@ -164,7 +164,7 @@ void Mesh::update() {
 	*/
 }
 
-void Mesh::render(Shader * shader) {
+void Mesh::render(Shader* shader) {
 	updateModelMatrix();
 	updateUniforms(shader);
 	shader->use();

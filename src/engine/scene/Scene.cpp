@@ -5,18 +5,12 @@ enum shader_enum {
 };
 
 void Scene::initUniforms() {
-	//TODO: more generic shader selection???
-	int SHADER_CORE_PROGRAM = 0;
-
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getProjectionMatrix(), "ProjectionMatrix");
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(*lights[0], "lightPos0");
 }
 
 void Scene::updateUniforms() {
-	//TODO: more generic shader selection???
-	int SHADER_CORE_PROGRAM = 0;
-
 	// Update viewMatrix (camera)
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(camera->getPosition(), "cameraPos");
@@ -51,11 +45,19 @@ Camera* Scene::getMainCamera() {
 }
 
 void Scene::render() {
-	//TODO: more generic shader selection???
-	int SHADER_CORE_PROGRAM = 0;
-
 	updateUniforms();
 	for (auto *i : models) {
 		i->render(this->shaders[SHADER_CORE_PROGRAM]);
 	}
+
+	/*
+	Camera2D c = Camera2D(10.f, 0.1f, 10.f, glm::vec3(0.f, 1.f, 1.f), glm::vec3(0.f, -90.f, 0.f));
+	Camera* mainCamera = camera;
+	camera = &c;
+	updateUniforms();
+	for (auto *i : models) {
+		i->render(this->shaders[SHADER_CORE_PROGRAM]);
+	}
+	camera = mainCamera;
+	*/
 }

@@ -7,8 +7,8 @@
 
 class Model {
 	private:
-		Material *material;
-		Texture *overrideTextureDiffuse, *overrideTextureSpecular;
+		Material* material;
+		Texture* overrideTextureDiffuse, *overrideTextureSpecular;
 		std::vector<Mesh*> meshes;
 		glm::vec3 position;
 		
@@ -16,8 +16,8 @@ class Model {
 
 
 	public:
-		Model(glm::vec3 position, Material *material, Texture *ovTexDif, Texture *ovTexSpec, std::vector<Mesh*> meshes);
-		Model(glm::vec3 position, Material *material, Texture *ovTexDif, Texture *ovTexSpec, const char* objFile);
+		Model(glm::vec3 position, Material* material, Texture* ovTexDif, Texture* ovTexSpec, std::vector<Mesh*> meshes);
+		Model(glm::vec3 position, Material* material, Texture* ovTexDif, Texture* ovTexSpec, const char* objFile);
 		~Model();
 
 		void changeRotation(const glm::vec3 rotation);
@@ -25,5 +25,5 @@ class Model {
 
 		void update();
 
-		void render(Shader *shader);
+		void render(Shader* shader);
 };

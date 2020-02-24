@@ -8,7 +8,7 @@ void Model::updateUniforms() {
 
 
 
-Model::Model(glm::vec3 position, Material *material, Texture *ovTexDif, Texture *ovTexSpec, std::vector<Mesh*> meshes) {
+Model::Model(glm::vec3 position, Material* material, Texture* ovTexDif, Texture* ovTexSpec, std::vector<Mesh*> meshes) {
 	this->position = position;
 	this->material = material;
 	this->overrideTextureDiffuse = ovTexDif;
@@ -25,7 +25,7 @@ Model::Model(glm::vec3 position, Material *material, Texture *ovTexDif, Texture 
 	}
 }
 
-Model::Model(glm::vec3 position, Material *material, Texture *ovTexDif, Texture *ovTexSpec, const char* objFile) {
+Model::Model(glm::vec3 position, Material* material, Texture* ovTexDif, Texture* ovTexSpec, const char* objFile) {
 	this->position = position;
 	this->material = material;
 	this->overrideTextureDiffuse = ovTexDif;
@@ -69,7 +69,7 @@ void Model::update() {
 	updateUniforms();
 }
 
-void Model::render(Shader *shader) {
+void Model::render(Shader* shader) {
 	updateUniforms();
 	material->sendToShader(*shader);
 
