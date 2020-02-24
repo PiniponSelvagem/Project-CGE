@@ -135,6 +135,9 @@
     <ClCompile Include="src\game\scene\Playground.cpp">
       <Filter>Source Files\src\game\scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\scene\HudTest.cpp">
+      <Filter>Source Files\src\game\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_core.glsl">
@@ -195,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="src\engine\WindowUserPointer.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\scene\HudTest.h">
+      <Filter>Header Files\game\scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,6 +15,7 @@
 #include "../engine/WindowUserPointer.h"
 
 #include "scene/Playground.h"
+#include "scene/HudTest.h"
 
 
 
@@ -35,6 +36,7 @@ class Game {
 
 		// Scenes
 		Playground* scene;
+		HudTest* hudTest;
 
 		// Mouse Input
 		double lastMouseX, lastMouseY;

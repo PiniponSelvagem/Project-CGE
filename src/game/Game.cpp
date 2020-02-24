@@ -237,6 +237,10 @@ Game::Game(const char* title, const int width, const int height, bool resizable)
 	scene = new Playground();
 	scene->initScene();
 	wuPointer->camera = scene->getMainCamera();
+
+	hudTest = new HudTest();
+	hudTest->initScene();
+
 	framebuffer_size_callback(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
@@ -272,6 +276,9 @@ void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	scene->render();
+	glDisable(GL_DEPTH_TEST);
+	hudTest->render();
+	glEnable(GL_DEPTH_TEST);
 	
 	// END
 	glfwSwapBuffers(window);

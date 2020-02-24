@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\scene\HudTest.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
     <ClCompile Include="src\engine\scene\Scene.cpp" />
     <ClCompile Include="src\game\player\Player.cpp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\WindowUserPointer.h" />
+    <ClInclude Include="src\game\scene\HudTest.h" />
     <ClInclude Include="src\game\scene\Playground.h" />
     <ClInclude Include="src\engine\scene\Scene.h" />
     <ClInclude Include="src\game\player\Player.h" />
