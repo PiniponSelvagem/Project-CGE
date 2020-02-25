@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\camera\CameraHUD.cpp" />
     <ClCompile Include="src\game\scene\HudTest.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
     <ClCompile Include="src\engine\scene\Scene.cpp" />

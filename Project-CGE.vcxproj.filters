@@ -123,9 +123,6 @@
     <ClCompile Include="src\engine\camera\Camera3D.cpp">
       <Filter>Source Files\src\engine\camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\camera\Camera2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\player\Player.cpp">
       <Filter>Source Files\src\game\player</Filter>
     </ClCompile>
@@ -137,6 +134,12 @@
     </ClCompile>
     <ClCompile Include="src\game\scene\HudTest.cpp">
       <Filter>Source Files\src\game\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\camera\CameraHUD.cpp">
+      <Filter>Source Files\src\engine\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\camera\Camera2D.cpp">
+      <Filter>Source Files\src\engine\camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

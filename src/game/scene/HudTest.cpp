@@ -33,16 +33,16 @@ void HudTest::initModels() {
 
 	meshes.push_back(
 		new Mesh(
-			&Cube(),
+			&Quad(),
 			glm::vec3(0.f),
 			glm::vec3(0.f),
 			glm::vec3(0.f),
-			glm::vec3(1.f)
+			glm::vec3(100.f)
 		)
 	);
 
 	models.push_back(new Model(
-		glm::vec3(2.f, -2.f, -5.f),
+		glm::vec3(50.f, 50.f, -1.f),
 		materials[MAT_CRATE],
 		textures[TEX_CRATE],
 		textures[TEX_CRATE_SPECULAR],
@@ -60,7 +60,8 @@ void HudTest::initLights() {
 
 
 HudTest::HudTest() : Scene() {
-	camera = new Camera3D(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, -90.f, 0.f));
+	//camera = new Camera2D(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, -90.f, 0.f));
+	camera = new CameraHUD(0.f, 0.f, 0.f, glm::vec3(0.f), glm::vec3(0.f, -90.f, 0.f));
 }
 
 
@@ -68,5 +69,5 @@ HudTest::~HudTest() {
 }
 
 void HudTest::update() {
-	models[0]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
+	
 }
