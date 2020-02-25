@@ -138,12 +138,6 @@
     <ClCompile Include="src\game\scene\Playground.cpp">
       <Filter>Source Files\src\game\scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\scene\HudTest.cpp">
-      <Filter>Source Files\src\game\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\camera\CameraHUD.cpp">
-      <Filter>Source Files\src\engine\camera</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\camera\Camera2D.cpp">
       <Filter>Source Files\src\engine\camera</Filter>
     </ClCompile>
@@ -152,6 +146,12 @@
     </ClCompile>
     <ClCompile Include="src\engine\gui\SceneGUI.cpp">
       <Filter>Source Files\src\engine\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\gui\MaterialGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\gui\ModelGUI.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -216,14 +216,17 @@
     <ClInclude Include="src\engine\WindowUserPointer.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\scene\HudTest.h">
-      <Filter>Header Files\game\scene</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\gui\CameraGUI.h">
       <Filter>Header Files\engine\gui</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\gui\SceneGUI.h">
       <Filter>Header Files\engine\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\gui\MaterialGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\gui\ModelGUI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

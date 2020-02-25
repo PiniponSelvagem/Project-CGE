@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\gui\MaterialGUI.cpp" />
+    <ClCompile Include="src\engine\gui\ModelGUI.cpp" />
     <ClCompile Include="src\engine\gui\SceneGUI.cpp" />
     <ClCompile Include="src\engine\gui\CameraGUI.cpp" />
-    <ClCompile Include="src\engine\camera\CameraHUD.cpp" />
-    <ClCompile Include="src\game\scene\HudTest.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
     <ClCompile Include="src\engine\scene\Scene.cpp" />
     <ClCompile Include="src\game\player\Player.cpp" />
@@ -52,10 +52,11 @@
     <None Include="resources\shaders\vertex_gui.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\gui\MaterialGUI.h" />
+    <ClInclude Include="src\engine\gui\ModelGUI.h" />
     <ClInclude Include="src\engine\gui\SceneGUI.h" />
     <ClInclude Include="src\engine\gui\CameraGUI.h" />
     <ClInclude Include="src\engine\WindowUserPointer.h" />
-    <ClInclude Include="src\game\scene\HudTest.h" />
     <ClInclude Include="src\game\scene\Playground.h" />
     <ClInclude Include="src\engine\scene\Scene.h" />
     <ClInclude Include="src\game\player\Player.h" />

@@ -268,6 +268,7 @@ void Game::update() {
 	updateInput();
 
 	scene->update();
+	sceneGUI->update();
 }
 
 void Game::render() {

@@ -1,9 +1,9 @@
 #pragma once
 #include "../Shader.h"
 #include "../models/Texture.h"
-#include "../models/Material.h"
+#include "MaterialGUI.h"
 #include "../models/Mesh.h"
-#include "../models/Model.h"
+#include "ModelGUI.h"
 #include "CameraGUI.h"
 
 class SceneGUI {
@@ -12,26 +12,22 @@ class SceneGUI {
 		CameraGUI* camera;
 
 		// Shaders
-		std::vector<Shader*> shaders;
+		Shader* shader;
 
 		// Textures
 		std::vector<Texture*> textures;
 
 		// Materials
-		std::vector<Material*> materials;
+		std::vector<MaterialGUI*> materials;
 
 		// Models
-		std::vector<Model*> models;
-
-		// Lights
-		std::vector<glm::vec3*> lights;
+		std::vector<ModelGUI*> models;
 
 
 		void initShaders();
 		void initTextures();
 		void initMaterials();
 		void initModels();
-		void initLights();
 		void initUniforms();
 
 		void updateUniforms();

@@ -15,7 +15,6 @@
 #include "../engine/WindowUserPointer.h"
 
 #include "scene/Playground.h"
-#include "scene/HudTest.h"
 
 #include "../engine/gui/SceneGUI.h"
 
