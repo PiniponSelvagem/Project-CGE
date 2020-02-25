@@ -238,8 +238,8 @@ Game::Game(const char* title, const int width, const int height, bool resizable)
 	scene->initScene();
 	wuPointer->camera = scene->getMainCamera();
 
-	hudTest = new HudTest();
-	hudTest->initScene();
+	sceneGUI = new SceneGUI();
+	sceneGUI->initScene();
 
 	framebuffer_size_callback(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
@@ -277,7 +277,7 @@ void Game::render() {
 
 	scene->render();
 	glDisable(GL_DEPTH_TEST);
-	hudTest->render();
+	sceneGUI->render();
 	glEnable(GL_DEPTH_TEST);
 	
 	// END

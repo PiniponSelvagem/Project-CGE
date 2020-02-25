@@ -70,6 +70,12 @@
     <Filter Include="Source Files\src\game\scene">
       <UniqueIdentifier>{8bce73b8-877e-4341-861c-ae4979059fe7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine\gui">
+      <UniqueIdentifier>{b711114a-ad63-4d3d-9bf7-f06d4feed4a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\engine\gui">
+      <UniqueIdentifier>{107ee277-dcec-4908-a364-f65ecf6c2693}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\GLAD\glad.c">
@@ -141,6 +147,12 @@
     <ClCompile Include="src\engine\camera\Camera2D.cpp">
       <Filter>Source Files\src\engine\camera</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\gui\CameraGUI.cpp">
+      <Filter>Source Files\src\engine\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\gui\SceneGUI.cpp">
+      <Filter>Source Files\src\engine\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_core.glsl">
@@ -149,6 +161,8 @@
     <None Include="resources\shaders\vertex_core.glsl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\shaders\vertex_gui.glsl" />
+    <None Include="resources\shaders\fragment_gui.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libs.h">
@@ -204,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="src\game\scene\HudTest.h">
       <Filter>Header Files\game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\gui\CameraGUI.h">
+      <Filter>Header Files\engine\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\gui\SceneGUI.h">
+      <Filter>Header Files\engine\gui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

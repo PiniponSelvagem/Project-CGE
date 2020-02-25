@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\gui\SceneGUI.cpp" />
+    <ClCompile Include="src\engine\gui\CameraGUI.cpp" />
     <ClCompile Include="src\engine\camera\CameraHUD.cpp" />
     <ClCompile Include="src\game\scene\HudTest.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
@@ -44,10 +46,14 @@
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\shaders\fragment_gui.glsl" />
     <None Include="resources\shaders\fragment_core.glsl" />
     <None Include="resources\shaders\vertex_core.glsl" />
+    <None Include="resources\shaders\vertex_gui.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\gui\SceneGUI.h" />
+    <ClInclude Include="src\engine\gui\CameraGUI.h" />
     <ClInclude Include="src\engine\WindowUserPointer.h" />
     <ClInclude Include="src\game\scene\HudTest.h" />
     <ClInclude Include="src\game\scene\Playground.h" />
