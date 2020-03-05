@@ -23,6 +23,8 @@ class Playground : public Scene {
 		void cameraRight(float dTime);
 		void cameraUp(float dTime);
 		void cameraDown(float dTime);
+
+		void lightSetPosition();
 		/******************************/
 };
 

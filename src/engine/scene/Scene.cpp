@@ -7,13 +7,16 @@ enum shader_enum {
 void Scene::initUniforms() {
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getProjectionMatrix(), "ProjectionMatrix");
-	shaders[SHADER_CORE_PROGRAM]->setVec3f(*lights[0], "lightPos0");
+	shaders[SHADER_CORE_PROGRAM]->setVec3f(lights[0]->getPosition(), "lightPos0");
+	shaders[SHADER_CORE_PROGRAM]->setVec3f(lights[0]->getColor(), "lightColor0");
 }
 
 void Scene::updateUniforms() {
 	// Update viewMatrix (camera)
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(camera->getPosition(), "cameraPos");
+	shaders[SHADER_CORE_PROGRAM]->setVec3f(lights[0]->getPosition(), "lightPos0");
+	shaders[SHADER_CORE_PROGRAM]->setVec3f(lights[0]->getColor(), "lightColor0");
 	camera->updateProjectionMatrix();
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getProjectionMatrix(), "ProjectionMatrix");
 
@@ -49,15 +52,4 @@ void Scene::render() {
 	for (auto *i : models) {
 		i->render(this->shaders[SHADER_CORE_PROGRAM]);
 	}
-
-	/*
-	Camera2D c = Camera2D(10.f, 0.1f, 10.f, glm::vec3(0.f, 1.f, 1.f), glm::vec3(0.f, -90.f, 0.f));
-	Camera* mainCamera = camera;
-	camera = &c;
-	updateUniforms();
-	for (auto *i : models) {
-		i->render(this->shaders[SHADER_CORE_PROGRAM]);
-	}
-	camera = mainCamera;
-	*/
 }

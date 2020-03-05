@@ -147,11 +147,14 @@
     <ClCompile Include="src\engine\gui\SceneGUI.cpp">
       <Filter>Source Files\src\engine\gui</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\gui\MaterialGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\gui\ModelGUI.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src\engine\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\gui\MaterialGUI.cpp">
+      <Filter>Source Files\src\engine\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Light.cpp">
+      <Filter>Source Files\src\engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,11 +225,14 @@
     <ClInclude Include="src\engine\gui\SceneGUI.h">
       <Filter>Header Files\engine\gui</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\Light.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
     <ClInclude Include="src\engine\gui\MaterialGUI.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\engine\gui</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\gui\ModelGUI.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\engine\gui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

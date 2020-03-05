@@ -189,6 +189,10 @@ void Game::updateKeyboardInput() {
 		scene->cameraUp(dTime);
 	if (keyInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
 		scene->cameraDown(dTime);
+
+	// TODO: MOUSE BUTTONS
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+		scene->lightSetPosition();
 }
 
 void Game::updateInput() {
@@ -277,9 +281,7 @@ void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	scene->render();
-	glDisable(GL_DEPTH_TEST);
 	sceneGUI->render();
-	glEnable(GL_DEPTH_TEST);
 	
 	// END
 	glfwSwapBuffers(window);

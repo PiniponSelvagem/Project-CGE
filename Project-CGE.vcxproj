@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\Light.cpp" />
     <ClCompile Include="src\engine\gui\MaterialGUI.cpp" />
     <ClCompile Include="src\engine\gui\ModelGUI.cpp" />
     <ClCompile Include="src\engine\gui\SceneGUI.cpp" />
@@ -52,6 +53,7 @@
     <None Include="resources\shaders\vertex_gui.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\Light.h" />
     <ClInclude Include="src\engine\gui\MaterialGUI.h" />
     <ClInclude Include="src\engine\gui\ModelGUI.h" />
     <ClInclude Include="src\engine\gui\SceneGUI.h" />

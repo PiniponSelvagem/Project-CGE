@@ -17,6 +17,7 @@ out vec4 fs_color;
 
 uniform Material material;
 uniform vec3 lightPos0;
+uniform vec3 lightColor0;
 uniform vec3 cameraPos;
 
 
@@ -29,7 +30,7 @@ vec3 calculateDiffuse(Material material, vec3 vs_position, vec3 vs_normal, vec3 
 	float diffuse		  = clamp(dot(posToLightDirVec, vs_normal), 0, 1);
 	vec3 diffuseFinal	  = material.diffuse * diffuse;
 
-	return diffuseFinal;
+	return diffuseFinal * lightColor0;
 }
 
 vec3 calculateSpecular(Material material, vec3 vs_position, vec3 vs_normal, vec3 lightPos0, vec3 cameraPos) {
@@ -39,7 +40,7 @@ vec3 calculateSpecular(Material material, vec3 vs_position, vec3 vs_normal, vec3
 	float specularConst	  = pow(max(dot(posToViewDirVec, reflectDirVec), 0), 30);
 	vec3 specularFinal	  = material.specular * specularConst * texture(material.specularTex, vs_texcoord).rgb;
 
-	return specularFinal;
+	return specularFinal * lightColor0;
 }
 
 

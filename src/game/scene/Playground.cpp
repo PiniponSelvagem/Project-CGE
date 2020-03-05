@@ -95,8 +95,7 @@ void Playground::initModels() {
 		textures[TEX_GRASS_SPECULAR],
 		meshFloor
 	));
-
-	/*
+	
 	models.push_back(new Model(
 		glm::vec3(0.f, 0.f, -20.f),
 		materials[MAT_CRATE],
@@ -104,7 +103,6 @@ void Playground::initModels() {
 		textures[TEX_CRATE_SPECULAR],
 		"resources/obj/teapot.obj"
 	));
-	*/
 
 	for (auto *&i : meshes) {
 		delete i;
@@ -114,7 +112,9 @@ void Playground::initModels() {
 	}
 }
 void Playground::initLights() {
-	lights.push_back(new glm::vec3(0.f, 0.f, 1.f));
+	lights.push_back(new Light(
+		glm::vec3(0.f, 0.f, 1.f)//, glm::vec3(1.f, 0.f, 0.f)
+	));
 }
 
 
@@ -142,3 +142,5 @@ void Playground::cameraLeft(float dTime)     { camera->moveWalk(dTime, LEFT);   
 void Playground::cameraRight(float dTime)    { camera->moveWalk(dTime, RIGHT);    }
 void Playground::cameraUp(float dTime)       { camera->moveWalk(dTime, UP);       }
 void Playground::cameraDown(float dTime)     { camera->moveWalk(dTime, DOWN);     }
+
+void Playground::lightSetPosition() { lights[0]->setPosition(camera->getPosition()); }
