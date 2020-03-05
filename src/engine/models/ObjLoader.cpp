@@ -58,18 +58,18 @@ std::vector<Vertex> ObjLoader::loadObj(const char* fileName) {
 				if (p > 2) p = 0;
 			}
 		}
-
-		vertices.resize(vertexPositionIndices.size(), Vertex());
-
-		for (size_t i = 0; i < vertexPositionIndices.size(); ++i) {
-			vertices[i].position = vertexPositions[vertexPositionIndices[i] - 1];
-			vertices[i].texcoord = vertexTexCoords[vertexTexCoordIndices[i] - 1];
-			vertices[i].normal = vertexNormals[vertexNormalIndices[i] - 1];
-			vertices[i].color = glm::vec3(1.f, 1.f, 1.f);
-		}
-
-		//std::cout << "Nr of vertices: " << vertices.size() << std::endl;
 	}
+
+	vertices.resize(vertexPositionIndices.size(), Vertex());
+
+	for (size_t i = 0; i < vertexPositionIndices.size(); ++i) {
+		vertices[i].position = vertexPositions[vertexPositionIndices[i] - 1];
+		vertices[i].texcoord = vertexTexCoords[vertexTexCoordIndices[i] - 1];
+		vertices[i].normal = vertexNormals[vertexNormalIndices[i] - 1];
+		vertices[i].color = glm::vec3(1.f, 1.f, 1.f);
+	}
+
+	//std::cout << "Nr of vertices: " << vertices.size() << std::endl;
 
 	return vertices;
 }
