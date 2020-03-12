@@ -10,3 +10,8 @@ Following "Suraj Sharma" on youtube, on the learning process but making my own c
 - https://learnopengl.com
 - https://github.com/Headturna
 - https://www.youtube.com/playlist?list=PL6xSOsbVA1eYSZTKBxnoXYboy7wc4yg-Z
+
+
+---
+## Notes in case you want to compile to x64
+- SOIL - requires compiling to x64. Download its source code from the provided link above and compile it to x64. I used the VC9 project thats provided in the zip file, with VS2017 without problems.

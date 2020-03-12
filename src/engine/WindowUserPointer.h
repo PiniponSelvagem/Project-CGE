@@ -1,8 +1,10 @@
 #pragma once
-#include "input/KeyInput.h"
+#include "input/KeyboardInput.h"
+#include "input/MouseInput.h"
 #include "camera/Camera.h"
 
 struct WindowUserPointer {
-	KeyInput* keyInput;
+	KeyboardInput* keyboardInput;
+	MouseInput* mouseInput;
 	Camera* camera;
 };

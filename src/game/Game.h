@@ -11,7 +11,8 @@
 #include "../engine/camera/Camera.h"
 #include "../engine/models/ObjLoader.h"
 
-#include "../engine/input/KeyInput.h"
+#include "../engine/input/KeyboardInput.h"
+#include "../engine/input/MouseInput.h"
 #include "../engine/WindowUserPointer.h"
 
 #include "scene/Playground.h"
@@ -32,8 +33,9 @@ class Game {
 		float curTime;
 		float lastTime;
 
-		// Keyboard Input
-		KeyInput* keyInput;
+		// Input
+		KeyboardInput* keyboardInput;
+		MouseInput* mouseInput;
 
 		// Scenes
 		Playground* scene;
@@ -50,7 +52,7 @@ class Game {
 		void initGLAD();	//AFTER CONTEXT CREATION
 		void initOpenGLoptions();
 
-		void initKeyInput();
+		void initInput();
 		
 		void updateDTime();
 		void updateMouseInput();

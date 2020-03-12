@@ -48,7 +48,8 @@ void Game::initOpenGLoptions() {
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
-void Game::initKeyInput() {
+void Game::initInput() {
+	// Keyboard Input
 	std::vector<int> keys;
 	keys.push_back(GLFW_KEY_ESCAPE);
 
@@ -64,9 +65,18 @@ void Game::initKeyInput() {
 
 	keys.push_back(GLFW_KEY_PAGE_UP);
 	keys.push_back(GLFW_KEY_PAGE_DOWN);
-	keyInput = new KeyInput(keys);
-	keyInput->setKeyCallback(window);
-	wuPointer->keyInput = keyInput;
+	keyboardInput = new KeyboardInput(keys);
+	keyboardInput->setKeyCallback(window);
+	wuPointer->keyboardInput = keyboardInput;
+
+
+	// Mouse Input
+	std::vector<int> buttons;
+	buttons.push_back(GLFW_MOUSE_BUTTON_1);
+
+	mouseInput = new MouseInput(buttons);
+	mouseInput->setKeyCallback(window);
+	wuPointer->mouseInput = mouseInput;
 }
 
 /*
@@ -168,30 +178,30 @@ void Game::updateKeyboardInput() {
 }
 */
 void Game::updateKeyboardInput() {
-	if (keyInput->isKeyActive(GLFW_KEY_ESCAPE)) //if not pressed == GLFW_RELEASE
+	if (keyboardInput->isKeyActive(GLFW_KEY_ESCAPE)) //if not pressed == GLFW_RELEASE
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 
-	if (keyInput->isKeyActive(GLFW_KEY_M))
+	if (keyboardInput->isKeyActive(GLFW_KEY_M))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	if (keyInput->isKeyActive(GLFW_KEY_N))
+	if (keyboardInput->isKeyActive(GLFW_KEY_N))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
-	if (keyInput->isKeyActive(GLFW_KEY_W))
+	if (keyboardInput->isKeyActive(GLFW_KEY_W))
 		scene->cameraFoward(dTime);
-	if (keyInput->isKeyActive(GLFW_KEY_S))
+	if (keyboardInput->isKeyActive(GLFW_KEY_S))
 		scene->cameraBackward(dTime);
-	if (keyInput->isKeyActive(GLFW_KEY_A))
+	if (keyboardInput->isKeyActive(GLFW_KEY_A))
 		scene->cameraLeft(dTime);
-	if (keyInput->isKeyActive(GLFW_KEY_D))
+	if (keyboardInput->isKeyActive(GLFW_KEY_D))
 		scene->cameraRight(dTime);
 
-	if (keyInput->isKeyActive(GLFW_KEY_SPACE))
+	if (keyboardInput->isKeyActive(GLFW_KEY_SPACE))
 		scene->cameraUp(dTime);
-	if (keyInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
+	if (keyboardInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
 		scene->cameraDown(dTime);
 
-	// TODO: MOUSE BUTTONS
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+
+	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))
 		scene->lightSetPosition();
 }
 
@@ -236,7 +246,7 @@ Game::Game(const char* title, const int width, const int height, bool resizable)
 	wuPointer = new WindowUserPointer();
 	glfwSetWindowUserPointer(window, wuPointer);
 
-	initKeyInput();
+	initInput();
 
 	scene = new Playground();
 	scene->initScene();
@@ -252,7 +262,8 @@ Game::~Game() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	delete scene;
-	delete keyInput;
+	delete keyboardInput;
+	delete mouseInput;
 	delete wuPointer;
 }
 

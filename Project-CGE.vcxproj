@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\input\Input.cpp" />
+    <ClCompile Include="src\engine\input\MouseInput.cpp" />
     <ClCompile Include="src\engine\Light.cpp" />
     <ClCompile Include="src\engine\gui\MaterialGUI.cpp" />
     <ClCompile Include="src\engine\gui\ModelGUI.cpp" />
@@ -53,6 +55,8 @@
     <None Include="resources\shaders\vertex_gui.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\input\MouseInput.h" />
+    <ClInclude Include="src\engine\input\Input.h" />
     <ClInclude Include="src\engine\Light.h" />
     <ClInclude Include="src\engine\gui\MaterialGUI.h" />
     <ClInclude Include="src\engine\gui\ModelGUI.h" />
@@ -62,7 +66,7 @@
     <ClInclude Include="src\game\scene\Playground.h" />
     <ClInclude Include="src\engine\scene\Scene.h" />
     <ClInclude Include="src\game\player\Player.h" />
-    <ClInclude Include="src\engine\input\KeyInput.h" />
+    <ClInclude Include="src\engine\input\KeyboardInput.h" />
     <ClInclude Include="src\Func.h" />
     <ClInclude Include="src\engine\models\ObjLoader.h" />
     <ClInclude Include="src\engine\models\Model.h" />
