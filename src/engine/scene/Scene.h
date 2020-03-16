@@ -5,7 +5,7 @@
 #include "../models/Mesh.h"
 #include "../models/Model.h"
 #include "../camera/Camera.h"
-#include "../Light.h"
+#include "../lights/Light.h"
 
 class Scene {
 	protected:
@@ -25,7 +25,7 @@ class Scene {
 		std::vector<Model*> models;
 
 		// Lights
-		std::vector<Light*> lights;
+		std::vector<LightPoint*> lightsPoint;
 
 
 		virtual void initShaders() = 0;

@@ -43,6 +43,17 @@ vec3 calculateSpecular(Material material, vec3 vs_position, vec3 vs_normal, vec3
 	return specularFinal * lightColor0;
 }
 
+float calculateAttenuation(vec3 vs_position, vec3 vs_normal, vec3 lightPos0) {
+	// http://learnwebgl.brown37.net/09_lights/lights_attenuation.html
+	vec3 posToLightDirVec = lightPos0 - vs_position;
+	float dist			  = length(posToLightDirVec);
+	float falloffNear = 0;
+	float falloffFar  = 1;
+	float attenuationFinal = 1.0 / (1.0 + falloffNear * dist + falloffFar * dist * dist);
+
+	return attenuationFinal;
+}
+
 
 void main() {
 	//fs_color = vec4(vs_color, 1.f);
@@ -59,10 +70,13 @@ void main() {
 	vec3 specularFinal = calculateSpecular(material, vs_position, vs_normal, lightPos0, cameraPos);
 
 	//Attenuation
+	float attenuationFinal = calculateAttenuation(vs_position, vs_normal, lightPos0);
 
 
 	//Final Color / Light	
 	fs_color = texture(material.diffuseTex, vs_texcoord)
 		//* vec4(vs_color, 1.f)	//rainbow effect
-		* (vec4(ambientFinal, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
+		* (vec4(ambientFinal, 1.f)
+			+ attenuationFinal * (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f))
+		);
 }

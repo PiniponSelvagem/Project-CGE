@@ -1,6 +1,7 @@
 #include "Playground.h"
 
 enum texture_enum {
+	TEX_DEFAULT,
 	TEX_CRATE, TEX_CRATE_SPECULAR,
 	TEX_FRAGILE, TEX_FRAGILE_SPECULAR,
 	TEX_GRASS, TEX_GRASS_SPECULAR
@@ -21,6 +22,9 @@ void Playground::initShaders() {
 	shaders.push_back(new Shader("resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
 }
 void Playground::initTextures() {
+	// TEXTURE - DEFAULT
+	textures.push_back(new Texture("resources/png/NO_TEX.png", GL_TEXTURE_2D));
+
 	// TEXTURE 0
 	textures.push_back(new Texture("resources/png/crate.png", GL_TEXTURE_2D));
 	textures.push_back(new Texture("resources/png/crate_specular.png", GL_TEXTURE_2D));
@@ -99,8 +103,8 @@ void Playground::initModels() {
 	models.push_back(new Model(
 		glm::vec3(0.f, 0.f, -20.f),
 		materials[MAT_CRATE],
-		textures[TEX_CRATE],
-		textures[TEX_CRATE_SPECULAR],
+		textures[TEX_DEFAULT],
+		textures[TEX_DEFAULT],
 		"resources/obj/teapot.obj"
 	));
 
@@ -112,9 +116,15 @@ void Playground::initModels() {
 	}
 }
 void Playground::initLights() {
-	lights.push_back(new Light(
+	lightsPoint.push_back(new LightPoint(
 		glm::vec3(0.f, 0.f, 1.f)//, glm::vec3(1.f, 0.f, 0.f)
 	));
+
+	/*
+	lights.push_back(new Light(
+		glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 0.f, 0.f)
+	));
+	*/
 }
 
 
@@ -143,4 +153,4 @@ void Playground::cameraRight(float dTime)    { camera->moveWalk(dTime, RIGHT);  
 void Playground::cameraUp(float dTime)       { camera->moveWalk(dTime, UP);       }
 void Playground::cameraDown(float dTime)     { camera->moveWalk(dTime, DOWN);     }
 
-void Playground::lightSetPosition() { lights[0]->setPosition(camera->getPosition()); }
+void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }

@@ -25,6 +25,9 @@ class Playground : public Scene {
 		void cameraDown(float dTime);
 
 		void lightSetPosition();
+		void lightSetAttenuation(float attenuation);
+		void lightSetFalloffNear(float falloffNear);
+		void lightSetFalloffFar(float falloffFar);
 		/******************************/
 };
 
