@@ -3,19 +3,19 @@
 #include "../models/Vertex.h"
 #include "../models/Mesh.h"
 #include "../models/Texture.h"
-#include "MaterialGUI.h"
+#include "MaterialUI.h"
 
-class ModelGUI {
+class ModelUI {
 	private:
-		MaterialGUI* material;
+		MaterialUI* material;
 		Texture* overrideTextureDiffuse, *overrideTextureMask;
 		std::vector<Mesh*> meshes;
 		glm::vec3 position;
 
 
 	public:
-		ModelGUI(glm::vec3 position, MaterialGUI* material, Texture* ovTexDif, Texture* ovTexMask, std::vector<Mesh*> meshes);
-		~ModelGUI();
+		ModelUI(glm::vec3 position, MaterialUI* material, Texture* ovTexDif, Texture* ovTexMask, std::vector<Mesh*> meshes);
+		~ModelUI();
 
 		void changeRotation(const glm::vec3 rotation);
 		void changePosition(const glm::vec3 position);

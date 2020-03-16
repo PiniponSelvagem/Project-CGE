@@ -5,6 +5,7 @@
 #include "../models/Mesh.h"
 #include "../models/Model.h"
 #include "../camera/Camera.h"
+#include "../ui/CameraUI.h"
 #include "../lights/Light.h"
 
 class Scene {

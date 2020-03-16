@@ -1,15 +1,15 @@
 #pragma once
 #include "../Shader.h"
 #include "../models/Texture.h"
-#include "MaterialGUI.h"
+#include "MaterialUI.h"
 #include "../models/Mesh.h"
-#include "ModelGUI.h"
-#include "CameraGUI.h"
+#include "ModelUI.h"
+#include "CameraUI.h"
 
-class SceneGUI {
+class SceneUI {
 	protected:
 		// Camera
-		CameraGUI* camera;
+		CameraUI* camera;
 
 		// Shaders
 		Shader* shader;
@@ -18,10 +18,10 @@ class SceneGUI {
 		std::vector<Texture*> textures;
 
 		// Materials
-		std::vector<MaterialGUI*> materials;
+		std::vector<MaterialUI*> materials;
 
 		// Models
-		std::vector<ModelGUI*> models;
+		std::vector<ModelUI*> models;
 
 
 		void initShaders();
@@ -35,11 +35,11 @@ class SceneGUI {
 
 
 	public:
-		SceneGUI();
-		~SceneGUI();
+		SceneUI();
+		~SceneUI();
 		void initScene();
 
-		CameraGUI* getMainCamera();
+		CameraUI* getMainCamera();
 
 		void update();
 		void render();

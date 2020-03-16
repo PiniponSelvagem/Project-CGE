@@ -1,4 +1,4 @@
-#include "SceneGUI.h"
+#include "SceneUI.h"
 
 enum texture_enum {
 	TEX_CRATE, TEX_CRATE_MASK
@@ -14,22 +14,22 @@ enum mesh_enum {
 };
 
 
-void SceneGUI::initShaders() {
+void SceneUI::initShaders() {
 	// SHADER_CORE_PROGRAM
 	shader = new Shader("resources/shaders/vertex_gui.glsl", "resources/shaders/fragment_gui.glsl");
 }
-void SceneGUI::initTextures() {
+void SceneUI::initTextures() {
 	// TEXTURE 0
 	textures.push_back(new Texture("resources/png/crate.png", GL_TEXTURE_2D));
 	textures.push_back(new Texture("resources/png/crate_mask.png", GL_TEXTURE_2D));
 }
-void SceneGUI::initMaterials() {
-	materials.push_back(new MaterialGUI(
+void SceneUI::initMaterials() {
+	materials.push_back(new MaterialUI(
 		TEX_CRATE, 
 		glm::vec3(1.f, 0.f, 0.f), TEX_CRATE_MASK
 	));
 }
-void SceneGUI::initModels() {
+void SceneUI::initModels() {
 	std::vector<Mesh*> meshes;
 
 	meshes.push_back(
@@ -42,10 +42,18 @@ void SceneGUI::initModels() {
 		)
 	);
 
-	models.push_back(new ModelGUI(
+	models.push_back(new ModelUI(
 		glm::vec3(100.f, 100.f, -1.f),
 		materials[MAT_CRATE],
 		textures[TEX_CRATE],
+		textures[TEX_CRATE_MASK],
+		meshes
+	));
+
+	models.push_back(new ModelUI(
+		glm::vec3(125.f, 125.f, -2.f),
+		materials[MAT_CRATE],
+		textures[TEX_CRATE_MASK],
 		textures[TEX_CRATE_MASK],
 		meshes
 	));
@@ -55,23 +63,22 @@ void SceneGUI::initModels() {
 	}
 }
 
-void SceneGUI::initUniforms() {
+void SceneUI::initUniforms() {
 	shader->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
 	shader->setMat4fv(camera->getProjectionMatrix(), "ProjectionMatrix");
 }
 
-void SceneGUI::updateUniforms() {
-	// Update viewMatrix (camera)
+void SceneUI::updateUniforms() {
 	shader->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
 	shader->setMat4fv(camera->getProjectionMatrix(), "ProjectionMatrix");
 }
 
 
 
-SceneGUI::SceneGUI() {
-	camera = new CameraGUI(800.f, 600.f, 10.f);
+SceneUI::SceneUI() {
+	camera = new CameraUI(800.f, 600.f, 10.f);
 }
-SceneGUI::~SceneGUI() {
+SceneUI::~SceneUI() {
 	delete camera;
 	delete shader;
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }
@@ -79,24 +86,26 @@ SceneGUI::~SceneGUI() {
 	for (auto *&i : models) { delete i; }
 }
 
-void SceneGUI::initScene() {
+void SceneUI::initScene() {
 	initShaders();
 	initTextures();
 	initMaterials();
 	initModels();
 }
 
-CameraGUI* SceneGUI::getMainCamera() {
+CameraUI* SceneUI::getMainCamera() {
 	return camera;
 }
 
-void SceneGUI::update() {
+void SceneUI::update() {
 	//models[0]->changeRotation(glm::vec3(0.f, 0.f, 1.f));
 }
 
-void SceneGUI::render() {
+void SceneUI::render() {
+	glDisable(GL_DEPTH_TEST);
 	updateUniforms();
 	for (auto *i : models) {
 		i->render(shader);
 	}
+	glEnable(GL_DEPTH_TEST);
 }

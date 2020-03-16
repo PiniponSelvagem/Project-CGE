@@ -1,10 +1,8 @@
 #pragma once
-#include "ModelGUI.h"
+#include "ModelUI.h"
 
 
-
-
-ModelGUI::ModelGUI(glm::vec3 position, MaterialGUI* material, Texture* ovTexDif, Texture* ovTexMask, std::vector<Mesh*> meshes) {
+ModelUI::ModelUI(glm::vec3 position, MaterialUI* material, Texture* ovTexDif, Texture* ovTexMask, std::vector<Mesh*> meshes) {
 	this->position = position;
 	this->material = material;
 	this->overrideTextureDiffuse = ovTexDif;
@@ -21,24 +19,24 @@ ModelGUI::ModelGUI(glm::vec3 position, MaterialGUI* material, Texture* ovTexDif,
 	}
 }
 
-ModelGUI::~ModelGUI() {
+ModelUI::~ModelUI() {
 	for (auto *&i : meshes) {
 		delete i;
 	}
 }
 
-void ModelGUI::changeRotation(const glm::vec3 rotation) {
+void ModelUI::changeRotation(const glm::vec3 rotation) {
 	for (auto &i : meshes) {
 		i->changeRotation(rotation);
 	}
 }
-void ModelGUI::changePosition(const glm::vec3 position) {
+void ModelUI::changePosition(const glm::vec3 position) {
 	for (auto &i : meshes) {
 		i->changePosition(position);
 	}
 }
 
-void ModelGUI::render(Shader* shader) {
+void ModelUI::render(Shader* shader) {
 	material->sendToShader(*shader);
 
 	shader->use();

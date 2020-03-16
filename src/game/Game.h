@@ -17,7 +17,7 @@
 
 #include "scene/Playground.h"
 
-#include "../engine/gui/SceneGUI.h"
+#include "../engine/ui/SceneUI.h"
 
 
 
@@ -39,7 +39,7 @@ class Game {
 
 		// Scenes
 		Playground* scene;
-		SceneGUI* sceneGUI;
+		SceneUI* sceneUI;
 
 		// Mouse Input
 		double lastMouseX, lastMouseY;

@@ -201,7 +201,7 @@ void Game::updateKeyboardInput() {
 		scene->cameraDown(dTime);
 
 
-	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))
+	//if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))
 		scene->lightSetPosition();
 }
 
@@ -220,6 +220,9 @@ void Game::framebuffer_size_callback(GLFWwindow* window, int width, int height) 
 	glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
 	if (wup->camera != nullptr) {
 		wup->camera->setAspectRatio(static_cast<float>(fbWidth) / fbHeight);
+	}
+	if (wup->cameraUI != nullptr) {
+		wup->cameraUI->setUIWindowSize(fbWidth, fbHeight);
 	}
 	glViewport(0, 0, width, height);
 }
@@ -252,8 +255,9 @@ Game::Game(const char* title, const int width, const int height, bool resizable)
 	scene->initScene();
 	wuPointer->camera = scene->getMainCamera();
 
-	sceneGUI = new SceneGUI();
-	sceneGUI->initScene();
+	sceneUI = new SceneUI();
+	sceneUI->initScene();
+	wuPointer->cameraUI = sceneUI->getMainCamera();
 
 	framebuffer_size_callback(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
@@ -283,7 +287,7 @@ void Game::update() {
 	updateInput();
 
 	scene->update();
-	sceneGUI->update();
+	sceneUI->update();
 }
 
 void Game::render() {
@@ -292,7 +296,7 @@ void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	scene->render();
-	sceneGUI->render();
+	sceneUI->render();
 	
 	// END
 	glfwSwapBuffers(window);

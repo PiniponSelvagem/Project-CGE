@@ -2,11 +2,6 @@
 #include "Model.h"
 #include "ObjLoader.h"
 
-void Model::updateUniforms() {
-
-}
-
-
 
 Model::Model(glm::vec3 position, Material* material, Texture* ovTexDif, Texture* ovTexSpec, std::vector<Mesh*> meshes) {
 	this->position = position;
@@ -65,12 +60,8 @@ void Model::changePosition(const glm::vec3 position) {
 	}
 }
 
-void Model::update() {
-	updateUniforms();
-}
 
 void Model::render(Shader* shader) {
-	updateUniforms();
 	material->sendToShader(*shader);
 
 	shader->use();

@@ -1,15 +1,15 @@
 #pragma once
-#include "MaterialGUI.h"
+#include "MaterialUI.h"
 
-MaterialGUI::MaterialGUI(GLint diffuseTex, glm::vec3 color, GLint maskTex) {
+MaterialUI::MaterialUI(GLint diffuseTex, glm::vec3 color, GLint maskTex) {
 	this->diffuseTex = diffuseTex;
 	this->color = color;
 	this->maskTex = maskTex;
 }
 
-MaterialGUI::~MaterialGUI() { }
+MaterialUI::~MaterialUI() { }
 
-void MaterialGUI::sendToShader(Shader &program) {
+void MaterialUI::sendToShader(Shader &program) {
 	program.set1i(diffuseTex,   "material.diffuseTex");
 	program.setVec3f(color,		"material.color");
 	program.set1i(maskTex,		"material.maskTex");

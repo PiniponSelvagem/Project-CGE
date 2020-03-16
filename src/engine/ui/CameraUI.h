@@ -1,7 +1,7 @@
 #pragma once
 #include "../../libs.h"
 
-class CameraGUI {
+class CameraUI {
 	protected:
 		float width, height;
 		float farPlane;
@@ -13,11 +13,11 @@ class CameraGUI {
 
 
 	public:
-		CameraGUI(float width, float height, float farPlane);
-		~CameraGUI();
+		CameraUI(float width, float height, float farPlane);
+		~CameraUI();
 
 		const glm::mat4 getViewMatrix();
 		const glm::mat4 getProjectionMatrix();
 
-		void setGuiSize(float width, float height);
+		void setUIWindowSize(float width, float height);
 };

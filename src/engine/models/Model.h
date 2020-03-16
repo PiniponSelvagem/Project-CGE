@@ -11,8 +11,6 @@ class Model {
 		Texture* overrideTextureDiffuse, *overrideTextureSpecular;
 		std::vector<Mesh*> meshes;
 		glm::vec3 position;
-		
-		void updateUniforms();
 
 
 	public:
@@ -22,8 +20,6 @@ class Model {
 
 		void changeRotation(const glm::vec3 rotation);
 		void changePosition(const glm::vec3 position);
-
-		void update();
-
+		
 		void render(Shader* shader);
 };

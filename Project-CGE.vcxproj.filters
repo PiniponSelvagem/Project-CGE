@@ -70,17 +70,17 @@
     <Filter Include="Source Files\src\game\scene">
       <UniqueIdentifier>{8bce73b8-877e-4341-861c-ae4979059fe7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\engine\gui">
-      <UniqueIdentifier>{b711114a-ad63-4d3d-9bf7-f06d4feed4a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine\gui">
-      <UniqueIdentifier>{107ee277-dcec-4908-a364-f65ecf6c2693}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\src\engine\lights">
       <UniqueIdentifier>{f84b6327-8e88-4a78-89db-7613532b92e1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\engine\lights">
       <UniqueIdentifier>{4c92ea57-394c-47ea-80ac-9c0618f01fce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\ui">
+      <UniqueIdentifier>{b711114a-ad63-4d3d-9bf7-f06d4feed4a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\engine\ui">
+      <UniqueIdentifier>{107ee277-dcec-4908-a364-f65ecf6c2693}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -147,18 +147,6 @@
     <ClCompile Include="src\engine\camera\Camera2D.cpp">
       <Filter>Source Files\src\engine\camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\gui\CameraGUI.cpp">
-      <Filter>Source Files\src\engine\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\gui\SceneGUI.cpp">
-      <Filter>Source Files\src\engine\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\gui\ModelGUI.cpp">
-      <Filter>Source Files\src\engine\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\gui\MaterialGUI.cpp">
-      <Filter>Source Files\src\engine\gui</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\input\Input.cpp">
       <Filter>Source Files\src\engine\input</Filter>
     </ClCompile>
@@ -170,6 +158,18 @@
     </ClCompile>
     <ClCompile Include="src\engine\lights\PointLight.cpp">
       <Filter>Source Files\src\engine\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\ui\CameraUI.cpp">
+      <Filter>Source Files\src\engine\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\ui\MaterialUI.cpp">
+      <Filter>Source Files\src\engine\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\ui\ModelUI.cpp">
+      <Filter>Source Files\src\engine\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\ui\SceneUI.cpp">
+      <Filter>Source Files\src\engine\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -231,18 +231,6 @@
     <ClInclude Include="src\engine\WindowUserPointer.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\gui\CameraGUI.h">
-      <Filter>Header Files\engine\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\gui\SceneGUI.h">
-      <Filter>Header Files\engine\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\gui\MaterialGUI.h">
-      <Filter>Header Files\engine\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\gui\ModelGUI.h">
-      <Filter>Header Files\engine\gui</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\input\Input.h">
       <Filter>Header Files\engine\input</Filter>
     </ClInclude>
@@ -254,6 +242,18 @@
     </ClInclude>
     <ClInclude Include="src\engine\lights\Light.h">
       <Filter>Header Files\engine\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ui\CameraUI.h">
+      <Filter>Header Files\engine\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ui\MaterialUI.h">
+      <Filter>Header Files\engine\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ui\ModelUI.h">
+      <Filter>Header Files\engine\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ui\SceneUI.h">
+      <Filter>Header Files\engine\ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
