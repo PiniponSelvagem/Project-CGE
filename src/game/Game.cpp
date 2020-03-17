@@ -56,6 +56,8 @@ void Game::initInput() {
 	keys.push_back(GLFW_KEY_M);
 	keys.push_back(GLFW_KEY_N);
 
+	keys.push_back(GLFW_KEY_R);
+
 	keys.push_back(GLFW_KEY_W);
 	keys.push_back(GLFW_KEY_S);
 	keys.push_back(GLFW_KEY_A);
@@ -186,6 +188,9 @@ void Game::updateKeyboardInput() {
 	if (keyboardInput->isKeyActive(GLFW_KEY_N))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
+	if (keyboardInput->isKeyActive(GLFW_KEY_R))
+		scene->reloadShader();
+
 	if (keyboardInput->isKeyActive(GLFW_KEY_W))
 		scene->cameraFoward(dTime);
 	if (keyboardInput->isKeyActive(GLFW_KEY_S))
@@ -201,7 +206,7 @@ void Game::updateKeyboardInput() {
 		scene->cameraDown(dTime);
 
 
-	//if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))
+	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))
 		scene->lightSetPosition();
 }
 

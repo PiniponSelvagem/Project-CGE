@@ -73,6 +73,18 @@ void Shader::linkProgram(GLuint vertexShader, GLuint fragmentShader, GLuint geom
 
 
 Shader::Shader(const char* vertexFile, const char* fragmentFile, const char* geometryFile) {
+	this->vertexFile = vertexFile;
+	this->fragmentFile = fragmentFile;
+	this->geometryFile = geometryFile;
+
+	reload();
+}
+
+Shader::~Shader() {
+	glDeleteProgram(id);
+}
+
+void Shader::reload() {
 	GLuint vertexShader = 0;
 	GLuint geometryShader = 0;
 	GLuint fragmentShader = 0;
@@ -85,16 +97,10 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile, const char* geo
 
 	this->linkProgram(vertexShader, fragmentShader, geometryShader);
 
-
 	glDeleteShader(vertexShader);
 	glDeleteShader(geometryShader);
 	glDeleteShader(fragmentShader);
 }
-
-Shader::~Shader() {
-	glDeleteProgram(id);
-}
-
 
 void Shader::set1i(GLint value, const GLchar* name) {
 	use();

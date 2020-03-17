@@ -3,6 +3,10 @@
 
 class Shader {
 	private:
+		const char* vertexFile;
+		const char* fragmentFile;
+		const char* geometryFile;
+
 		GLuint id;
 
 		std::string loadShaderSource(const char* fileName);
@@ -16,6 +20,7 @@ class Shader {
 
 		~Shader();
 
+		void reload();
 
 		// Set uniform functions
 		inline void use() {

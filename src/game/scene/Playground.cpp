@@ -95,8 +95,8 @@ void Playground::initModels() {
 	models.push_back(new Model(
 		glm::vec3(0.f, 0.f, 0.f),
 		materials[MAT_CRATE],
-		textures[TEX_GRASS],
-		textures[TEX_GRASS_SPECULAR],
+		textures[TEX_DEFAULT],
+		textures[TEX_DEFAULT],
 		meshFloor
 	));
 	
@@ -116,15 +116,24 @@ void Playground::initModels() {
 	}
 }
 void Playground::initLights() {
+	/*
 	lightsPoint.push_back(new LightPoint(
 		glm::vec3(0.f, 0.f, 1.f)//, glm::vec3(1.f, 0.f, 0.f)
 	));
-
-	/*
-	lights.push_back(new Light(
-		glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 0.f, 0.f)
-	));
 	*/
+
+	lightsPoint.push_back(new LightPoint(
+		glm::vec3(0.f, 0.f, 4.f), glm::vec3(1.f, 0.f, 0.f)
+	));
+	lightsPoint.push_back(new LightPoint(
+		glm::vec3(4.f, 0.f, 4.f), glm::vec3(0.f, 1.f, 0.f)
+	));
+	lightsPoint.push_back(new LightPoint(
+		glm::vec3(4.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f)
+	));
+	lightsPoint.push_back(new LightPoint(
+		glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f)
+	));
 }
 
 

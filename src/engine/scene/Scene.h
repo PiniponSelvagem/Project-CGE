@@ -45,9 +45,12 @@ class Scene {
 		virtual ~Scene();
 		void initScene();
 
+		void reloadShader();
+
 		Camera* getMainCamera();
 
 		virtual void update() = 0;
+
 		void render();
 };
 
