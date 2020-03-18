@@ -21,10 +21,10 @@ class Primitive {
 			return indices.data();
 		}
 
-		inline const unsigned getNrVertices() {
+		inline const size_t getNrVertices() {
 			return vertices.size();
 		}
-		inline const unsigned getNrIndices() {
+		inline const size_t getNrIndices() {
 			return indices.size();
 		}
 };

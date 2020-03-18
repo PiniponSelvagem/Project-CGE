@@ -1,3 +1,4 @@
+#pragma once
 #include "Input.h"
 #include "../WindowUserPointer.h"
 

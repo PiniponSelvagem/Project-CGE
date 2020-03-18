@@ -13,163 +13,97 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\src">
-      <UniqueIdentifier>{d5a8cfb1-6b62-4cb0-b27b-cb6fe60e4855}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\engine">
-      <UniqueIdentifier>{a78b6ac9-d0da-4996-979b-366d47d26069}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\game">
-      <UniqueIdentifier>{da6a464e-5a4e-4a01-9cb1-1e6cafc283a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game">
-      <UniqueIdentifier>{c2384796-defe-4c0f-8eb9-6fe61ca4b93b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\engine\models">
-      <UniqueIdentifier>{3798424f-97ea-4117-8a6b-7641b82396cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine">
-      <UniqueIdentifier>{714a3609-e817-4f1b-9c6d-74dac29ac0c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine\models">
-      <UniqueIdentifier>{7a073601-0379-4234-8d63-c33405a04c75}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine\models\primitives">
-      <UniqueIdentifier>{62f62350-cebc-4c13-8bf7-4dec089273b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\engine\models\primitives">
-      <UniqueIdentifier>{86607a2d-b2cf-42f7-9d82-fc13ecb40467}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine\input">
-      <UniqueIdentifier>{a31ceae5-1b93-4372-be6c-829b3b0a6a42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\engine\input">
-      <UniqueIdentifier>{565afb65-7180-4709-9967-8829e0e97291}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine\camera">
-      <UniqueIdentifier>{558c9ef4-7fa6-41a3-a593-4c8acb6f55e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\engine\camera">
-      <UniqueIdentifier>{4806b46a-80dd-4199-8fae-637d358193c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\game\player">
-      <UniqueIdentifier>{81eea010-29e5-4dda-8d67-475a19669408}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\player">
-      <UniqueIdentifier>{b97c13aa-9c4e-48d8-b85f-ed0e306a11fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\engine\scene">
-      <UniqueIdentifier>{27f5c181-84bd-433d-bc78-2366d66e2d6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine\scene">
-      <UniqueIdentifier>{4960ac43-bbb3-499f-80a0-9469e623ed4f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\scene">
-      <UniqueIdentifier>{671bca45-07ea-43ca-92fb-07b40f59be37}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\game\scene">
-      <UniqueIdentifier>{8bce73b8-877e-4341-861c-ae4979059fe7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine\lights">
-      <UniqueIdentifier>{f84b6327-8e88-4a78-89db-7613532b92e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\engine\lights">
-      <UniqueIdentifier>{4c92ea57-394c-47ea-80ac-9c0618f01fce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\engine\ui">
-      <UniqueIdentifier>{b711114a-ad63-4d3d-9bf7-f06d4feed4a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\engine\ui">
-      <UniqueIdentifier>{107ee277-dcec-4908-a364-f65ecf6c2693}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\GLAD\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\Game.cpp">
-      <Filter>Source Files\src\game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\Shader.cpp">
-      <Filter>Source Files\src\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\Material.cpp">
-      <Filter>Source Files\src\engine\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\Mesh.cpp">
-      <Filter>Source Files\src\engine\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\Model.cpp">
-      <Filter>Source Files\src\engine\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\Texture.cpp">
-      <Filter>Source Files\src\engine\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\ObjLoader.cpp">
-      <Filter>Source Files\src\engine\models</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\primitives\Primitive.cpp">
-      <Filter>Source Files\src\engine\models\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\primitives\Triangle.cpp">
-      <Filter>Source Files\src\engine\models\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\primitives\Quad.cpp">
-      <Filter>Source Files\src\engine\models\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\models\primitives\Cube.cpp">
-      <Filter>Source Files\src\engine\models\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\input\KeyInput.cpp">
-      <Filter>Source Files\src\engine\input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Func.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\camera\Camera.cpp">
-      <Filter>Source Files\src\engine\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\camera\Camera3D.cpp">
-      <Filter>Source Files\src\engine\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\player\Player.cpp">
-      <Filter>Source Files\src\game\player</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\scene\Scene.cpp">
-      <Filter>Source Files\src\engine\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\scene\Playground.cpp">
-      <Filter>Source Files\src\game\scene</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\camera\Camera2D.cpp">
-      <Filter>Source Files\src\engine\camera</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\input\Input.cpp">
-      <Filter>Source Files\src\engine\input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\input\MouseInput.cpp">
-      <Filter>Source Files\src\engine\input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\lights\Light.cpp">
-      <Filter>Source Files\src\engine\lights</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\lights\PointLight.cpp">
-      <Filter>Source Files\src\engine\lights</Filter>
+    <ClCompile Include="src\engine\camera\Camera3D.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\ui\CameraUI.cpp">
-      <Filter>Source Files\src\engine\ui</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\primitives\Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Func.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\input\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\input\KeyInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\lights\Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\Material.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\ui\MaterialUI.cpp">
-      <Filter>Source Files\src\engine\ui</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\Model.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\ui\ModelUI.cpp">
-      <Filter>Source Files\src\engine\ui</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\input\MouseInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\ObjLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\scene\Playground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\lights\PointLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\primitives\Primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\primitives\Quad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\scene\Scene.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\ui\SceneUI.cpp">
-      <Filter>Source Files\src\engine\ui</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\shaders\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\TestUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\models\primitives\Triangle.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,79 +115,83 @@
     </None>
     <None Include="resources\shaders\vertex_gui.glsl" />
     <None Include="resources\shaders\fragment_gui.glsl" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\Shader.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\Game.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\models\Material.h">
-      <Filter>Header Files\engine\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\models\Mesh.h">
-      <Filter>Header Files\engine\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\models\Model.h">
-      <Filter>Header Files\engine\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\models\ObjLoader.h">
-      <Filter>Header Files\engine\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\models\Texture.h">
-      <Filter>Header Files\engine\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\models\Vertex.h">
-      <Filter>Header Files\engine\models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\models\primitives\Primitive.h">
-      <Filter>Header Files\engine\models\primitives</Filter>
-    </ClInclude>
     <ClInclude Include="src\Func.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\camera\Camera.h">
-      <Filter>Header Files\engine\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\player\Player.h">
-      <Filter>Header Files\game\player</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\scene\Scene.h">
-      <Filter>Header Files\engine\scene</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\scene\Playground.h">
-      <Filter>Header Files\game\scene</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\WindowUserPointer.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\input\Input.h">
-      <Filter>Header Files\engine\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\input\MouseInput.h">
-      <Filter>Header Files\engine\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\input\KeyboardInput.h">
-      <Filter>Header Files\engine\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\lights\Light.h">
-      <Filter>Header Files\engine\lights</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\ui\CameraUI.h">
-      <Filter>Header Files\engine\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\ui\MaterialUI.h">
-      <Filter>Header Files\engine\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\ui\ModelUI.h">
-      <Filter>Header Files\engine\ui</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\ui\SceneUI.h">
-      <Filter>Header Files\engine\ui</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ui\ModelUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ui\MaterialUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ui\CameraUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\scene\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\ObjLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\models\primitives\Primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\lights\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\MouseInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\KeyboardInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\camera\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\shaders\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\TestUI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

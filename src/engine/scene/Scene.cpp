@@ -1,3 +1,4 @@
+#pragma once
 #include "Scene.h"
 
 enum shader_enum {
@@ -16,6 +17,7 @@ void Scene::updateUniforms() {
 
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(lightsPoint[0]->getPosition(), "light[0].position");
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(lightsPoint[0]->getColor(), "light[0].color");
+	/*
 	shaders[SHADER_CORE_PROGRAM]->set1i(lightsPoint[0]->getAttenuation(), "light[0].attenuation");
 	shaders[SHADER_CORE_PROGRAM]->set1i(lightsPoint[0]->getFalloffNear(), "light[0].falloffNear");
 	shaders[SHADER_CORE_PROGRAM]->set1i(lightsPoint[0]->getFalloffFar(), "light[0].falloffFar");
@@ -51,6 +53,8 @@ void Scene::updateUniforms() {
 }
 
 
+////////////////////////////////
+
 
 Scene::Scene() { }
 Scene::~Scene() {
@@ -83,6 +87,9 @@ Camera* Scene::getMainCamera() {
 	return camera;
 }
 
+void Scene::update() {
+
+}
 void Scene::render() {
 	updateUniforms();
 	for (auto *i : models) {

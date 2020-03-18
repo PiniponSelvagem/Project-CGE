@@ -1,3 +1,4 @@
+#pragma once
 #include "Primitive.h"
 
 Primitive::Primitive() { }

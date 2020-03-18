@@ -16,7 +16,7 @@ class Playground : public Scene {
 		void update();
 
 		/* TODO: Make Player class??? */
-		void cameraPanTilt(float dTime, float mouseOffsetX, float mouseOffsetY);
+		void cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY);
 		void cameraFoward(float dTime);
 		void cameraBackward(float dTime);
 		void cameraLeft(float dTime);
@@ -25,9 +25,6 @@ class Playground : public Scene {
 		void cameraDown(float dTime);
 
 		void lightSetPosition();
-		void lightSetAttenuation(float attenuation);
-		void lightSetFalloffNear(float falloffNear);
-		void lightSetFalloffFar(float falloffFar);
 		/******************************/
 };
 

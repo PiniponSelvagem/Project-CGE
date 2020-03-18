@@ -23,6 +23,11 @@ const float FOV = 90.f;
 int main() {
 	Game game("Project-CGE", SCR_WIDTH, SCR_HEIGHT, true);
 	
+	game.initInput();
+
+	game.loadScene();
+	game.loadSceneUI();
+
 	while (!game.getWindowShouldClose()) {
 		game.update();
 		game.render();

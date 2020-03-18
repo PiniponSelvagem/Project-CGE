@@ -1,6 +1,6 @@
 #pragma once
 #include "../../libs.h"
-#include "../Shader.h"
+#include "../shaders/Shader.h"
 
 class Material {
 	private:

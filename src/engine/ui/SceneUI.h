@@ -1,5 +1,5 @@
 #pragma once
-#include "../Shader.h"
+#include "../shaders/Shader.h"
 #include "../models/Texture.h"
 #include "MaterialUI.h"
 #include "../models/Mesh.h"
@@ -24,24 +24,24 @@ class SceneUI {
 		std::vector<ModelUI*> models;
 
 
-		void initShaders();
-		void initTextures();
-		void initMaterials();
-		void initModels();
+		virtual void initShaders() = 0;
+		virtual void initTextures() = 0;
+		virtual void initMaterials() = 0;
+		virtual void initModels() = 0;
 		void initUniforms();
 
 		void updateUniforms();
 
 
-
 	public:
 		SceneUI();
-		~SceneUI();
+		virtual ~SceneUI();
+
 		void initScene();
 
 		CameraUI* getMainCamera();
 
-		void update();
+		virtual void update() = 0;
 		void render();
 };
 

@@ -1,3 +1,4 @@
+#pragma once
 #include "CameraUI.h"
 
 void CameraUI::updateProjectionMatrix() {

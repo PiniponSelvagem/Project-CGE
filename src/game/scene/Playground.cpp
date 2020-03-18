@@ -152,7 +152,7 @@ void Playground::update() {
 	models[2]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
 }
 
-void Playground::cameraPanTilt(float dTime, float mouseOffsetX, float mouseOffsetY) {
+void Playground::cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY) {
 	camera->changePanTilt(dTime, mouseOffsetX, mouseOffsetY);
 }
 void Playground::cameraFoward(float dTime)   { camera->moveWalk(dTime, FORWARD);  }

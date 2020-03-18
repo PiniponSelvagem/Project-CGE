@@ -1,5 +1,5 @@
 #pragma once
-#include "../Shader.h"
+#include "../shaders/Shader.h"
 #include "../models/Texture.h"
 #include "../models/Material.h"
 #include "../models/Mesh.h"
@@ -50,7 +50,18 @@ class Scene {
 		Camera* getMainCamera();
 
 		virtual void update() = 0;
-
 		void render();
+
+		/* TODO: Make Player class??? */
+		virtual void cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY) = 0;
+		virtual void cameraFoward(float dTime) = 0;
+		virtual void cameraBackward(float dTime) = 0;
+		virtual void cameraLeft(float dTime) = 0;
+		virtual void cameraRight(float dTime) = 0;
+		virtual void cameraUp(float dTime) = 0;
+		virtual void cameraDown(float dTime) = 0;
+
+		virtual void lightSetPosition() = 0;
+		/******************************/
 };
 

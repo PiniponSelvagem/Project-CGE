@@ -5,7 +5,7 @@ enum Direction { FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN };
 
 class Camera {
 	protected:
-		float aspectRatio = 1.333; // 1.333 -> 4:3
+		float aspectRatio = 1.333f; // 1.333 -> 4:3
 
 		glm::mat4 viewMatrix;
 		glm::mat4 projectionMatrix;
