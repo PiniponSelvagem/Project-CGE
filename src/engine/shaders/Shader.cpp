@@ -108,7 +108,7 @@ void Shader::set1i(GLint value, const GLchar* name) {
 	unuse();
 }
 
-void Shader::setVec1f(GLfloat value, const GLchar* name) {
+void Shader::set1f(GLfloat value, const GLchar* name) {
 	use();
 	glUniform1f(glGetUniformLocation(id, name), value);
 	unuse();

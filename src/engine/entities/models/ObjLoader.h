@@ -1,5 +1,5 @@
 #pragma once
-#include "../../libs.h"
+#include "../../../libs.h"
 #include "Vertex.h"
 
 class ObjLoader {

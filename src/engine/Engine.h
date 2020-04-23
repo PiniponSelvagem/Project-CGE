@@ -1,15 +1,15 @@
 #pragma once
 #include "../libs.h"
 
-#include "models/Vertex.h"
 #include "shaders/Shader.h"
-#include "models/Texture.h"
-#include "models/Material.h"
-#include "models/primitives/Primitive.h"
-#include "models/Mesh.h"
-#include "models/Model.h"
+#include "entities/models/Vertex.h"
+#include "entities/models/Texture.h"
+#include "entities/models/Material.h"
+#include "entities/models/primitives/Primitive.h"
+#include "entities/models/Mesh.h"
+#include "entities/models/Model.h"
+#include "entities/models/ObjLoader.h"
 #include "camera/Camera.h"
-#include "models/ObjLoader.h"
 
 #include "input/KeyboardInput.h"
 #include "input/MouseInput.h"

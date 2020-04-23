@@ -123,8 +123,12 @@ void Playground::initLights() {
 	*/
 
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(0.f, 0.f, 4.f), glm::vec3(1.f, 0.f, 0.f)
+		glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 0.f, 0.f),
+		1.f,
+		1.f,
+		0.f, 1.f
 	));
+	/*
 	lightsPoint.push_back(new LightPoint(
 		glm::vec3(4.f, 0.f, 4.f), glm::vec3(0.f, 1.f, 0.f)
 	));
@@ -134,15 +138,15 @@ void Playground::initLights() {
 	lightsPoint.push_back(new LightPoint(
 		glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f)
 	));
+	*/
 }
 
+////////////////////////////////
 
 
 Playground::Playground() : Scene() {
 	camera = new Camera3D(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, -90.f, 0.f));
 }
-
-
 Playground::~Playground() {
 }
 
@@ -150,6 +154,8 @@ void Playground::update() {
 	models[0]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
 	models[1]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
 	models[2]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
+
+	lightSetPosition();
 }
 
 void Playground::cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY) {

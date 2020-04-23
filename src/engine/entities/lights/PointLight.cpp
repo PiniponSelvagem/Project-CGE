@@ -3,7 +3,7 @@
 
 
 
-LightPoint::LightPoint(glm::vec3 position, glm::vec3 color, float attenuation, float falloffNear, float falloffFar) : Light(position, color) {
+LightPoint::LightPoint(glm::vec3 position, glm::vec3 color, float intensity, float attenuation, float falloffNear, float falloffFar) : Light(position, color, intensity) {
 	this->attenuation = attenuation;
 	this->falloffNear = falloffNear;
 	this->falloffFar  = falloffFar;
@@ -44,4 +44,13 @@ float LightPoint::getFalloffNear() {
 }
 float LightPoint::getFalloffFar() {
 	return falloffFar;
+}
+
+void LightPoint::sendToShader(Shader &program) {
+	program.setVec3f(position, "lightPoint.position");
+	program.setVec3f(color, "lightPoint.color");
+	program.set1f(intensity, "lightPoint.intensity");
+	program.set1f(attenuation, "lightPoint.attenuation");
+	program.set1f(falloffNear, "lightPoint.falloffNear");
+	program.set1f(falloffFar, "lightPoint.falloffFar");
 }

@@ -1,8 +1,8 @@
 #pragma once
 #include "../../libs.h"
-#include "../models/Vertex.h"
-#include "../models/Mesh.h"
-#include "../models/Texture.h"
+#include "../entities/models/Vertex.h"
+#include "../entities/models/Mesh.h"
+#include "../entities/models/Texture.h"
 #include "MaterialUI.h"
 
 class ModelUI {

@@ -1,12 +1,12 @@
 #pragma once
 #include "../shaders/Shader.h"
-#include "../models/Texture.h"
-#include "../models/Material.h"
-#include "../models/Mesh.h"
-#include "../models/Model.h"
+#include "../entities/models/Texture.h"
+#include "../entities/models/Material.h"
+#include "../entities/models/Mesh.h"
+#include "../entities/models/Model.h"
+#include "../entities/lights/Light.h"
 #include "../camera/Camera.h"
 #include "../ui/CameraUI.h"
-#include "../lights/Light.h"
 
 class Scene {
 	protected:
@@ -34,6 +34,7 @@ class Scene {
 		virtual void initMaterials() = 0;
 		virtual void initModels() = 0;
 		virtual void initLights() = 0;
+
 		void initUniforms();
 
 		void updateUniforms();

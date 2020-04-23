@@ -1,8 +1,8 @@
 #pragma once
 #include "../shaders/Shader.h"
-#include "../models/Texture.h"
+#include "../entities/models/Texture.h"
+#include "../entities/models/Mesh.h"
 #include "MaterialUI.h"
-#include "../models/Mesh.h"
 #include "ModelUI.h"
 #include "CameraUI.h"
 
