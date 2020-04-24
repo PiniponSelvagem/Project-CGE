@@ -8,6 +8,11 @@ struct Material {
 	sampler2D specularTex;
 };
 
+struct Fog {
+	float density;
+	float gradient;
+};
+
 struct LightPoint {
 	vec3 position;
 	vec3 color;
@@ -26,9 +31,10 @@ in float visibility;
 out vec4 fs_color;
 
 uniform Material material;
+uniform Fog fog;
 uniform LightPoint lightPoint;
 uniform vec3 cameraPos;
-uniform vec3 skyColor;
+//uniform vec3 skyColor;
 
 
 vec3 calculateAmbient(Material material) {
@@ -59,6 +65,16 @@ float calculateAttenuation(vec3 vs_position, vec3 vs_normal, LightPoint lightPoi
 	float attenuationFinal = lightPoint.attenuation / (1.0 + lightPoint.falloffNear * dist + lightPoint.falloffFar * (dist * dist));
 
 	return attenuationFinal * lightPoint.intensity;
+}
+
+float calculateFogVisibility() {
+	vec3 posRelativeToCam  = cameraPos - vs_position;
+	//vec3 posRelativeToCam = cameraPos * vs_position;
+	float dist = length(posRelativeToCam);
+	float visibility = exp(-pow((dist*fog.density), fog.gradient));
+	visibility = clamp(visibility, 0.0, 1.0);
+
+	return visibility;
 }
 
 
@@ -96,8 +112,8 @@ void main() {
 		* (vec4(ambientFinal, 1.f)
 			+ (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f))
 		);
-
+	
 	// Fog calculation
-	fs_color = mix(vec4(vec3(1.0, 1.0, 0.0), 1.0), fs_color, visibility);
+	fs_color = mix(vec4(vec3(1.0, 1.0, 0.0), 1.0), fs_color, calculateFogVisibility());
 	//fs_color = mix(vec4(skyColor, 1.0), fs_color, visibility);
 }

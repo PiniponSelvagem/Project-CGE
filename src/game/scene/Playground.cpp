@@ -63,7 +63,7 @@ void Playground::initModels() {
 			glm::vec3(0.f, 0.f, -2.f),
 			glm::vec3(0.f),
 			glm::vec3(-90.f, 0.f, 0.f),
-			glm::vec3(55.f)
+			glm::vec3(1000.f)
 		)
 	);
 
