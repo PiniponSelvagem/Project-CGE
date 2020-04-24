@@ -14,6 +14,8 @@ void Scene::updateUniforms() {
 	// Update viewMatrix (camera)
 	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
 	shaders[SHADER_CORE_PROGRAM]->setVec3f(camera->getPosition(), "cameraPos");
+	
+	fog->sendToShader(*shaders[SHADER_CORE_PROGRAM]);
 
 	for (LightPoint* lightPoint : lightsPoint) {
 		lightPoint->sendToShader(*shaders[SHADER_CORE_PROGRAM]);
@@ -36,6 +38,7 @@ Scene::~Scene() {
 	for (size_t i = 0; i < materials.size(); ++i) { delete materials[i]; }
 	for (auto *&i : models) { delete i; }
 	for (size_t i = 0; i < lightsPoint.size(); ++i) { delete lightsPoint[i]; }
+	delete fog;
 }
 
 void Scene::initScene() {
@@ -44,6 +47,7 @@ void Scene::initScene() {
 	initMaterials();
 	initModels();
 	initLights();
+	initEnviroment();
 }
 
 void Scene::reloadShader() {

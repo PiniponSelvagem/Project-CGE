@@ -5,6 +5,7 @@
 #include "../entities/models/Mesh.h"
 #include "../entities/models/Model.h"
 #include "../entities/lights/Light.h"
+#include "../enviroment/Fog.h"
 #include "../camera/Camera.h"
 #include "../ui/CameraUI.h"
 
@@ -28,12 +29,16 @@ class Scene {
 		// Lights
 		std::vector<LightPoint*> lightsPoint;
 
+		// Enviroment
+		Fog* fog;
+
 
 		virtual void initShaders() = 0;
 		virtual void initTextures() = 0;
 		virtual void initMaterials() = 0;
 		virtual void initModels() = 0;
 		virtual void initLights() = 0;
+		virtual void initEnviroment() = 0;
 
 		void initUniforms();
 

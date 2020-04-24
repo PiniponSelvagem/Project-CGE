@@ -8,6 +8,7 @@ class Playground : public Scene {
 		void initMaterials();
 		void initModels();
 		void initLights();
+		void initEnviroment();
 
 	public:
 		Playground();

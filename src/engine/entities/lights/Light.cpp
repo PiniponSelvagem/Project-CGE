@@ -24,6 +24,7 @@ void Light::serIntensity(float intensity) {
 	this->intensity = intensity;
 }
 
+/*
 glm::vec3 Light::getPosition() {
 	return position;
 }
@@ -33,9 +34,4 @@ glm::vec3 Light::getColor() {
 float Light::getIntensity() {
 	return intensity;
 }
-
-void Light::sendToShader(Shader &program) {
-	program.setVec3f(position, "light.position");
-	program.setVec3f(color, "light.color");
-	program.set1f(intensity, "light.intensity");
-}
+*/

@@ -38,7 +38,7 @@ void Playground::initTextures() {
 	textures.push_back(new Texture("resources/png/grass_specular.png", GL_TEXTURE_2D));
 }
 void Playground::initMaterials() {
-	materials.push_back(new Material(glm::vec3(0.1f), glm::vec3(1.f), glm::vec3(2.f),
+	materials.push_back(new Material(glm::vec3(0.05f), glm::vec3(1.f), glm::vec3(2.f),
 		0,
 		1
 	));
@@ -63,7 +63,7 @@ void Playground::initModels() {
 			glm::vec3(0.f, 0.f, -2.f),
 			glm::vec3(0.f),
 			glm::vec3(-90.f, 0.f, 0.f),
-			glm::vec3(20.f)
+			glm::vec3(55.f)
 		)
 	);
 
@@ -101,7 +101,7 @@ void Playground::initModels() {
 	));
 	
 	models.push_back(new Model(
-		glm::vec3(0.f, 0.f, -20.f),
+		glm::vec3(0.f, 5.5f, -20.f),
 		materials[MAT_CRATE],
 		textures[TEX_DEFAULT],
 		textures[TEX_DEFAULT],
@@ -123,10 +123,18 @@ void Playground::initLights() {
 	*/
 
 	lightsPoint.push_back(new LightPoint(
+		glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 1.f, 1.f),
+		1.f,
+		1.f,
+		0.045f, 0.0075f
+	));
+
+	/*
+	lightsPoint.push_back(new LightPoint(
 		glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 0.f, 0.f),
 		1.f,
 		1.f,
-		0.f, 1.f
+		0.045f, 0.0075f
 	));
 	/*
 	lightsPoint.push_back(new LightPoint(
@@ -139,6 +147,9 @@ void Playground::initLights() {
 		glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f)
 	));
 	*/
+}
+void Playground::initEnviroment() {
+	fog = new Fog(0.003, 5.0);
 }
 
 ////////////////////////////////
@@ -155,7 +166,7 @@ void Playground::update() {
 	models[1]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
 	models[2]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
 
-	lightSetPosition();
+	//lightSetPosition();
 }
 
 void Playground::cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY) {

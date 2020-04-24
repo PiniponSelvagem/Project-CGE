@@ -21,12 +21,14 @@ in vec3 vs_position;
 in vec3 vs_color;
 in vec2 vs_texcoord;
 in vec3 vs_normal;
+in float visibility;
 
 out vec4 fs_color;
 
 uniform Material material;
 uniform LightPoint lightPoint;
 uniform vec3 cameraPos;
+uniform vec3 skyColor;
 
 
 vec3 calculateAmbient(Material material) {
@@ -35,7 +37,7 @@ vec3 calculateAmbient(Material material) {
 
 vec3 calculateDiffuse(Material material, vec3 vs_position, vec3 vs_normal, LightPoint lightPointt) {
 	vec3 posToLightDirVec = normalize(lightPoint.position - vs_position);
-	float diffuse		  = clamp(dot(posToLightDirVec, vs_normal), 0, 1);
+	float diffuse		  = clamp(dot(posToLightDirVec, normalize(vs_normal)), 0, 1);
 	vec3 diffuseFinal	  = material.diffuse * diffuse;
 
 	return diffuseFinal * lightPoint.color;
@@ -53,8 +55,7 @@ vec3 calculateSpecular(Material material, vec3 vs_position, vec3 vs_normal, Ligh
 
 float calculateAttenuation(vec3 vs_position, vec3 vs_normal, LightPoint lightPoint) {
 	// http://learnwebgl.brown37.net/09_lights/lights_attenuation.html
-	vec3 posToLightDirVec  = lightPoint.position - vs_position;
-	float dist			   = length(posToLightDirVec);
+	float dist			   = length(lightPoint.position - vs_position);
 	float attenuationFinal = lightPoint.attenuation / (1.0 + lightPoint.falloffNear * dist + lightPoint.falloffFar * (dist * dist));
 
 	return attenuationFinal * lightPoint.intensity;
@@ -86,13 +87,17 @@ void main() {
 		//fs_color = fs_color + attenuationFinal * (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
 	//}
 
-	//fs_color = (fs_color + texture(material.diffuseTex, vs_texcoord)) * vec4(ambientFinal, 1.f);
-	
+	diffuseFinal  *= attenuationFinal;
+	specularFinal *= attenuationFinal;
 
 	//Final Color / Light	
 	fs_color = texture(material.diffuseTex, vs_texcoord)
 		//* vec4(vs_color, 1.f)	//rainbow effect
 		* (vec4(ambientFinal, 1.f)
-			+ attenuationFinal * (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f))
+			+ (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f))
 		);
+
+	// Fog calculation
+	fs_color = mix(vec4(vec3(1.0, 1.0, 0.0), 1.0), fs_color, visibility);
+	//fs_color = mix(vec4(skyColor, 1.0), fs_color, visibility);
 }

@@ -36,6 +36,7 @@ void LightPoint::setFalloffFar(float falloffFar) {
 	this->falloffFar = falloffNear;
 }
 
+/*
 float LightPoint::getAttenuation() {
 	return attenuation;
 }
@@ -45,12 +46,13 @@ float LightPoint::getFalloffNear() {
 float LightPoint::getFalloffFar() {
 	return falloffFar;
 }
+*/
 
 void LightPoint::sendToShader(Shader &program) {
 	program.setVec3f(position, "lightPoint.position");
-	program.setVec3f(color, "lightPoint.color");
-	program.set1f(intensity, "lightPoint.intensity");
+	program.setVec3f(color,    "lightPoint.color");
+	program.set1f(intensity,   "lightPoint.intensity");
 	program.set1f(attenuation, "lightPoint.attenuation");
 	program.set1f(falloffNear, "lightPoint.falloffNear");
-	program.set1f(falloffFar, "lightPoint.falloffFar");
+	program.set1f(falloffFar,  "lightPoint.falloffFar");
 }
