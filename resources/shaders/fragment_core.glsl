@@ -32,7 +32,7 @@ out vec4 fs_color;
 
 uniform Material material;
 uniform Fog fog;
-uniform LightPoint lightPoint;
+uniform LightPoint lightPoint[4];
 uniform vec3 cameraPos;
 //uniform vec3 skyColor;
 
@@ -41,7 +41,7 @@ vec3 calculateAmbient(Material material) {
 	return material.ambient;
 }
 
-vec3 calculateDiffuse(Material material, vec3 vs_position, vec3 vs_normal, LightPoint lightPointt) {
+vec3 calculateDiffuse(Material material, vec3 vs_position, vec3 vs_normal, LightPoint lightPoint) {
 	vec3 posToLightDirVec = normalize(lightPoint.position - vs_position);
 	float diffuse		  = clamp(dot(posToLightDirVec, normalize(vs_normal)), 0, 1);
 	vec3 diffuseFinal	  = material.diffuse * diffuse;
@@ -95,13 +95,13 @@ void main() {
 	float attenuationFinal = 0.f;
 
 	
-	//for (int i=0; i<2; ++i) {
-		attenuationFinal = attenuationFinal + calculateAttenuation(vs_position, vs_normal, lightPoint);
-		diffuseFinal = calculateDiffuse(material, vs_position, vs_normal, lightPoint);
-		specularFinal = calculateSpecular(material, vs_position, vs_normal, lightPoint, cameraPos);
+	for (int i=0; i<4; ++i) {
+		attenuationFinal = attenuationFinal + calculateAttenuation(vs_position, vs_normal, lightPoint[i]);
+		diffuseFinal = diffuseFinal + calculateDiffuse(material, vs_position, vs_normal, lightPoint[i]);
+		specularFinal = specularFinal + calculateSpecular(material, vs_position, vs_normal, lightPoint[i], cameraPos);
 		
 		//fs_color = fs_color + attenuationFinal * (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
-	//}
+	}
 
 	diffuseFinal  *= attenuationFinal;
 	specularFinal *= attenuationFinal;
@@ -114,6 +114,6 @@ void main() {
 		);
 	
 	// Fog calculation
-	fs_color = mix(vec4(vec3(1.0, 1.0, 0.0), 1.0), fs_color, calculateFogVisibility());
+	fs_color = mix(vec4(vec3(0.0, 0.0, 0.0), 1.0), fs_color, calculateFogVisibility());
 	//fs_color = mix(vec4(skyColor, 1.0), fs_color, visibility);
 }

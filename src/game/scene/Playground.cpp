@@ -121,32 +121,32 @@ void Playground::initLights() {
 		glm::vec3(0.f, 0.f, 1.f)//, glm::vec3(1.f, 0.f, 0.f)
 	));
 	*/
+	float intensity = 0.5f;
 
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 1.f, 1.f),
-		1.f,
+		glm::vec3(10.f, 0.f, 10.f), glm::vec3(1.f, 1.f, 0.f),
+		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
-
-	/*
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 0.f, 0.f),
-		1.f,
+		glm::vec3(-10.f, 0.f, 10.f), glm::vec3(1.f, 0.f, 0.f),
+		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
-	/*
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(4.f, 0.f, 4.f), glm::vec3(0.f, 1.f, 0.f)
+		glm::vec3(-10.f, 0.f, -10.f), glm::vec3(0.f, 1.f, 0.f),
+		intensity,
+		1.f,
+		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(4.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f)
+		glm::vec3(10.f, 0.f, -10.f), glm::vec3(0.f, 0.f, 1.f),
+		intensity,
+		1.f,
+		0.045f, 0.0075f
 	));
-	lightsPoint.push_back(new LightPoint(
-		glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f)
-	));
-	*/
 }
 void Playground::initEnviroment() {
 	fog = new Fog(0.003, 5.0);

@@ -43,7 +43,7 @@ class Light {
 		float getIntensity();
 		*/
 
-		virtual void sendToShader(Shader &program) = 0;
+		virtual void sendToShader(Shader &program, int idx) = 0;
 };
 
 class LightPoint : public Light {
@@ -66,5 +66,5 @@ class LightPoint : public Light {
 		float getFalloffFar();
 		*/
 
-		void sendToShader(Shader &program);
+		void sendToShader(Shader &program, int idx);
 };

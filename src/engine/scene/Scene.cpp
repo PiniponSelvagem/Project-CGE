@@ -17,8 +17,9 @@ void Scene::updateUniforms() {
 	
 	fog->sendToShader(*shaders[SHADER_CORE_PROGRAM]);
 
+	int idx = 0;
 	for (LightPoint* lightPoint : lightsPoint) {
-		lightPoint->sendToShader(*shaders[SHADER_CORE_PROGRAM]);
+		lightPoint->sendToShader(*shaders[SHADER_CORE_PROGRAM], idx++);
 	}	
 
 	camera->updateProjectionMatrix();

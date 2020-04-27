@@ -48,11 +48,12 @@ float LightPoint::getFalloffFar() {
 }
 */
 
-void LightPoint::sendToShader(Shader &program) {
-	program.setVec3f(position, "lightPoint.position");
-	program.setVec3f(color,    "lightPoint.color");
-	program.set1f(intensity,   "lightPoint.intensity");
-	program.set1f(attenuation, "lightPoint.attenuation");
-	program.set1f(falloffNear, "lightPoint.falloffNear");
-	program.set1f(falloffFar,  "lightPoint.falloffFar");
+void LightPoint::sendToShader(Shader &program, int idx) {
+	std::string prefix = "lightPoint[" + std::to_string(idx) + "].";
+	program.setVec3f(position, (prefix + "position").c_str());
+	program.setVec3f(color,    (prefix + "color").c_str());
+	program.set1f(intensity,   (prefix + "intensity").c_str());
+	program.set1f(attenuation, (prefix + "attenuation").c_str());
+	program.set1f(falloffNear, (prefix + "falloffNear").c_str());
+	program.set1f(falloffFar,  (prefix + "falloffFar").c_str());
 }

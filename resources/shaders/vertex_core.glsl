@@ -16,7 +16,7 @@ uniform mat4 ViewMatrix;
 uniform mat4 ProjectionMatrix;
 
 /* 
-//Simple Fog, might be less resource intensive,
+//Simple Fog, might be less resource intensive (not a performance impact that could be noticable atm),
 //but poor results specially, with large objects compared to fragment fog calculation.
 
 out float visibility;
@@ -34,7 +34,7 @@ void main() {
 	vs_normal	= mat3(ModelMatrix) * vx_normal;
 	
 	/*
-	//Simple Fog, less resource intensive,
+	//Simple Fog, less resource intensive (not a performance impact that could be noticable atm),
 	//but poor results specially, with large objects compared to fragment fog calculation.
 	//Example: large floor plane with high density fog.
 
