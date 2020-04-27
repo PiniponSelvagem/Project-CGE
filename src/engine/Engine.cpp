@@ -126,6 +126,10 @@ void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height
 	WindowUserPointer* wup = static_cast<WindowUserPointer*>(glfwGetWindowUserPointer(window));
 	int fbWidth, fbHeight;
 	glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
+
+	if (fbWidth == 0)  fbWidth = 1;
+	if (fbHeight == 0) fbHeight = 1;
+
 	if (wup->camera != nullptr) {
 		wup->camera->setAspectRatio(static_cast<float>(fbWidth) / fbHeight);
 	}
