@@ -34,6 +34,12 @@ void SceneUI::initScene() {
 	initModels();
 }
 
+void SceneUI::reloadShader() {
+	std::cout << "SHADER UI: reloading started..." << std::endl;
+	shader->reload();
+	std::cout << "SHADER UI: reload complete" << std::endl;
+}
+
 CameraUI* SceneUI::getMainCamera() {
 	return camera;
 }

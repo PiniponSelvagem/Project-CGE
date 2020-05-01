@@ -30,8 +30,10 @@ void Game::updateKeyboardInput() {
 	if (keyboardInput->isKeyActive(GLFW_KEY_N))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	if (keyboardInput->isKeyActive(GLFW_KEY_R))
+	if (keyboardInput->isKeyActive(GLFW_KEY_R)) {
 		scene->reloadShader();
+		sceneUI->reloadShader();
+	}
 	if (keyboardInput->isKeyActive(GLFW_KEY_E)) {
 		loadScene();
 		loadSceneUI();

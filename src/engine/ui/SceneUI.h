@@ -39,6 +39,8 @@ class SceneUI {
 
 		void initScene();
 
+		void reloadShader();
+
 		CameraUI* getMainCamera();
 
 		virtual void update() = 0;
