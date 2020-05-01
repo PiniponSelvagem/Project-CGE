@@ -24,7 +24,6 @@ class Engine {
 	protected:
 		// Window
 		GLFWwindow* window;
-		const int WINDOW_WIDTH, WINDOW_HEIGHT;
 		WindowUserPointer* wuPointer;
 
 		// Delta Time
@@ -46,7 +45,7 @@ class Engine {
 		Scene* scene;
 		SceneUI* sceneUI;
 		
-		void initWindow(const char * title, bool resizable);
+		void initWindow(const char * title, const int width, const int height, bool resizable);
 		void initGLFW();
 		void initGLAD();	//AFTER CONTEXT CREATION
 		void initOpenGLoptions();
@@ -69,8 +68,11 @@ class Engine {
 
 		int getWindowShouldClose();
 		void setWindowShouldClose();
+
+		void getWindowSize(float &width, float &height);
+		float getWindowAspectRatio();
 		
-		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+		static void framebuffer_size_callback(GLFWwindow * window, int width, int height);
 
 		virtual void loadScene() = 0;
 		virtual void loadSceneUI() = 0;

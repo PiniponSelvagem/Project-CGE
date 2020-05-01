@@ -69,14 +69,3 @@ class Camera3D : public Camera {
 
 		void updateProjectionMatrix();
 };
-class CameraHUD : public Camera {
-private:
-	void updateCameraVectors();
-
-
-public:
-	CameraHUD(float fov, float nearPlane, float farPlane, glm::vec3 position, glm::vec3 direction);
-	~CameraHUD();
-
-	void updateProjectionMatrix();
-};

@@ -14,8 +14,8 @@ extern "C"
 // SETTINGS
 const unsigned int GL_MAJOR_VER = 4;
 const unsigned int GL_MINOR_VER = 4;
-const unsigned int SCR_WIDTH  = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH  = 1280;
+const unsigned int SCR_HEIGHT = 720;
 
 const float FOV = 90.f;
 
@@ -33,6 +33,7 @@ int main() {
 	int nbFrames = 0;
 
 	while (!game.getWindowShouldClose()) {
+		/*
 		// Measure speed
 		double currentTime = glfwGetTime();
 		nbFrames++;
@@ -45,6 +46,7 @@ int main() {
 			lastTime += 1.0;
 		}
 		//
+		*/
 
 		game.update();
 		game.render();

@@ -112,11 +112,18 @@ void Game::loadScene() {
 	delete scene;
 	scene = new Playground();
 	scene->initScene();
+
+	float aspectRatio = getWindowAspectRatio();
+	scene->getMainCamera()->setAspectRatio(aspectRatio);
 	wuPointer->camera = scene->getMainCamera();
 }
 void Game::loadSceneUI() {
 	delete sceneUI;
 	sceneUI = new TestUI();
 	sceneUI->initScene();
+
+	float width, height;
+	getWindowSize(width, height);
+	sceneUI->getMainCamera()->setUIWindowSize(width, height);
 	wuPointer->cameraUI = sceneUI->getMainCamera();
 }

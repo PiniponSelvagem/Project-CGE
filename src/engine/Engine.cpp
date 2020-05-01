@@ -1,14 +1,14 @@
 #pragma once
 #include "Engine.h"
 
-void Engine::initWindow(const char * title, bool resizable) {
+void Engine::initWindow(const char * title, const int width, int height, bool resizable) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, resizable);
 
 	// CREATE WINDOW
-	window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, title, NULL, NULL);
+	window = glfwCreateWindow(width, height, title, NULL, NULL);
 	if (window == NULL) {
 		std::cout << "ERROR::GAME::GLFW_CREATE_WINDOW" << std::endl;
 		glfwTerminate();
@@ -81,7 +81,7 @@ void Engine::renderEnd() {
 ////////////////////////////////
 
 
-Engine::Engine(const char* title, const int width, const int height, bool resizable) : WINDOW_WIDTH(width), WINDOW_HEIGHT(height) {
+Engine::Engine(const char* title, const int width, const int height, bool resizable) {
 	dTime = 0.f;
 	curTime = 0.f;
 	lastTime = 0.f;
@@ -95,14 +95,14 @@ Engine::Engine(const char* title, const int width, const int height, bool resiza
 	firstMouse = true;
 
 	initGLFW();
-	initWindow(title, resizable);
+	initWindow(title, width, height, resizable);
 	initGLAD();
 	initOpenGLoptions();
 
 	wuPointer = new WindowUserPointer();
 	glfwSetWindowUserPointer(window, wuPointer);
 
-	framebuffer_size_callback(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+	//TODO: framebuffer_size_callback(window, width, height);
 }
 
 Engine::~Engine() {
@@ -120,6 +120,22 @@ void Engine::setWindowShouldClose() {
 }
 int Engine::getWindowShouldClose() {
 	return glfwWindowShouldClose(window);
+}
+
+void Engine::getWindowSize(float &width, float &height) {
+	int int_width, int_height;
+	glfwGetWindowSize(window, &int_width, &int_height);
+	width = int_width;
+	height = int_height;
+}
+
+float Engine::getWindowAspectRatio() {
+	float width, height;
+	getWindowSize(width, height);
+	if (width == 0)  width = 1;
+	if (height == 0) height = 1;
+
+	return width / height;
 }
 
 void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height) {
