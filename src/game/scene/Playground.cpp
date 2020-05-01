@@ -161,10 +161,10 @@ Playground::Playground() : Scene() {
 Playground::~Playground() {
 }
 
-void Playground::update() {
-	models[0]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
-	models[1]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
-	models[2]->changeRotation(glm::vec3(0.f, 1.f, 0.f));
+void Playground::update(float dTime) {
+	models[0]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
+	models[1]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
+	models[2]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
 
 	//lightSetPosition();
 }

@@ -37,6 +37,11 @@ void Game::updateKeyboardInput() {
 		loadSceneUI();
 	}
 
+	if (keyboardInput->isKeyActive(GLFW_KEY_0))
+		glfwSwapInterval(0);
+	if (keyboardInput->isKeyActive(GLFW_KEY_9))
+		glfwSwapInterval(1);
+
 	if (keyboardInput->isKeyActive(GLFW_KEY_W))
 		scene->cameraFoward(dTime);
 	if (keyboardInput->isKeyActive(GLFW_KEY_S))
@@ -76,6 +81,9 @@ void Game::initInput() {
 
 	keys.push_back(GLFW_KEY_R);
 	keys.push_back(GLFW_KEY_E);
+
+	keys.push_back(GLFW_KEY_0);
+	keys.push_back(GLFW_KEY_9);
 
 	keys.push_back(GLFW_KEY_W);
 	keys.push_back(GLFW_KEY_S);

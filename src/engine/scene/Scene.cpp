@@ -63,7 +63,7 @@ Camera* Scene::getMainCamera() {
 	return camera;
 }
 
-void Scene::update() {
+void Scene::update(float dTime) {
 
 }
 void Scene::render() {

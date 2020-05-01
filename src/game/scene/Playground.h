@@ -14,7 +14,7 @@ class Playground : public Scene {
 		Playground();
 		~Playground();
 
-		void update();
+		void update(float dTime);
 
 		/* TODO: Make Player class??? */
 		void cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY);

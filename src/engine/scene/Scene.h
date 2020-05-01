@@ -55,7 +55,7 @@ class Scene {
 
 		Camera* getMainCamera();
 
-		virtual void update() = 0;
+		virtual void update(float dTime) = 0;
 		void render();
 
 		/* TODO: Make Player class??? */
