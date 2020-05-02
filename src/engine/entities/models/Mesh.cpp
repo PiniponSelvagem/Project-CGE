@@ -92,17 +92,6 @@ Mesh::Mesh(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, c
 	);
 }
 
-Mesh::Mesh(Primitive* primitive,
-		glm::vec3 position,
-		glm::vec3 origin,
-		glm::vec3 rotation,
-		glm::vec3 scale
-) {
-	Mesh_AuxCtor(
-		primitive->getVertices(), primitive->getNrVertices(), primitive->getIndices(), primitive->getNrIndices(),
-		position, origin, rotation, scale
-	);
-}
 
 Mesh::Mesh(const Mesh &mesh) {
 	Mesh_AuxCtor(
@@ -122,47 +111,6 @@ Mesh::~Mesh() {
 	delete[] indexArray;
 }
 
-void Mesh::setOrigin(const glm::vec3 origin) {
-	this->origin = origin;
-}
-void Mesh::setPosition(const glm::vec3 position) {
-	this->position = position;
-}
-void Mesh::setRotation(const glm::vec3 rotation) {
-	this->rotation = rotation;
-}
-void Mesh::setScale(const glm::vec3 scale) {
-	this->scale = scale;
-}
-
-void Mesh::changePosition(const glm::vec3 position) {
-	this->position += position;
-	this->origin += position;
-}
-void Mesh::changePosition_keepOrigin(const glm::vec3 position) { // Useful to create orbiting objects
-	this->position += position;
-}
-void Mesh::changeRotation(const glm::vec3 rotation) {
-	this->rotation += rotation;
-	if (this->rotation.x > 360)
-		this->rotation.x = 0;
-	else if (this->rotation.x = -1)
-		this->rotation.x = 359;
-}
-void Mesh::changeScale(const glm::vec3 scale) {
-	this->scale += scale;
-}
-
-void Mesh::update() {
-	/*
-	this->ModelMatrix = glm::mat4(1.f);
-	this->ModelMatrix = glm::translate(ModelMatrix, position);
-	this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));	//X
-	this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));	//Y
-	this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
-	this->ModelMatrix = glm::scale(ModelMatrix, scale);
-	*/
-}
 
 void Mesh::render(Shader* shader) {
 	updateModelMatrix();

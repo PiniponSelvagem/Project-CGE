@@ -46,7 +46,6 @@ void Playground::initMaterials() {
 }
 void Playground::initModels() {
 	Mesh* cube;
-	//std::vector<Mesh*> meshFloor;
 
 	std::vector<Vertex> vertex = ObjLoader::loadObj("resources/obj/cube.obj");
 	cube = new Mesh(
@@ -56,29 +55,6 @@ void Playground::initModels() {
 		0,
 		glm::vec3(0.f, 0.f, 0.f)
 	);
-	/*
-	meshes.push_back(
-		new Mesh(
-			&Cube(),
-			glm::vec3(0.f),
-			glm::vec3(0.f),
-			glm::vec3(0.f),
-			glm::vec3(1.f)
-		)
-	);
-	*/
-
-	/*
-	meshFloor.push_back(
-		new Mesh(
-			&Quad(),
-			glm::vec3(0.f, 0.f, -2.f),
-			glm::vec3(0.f),
-			glm::vec3(-90.f, 0.f, 0.f),
-			glm::vec3(1000.f)
-		)
-	);
-	*/
 
 
 	models.push_back(new Model(
@@ -122,11 +98,6 @@ void Playground::initModels() {
 	));
 
 	delete cube;
-	/*
-	for (auto *&i : meshFloor) {
-		delete i;
-	}
-	*/
 }
 void Playground::initLights() {
 	/*

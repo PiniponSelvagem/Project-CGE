@@ -17,6 +17,7 @@ void TestUI::initMaterials() {
 	));
 }
 void TestUI::initModels() {
+	/*
 	std::vector<Mesh*> meshes;
 
 	meshes.push_back(
@@ -48,6 +49,7 @@ void TestUI::initModels() {
 	for (auto *&i : meshes) {
 		delete i;
 	}
+	*/
 }
 
 

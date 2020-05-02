@@ -75,18 +75,6 @@
     <ClCompile Include="src\engine\entities\lights\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\entities\models\primitives\Cube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\entities\models\primitives\Primitive.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\entities\models\primitives\Quad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\entities\models\primitives\Triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\entities\models\Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -173,9 +161,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\entities\lights\Light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\entities\models\primitives\Primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\entities\models\Material.h">

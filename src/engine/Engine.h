@@ -5,7 +5,6 @@
 #include "entities/models/Vertex.h"
 #include "entities/models/Texture.h"
 #include "entities/models/Material.h"
-#include "entities/models/primitives/Primitive.h"
 #include "entities/models/Mesh.h"
 #include "entities/models/Model.h"
 #include "entities/models/ObjLoader.h"
