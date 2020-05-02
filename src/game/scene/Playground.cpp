@@ -45,18 +45,16 @@ void Playground::initMaterials() {
 	));
 }
 void Playground::initModels() {
-	std::vector<Mesh*> meshes;
+	Mesh* cube;
 	//std::vector<Mesh*> meshFloor;
 
 	std::vector<Vertex> vertex = ObjLoader::loadObj("resources/obj/cube.obj");
-	meshes.push_back(
-		new Mesh(
-			vertex.data(),
-			vertex.size(),
-			NULL,
-			0,
-			glm::vec3(0.f, 0.f, 0.f)
-		)
+	cube = new Mesh(
+		vertex.data(),
+		vertex.size(),
+		NULL,
+		0,
+		glm::vec3(0.f, 0.f, 0.f)
 	);
 	/*
 	meshes.push_back(
@@ -88,7 +86,7 @@ void Playground::initModels() {
 		materials[MAT_CRATE],
 		textures[TEX_CRATE],
 		textures[TEX_CRATE_SPECULAR],
-		meshes
+		cube
 	));
 
 	models.push_back(new Model(
@@ -96,7 +94,7 @@ void Playground::initModels() {
 		materials[MAT_CRATE],
 		textures[TEX_FRAGILE],
 		textures[TEX_FRAGILE_SPECULAR],
-		meshes
+		cube
 	));
 
 	models.push_back(new Model(
@@ -104,7 +102,7 @@ void Playground::initModels() {
 		materials[MAT_CRATE],
 		textures[TEX_FRAGILE],
 		textures[TEX_FRAGILE_SPECULAR],
-		meshes
+		cube
 	));
 
 	models.push_back(new Model(
@@ -123,9 +121,7 @@ void Playground::initModels() {
 		"resources/obj/teapot.obj"
 	));
 
-	for (auto *&i : meshes) {
-		delete i;
-	}
+	delete cube;
 	/*
 	for (auto *&i : meshFloor) {
 		delete i;
