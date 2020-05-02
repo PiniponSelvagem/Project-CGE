@@ -3,6 +3,6 @@
 #include "Vertex.h"
 
 class ObjLoader {
-public:
-	static std::vector<Vertex> loadObj(const char* fileName);
+	public:
+		static std::vector<Vertex> loadObj(const char* fileName);
 };

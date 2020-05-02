@@ -1,4 +1,5 @@
 #include "Playground.h"
+#include "../../engine/entities/models/ObjLoader.h"
 
 enum texture_enum {
 	TEX_DEFAULT,
@@ -45,8 +46,19 @@ void Playground::initMaterials() {
 }
 void Playground::initModels() {
 	std::vector<Mesh*> meshes;
-	std::vector<Mesh*> meshFloor;
+	//std::vector<Mesh*> meshFloor;
 
+	std::vector<Vertex> vertex = ObjLoader::loadObj("resources/obj/cube.obj");
+	meshes.push_back(
+		new Mesh(
+			vertex.data(),
+			vertex.size(),
+			NULL,
+			0,
+			glm::vec3(0.f, 0.f, 0.f)
+		)
+	);
+	/*
 	meshes.push_back(
 		new Mesh(
 			&Cube(),
@@ -56,7 +68,9 @@ void Playground::initModels() {
 			glm::vec3(1.f)
 		)
 	);
+	*/
 
+	/*
 	meshFloor.push_back(
 		new Mesh(
 			&Quad(),
@@ -66,6 +80,7 @@ void Playground::initModels() {
 			glm::vec3(1000.f)
 		)
 	);
+	*/
 
 
 	models.push_back(new Model(
@@ -93,11 +108,11 @@ void Playground::initModels() {
 	));
 
 	models.push_back(new Model(
-		glm::vec3(0.f, 0.f, 0.f),
+		glm::vec3(0.f, -2.f, 0.f),
 		materials[MAT_CRATE],
 		textures[TEX_DEFAULT],
 		textures[TEX_DEFAULT],
-		meshFloor
+		"resources/obj/floor.obj"
 	));
 	
 	models.push_back(new Model(
@@ -111,9 +126,11 @@ void Playground::initModels() {
 	for (auto *&i : meshes) {
 		delete i;
 	}
+	/*
 	for (auto *&i : meshFloor) {
 		delete i;
 	}
+	*/
 }
 void Playground::initLights() {
 	/*
