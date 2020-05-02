@@ -115,13 +115,6 @@ Engine::~Engine() {
 	delete wuPointer;
 }
 
-void Engine::setWindowShouldClose() {
-	glfwSetWindowShouldClose(window, GLFW_TRUE);
-}
-int Engine::getWindowShouldClose() {
-	return glfwWindowShouldClose(window);
-}
-
 void Engine::getWindowSize(float &width, float &height) {
 	int int_width, int_height;
 	glfwGetWindowSize(window, &int_width, &int_height);

@@ -72,9 +72,6 @@
     <ClCompile Include="src\game\ui\TestUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\entities\lights\Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\entities\models\Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -90,10 +87,7 @@
     <ClCompile Include="src\engine\entities\models\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\entities\lights\LightPoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\enviroment\Fog.cpp">
+    <ClCompile Include="src\engine\entities\lights\LightPoint.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

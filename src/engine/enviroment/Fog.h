@@ -8,12 +8,18 @@ class Fog {
 		float gradient;
 
 	public:
-		Fog(float density, float gradient);
-		~Fog();
+		Fog(float density, float gradient) {
+			this->density = density;
+			this->gradient = gradient;
+		}
+		~Fog() { }
 
-		void setDensity(float density);
-		void setGradient(float gradient);
+		inline void setDensity(float density) { this->density = density; }
+		inline void setGradient(float gradient) { this->gradient = gradient; }
 
-		void sendToShader(Shader &program);
+		void sendToShader(Shader &program) {
+			program.set1f(density,  "fog.density");
+			program.set1f(gradient, "fog.gradient");
+		}
 };
 

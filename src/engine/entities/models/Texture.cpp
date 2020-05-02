@@ -58,12 +58,3 @@ void Texture::loadTexture(const char* fileName) {
 	glBindTexture(type, 0);
 	SOIL_free_image_data(image);
 }
-
-void Texture::bind(const GLint textureUnit) {
-	glActiveTexture(GL_TEXTURE0 + textureUnit);
-	glBindTexture(type, id);
-}
-void Texture::unbind() {
-	glActiveTexture(0);
-	glBindTexture(type, 0);
-}

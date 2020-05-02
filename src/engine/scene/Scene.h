@@ -4,7 +4,7 @@
 #include "../entities/models/Material.h"
 #include "../entities/models/Mesh.h"
 #include "../entities/models/Model.h"
-#include "../entities/lights/Light.h"
+#include "../entities/lights/LightPoint.h"
 #include "../enviroment/Fog.h"
 #include "../camera/Camera.h"
 #include "../ui/CameraUI.h"

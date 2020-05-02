@@ -65,8 +65,12 @@ class Engine {
 
 		virtual void initInput() = 0;
 
-		int getWindowShouldClose();
-		void setWindowShouldClose();
+		inline void setWindowShouldClose() {
+			glfwSetWindowShouldClose(window, GLFW_TRUE);
+		}
+		inline int getWindowShouldClose() {
+			return glfwWindowShouldClose(window);
+		}
 
 		void getWindowSize(float &width, float &height);
 		float getWindowAspectRatio();

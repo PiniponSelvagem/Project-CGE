@@ -19,16 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\engine\enviroment\Fog.cpp" />
     <ClCompile Include="src\engine\Engine.cpp" />
     <ClCompile Include="src\engine\input\Input.cpp" />
     <ClCompile Include="src\engine\input\MouseInput.cpp" />
-    <ClCompile Include="src\engine\entities\lights\Light.cpp" />
     <ClCompile Include="src\engine\ui\MaterialUI.cpp" />
     <ClCompile Include="src\engine\ui\ModelUI.cpp" />
     <ClCompile Include="src\engine\ui\SceneUI.cpp" />
     <ClCompile Include="src\engine\ui\CameraUI.cpp" />
-    <ClCompile Include="src\engine\entities\lights\LightPoint.cpp" />
+    <ClCompile Include="src\engine\entities\lights\LightPoint.h" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
     <ClCompile Include="src\engine\scene\Scene.cpp" />

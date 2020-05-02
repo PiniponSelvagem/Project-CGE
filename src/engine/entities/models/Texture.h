@@ -20,6 +20,12 @@ class Texture {
 
 		void loadTexture(const char* fileName);
 
-		void bind(const GLint textureUnit);
-		void unbind();
+		inline void bind(const GLint textureUnit) {
+			glActiveTexture(GL_TEXTURE0 + textureUnit);
+			glBindTexture(type, id);
+		}
+		inline void unbind() {
+			glActiveTexture(0);
+			glBindTexture(type, 0);
+		}
 };
