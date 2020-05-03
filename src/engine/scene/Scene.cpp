@@ -69,6 +69,6 @@ void Scene::update(float dTime) {
 void Scene::render() {
 	updateUniforms();
 	for (auto *i : models) {
-		i->render(this->shaders[SHADER_CORE_PROGRAM]);
+		i->render(shaders[SHADER_CORE_PROGRAM]);
 	}
 }

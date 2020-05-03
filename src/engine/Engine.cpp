@@ -101,8 +101,6 @@ Engine::Engine(const char* title, const int width, const int height, bool resiza
 
 	wuPointer = new WindowUserPointer();
 	glfwSetWindowUserPointer(window, wuPointer);
-
-	//TODO: framebuffer_size_callback(window, width, height);
 }
 
 Engine::~Engine() {

@@ -40,7 +40,6 @@ Model::~Model() {
 
 void Model::render(Shader* shader) {
 	material->sendToShader(*shader);
-
 	shader->use();
 
 	overrideTextureDiffuse->bind(0);

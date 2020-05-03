@@ -7,7 +7,6 @@ std::string Shader::loadShaderSource(const char* fileName) {
 
 	std::ifstream in_file;
 
-	// VERTEX
 	in_file.open(fileName);
 
 	if (in_file.is_open()) {
@@ -24,7 +23,7 @@ std::string Shader::loadShaderSource(const char* fileName) {
 	return src;
 }
 
-GLuint Shader::loadShader(GLenum type, const char* fileName) {
+GLuint Shader::loadShader(const char* fileName, GLenum type) {
 	char infoLog[512];
 	GLint success;
 
@@ -37,105 +36,103 @@ GLuint Shader::loadShader(GLenum type, const char* fileName) {
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success) {
 		glGetShaderInfoLog(shader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::COULD_NOT_COMPILE_SHADER: " << fileName << std::endl;
-		std::cout << infoLog << std::endl;
+		std::cerr << "ERROR::SHADER::COULD_NOT_COMPILE_SHADER: " << fileName << std::endl;
+		std::cerr << infoLog << std::endl;
 	}
 
 	return shader;
 }
 
-void Shader::linkProgram(GLuint vertexShader, GLuint fragmentShader, GLuint geometryShader) {
+void Shader::linkProgram(GLuint vertexShader, GLuint fragmentShader) {
 	char infoLog[512];
 	GLint success;
 
-	id = glCreateProgram();
+	programID = glCreateProgram();
 
-	glAttachShader(id, vertexShader);
+	glAttachShader(programID, vertexShader);
+	glAttachShader(programID, fragmentShader);
+	glLinkProgram(programID);
 
-	if (geometryShader) {
-		glAttachShader(id, geometryShader);
-	}
-
-	glAttachShader(id, fragmentShader);
-	glLinkProgram(id);
-
-	glGetProgramiv(id, GL_LINK_STATUS, &success);
+	glGetProgramiv(programID, GL_LINK_STATUS, &success);
 	if (!success) {
-		glGetProgramInfoLog(id, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::COULD_NOT_LINK_PROGRAM" << std::endl;
-		std::cout << infoLog << std::endl;
+		glGetProgramInfoLog(programID, 512, NULL, infoLog);
+		std::cerr << "ERROR::SHADER::COULD_NOT_LINK_PROGRAM" << std::endl;
+		std::cerr << infoLog << std::endl;
 	}
 
 	glUseProgram(0);
 }
 
+void Shader::load() {
+	vertexShaderID   = loadShader(vertexFile, GL_VERTEX_SHADER);
+	fragmentShaderID = loadShader(fragmentFile, GL_FRAGMENT_SHADER);
+
+	this->linkProgram(vertexShaderID, fragmentShaderID);
+
+	glDeleteShader(vertexShaderID);
+	glDeleteShader(fragmentShaderID);
+}
+
+void Shader::unload() {
+	unuse();
+	glDetachShader(programID, vertexShaderID);
+	glDetachShader(programID, fragmentShaderID);
+	glDeleteProgram(programID);
+}
 
 
 
-Shader::Shader(const char* vertexFile, const char* fragmentFile, const char* geometryFile) {
+
+Shader::Shader(const char* vertexFile, const char* fragmentFile) {
 	this->vertexFile = vertexFile;
 	this->fragmentFile = fragmentFile;
-	this->geometryFile = geometryFile;
 
-	reload();
+	load();
 }
 
 Shader::~Shader() {
-	glDeleteProgram(id);
+	unload();
 }
 
 void Shader::reload() {
-	GLuint vertexShader = 0;
-	GLuint geometryShader = 0;
-	GLuint fragmentShader = 0;
-
-	vertexShader = loadShader(GL_VERTEX_SHADER, vertexFile);
-	if (geometryFile != "") {
-		geometryShader = loadShader(GL_GEOMETRY_SHADER, geometryFile);
-	}
-	fragmentShader = loadShader(GL_FRAGMENT_SHADER, fragmentFile);
-
-	this->linkProgram(vertexShader, fragmentShader, geometryShader);
-
-	glDeleteShader(vertexShader);
-	glDeleteShader(geometryShader);
-	glDeleteShader(fragmentShader);
+	unload();
+	load();
 }
 
 void Shader::set1i(GLint value, const GLchar* name) {
 	use();
-	glUniform1i(glGetUniformLocation(id, name), value);
+	glUniform1i(glGetUniformLocation(programID, name), value);
 	unuse();
 }
 
 void Shader::set1f(GLfloat value, const GLchar* name) {
 	use();
-	glUniform1f(glGetUniformLocation(id, name), value);
+	glUniform1f(glGetUniformLocation(programID, name), value);
 	unuse();
 }
 void Shader::setVec2f(glm::fvec2 value, const GLchar* name) {
 	use();
-	glUniform2fv(glGetUniformLocation(id, name), 1, glm::value_ptr(value));
+	glUniform2fv(glGetUniformLocation(programID, name), 1, glm::value_ptr(value));
 	unuse();
 }
 void Shader::setVec3f(glm::fvec3 value, const GLchar* name) {
 	use();
-	glUniform3fv(glGetUniformLocation(id, name), 1, glm::value_ptr(value));
+	glUniform3fv(glGetUniformLocation(programID, name), 1, glm::value_ptr(value));
 	unuse();
 }
 void Shader::setVec4f(glm::fvec4 value, const GLchar* name) {
 	use();
-	glUniform3fv(glGetUniformLocation(id, name), 1, glm::value_ptr(value));
+	glUniform3fv(glGetUniformLocation(programID, name), 1, glm::value_ptr(value));
 	unuse();
 }
 
 void Shader::setMat3fv(glm::mat3 value, const GLchar* name, GLboolean transpose) {
 	use();
-	glUniformMatrix3fv(glGetUniformLocation(id, name), 1, transpose, glm::value_ptr(value));
+	glUniformMatrix3fv(glGetUniformLocation(programID, name), 1, transpose, glm::value_ptr(value));
 	unuse();
 }
 void Shader::setMat4fv(glm::mat4 value, const GLchar* name, GLboolean transpose) {
 	use();
-	glUniformMatrix4fv(glGetUniformLocation(id, name), 1, transpose, glm::value_ptr(value));
+	glUniformMatrix4fv(glGetUniformLocation(programID, name), 1, transpose, glm::value_ptr(value));
 	unuse();
 }

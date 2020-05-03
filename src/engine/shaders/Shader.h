@@ -5,30 +5,28 @@ class Shader {
 	private:
 		const char* vertexFile;
 		const char* fragmentFile;
-		const char* geometryFile;
 
-		GLuint id;
+		GLuint programID;
+		GLuint vertexShaderID;
+		GLuint fragmentShaderID;
 
 		std::string loadShaderSource(const char* fileName);
 
-		GLuint loadShader(GLenum type, const char* fileName);
+		GLuint loadShader(const char* fileName, GLenum type);
 
-		void linkProgram(GLuint vertexShader, GLuint fragmentShader, GLuint geometryShader);
+		void linkProgram(GLuint vertexShader, GLuint fragmentShader);
+
+		void load();
+		void unload();
 
 	public:
-		Shader(const char* vertexFile, const char* fragmentFile, const char* geometryFile = "");
-
-		~Shader();
+		Shader(const char* vertexFile, const char* fragmentFile);
+		virtual ~Shader();
 
 		void reload();
 
-		// Set uniform functions
-		inline void use() {
-			glUseProgram(id);
-		}
-		inline void unuse() {
-			glUseProgram(0);
-		}
+		inline void use() {	glUseProgram(programID); }
+		inline void unuse() { glUseProgram(0); }
 
 
 		void set1i(GLint value, const GLchar* name);
