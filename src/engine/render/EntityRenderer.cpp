@@ -1,6 +1,13 @@
 #pragma once
 #include "EntityRenderer.h"
 
+void EntityRenderer::bindTexture(Texture* texture, int textureUnit) {
+	glActiveTexture(GL_TEXTURE0 + textureUnit);
+	glBindTexture(texture->getType(), texture->getID());
+}
+
+
+
 void EntityRenderer::render(Entity* entity) {
 	Model* model = entity->getModel();
 
@@ -12,15 +19,8 @@ void EntityRenderer::render(Entity* entity) {
 
 	shader->use();
 
-	//diffuseTex->bind(0);
-	//bind(const GLint textureUnit)
-	//textureunit = 0
-	glActiveTexture(GL_TEXTURE0 + 0);
-	glBindTexture(model->getDiffuseTex()->getType(), model->getDiffuseTex()->getID());
-	//textureunit = 1
-	glActiveTexture(GL_TEXTURE0 + 1);
-	glBindTexture(model->getSpecularTex()->getType(), model->getSpecularTex()->getID());
-
+	bindTexture(model->getDiffuseTex(), 0);
+	bindTexture(model->getSpecularTex(), 1);
 
 
 	entity->updateModelMatrix();
@@ -32,6 +32,8 @@ void EntityRenderer::render(Entity* entity) {
 	glDrawArrays(GL_TRIANGLES, 0, model->getMesh()->getVertexCount());
 	//else
 	//	glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
+
+	//TODO: Load objects with indicies, less ram usage
 
 
 
