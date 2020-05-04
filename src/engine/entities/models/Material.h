@@ -1,6 +1,5 @@
 #pragma once
 #include "../../../libs.h"
-#include "../../shaders/Shader.h"
 
 class Material {
 	private:
@@ -11,10 +10,16 @@ class Material {
 		GLint specularTex;
 
 
-
 	public:
-		Material(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, GLint diffuseTex, GLint specularTex);
-		~Material();
+		Material(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, GLint diffuseTex, GLint specularTex)
+			: ambient(ambient), diffuse(diffuse), specular(specular), diffuseTex(diffuseTex), specularTex(specularTex)
+		{ }
+		virtual ~Material() { }
 
-		void sendToShader(Shader &program);
+		inline glm::vec3 getAmbient()  { return ambient; }
+		inline glm::vec3 getSpecular() { return specular; }
+		inline glm::vec3 getDiffuse()  { return diffuse; }
+
+		inline GLint getDiffuseTex()  { return diffuseTex; }
+		inline GLint getSpecularTex() { return specularTex; }
 };

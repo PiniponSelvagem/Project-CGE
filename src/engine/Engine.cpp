@@ -107,7 +107,6 @@ Engine::~Engine() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	delete scene;
-	delete sceneUI;
 	delete keyboardInput;
 	delete mouseInput;
 	delete wuPointer;
@@ -151,13 +150,11 @@ void Engine::update() {
 	updateInput();
 
 	scene->update(dTime);
-	sceneUI->update();
 }
 void Engine::render() {
 	renderStart();
 
 	scene->render();
-	sceneUI->render();
 
 	renderEnd();
 }

@@ -1,9 +1,12 @@
 #pragma once
 #include "../shaders/Shader.h"
+#include "../render/MasterRenderer.h"
+#include "../render/EntityRenderer.h"
 #include "../entities/models/Texture.h"
 #include "../entities/models/Material.h"
 #include "../entities/models/Mesh.h"
 #include "../entities/models/Model.h"
+#include "../entities/models/Entity.h"
 #include "../entities/lights/LightPoint.h"
 #include "../enviroment/Fog.h"
 #include "../camera/Camera.h"
@@ -17,6 +20,13 @@ class Scene {
 		// Shaders
 		std::vector<Shader*> shaders;
 
+		// Renderers
+		MasterRenderer* masterRenderer;
+		EntityRenderer* entityRenderer;
+
+		// Meshes
+		std::vector<Mesh*> meshes;
+
 		// Textures
 		std::vector<Texture*> textures;
 
@@ -26,6 +36,9 @@ class Scene {
 		// Models
 		std::vector<Model*> models;
 
+		// Entities
+		std::vector<Entity*> entities;
+
 		// Lights
 		std::vector<LightPoint*> lightsPoint;
 
@@ -34,15 +47,13 @@ class Scene {
 
 
 		virtual void initShaders() = 0;
+		virtual void initMeshes() = 0;
 		virtual void initTextures() = 0;
 		virtual void initMaterials() = 0;
 		virtual void initModels() = 0;
+		virtual void initEntities() = 0;
 		virtual void initLights() = 0;
 		virtual void initEnviroment() = 0;
-
-		void initUniforms();
-
-		void updateUniforms();
 
 
 

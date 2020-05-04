@@ -1,7 +1,6 @@
 #pragma once
 #include "Game.h"
 #include "scene/Playground.h"
-#include "ui/TestUI.h"
 
 
 void Game::updateMouseInput() {
@@ -32,11 +31,9 @@ void Game::updateKeyboardInput() {
 
 	if (keyboardInput->isKeyActive(GLFW_KEY_R)) {
 		scene->reloadShader();
-		sceneUI->reloadShader();
 	}
 	if (keyboardInput->isKeyActive(GLFW_KEY_E)) {
 		loadScene();
-		loadSceneUI();
 	}
 
 	if (keyboardInput->isKeyActive(GLFW_KEY_0))
@@ -118,14 +115,4 @@ void Game::loadScene() {
 	float aspectRatio = getWindowAspectRatio();
 	scene->getMainCamera()->setAspectRatio(aspectRatio);
 	wuPointer->camera = scene->getMainCamera();
-}
-void Game::loadSceneUI() {
-	delete sceneUI;
-	sceneUI = new TestUI();
-	sceneUI->initScene();
-
-	float width, height;
-	getWindowSize(width, height);
-	sceneUI->getMainCamera()->setUIWindowSize(width, height);
-	wuPointer->cameraUI = sceneUI->getMainCamera();
 }

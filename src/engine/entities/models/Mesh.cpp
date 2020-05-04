@@ -1,17 +1,7 @@
 #pragma once
 #include "Mesh.h"
 
-void Mesh::Mesh_AuxCtor(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices,
-				  glm::vec3 position,
-				  glm::vec3 origin,
-				  glm::vec3 rotation,
-				  glm::vec3 scale
-) {
-	this->position = position;
-	this->origin = origin;
-	this->rotation = rotation;
-	this->scale = scale;
-
+void Mesh::Mesh_AuxCtor(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices) {
 	this->nVertices = nVertices;
 	this->nIndices = nIndices;
 
@@ -26,7 +16,6 @@ void Mesh::Mesh_AuxCtor(Vertex* vertexArray, const unsigned &nVertices, GLuint* 
 	}
 
 	initVAO();
-	updateModelMatrix();
 }
 
 void Mesh::initVAO() {
@@ -64,40 +53,14 @@ void Mesh::initVAO() {
 	glBindVertexArray(0);
 }
 
-void Mesh::updateUniforms(Shader* shader) {
-	shader->setMat4fv(ModelMatrix, "ModelMatrix");
-}
 
-void Mesh::updateModelMatrix() {
-	this->ModelMatrix = glm::mat4(1.f);
-	this->ModelMatrix = glm::translate(ModelMatrix, origin);
-	this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));	//X
-	this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));	//Y
-	this->ModelMatrix = glm::rotate(ModelMatrix, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));	//Z
-	this->ModelMatrix = glm::translate(ModelMatrix, position - origin);
-	this->ModelMatrix = glm::scale(ModelMatrix, scale);
+Mesh::Mesh(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices) {
+	Mesh_AuxCtor(vertexArray, nVertices, indexArray, nIndices);
 }
 
 
-
-Mesh::Mesh(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices,
-		glm::vec3 position,
-		glm::vec3 origin,
-		glm::vec3 rotation,
-		glm::vec3 scale
-) {
-	Mesh_AuxCtor(
-		vertexArray, nVertices, indexArray, nIndices,
-		position, origin, rotation, scale
-	);
-}
-
-
-Mesh::Mesh(const Mesh &mesh) {
-	Mesh_AuxCtor(
-		mesh.vertexArray, mesh.nVertices, mesh.indexArray, mesh.nIndices,
-		mesh.position, mesh.origin, mesh.rotation, mesh.scale
-	);
+Mesh::Mesh(const Mesh* mesh) {
+	Mesh_AuxCtor(mesh->vertexArray, mesh->nVertices, mesh->indexArray, mesh->nIndices);
 }
 
 Mesh::~Mesh() {
@@ -109,17 +72,4 @@ Mesh::~Mesh() {
 
 	delete[] vertexArray;
 	delete[] indexArray;
-}
-
-
-void Mesh::render(Shader* shader) {
-	updateModelMatrix();
-	updateUniforms(shader);
-	shader->use();
-
-	glBindVertexArray(VAO);
-	if (nIndices == 0)
-		glDrawArrays(GL_TRIANGLES, 0, nVertices);
-	else
-		glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
 }

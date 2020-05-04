@@ -15,6 +15,5 @@ class Game : public Engine {
 		void initInput();
 
 		void loadScene();
-		void loadSceneUI();
 };
 

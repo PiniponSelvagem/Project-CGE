@@ -1,52 +1,29 @@
 #pragma once
 #include "Scene.h"
 
-enum shader_enum {
-	SHADER_CORE_PROGRAM
-};
-
-void Scene::initUniforms() {
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getProjectionMatrix(), "ProjectionMatrix");
-}
-
-void Scene::updateUniforms() {
-	// Update viewMatrix (camera)
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
-	shaders[SHADER_CORE_PROGRAM]->setVec3f(camera->getPosition(), "cameraPos");
-	
-	fog->sendToShader(*shaders[SHADER_CORE_PROGRAM]);
-
-	int idx = 0;
-	for (LightPoint* lightPoint : lightsPoint) {
-		lightPoint->sendToShader(*shaders[SHADER_CORE_PROGRAM], idx++);
-	}	
-
-	camera->updateProjectionMatrix();
-	shaders[SHADER_CORE_PROGRAM]->setMat4fv(camera->getProjectionMatrix(), "ProjectionMatrix");
-}
-
-
-////////////////////////////////
-
-
 Scene::Scene() { }
 Scene::~Scene() {
 	delete camera;
 
+	delete masterRenderer;
+	delete entityRenderer;
 	for (size_t i = 0; i < shaders.size(); ++i)	  { delete shaders[i];   }
+	for (auto *&i : meshes) { delete i; }
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }
 	for (size_t i = 0; i < materials.size(); ++i) { delete materials[i]; }
 	for (auto *&i : models) { delete i; }
+	for (auto *&i : entities) { delete i; }
 	for (size_t i = 0; i < lightsPoint.size(); ++i) { delete lightsPoint[i]; }
 	delete fog;
 }
 
 void Scene::initScene() {
 	initShaders();
+	initMeshes();
 	initTextures();
 	initMaterials();
 	initModels();
+	initEntities();
 	initLights();
 	initEnviroment();
 }
@@ -67,8 +44,11 @@ void Scene::update(float dTime) {
 
 }
 void Scene::render() {
-	updateUniforms();
-	for (auto *i : models) {
-		i->render(shaders[SHADER_CORE_PROGRAM]);
+	masterRenderer->sendCamera(camera);
+	masterRenderer->sendFog(fog);
+	masterRenderer->sendLightsPoint(lightsPoint);
+
+	for (auto *i : entities) {
+		entityRenderer->render(i);
 	}
 }

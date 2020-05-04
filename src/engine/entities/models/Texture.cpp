@@ -1,29 +1,7 @@
 #pragma once
 #include "Texture.h"
 
-void Texture::deleteTextureIfThisExists() {
-	if (id) {
-		glDeleteTextures(1, &id);
-	}
-}
-
-
-
-Texture::Texture(const char* fileName, GLenum type) {
-	deleteTextureIfThisExists();
-
-	this->type = type;
-
-	loadTexture(fileName);
-}
-
-Texture::~Texture() {
-	glDeleteTextures(1, &id);
-}
-
-void Texture::loadTexture(const char* fileName) {
-	deleteTextureIfThisExists();
-
+void Texture::load(const char* fileName) {
 	/*
 	Jack42 - 1 ano atrás - 19:22
 	If you actually you want to reuse the old texture, you should not delete it and create a new texture object,
@@ -31,6 +9,8 @@ void Texture::loadTexture(const char* fileName) {
 	much sense if a new opengl texture object is created every time, then it would be more logical to just create
 	multiple Texture instances by the constructor.
 	*/
+
+	int width, height;
 	unsigned char* image = SOIL_load_image(fileName, &width, &height, NULL, SOIL_LOAD_RGBA);
 	const char* soil_log = SOIL_last_result();
 
@@ -51,10 +31,21 @@ void Texture::loadTexture(const char* fileName) {
 		glGenerateMipmap(type);
 	}
 	else {
-		std::cout << "ERROR: [Texture] Failed to load texture " << fileName << ". " << soil_log << std::endl;
+		std::cout << "ERROR::TEXTURE::LOAD: Failed to load texture " << fileName << ". " << soil_log << std::endl;
 	}
 
 	glActiveTexture(0);
 	glBindTexture(type, 0);
 	SOIL_free_image_data(image);
+}
+
+
+
+Texture::Texture(const char* fileName, GLenum type) {
+	this->type = type;
+	load(fileName);
+}
+
+Texture::~Texture() {
+	glDeleteTextures(1, &id);
 }

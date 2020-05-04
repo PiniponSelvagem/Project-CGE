@@ -17,9 +17,7 @@ class Fog {
 		inline void setDensity(float density) { this->density = density; }
 		inline void setGradient(float gradient) { this->gradient = gradient; }
 
-		void sendToShader(Shader &program) {
-			program.set1f(density,  "fog.density");
-			program.set1f(gradient, "fog.gradient");
-		}
+		inline float getDensity()   { return density; }
+		inline float getGradient() { return gradient; }
 };
 

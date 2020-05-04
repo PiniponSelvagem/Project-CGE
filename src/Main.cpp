@@ -26,14 +26,12 @@ int main() {
 	game.initInput();
 
 	game.loadScene();
-	game.loadSceneUI();
 
 	/* Measure speed */
 	double lastTime = glfwGetTime();
 	int nbFrames = 0;
 
 	while (!game.getWindowShouldClose()) {
-		/*
 		// Measure speed
 		double currentTime = glfwGetTime();
 		nbFrames++;
@@ -46,7 +44,6 @@ int main() {
 			lastTime += 1.0;
 		}
 		//
-		*/
 
 		game.update();
 		game.render();

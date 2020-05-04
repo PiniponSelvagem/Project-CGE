@@ -36,8 +36,10 @@ class Light {
 		virtual ~Light() { }
 
 		inline void setPosition(const glm::vec3 position) { this->position = position; }
-		inline void setColor(const glm::vec3 color) { this->color = color; }
-		inline void serIntensity(const float intensity) { this->intensity = intensity; }
+		inline void setColor(const glm::vec3 color)       { this->color = color; }
+		inline void serIntensity(const float intensity)   { this->intensity = intensity; }
 
-		virtual void sendToShader(Shader &program, int idx) = 0;
+		inline glm::vec3 getPosition() { return position; }
+		inline glm::vec3 getColor()    { return color; }
+		inline float getIntensity()    { return intensity; }
 };

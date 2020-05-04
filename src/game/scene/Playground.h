@@ -4,9 +4,11 @@
 class Playground : public Scene {
 	private:
 		void initShaders();
+		void initMeshes();
 		void initTextures();
 		void initMaterials();
 		void initModels();
+		void initEntities();
 		void initLights();
 		void initEnviroment();
 

@@ -15,7 +15,6 @@
 #include "WindowUserPointer.h"
 
 #include "scene/Scene.h"
-#include "ui/SceneUI.h"
 
 
 
@@ -42,7 +41,6 @@ class Engine {
 
 		// Scenes
 		Scene* scene;
-		SceneUI* sceneUI;
 		
 		void initWindow(const char * title, const int width, const int height, bool resizable);
 		void initGLFW();
@@ -78,7 +76,6 @@ class Engine {
 		static void framebuffer_size_callback(GLFWwindow * window, int width, int height);
 
 		virtual void loadScene() = 0;
-		virtual void loadSceneUI() = 0;
 
 		void update();
 		void render();

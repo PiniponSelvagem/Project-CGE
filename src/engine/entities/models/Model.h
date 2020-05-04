@@ -7,19 +7,22 @@
 
 class Model {
 	private:
-		Material* material;
-		Texture* overrideTextureDiffuse, *overrideTextureSpecular;
 		Mesh* mesh;
-		glm::vec3 position;
+		Texture* diffuseTex, *specularTex;
+		Material* material;
 
 
 	public:
-		Model(glm::vec3 position, Material* material, Texture* ovTexDif, Texture* ovTexSpec, Mesh* mesh);
-		Model(glm::vec3 position, Material* material, Texture* ovTexDif, Texture* ovTexSpec, const char* objFile);
-		~Model();
+		Model(Mesh* mesh, Texture* diffuseTex, Texture* specularTex, Material* material)
+			: mesh(mesh), diffuseTex(diffuseTex), specularTex(specularTex), material(material)
+		{ }
+		virtual ~Model() { }
 
-		inline void changeRotation(const glm::vec3 rotation) { mesh->changeRotation(rotation); }
-		inline void changePosition(const glm::vec3 position) { mesh->changePosition(position); }
-		
-		void render(Shader* shader);
+		inline Mesh* getMesh() { return mesh; }
+
+		inline Texture* getDiffuseTex()  { return diffuseTex; }
+		inline Texture* getSpecularTex() { return specularTex; }
+
+		inline Material* getMaterial() { return material; }
+
 };

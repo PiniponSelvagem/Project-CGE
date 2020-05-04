@@ -38,13 +38,7 @@ class LightPoint : public Light {
 			this->falloffFar = falloffNear;
 		}
 
-		void sendToShader(Shader &program, int idx) {
-			std::string prefix = "lightPoint[" + std::to_string(idx) + "].";
-			program.setVec3f(position, (prefix + "position").c_str());
-			program.setVec3f(color,    (prefix + "color").c_str());
-			program.set1f(intensity,   (prefix + "intensity").c_str());
-			program.set1f(attenuation, (prefix + "attenuation").c_str());
-			program.set1f(falloffNear, (prefix + "falloffNear").c_str());
-			program.set1f(falloffFar,  (prefix + "falloffFar").c_str());
-		}
+		inline float getAttenuation() { return attenuation; }
+		inline float getFalloffNear() { return falloffNear; }
+		inline float getFalloffFar()  { return falloffFar; }
 };

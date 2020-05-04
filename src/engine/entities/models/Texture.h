@@ -4,28 +4,15 @@
 class Texture {
 	private:
 		GLuint id;
-		int width, height;
-		unsigned int type;
+		int type;
 
-		void deleteTextureIfThisExists();
-		
+		void load(const char* fileName);
+
 
 	public:
 		Texture(const char* fileName, GLenum type);
-		~Texture();
+		virtual ~Texture();
 
-		inline GLuint getID() const {
-			return id;
-		}
-
-		void loadTexture(const char* fileName);
-
-		inline void bind(const GLint textureUnit) {
-			glActiveTexture(GL_TEXTURE0 + textureUnit);
-			glBindTexture(type, id);
-		}
-		inline void unbind() {
-			glActiveTexture(0);
-			glBindTexture(type, 0);
-		}
+		inline GLuint getID() {	return id; }
+		inline int getType()  { return type; }
 };
