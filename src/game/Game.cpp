@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include "scene/Playground.h"
+#include "scene/PerformanceTest.h"
 
 
 void Game::updateMouseInput() {
@@ -109,7 +110,8 @@ void Game::initInput() {
 
 void Game::loadScene() {
 	delete scene;
-	scene = new Playground();
+	//scene = new Playground();
+	scene = new PerformanceTest();
 	scene->initScene();
 
 	float aspectRatio = getWindowAspectRatio();

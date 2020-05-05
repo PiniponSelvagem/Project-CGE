@@ -17,11 +17,12 @@ class Mesh {
 		void Mesh_AuxCtor(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices);
 		
 		void initVAO();
+
+		//void storeDataInAttributeList(GLuint attribNumber, int attribSize, void* data, int dataSize);
 		
 
 	public:
 		Mesh(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices);
-
 		Mesh(const Mesh* mesh);
 		~Mesh();
 

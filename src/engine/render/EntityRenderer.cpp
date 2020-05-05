@@ -28,15 +28,17 @@ void EntityRenderer::render(Entity* entity) {
 	shader->use();
 
 	glBindVertexArray(model->getMesh()->getVaoID());
+
+
+	// INDICIES NOT BEING LOADED ATM IN OBJLOADER.cpp
+
 	//if (nIndices == 0)
 	glDrawArrays(GL_TRIANGLES, 0, model->getMesh()->getVertexCount());
 	//else
 	//	glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
-
-	//TODO: Load objects with indicies, less ram usage
-
-
-
+	//glDrawElements(GL_TRIANGLES, model->getMesh()->getVertexCount(), GL_UNSIGNED_INT, 0);
+	
+	
 	glBindVertexArray(0);
 	glUseProgram(0);
 	glActiveTexture(0);

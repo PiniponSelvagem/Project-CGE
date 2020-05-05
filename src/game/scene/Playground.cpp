@@ -27,7 +27,6 @@ void Playground::initShaders() {
 	shaders.push_back(new Shader("resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
 
 	// Renderers
-	//entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 	masterRenderer = new MasterRenderer(shaders[SHADER_CORE_PROGRAM]);
 	entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 }

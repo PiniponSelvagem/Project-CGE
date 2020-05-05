@@ -28,6 +28,7 @@
     <ClCompile Include="src\engine\ui\CameraUI.cpp" />
     <ClCompile Include="src\engine\entities\lights\LightPoint.h" />
     <ClCompile Include="src\game\Game.cpp" />
+    <ClCompile Include="src\game\scene\PerformanceTest.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
     <ClCompile Include="src\engine\scene\Scene.cpp" />
     <ClCompile Include="src\engine\camera\Camera2D.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="src\engine\ui\CameraUI.h" />
     <ClInclude Include="src\engine\WindowUserPointer.h" />
     <ClInclude Include="src\game\Game.h" />
+    <ClInclude Include="src\game\scene\PerformanceTest.h" />
     <ClInclude Include="src\game\scene\Playground.h" />
     <ClInclude Include="src\engine\scene\Scene.h" />
     <ClInclude Include="src\engine\input\KeyboardInput.h" />
