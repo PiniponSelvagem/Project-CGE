@@ -30,7 +30,7 @@ void EntityRenderer::render(Entity* entity) {
 	glBindVertexArray(model->getMesh()->getVaoID());
 
 
-	// INDICIES NOT BEING LOADED ATM IN OBJLOADER.cpp
+	// INDICES NOT BEING LOADED ATM IN OBJLOADER.cpp
 
 	//if (nIndices == 0)
 	glDrawArrays(GL_TRIANGLES, 0, model->getMesh()->getVertexCount());

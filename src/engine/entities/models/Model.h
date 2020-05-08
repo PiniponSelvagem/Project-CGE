@@ -7,6 +7,13 @@
 
 class Model {
 	private:
+
+		/*
+			TODO:
+			maybe use reference instead of pointers
+
+			check possible other places too
+		*/
 		Mesh* mesh;
 		Texture* diffuseTex, *specularTex;
 		Material* material;

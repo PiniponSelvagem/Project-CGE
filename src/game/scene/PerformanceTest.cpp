@@ -1,9 +1,18 @@
 #include "PerformanceTest.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
-#define ENTITIES_NUMBER 500
+#define LIGHT_POS 10.f
+#define LIGHT_INTENSITY 0.5f
+
+#define ENTITIES_NUMBER 1000
 #define ENTITIES_RANGE 50
 #define ENTITIES_RANGE_OFFSET ENTITIES_RANGE/2
+
+/*
+#define SPACING 10
+#define MAX 10
+#define OFFSET (MAX*SPACING)*0.5
+*/
 
 enum shader_enum {
 	SHADER_CORE_PROGRAM
@@ -31,13 +40,7 @@ void PerformanceTest::initShaders() {
 	entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 }
 void PerformanceTest::initMeshes() {
-	std::vector<Vertex> vertex = ObjLoader::loadObj("resources/obj/cube.obj");
-	meshes.push_back(new Mesh(
-		vertex.data(),
-		vertex.size(),
-		NULL,
-		0
-	));
+	meshes.push_back(ObjLoader::loadObj("resources/obj/cube.obj"));
 }
 void PerformanceTest::initTextures() {
 	// TEXTURE - DEFAULT
@@ -48,9 +51,12 @@ void PerformanceTest::initTextures() {
 	textures.push_back(new Texture("resources/png/crate_specular.png", GL_TEXTURE_2D));
 }
 void PerformanceTest::initMaterials() {
-	materials.push_back(new Material(glm::vec3(0.05f), glm::vec3(1.f), glm::vec3(2.f),
-									 0,
-									 1
+	materials.push_back(new Material(
+		glm::vec3(0.05f), 
+		glm::vec3(1.f),
+		glm::vec3(2.f),
+		0,
+		1
 	));
 }
 void PerformanceTest::initModels() {
@@ -68,30 +74,44 @@ void PerformanceTest::initEntities() {
 		float randZ = rand() % ENTITIES_RANGE - ENTITIES_RANGE_OFFSET;
 		entities.push_back(new Entity(models[0], glm::vec3(randX, randY, randZ)));
 	}
+	
+	/*
+	for (int x = 0; x < MAX * SPACING; x+=SPACING) {
+		for (int y = 0; y < MAX * SPACING; y+=SPACING) {
+			for (int z = 0; z < MAX * SPACING; z+=SPACING) {
+				entities.push_back(new Entity(models[0], glm::vec3(
+					x-OFFSET, 
+					y-OFFSET, 
+					z-OFFSET)
+				));
+			}
+		}
+	}
+	*/
 }
 void PerformanceTest::initLights() {
-	float intensity = 0.5f;
+	float intensity = LIGHT_INTENSITY;
 
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(20.f, 0.f, 10.f), glm::vec3(1.f, 1.f, 0.f),
+		glm::vec3(LIGHT_POS, 0.f, LIGHT_POS), glm::vec3(1.f, 1.f, 0.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(-20.f, 0.f, 20.f), glm::vec3(1.f, 0.f, 0.f),
+		glm::vec3(-LIGHT_POS, 0.f, LIGHT_POS), glm::vec3(1.f, 0.f, 0.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(-20.f, 0.f, -20.f), glm::vec3(0.f, 1.f, 0.f),
+		glm::vec3(-LIGHT_POS, 0.f, -LIGHT_POS), glm::vec3(0.f, 1.f, 0.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(20.f, 0.f, -20.f), glm::vec3(0.f, 0.f, 1.f),
+		glm::vec3(LIGHT_POS, 0.f, -LIGHT_POS), glm::vec3(0.f, 0.f, 1.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f

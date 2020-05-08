@@ -1,6 +1,8 @@
 #include "Playground.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
+#define SPEED_MULT 1
+
 enum shader_enum {
 	SHADER_CORE_PROGRAM
 };
@@ -31,29 +33,9 @@ void Playground::initShaders() {
 	entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 }
 void Playground::initMeshes() {
-	std::vector<Vertex> vertex = ObjLoader::loadObj("resources/obj/cube.obj");
-	meshes.push_back(new Mesh(
-		vertex.data(),
-		vertex.size(),
-		NULL,
-		0
-	));
-
-	vertex = ObjLoader::loadObj("resources/obj/floor.obj");
-	meshes.push_back(new Mesh(
-		vertex.data(),
-		vertex.size(),
-		NULL,
-		0
-	));
-
-	vertex = ObjLoader::loadObj("resources/obj/teapot.obj");
-	meshes.push_back(new Mesh(
-		vertex.data(),
-		vertex.size(),
-		NULL,
-		0
-	));
+	meshes.push_back(ObjLoader::loadObj("resources/obj/cube.obj"));
+	meshes.push_back(ObjLoader::loadObj("resources/obj/floor.obj"));
+	meshes.push_back(ObjLoader::loadObj("resources/obj/teapot.obj"));
 }
 void Playground::initTextures() {
 	// TEXTURE - DEFAULT
@@ -72,7 +54,10 @@ void Playground::initTextures() {
 	textures.push_back(new Texture("resources/png/grass_specular.png", GL_TEXTURE_2D));
 }
 void Playground::initMaterials() {
-	materials.push_back(new Material(glm::vec3(0.05f), glm::vec3(1.f), glm::vec3(2.f),
+	materials.push_back(new Material(
+		glm::vec3(0.05f),
+		glm::vec3(1.f),
+		glm::vec3(2.f),
 		0,
 		1
 	));
@@ -165,11 +150,11 @@ void Playground::update(float dTime) {
 void Playground::cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY) {
 	camera->changePanTilt(dTime, mouseOffsetX, mouseOffsetY);
 }
-void Playground::cameraFoward(float dTime)   { camera->moveWalk(dTime, FORWARD);  }
-void Playground::cameraBackward(float dTime) { camera->moveWalk(dTime, BACKWARD); }
-void Playground::cameraLeft(float dTime)     { camera->moveWalk(dTime, LEFT);     }
-void Playground::cameraRight(float dTime)    { camera->moveWalk(dTime, RIGHT);    }
-void Playground::cameraUp(float dTime)       { camera->moveWalk(dTime, UP);       }
-void Playground::cameraDown(float dTime)     { camera->moveWalk(dTime, DOWN);     }
+void Playground::cameraFoward(float dTime)   { camera->moveWalk(dTime*SPEED_MULT, FORWARD);  }
+void Playground::cameraBackward(float dTime) { camera->moveWalk(dTime*SPEED_MULT, BACKWARD); }
+void Playground::cameraLeft(float dTime)     { camera->moveWalk(dTime*SPEED_MULT, LEFT);     }
+void Playground::cameraRight(float dTime)    { camera->moveWalk(dTime*SPEED_MULT, RIGHT);    }
+void Playground::cameraUp(float dTime)       { camera->moveWalk(dTime*SPEED_MULT, UP);       }
+void Playground::cameraDown(float dTime)     { camera->moveWalk(dTime*SPEED_MULT, DOWN);     }
 
 void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }
