@@ -1,9 +1,9 @@
 #version 440
 
 layout (location = 0) in vec3 vx_position;
-layout (location = 1) in vec3 vx_color;
-layout (location = 2) in vec2 vx_texcoord;
-layout (location = 3) in vec3 vx_normal;
+layout (location = 1) in vec2 vx_texcoord;
+layout (location = 2) in vec3 vx_normal;
+layout (location = 3) in vec3 vx_color;
 
 out vec3 vs_position;
 out vec3 vs_color;

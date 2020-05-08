@@ -1,5 +1,6 @@
 #pragma once
 #include "ObjLoader.h"
+#include "Loader.h"
 
 Mesh* ObjLoader::loadObj(const char* fileName) {
 	// Vertex portions
@@ -8,9 +9,9 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 	std::vector<glm::fvec3> vertexNormals;
 
 	// Face vectors
-	std::vector<GLint> vertexPositionIndices;
-	std::vector<GLint> vertexTexCoordIndices;
-	std::vector<GLint> vertexNormalIndices;
+	std::vector<GLuint> vertexPositionIndices;
+	std::vector<GLuint> vertexTexCoordIndices;
+	std::vector<GLuint> vertexNormalIndices;
 
 	// Vertex array
 	std::vector<Vertex> vertices;
@@ -72,14 +73,13 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 		vertices[i].color = glm::vec3(1.f, 1.f, 1.f);
 	}
 
-	//std::cout << "Nr of vertices: " << vertices.size() << std::endl;
-
-
-	return new Mesh(
+	std::cout << "Nr of vertices: " << vertices.size() << std::endl;
+	
+	return Loader::load(
 		vertices.data(),
 		vertices.size(),
-		NULL,
-		0
+		vertexPositionIndices.data(),
+		vertexPositionIndices.size()
 	);
 }
 

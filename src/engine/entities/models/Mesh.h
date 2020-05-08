@@ -5,27 +5,23 @@
 
 class Mesh {
 	private:
-		Vertex* vertexArray;
-		unsigned nVertices;
-		GLuint* indexArray;
-		unsigned nIndices;
-
-		GLuint VAO;
-		GLuint VBO;
-		GLuint EBO;
-
-		void Mesh_AuxCtor(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices);
-		
-		void initVAO();
-
-		//void storeDataInAttributeList(GLuint attribNumber, int attribSize, void* data, int dataSize);
-		
+		GLuint vao;
+		GLuint vbo;
+		GLuint ebo;
+		unsigned int nIndices;
 
 	public:
-		Mesh(Vertex* vertexArray, const unsigned &nVertices, GLuint* indexArray, const unsigned &nIndices);
-		Mesh(const Mesh* mesh);
-		~Mesh();
+		Mesh(GLuint vao, GLuint vbo, GLuint ebo, unsigned int nIndices)
+			: vao(vao), vbo(vbo), ebo(ebo), nIndices(nIndices)
+		{ }
+		virtual ~Mesh() {
+			glDeleteVertexArrays(1, &vao);
+			glDeleteBuffers(1, &vbo);
+			if (ebo != 0) {
+				glDeleteBuffers(1, &ebo);
+			}
+		}
 
-		inline GLuint getVaoID() { return VAO; }
-		inline unsigned getVertexCount() { return nVertices; }
+		inline GLuint getVaoID() { return vao; }
+		inline unsigned getIndicesCount() { return nIndices; }
 };
