@@ -6,19 +6,17 @@
 class Mesh {
 	private:
 		GLuint vao;
-		GLuint vbo;
-		GLuint ebo;
-		unsigned int nIndices;
+		std::vector<GLuint> buffers;
+		GLuint nIndices;
 
 	public:
-		Mesh(GLuint vao, GLuint vbo, GLuint ebo, unsigned int nIndices)
-			: vao(vao), vbo(vbo), ebo(ebo), nIndices(nIndices)
+		Mesh(GLuint vao, std::vector<GLuint> &buffers,  unsigned int nIndices)
+			: vao(vao), buffers(buffers), nIndices(nIndices)
 		{ }
 		virtual ~Mesh() {
 			glDeleteVertexArrays(1, &vao);
-			glDeleteBuffers(1, &vbo);
-			if (ebo != 0) {
-				glDeleteBuffers(1, &ebo);
+			for (size_t i = 0; i < buffers.size(); ++i) {
+				glDeleteBuffers(1, &buffers[i]);
 			}
 		}
 

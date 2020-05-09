@@ -4,9 +4,9 @@
 
 Mesh* ObjLoader::loadObj(const char* fileName) {
 	// Vertex portions
-	std::vector<glm::fvec3> vertexPositions;
-	std::vector<glm::fvec2> vertexTexCoords;
-	std::vector<glm::fvec3> vertexNormals;
+	std::vector<glm::vec3> vertexPositions;
+	std::vector<glm::vec2> vertexTexCoords;
+	std::vector<glm::vec3> vertexNormals;
 
 	// Face vectors
 	std::vector<GLuint> vertexPositionIndices;
@@ -14,7 +14,7 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 	std::vector<GLuint> vertexNormalIndices;
 
 	// Vertex array
-	std::vector<Vertex> vertices;
+	std::vector<VertexData> verticesData;
 
 	std::ifstream inFile(fileName);
 
@@ -31,7 +31,6 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 	while (std::getline(inFile, line)) {
 		ss.clear();
 		ss.str(line);
-		std::cout << line << std::endl;
 		if (line.size() > 1) ss >> prefix;
 		else prefix = "";
 
@@ -52,9 +51,9 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 		else if (prefix == "f") {
 			int p = 0;
 			while (ss >> tempGLint) {
-				if (p == 0) { vertexPositionIndices.push_back(tempGLint); }
-				else if (p == 1) { vertexTexCoordIndices.push_back(tempGLint); }
-				else if (p == 2) { vertexNormalIndices.push_back(tempGLint); }
+				if (p == 0) { vertexPositionIndices.push_back(tempGLint-1); }
+				else if (p == 1) { vertexTexCoordIndices.push_back(tempGLint-1); }
+				else if (p == 2) { vertexNormalIndices.push_back(tempGLint-1); }
 
 				if (ss.peek() == '/') { ++p; ss.ignore(1, '/'); }
 				else if (ss.peek() == ' ') { ++p; ss.ignore(1, ' '); }
@@ -64,22 +63,21 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 		}
 	}
 
-	vertices.resize(vertexPositionIndices.size(), Vertex());
+	verticesData.resize(vertexPositionIndices.size(), VertexData());
 
 	for (size_t i = 0; i < vertexPositionIndices.size(); ++i) {
-		vertices[i].position = vertexPositions[vertexPositionIndices[i] - 1];
-		vertices[i].texcoord = vertexTexCoords[vertexTexCoordIndices[i] - 1];
-		vertices[i].normal = vertexNormals[vertexNormalIndices[i] - 1];
-		vertices[i].color = glm::vec3(1.f, 1.f, 1.f);
+		verticesData[i].position = vertexPositions[vertexPositionIndices[i]];
+		verticesData[i].texcoord = vertexTexCoords[vertexTexCoordIndices[i]];
+		verticesData[i].normal = vertexNormals[vertexNormalIndices[i]];
+		verticesData[i].color = glm::vec3(1.f, 1.f, 1.f);
 	}
 
-	std::cout << "Nr of vertices: " << vertices.size() << std::endl;
+	//std::cout << "Nr of vertices: " << verticesData.size() << std::endl;
 	
 	return Loader::load(
-		vertices.data(),
-		vertices.size(),
-		vertexPositionIndices.data(),
-		vertexPositionIndices.size()
+		vertexPositions,
+		vertexPositionIndices,
+		verticesData
 	);
 }
 

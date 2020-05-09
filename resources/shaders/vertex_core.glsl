@@ -6,9 +6,9 @@ layout (location = 2) in vec3 vx_normal;
 layout (location = 3) in vec3 vx_color;
 
 out vec3 vs_position;
-out vec3 vs_color;
 out vec2 vs_texcoord;
 out vec3 vs_normal;
+out vec3 vs_color;
 
 
 uniform mat4 ModelMatrix;

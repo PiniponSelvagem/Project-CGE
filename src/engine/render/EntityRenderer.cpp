@@ -36,7 +36,7 @@ void EntityRenderer::render(Entity* entity) {
 	glDrawArrays(GL_TRIANGLES, 0, model->getMesh()->getIndicesCount());
 	//else
 	//	glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
-	//glDrawElements(GL_TRIANGLES, model->getMesh()->getVertexCount(), GL_UNSIGNED_INT, 0);
+	//glDrawElements(GL_TRIANGLES, model->getMesh()->getIndicesCount(), GL_UNSIGNED_INT, 0);
 	
 	
 	glBindVertexArray(0);

@@ -23,9 +23,9 @@ struct LightPoint {
 };
 
 in vec3 vs_position;
-in vec3 vs_color;
 in vec2 vs_texcoord;
 in vec3 vs_normal;
+in vec3 vs_color;
 in float visibility;
 
 out vec4 fs_color;
@@ -78,6 +78,7 @@ float calculateFogVisibility() {
 }
 
 
+
 void main() {
 	//fs_color = vec4(vs_color, 1.f);
 	//fs_color = texture(texture0, vs_texcoord) * texture(texture1, vs_texcoord) * vec4(vs_color, 1.f);
@@ -115,5 +116,11 @@ void main() {
 	
 	// Fog calculation
 	fs_color = mix(vec4(vec3(0.0, 0.0, 0.0), 1.0), fs_color, calculateFogVisibility());
+	/*
+	fs_color = mix(vec4(vec3(0.0, 0.0, 0.0), 1.0), 
+		vec4(vs_color, 1.f) * (vec4(ambientFinal, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f)),
+		calculateFogVisibility()
+	);
+	*/
 	//fs_color = mix(vec4(skyColor, 1.0), fs_color, visibility);
 }
