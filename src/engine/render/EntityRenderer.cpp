@@ -31,12 +31,10 @@ void EntityRenderer::render(Entity* entity) {
 
 
 	// INDICES NOT BEING LOADED ATM IN OBJLOADER.cpp
-
 	//if (nIndices == 0)
-	glDrawArrays(GL_TRIANGLES, 0, model->getMesh()->getIndicesCount());
+	glDrawArrays(GL_TRIANGLES, 0, model->getMesh()->getVerticesCount());
 	//else
-	//	glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
-	//glDrawElements(GL_TRIANGLES, model->getMesh()->getIndicesCount(), GL_UNSIGNED_INT, 0);
+	//	glDrawElements(GL_TRIANGLES, model->getMesh()->getIndicesCount(), GL_UNSIGNED_INT, 0);
 	
 	
 	glBindVertexArray(0);

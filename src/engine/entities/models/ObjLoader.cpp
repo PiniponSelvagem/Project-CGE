@@ -14,7 +14,7 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 	std::vector<GLuint> vertexNormalIndices;
 
 	// Vertex array
-	std::vector<VertexData> verticesData;
+	std::vector<Vertex> verticesData;
 
 	std::ifstream inFile(fileName);
 
@@ -28,6 +28,7 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 	glm::vec3 tempVec3;
 	glm::vec2 tempVec2;
 	GLint tempGLint = 0;
+
 	while (std::getline(inFile, line)) {
 		ss.clear();
 		ss.str(line);
@@ -63,7 +64,7 @@ Mesh* ObjLoader::loadObj(const char* fileName) {
 		}
 	}
 
-	verticesData.resize(vertexPositionIndices.size(), VertexData());
+	verticesData.resize(vertexPositionIndices.size(), Vertex());
 
 	for (size_t i = 0; i < vertexPositionIndices.size(); ++i) {
 		verticesData[i].position = vertexPositions[vertexPositionIndices[i]];

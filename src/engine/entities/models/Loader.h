@@ -10,6 +10,6 @@ class Loader {
 		static Mesh* load(
 			std::vector<glm::vec3> vertices,
 			std::vector<GLuint> indices,
-			std::vector<VertexData> vertexData
+			std::vector<Vertex> vertexData
 		);
 };

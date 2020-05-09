@@ -5,21 +5,18 @@
 
 class Mesh {
 	private:
-		GLuint vao;
-		std::vector<GLuint> buffers;
-		GLuint nIndices;
+		GLuint vao, vbo;
+		unsigned int nVertices;
 
 	public:
-		Mesh(GLuint vao, std::vector<GLuint> &buffers,  unsigned int nIndices)
-			: vao(vao), buffers(buffers), nIndices(nIndices)
+		Mesh(GLuint vao, GLuint vbo,  unsigned int nVertices)
+			: vao(vao), vbo(vbo), nVertices(nVertices)
 		{ }
 		virtual ~Mesh() {
 			glDeleteVertexArrays(1, &vao);
-			for (size_t i = 0; i < buffers.size(); ++i) {
-				glDeleteBuffers(1, &buffers[i]);
-			}
+			glDeleteBuffers(1, &vbo);
 		}
 
 		inline GLuint getVaoID() { return vao; }
-		inline unsigned getIndicesCount() { return nIndices; }
+		inline unsigned getVerticesCount() { return nVertices; }
 };

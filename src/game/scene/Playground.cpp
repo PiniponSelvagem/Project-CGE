@@ -140,11 +140,9 @@ Playground::~Playground() {
 }
 
 void Playground::update(float dTime) {
-	/*
 	entities[0]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
 	entities[1]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
 	entities[2]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
-	*/
 
 	//lightSetPosition();
 }
