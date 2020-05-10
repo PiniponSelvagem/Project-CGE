@@ -25,7 +25,6 @@ struct LightPoint {
 in vec3 vs_position;
 in vec2 vs_texcoord;
 in vec3 vs_normal;
-in vec3 vs_color;
 in float visibility;
 
 out vec4 fs_color;
@@ -69,7 +68,6 @@ float calculateAttenuation(vec3 vs_position, vec3 vs_normal, LightPoint lightPoi
 
 float calculateFogVisibility() {
 	vec3 posRelativeToCam  = cameraPos - vs_position;
-	//vec3 posRelativeToCam = cameraPos * vs_position;
 	float dist = length(posRelativeToCam);
 	float visibility = exp(-pow((dist*fog.density), fog.gradient));
 	visibility = clamp(visibility, 0.0, 1.0);
@@ -79,10 +77,7 @@ float calculateFogVisibility() {
 
 
 
-void main() {
-	//fs_color = vec4(vs_color, 1.f);
-	//fs_color = texture(texture0, vs_texcoord) * texture(texture1, vs_texcoord) * vec4(vs_color, 1.f);
-	
+void main() {	
 	//Ambient Light
 	vec3 ambientFinal = calculateAmbient(material);
 
@@ -100,8 +95,6 @@ void main() {
 		attenuationFinal = attenuationFinal + calculateAttenuation(vs_position, vs_normal, lightPoint[i]);
 		diffuseFinal = diffuseFinal + calculateDiffuse(material, vs_position, vs_normal, lightPoint[i]);
 		specularFinal = specularFinal + calculateSpecular(material, vs_position, vs_normal, lightPoint[i], cameraPos);
-		
-		//fs_color = fs_color + attenuationFinal * (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
 	}
 
 	diffuseFinal  *= attenuationFinal;
@@ -109,18 +102,11 @@ void main() {
 
 	//Final Color / Light	
 	fs_color = texture(material.diffuseTex, vs_texcoord)
-		//* vec4(vs_color, 1.f)	//rainbow effect
 		* (vec4(ambientFinal, 1.f)
 			+ (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f))
 		);
 	
 	// Fog calculation
 	fs_color = mix(vec4(vec3(0.0, 0.0, 0.0), 1.0), fs_color, calculateFogVisibility());
-	/*
-	fs_color = mix(vec4(vec3(0.0, 0.0, 0.0), 1.0), 
-		vec4(vs_color, 1.f) * (vec4(ambientFinal, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f)),
-		calculateFogVisibility()
-	);
-	*/
 	//fs_color = mix(vec4(skyColor, 1.0), fs_color, visibility);
 }

@@ -8,8 +8,12 @@ class Loader {
 
 	public:
 		static Mesh* load(
+			std::vector<Vertex> vertexData
+		);
+
+		static Mesh* load_wIndices(
 			std::vector<glm::vec3> vertices,
 			std::vector<GLuint> indices,
-			std::vector<Vertex> vertexData
+			std::vector<VertexData> vertexData
 		);
 };

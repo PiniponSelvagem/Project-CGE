@@ -29,12 +29,17 @@ void EntityRenderer::render(Entity* entity) {
 
 	glBindVertexArray(model->getMesh()->getVaoID());
 
+	for (unsigned int i = 0; i < 3; i++)
+		glEnableVertexAttribArray(i);
 
-	// INDICES NOT BEING LOADED ATM IN OBJLOADER.cpp
-	//if (nIndices == 0)
-	glDrawArrays(GL_TRIANGLES, 0, model->getMesh()->getVerticesCount());
-	//else
-	//	glDrawElements(GL_TRIANGLES, model->getMesh()->getIndicesCount(), GL_UNSIGNED_INT, 0);
+	int nIndices = model->getMesh()->getIndicesCount();
+	if (nIndices == 0)
+		glDrawArrays(GL_TRIANGLES, 0, model->getMesh()->getVerticesCount());
+	else
+		glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
+
+	for (unsigned int i = 0; i < 3; i++)
+		glDisableVertexAttribArray(i);
 	
 	
 	glBindVertexArray(0);

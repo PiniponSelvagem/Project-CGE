@@ -33,10 +33,11 @@ void Playground::initShaders() {
 	entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 }
 void Playground::initMeshes() {
-	meshes.push_back(ObjLoader::loadObj("resources/obj/cube.obj"));
+	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/floor.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/teapot.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/stall.obj"));
+	meshes.push_back(ObjLoader::loadObj("resources/obj/plane_test.obj"));
 }
 void Playground::initTextures() {
 	// TEXTURE - DEFAULT
@@ -91,17 +92,26 @@ void Playground::initModels() {
 		textures[6],
 		materials[MAT_CRATE]
 	));
+
+	models.push_back(new Model(
+		meshes[4],
+		textures[TEX_FRAGILE],
+		textures[TEX_FRAGILE_SPECULAR],
+		materials[MAT_CRATE]
+	));
 }
 void Playground::initEntities() {
 	entities.push_back(new Entity(models[0], glm::vec3(0.f, 0.f, -1.f)));	//cube 0
 	entities.push_back(new Entity(models[0], glm::vec3(0.f, 2.f, 2.f)));	//cube 1
 	entities.push_back(new Entity(models[0], glm::vec3(-2.f, 2.f, 0.f)));	//cube 2
-
-	entities.push_back(new Entity(models[1], glm::vec3(0.f, -2.f, 0.f)));	//floor
-
-	entities.push_back(new Entity(models[2], glm::vec3(0.f, 5.5f, -20.f)));	//teapot
-
-	entities.push_back(new Entity(models[3], glm::vec3(0.f, -2.f, 10.f)));	//stall
+	
+	entities.push_back(new Entity(models[1], glm::vec3(0.f, -2.f, 0.f)));   //floor
+	
+	entities.push_back(new Entity(models[2], glm::vec3(0.f, 5.5f, -20.f))); //teapot
+	
+	entities.push_back(new Entity(models[3], glm::vec3(0.f, -2.f, 10.f)));  //stall
+	
+	entities.push_back(new Entity(models[4], glm::vec3(0.f, -30.f, 0.f)));  //plane_test
 }
 void Playground::initLights() {
 	/*
