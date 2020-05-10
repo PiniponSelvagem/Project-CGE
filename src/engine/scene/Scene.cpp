@@ -6,7 +6,6 @@ Scene::~Scene() {
 	delete camera;
 
 	delete masterRenderer;
-	delete entityRenderer;
 	for (size_t i = 0; i < shaders.size(); ++i)	  { delete shaders[i];   }
 	for (auto *&i : meshes) { delete i; }
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }
@@ -44,11 +43,9 @@ void Scene::update(float dTime) {
 
 }
 void Scene::render() {
-	masterRenderer->sendCamera(camera);
-	masterRenderer->sendFog(fog);
-	masterRenderer->sendLightsPoint(lightsPoint);
-
 	for (auto *i : entities) {
-		entityRenderer->render(i);
+		masterRenderer->processEntity(*i);
 	}
+
+	masterRenderer->render(*camera, *fog, lightsPoint);
 }

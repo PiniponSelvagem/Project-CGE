@@ -20,7 +20,7 @@ class Mesh {
 			}
 		}
 
-		inline GLuint getVaoID() { return vao; }
-		inline unsigned getVerticesCount() { return nVertices; }
-		inline unsigned getIndicesCount() { return nIndices; }
+		inline GLuint getVaoID() const { return vao; }
+		inline unsigned getVerticesCount() const { return nVertices; }
+		inline unsigned getIndicesCount() const  { return nIndices; }
 };

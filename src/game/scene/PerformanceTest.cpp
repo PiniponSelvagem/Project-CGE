@@ -37,7 +37,6 @@ void PerformanceTest::initShaders() {
 
 	// Renderers
 	masterRenderer = new MasterRenderer(shaders[SHADER_CORE_PROGRAM]);
-	entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 }
 void PerformanceTest::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj("resources/obj/cube.obj"));
@@ -61,10 +60,10 @@ void PerformanceTest::initMaterials() {
 }
 void PerformanceTest::initModels() {
 	models.push_back(new Model(
-		meshes[0],
-		textures[TEX_CRATE],
-		textures[TEX_CRATE_SPECULAR],
-		materials[MAT_CRATE]
+		*meshes[0],
+		*textures[TEX_CRATE],
+		*textures[TEX_CRATE_SPECULAR],
+		*materials[MAT_CRATE]
 	));
 }
 void PerformanceTest::initEntities() {
@@ -76,7 +75,6 @@ void PerformanceTest::initEntities() {
 		float randZ = rand() % ENTITIES_RANGE - ENTITIES_RANGE_OFFSET;
 		entities.push_back(new Entity(models[0], glm::vec3(randX, randY, randZ)));
 	}
-	
 	
 	
 	/*

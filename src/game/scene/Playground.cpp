@@ -30,7 +30,6 @@ void Playground::initShaders() {
 
 	// Renderers
 	masterRenderer = new MasterRenderer(shaders[SHADER_CORE_PROGRAM]);
-	entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 }
 void Playground::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
@@ -66,38 +65,38 @@ void Playground::initMaterials() {
 }
 void Playground::initModels() {
 	models.push_back(new Model(
-		meshes[0],
-		textures[TEX_FRAGILE],
-		textures[TEX_FRAGILE_SPECULAR],
-		materials[MAT_CRATE]
+		*meshes[0],
+		*textures[TEX_FRAGILE],
+		*textures[TEX_FRAGILE_SPECULAR],
+		*materials[MAT_CRATE]
 	));
 
 	models.push_back(new Model(
-		meshes[1],
-		textures[TEX_DEFAULT],
-		textures[TEX_DEFAULT],
-		materials[MAT_CRATE]
+		*meshes[1],
+		*textures[TEX_DEFAULT],
+		*textures[TEX_DEFAULT],
+		*materials[MAT_CRATE]
 	));
 
 	models.push_back(new Model(
-		meshes[2],
-		textures[TEX_DEFAULT],
-		textures[TEX_DEFAULT],
-		materials[MAT_CRATE]
+		*meshes[2],
+		*textures[TEX_DEFAULT],
+		*textures[TEX_DEFAULT],
+		*materials[MAT_CRATE]
 	));
 
 	models.push_back(new Model(
-		meshes[3],
-		textures[5],
-		textures[6],
-		materials[MAT_CRATE]
+		*meshes[3],
+		*textures[5],
+		*textures[6],
+		*materials[MAT_CRATE]
 	));
 
 	models.push_back(new Model(
-		meshes[4],
-		textures[TEX_FRAGILE],
-		textures[TEX_FRAGILE_SPECULAR],
-		materials[MAT_CRATE]
+		*meshes[4],
+		*textures[TEX_FRAGILE],
+		*textures[TEX_FRAGILE_SPECULAR],
+		*materials[MAT_CRATE]
 	));
 }
 void Playground::initEntities() {

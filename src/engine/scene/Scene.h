@@ -1,7 +1,6 @@
 #pragma once
 #include "../shaders/Shader.h"
 #include "../render/MasterRenderer.h"
-#include "../render/EntityRenderer.h"
 #include "../entities/models/Texture.h"
 #include "../entities/models/Material.h"
 #include "../entities/models/Mesh.h"
@@ -20,9 +19,8 @@ class Scene {
 		// Shaders
 		std::vector<Shader*> shaders;
 
-		// Renderers
+		// Renderer
 		MasterRenderer* masterRenderer;
-		EntityRenderer* entityRenderer;
 
 		// Meshes
 		std::vector<Mesh*> meshes;

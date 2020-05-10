@@ -1,19 +1,19 @@
 #pragma once
 #include "MasterRenderer.h"
 
-void MasterRenderer::sendCamera(Camera* camera) {
-	shader->setMat4fv(camera->getViewMatrix(), "ViewMatrix");
-	shader->setVec3f(camera->getPosition(), "cameraPos");
-	camera->updateProjectionMatrix();
-	shader->setMat4fv(camera->getProjectionMatrix(), "ProjectionMatrix");
+void MasterRenderer::sendCamera(Camera &camera) {
+	shader->setMat4fv(camera.getViewMatrix(), "ViewMatrix");
+	shader->setVec3f(camera.getPosition(), "cameraPos");
+	camera.updateProjectionMatrix();
+	shader->setMat4fv(camera.getProjectionMatrix(), "ProjectionMatrix");
 }
 
-void MasterRenderer::sendFog(Fog* fog) {
-	shader->set1f(fog->getDensity(),  "fog.density");
-	shader->set1f(fog->getGradient(), "fog.gradient");
+void MasterRenderer::sendFog(Fog &fog) {
+	shader->set1f(fog.getDensity(),  "fog.density");
+	shader->set1f(fog.getGradient(), "fog.gradient");
 }
 
-void MasterRenderer::sendLightsPoint(std::vector<LightPoint*> lightsPoint) {
+void MasterRenderer::sendLightsPoint(std::vector<LightPoint*> &lightsPoint) {
 	int idx = 0;
 	for (LightPoint* lightPoint : lightsPoint) {
 		std::string prefix = "lightPoint[" + std::to_string(idx++) + "].";
@@ -24,4 +24,30 @@ void MasterRenderer::sendLightsPoint(std::vector<LightPoint*> lightsPoint) {
 		shader->set1f(lightPoint->getFalloffNear(), (prefix + "falloffNear").c_str());
 		shader->set1f(lightPoint->getFalloffFar(),  (prefix + "falloffFar").c_str());
 	}
+}
+
+
+
+void MasterRenderer::render(Camera &camera, Fog &fog, std::vector<LightPoint*> &lightsPoint) {
+	sendCamera(camera);
+	sendFog(fog);
+	sendLightsPoint(lightsPoint);
+
+	entityRenderer.render(entities);
+
+	entities.clear();
+}
+
+void MasterRenderer::processEntity(Entity &entity) {
+	Model &model = *entity.getModel();
+
+	// If the model is in the map this will do nothing
+	// If it is not in the map it will insert it
+	entities.insert(
+		modelEntity_map::value_type(
+			model, std::vector<Entity>()
+		)
+	);
+
+	entities[model].push_back(entity);
 }

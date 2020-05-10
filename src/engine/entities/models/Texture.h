@@ -13,6 +13,6 @@ class Texture {
 		Texture(const char* fileName, GLenum type);
 		virtual ~Texture();
 
-		inline GLuint getID() {	return id; }
-		inline int getType()  { return type; }
+		inline GLuint getID() const { return id; }
+		inline int getType() const  { return type; }
 };

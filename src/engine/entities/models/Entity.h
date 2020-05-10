@@ -33,12 +33,12 @@ class Entity {
 		void updateModelMatrix();
 
 
-		inline Model* getModel() { return model; }
+		inline Model* getModel() const { return model; }
 
-		inline glm::vec3 getPosition() { return position; }
-		inline glm::vec3 getOrigin()   { return origin; }
-		inline glm::vec3 getRotation() { return rotation; }
-		inline glm::vec3 getScale()    { return scale; }
+		inline glm::vec3 getPosition() const { return position; }
+		inline glm::vec3 getOrigin() const   { return origin; }
+		inline glm::vec3 getRotation() const { return rotation; }
+		inline glm::vec3 getScale() const    { return scale; }
 
-		inline glm::mat4 getModelMatrix() { return modelMatrix; }
+		inline glm::mat4 getModelMatrix() const { return modelMatrix; }
 };
