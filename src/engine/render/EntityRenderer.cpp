@@ -29,7 +29,7 @@ void EntityRenderer::render(Entity* entity) {
 
 	glBindVertexArray(model->getMesh()->getVaoID());
 
-	for (unsigned int i = 0; i < 3; i++)
+	for (unsigned int i = 0; i <= 2; ++i)
 		glEnableVertexAttribArray(i);
 
 	int nIndices = model->getMesh()->getIndicesCount();
@@ -38,7 +38,7 @@ void EntityRenderer::render(Entity* entity) {
 	else
 		glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
 
-	for (unsigned int i = 0; i < 3; i++)
+	for (unsigned int i = 0; i <= 2; ++i)
 		glDisableVertexAttribArray(i);
 	
 	
