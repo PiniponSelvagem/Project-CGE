@@ -36,6 +36,7 @@ void Playground::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj("resources/obj/cube.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/floor.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/teapot.obj"));
+	meshes.push_back(ObjLoader::loadObj("resources/obj/stall.obj"));
 }
 void Playground::initTextures() {
 	// TEXTURE - DEFAULT
@@ -49,9 +50,9 @@ void Playground::initTextures() {
 	textures.push_back(new Texture("resources/png/fragile.png", GL_TEXTURE_2D));
 	textures.push_back(new Texture("resources/png/fragile_specular.png", GL_TEXTURE_2D));
 
-	// TEXTURE 1
-	textures.push_back(new Texture("resources/png/grass.png", GL_TEXTURE_2D));
-	textures.push_back(new Texture("resources/png/grass_specular.png", GL_TEXTURE_2D));
+	// TEXTURE 2
+	textures.push_back(new Texture("resources/png/stall.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/stall_specular.png", GL_TEXTURE_2D));
 }
 void Playground::initMaterials() {
 	materials.push_back(new Material(
@@ -83,6 +84,13 @@ void Playground::initModels() {
 		textures[TEX_DEFAULT],
 		materials[MAT_CRATE]
 	));
+
+	models.push_back(new Model(
+		meshes[3],
+		textures[5],
+		textures[6],
+		materials[MAT_CRATE]
+	));
 }
 void Playground::initEntities() {
 	entities.push_back(new Entity(models[0], glm::vec3(0.f, 0.f, -1.f)));	//cube 0
@@ -92,6 +100,8 @@ void Playground::initEntities() {
 	entities.push_back(new Entity(models[1], glm::vec3(0.f, -2.f, 0.f)));	//floor
 
 	entities.push_back(new Entity(models[2], glm::vec3(0.f, 5.5f, -20.f)));	//teapot
+
+	entities.push_back(new Entity(models[3], glm::vec3(0.f, -2.f, 10.f)));	//stall
 }
 void Playground::initLights() {
 	/*

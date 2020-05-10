@@ -68,7 +68,7 @@ void PerformanceTest::initModels() {
 	));
 }
 void PerformanceTest::initEntities() {
-	entities.push_back(new Entity(models[0], glm::vec3(0, 0, -1)));
+	//entities.push_back(new Entity(models[0], glm::vec3(0, 0, -1)));
 	
 	for (int i = 0; i < ENTITIES_NUMBER; ++i) {
 		float randX = rand() % ENTITIES_RANGE - ENTITIES_RANGE_OFFSET;
@@ -76,6 +76,7 @@ void PerformanceTest::initEntities() {
 		float randZ = rand() % ENTITIES_RANGE - ENTITIES_RANGE_OFFSET;
 		entities.push_back(new Entity(models[0], glm::vec3(randX, randY, randZ)));
 	}
+	
 	
 	
 	/*
