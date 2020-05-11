@@ -40,7 +40,7 @@ void PerformanceTest::initShaders() {
 	entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 }
 void PerformanceTest::initMeshes() {
-	meshes.push_back(ObjLoader::loadObj("resources/obj/cube.obj"));
+	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
 }
 void PerformanceTest::initTextures() {
 	// TEXTURE - DEFAULT
@@ -52,7 +52,6 @@ void PerformanceTest::initTextures() {
 }
 void PerformanceTest::initMaterials() {
 	materials.push_back(new Material(
-		glm::vec3(0.05f), 
 		glm::vec3(1.f),
 		glm::vec3(2.f),
 		0,
@@ -123,6 +122,7 @@ void PerformanceTest::initLights() {
 }
 void PerformanceTest::initEnviroment() {
 	fog = new Fog(0.003, 5.0);
+	ambient = glm::vec3(0.05f);
 }
 
 ////////////////////////////////
@@ -142,8 +142,8 @@ void PerformanceTest::update(float dTime) {
 	*/
 }
 
-void PerformanceTest::cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY) {
-	camera->changePanTilt(dTime, mouseOffsetX, mouseOffsetY);
+void PerformanceTest::cameraPanTilt(double mouseOffsetX, double mouseOffsetY) {
+	camera->changePanTilt(mouseOffsetX, mouseOffsetY);
 }
 void PerformanceTest::cameraFoward(float dTime)   { camera->moveWalk(dTime, FORWARD);  }
 void PerformanceTest::cameraBackward(float dTime) { camera->moveWalk(dTime, BACKWARD); }

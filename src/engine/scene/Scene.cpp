@@ -46,6 +46,7 @@ void Scene::update(float dTime) {
 void Scene::render() {
 	masterRenderer->sendCamera(camera);
 	masterRenderer->sendFog(fog);
+	masterRenderer->sendAmbient(ambient);
 	masterRenderer->sendLightsPoint(lightsPoint);
 
 	for (auto *i : entities) {

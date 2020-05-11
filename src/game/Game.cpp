@@ -19,7 +19,7 @@ void Game::updateMouseInput() {
 	lastMouseX = mouseX;
 	lastMouseY = mouseY;
 
-	scene->cameraPanTilt(dTime, mouseOffsetX, mouseOffsetY);
+	scene->cameraPanTilt(mouseOffsetX, mouseOffsetY);
 }
 void Game::updateKeyboardInput() {
 	if (keyboardInput->isKeyActive(GLFW_KEY_ESCAPE)) //if not pressed == GLFW_RELEASE

@@ -3,7 +3,6 @@
 
 class Material {
 	private:
-		glm::vec3 ambient;
 		glm::vec3 specular;
 		glm::vec3 diffuse;
 		GLint diffuseTex;
@@ -11,12 +10,11 @@ class Material {
 
 
 	public:
-		Material(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, GLint diffuseTex, GLint specularTex)
-			: ambient(ambient), diffuse(diffuse), specular(specular), diffuseTex(diffuseTex), specularTex(specularTex)
+		Material(glm::vec3 diffuse, glm::vec3 specular, GLint diffuseTex, GLint specularTex)
+			: diffuse(diffuse), specular(specular), diffuseTex(diffuseTex), specularTex(specularTex)
 		{ }
 		virtual ~Material() { }
 
-		inline glm::vec3 getAmbient()  { return ambient; }
 		inline glm::vec3 getSpecular() { return specular; }
 		inline glm::vec3 getDiffuse()  { return diffuse; }
 

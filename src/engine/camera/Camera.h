@@ -44,7 +44,7 @@ class Camera {
 		void moveFly(const float &dTime, const int direction);
 		void moveWalk(const float &dTime, const int direction);
 
-		void changePanTilt(const float &dTime, const double &offsetX, const double &offsetY);
+		void changePanTilt(const double &offsetX, const double &offsetY);
 };
 
 class Camera2D : public Camera {

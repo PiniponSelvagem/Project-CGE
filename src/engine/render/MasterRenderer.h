@@ -15,5 +15,6 @@ class MasterRenderer {
 
 		void sendCamera(Camera* camera);
 		void sendFog(Fog* fog);
+		void sendAmbient(glm::vec3 ambient);
 		void sendLightsPoint(std::vector<LightPoint*> lightsPoint);
 };

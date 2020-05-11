@@ -1,7 +1,6 @@
 #version 440
 
 struct Material {
-	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
 	sampler2D diffuseTex;
@@ -32,13 +31,9 @@ out vec4 fs_color;
 uniform Material material;
 uniform Fog fog;
 uniform LightPoint lightPoint[4];
+uniform vec3 ambient;
 uniform vec3 cameraPos;
 //uniform vec3 skyColor;
-
-
-vec3 calculateAmbient(Material material) {
-	return material.ambient;
-}
 
 vec3 calculateDiffuse(Material material, vec3 vs_position, vec3 vs_normal, LightPoint lightPoint) {
 	vec3 posToLightDirVec = normalize(lightPoint.position - vs_position);
@@ -77,10 +72,7 @@ float calculateFogVisibility() {
 
 
 
-void main() {	
-	//Ambient Light
-	vec3 ambientFinal = calculateAmbient(material);
-
+void main() {
 	//Diffuse Light
 	vec3 diffuseFinal = vec3(0.f);
 
@@ -102,7 +94,7 @@ void main() {
 
 	//Final Color / Light	
 	fs_color = texture(material.diffuseTex, vs_texcoord)
-		* (vec4(ambientFinal, 1.f)
+		* (vec4(ambient, 1.f)
 			+ (vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f))
 		);
 	

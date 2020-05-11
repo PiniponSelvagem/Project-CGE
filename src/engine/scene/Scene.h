@@ -44,6 +44,7 @@ class Scene {
 
 		// Enviroment
 		Fog* fog;
+		glm::vec3 ambient;
 
 
 		virtual void initShaders() = 0;
@@ -70,7 +71,7 @@ class Scene {
 		void render();
 
 		/* TODO: Make Player class??? */
-		virtual void cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY) = 0;
+		virtual void cameraPanTilt(double mouseOffsetX, double mouseOffsetY) = 0;
 		virtual void cameraFoward(float dTime) = 0;
 		virtual void cameraBackward(float dTime) = 0;
 		virtual void cameraLeft(float dTime) = 0;

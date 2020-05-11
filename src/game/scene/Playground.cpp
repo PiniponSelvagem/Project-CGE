@@ -57,7 +57,6 @@ void Playground::initTextures() {
 }
 void Playground::initMaterials() {
 	materials.push_back(new Material(
-		glm::vec3(0.05f),
 		glm::vec3(1.f),
 		glm::vec3(2.f),
 		0,
@@ -148,6 +147,7 @@ void Playground::initLights() {
 }
 void Playground::initEnviroment() {
 	fog = new Fog(0.003, 5.0);
+	ambient = glm::vec3(0.05f);
 }
 
 ////////////////////////////////
@@ -167,8 +167,8 @@ void Playground::update(float dTime) {
 	//lightSetPosition();
 }
 
-void Playground::cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY) {
-	camera->changePanTilt(dTime, mouseOffsetX, mouseOffsetY);
+void Playground::cameraPanTilt(double mouseOffsetX, double mouseOffsetY) {
+	camera->changePanTilt(mouseOffsetX, mouseOffsetY);
 }
 void Playground::cameraFoward(float dTime)   { camera->moveWalk(dTime*SPEED_MULT, FORWARD);  }
 void Playground::cameraBackward(float dTime) { camera->moveWalk(dTime*SPEED_MULT, BACKWARD); }

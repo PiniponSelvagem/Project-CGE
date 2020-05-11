@@ -13,6 +13,10 @@ void MasterRenderer::sendFog(Fog* fog) {
 	shader->set1f(fog->getGradient(), "fog.gradient");
 }
 
+void MasterRenderer::sendAmbient(glm::vec3 ambient) {
+	shader->setVec3f(ambient, "ambient");
+}
+
 void MasterRenderer::sendLightsPoint(std::vector<LightPoint*> lightsPoint) {
 	int idx = 0;
 	for (LightPoint* lightPoint : lightsPoint) {

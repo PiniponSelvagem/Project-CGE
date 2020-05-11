@@ -11,7 +11,6 @@ void EntityRenderer::bindTexture(Texture* texture, int textureUnit) {
 void EntityRenderer::render(Entity* entity) {
 	Model* model = entity->getModel();
 
-	shader->setVec3f(model->getMaterial()->getAmbient(),  "material.ambient");
 	shader->setVec3f(model->getMaterial()->getDiffuse(),  "material.diffuse");
 	shader->setVec3f(model->getMaterial()->getSpecular(), "material.specular");
 	shader->set1i(model->getMaterial()->getDiffuseTex(),  "material.diffuseTex");

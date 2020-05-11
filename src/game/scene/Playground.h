@@ -19,7 +19,7 @@ class Playground : public Scene {
 		void update(float dTime);
 
 		/* TODO: Make Player class??? */
-		void cameraPanTilt(float dTime, double mouseOffsetX, double mouseOffsetY);
+		void cameraPanTilt(double mouseOffsetX, double mouseOffsetY);
 		void cameraFoward(float dTime);
 		void cameraBackward(float dTime);
 		void cameraLeft(float dTime);
