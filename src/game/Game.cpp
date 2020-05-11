@@ -110,8 +110,8 @@ void Game::initInput() {
 
 void Game::loadScene() {
 	delete scene;
-	scene = new Playground();
-	//scene = new PerformanceTest();
+	//scene = new Playground();
+	scene = new PerformanceTest();
 	scene->initScene();
 
 	float aspectRatio = getWindowAspectRatio();
