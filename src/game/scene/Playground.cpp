@@ -27,9 +27,10 @@ enum mesh_enum {
 void Playground::initRenderer() {
 	// SHADER_CORE_PROGRAM
 	shaders.push_back(new Shader("resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
+	shaders.push_back(new Shader("resources/shaders/vertex_terrain.glsl", "resources/shaders/fragment_terrain.glsl"));
 
 	// Renderers
-	masterRenderer = new MasterRenderer(shaders[SHADER_CORE_PROGRAM]);
+	masterRenderer = new MasterRenderer(shaders[0], shaders[1]);
 }
 void Playground::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
@@ -106,10 +107,9 @@ void Playground::initEntities() {
 	models.push_back(new Model(
 		terrain->getMesh(),
 		terrain->getTexture(),
-		textures[TEX_FRAGILE_SPECULAR],
-		materials[MAT_CRATE]
+		textures[0],
+		materials[0]
 	));
-	entities.push_back(new Entity(models[4], glm::vec3(0, 0, 0)));
 }
 void Playground::initLights() {
 	/*
@@ -146,7 +146,7 @@ void Playground::initLights() {
 }
 void Playground::initEnviroment() {
 	fog = new Fog(0.003, 5.0);
-	ambient = glm::vec3(0.05f);
+	ambient = glm::vec3(0.10f);
 }
 
 ////////////////////////////////

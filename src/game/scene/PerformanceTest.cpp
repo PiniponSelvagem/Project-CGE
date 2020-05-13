@@ -34,9 +34,10 @@ enum mesh_enum {
 void PerformanceTest::initRenderer() {
 	// SHADER_CORE_PROGRAM
 	shaders.push_back(new Shader("resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
+	shaders.push_back(new Shader("resources/shaders/vertex_terrain.glsl", "resources/shaders/fragment_terrain.glsl"));
 
 	// Renderers
-	masterRenderer = new MasterRenderer(shaders[SHADER_CORE_PROGRAM]);
+	masterRenderer = new MasterRenderer(shaders[0], shaders[1]);
 }
 void PerformanceTest::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));

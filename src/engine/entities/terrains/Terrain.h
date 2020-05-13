@@ -12,6 +12,7 @@ class Terrain {
 
 		Mesh* mesh;
 		Texture* texture;
+		glm::mat4 modelMatrix = glm::mat4(1.f);
 
 		Mesh* generateTerrain();
 
@@ -29,4 +30,6 @@ class Terrain {
 
 		inline Mesh* getMesh() { return mesh; }
 		inline Texture* getTexture() { return texture; }
+		
+		inline glm::mat4 getModelMatrix() const { return modelMatrix; }
 };

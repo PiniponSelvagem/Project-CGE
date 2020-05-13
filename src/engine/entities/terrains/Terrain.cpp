@@ -54,5 +54,8 @@ Mesh* Terrain::generateTerrain() {
 		vertexData[i].texcoord = texcoords[i];
 	}
 
+	modelMatrix = glm::translate(modelMatrix, glm::vec3(worldPosX, 0, worldPosZ));
+	modelMatrix = glm::scale(modelMatrix, glm::vec3(1.f));
+
 	return Loader::load_wIndices(vertices, indices, vertexData);
 }

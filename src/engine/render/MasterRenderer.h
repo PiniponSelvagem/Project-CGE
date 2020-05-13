@@ -8,13 +8,18 @@
 #include "../entities/models/Entity.h"
 
 #include "EntityRenderer.h"
+#include "TerrainRenderer.h"
 
 class MasterRenderer {
 	protected:
 		EntityRenderer entityRenderer;
+		TerrainRenderer terrainRenderer;
 		
 	public:
-		MasterRenderer(Shader* shader) : entityRenderer(EntityRenderer(*shader)) { }
+		MasterRenderer(Shader* entityShader, Shader* terrainShader)
+		  : entityRenderer(EntityRenderer(*entityShader)),
+			terrainRenderer(TerrainRenderer(*terrainShader))
+		{ }
 		virtual ~MasterRenderer() { }
 
 		void reloadShaders();
@@ -24,6 +29,7 @@ class MasterRenderer {
 			Fog& fog,
 			glm::vec3& ambient,
 			std::vector<LightPoint*>& lightsPoint,
-			std::vector<Entity*>& entities
+			std::vector<Entity*>& entities,
+			Terrain& terrain
 		);
 };

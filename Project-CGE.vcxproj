@@ -27,6 +27,7 @@
     <ClCompile Include="src\engine\input\MouseInput.cpp" />
     <ClCompile Include="src\engine\render\EntityRenderer.cpp" />
     <ClCompile Include="src\engine\render\MasterRenderer.cpp" />
+    <ClCompile Include="src\engine\render\TerrainRenderer.cpp" />
     <ClCompile Include="src\engine\ui\CameraUI.cpp" />
     <ClCompile Include="src\engine\entities\lights\LightPoint.h" />
     <ClCompile Include="src\game\Game.cpp" />
@@ -45,6 +46,8 @@
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\shaders\fragment_terrain.glsl" />
+    <None Include="resources\shaders\vertex_terrain.glsl" />
     <None Include="resources\shaders\fragment_gui.glsl" />
     <None Include="resources\shaders\fragment_core.glsl" />
     <None Include="resources\shaders\vertex_core.glsl" />
@@ -61,6 +64,7 @@
     <ClInclude Include="src\engine\entities\lights\Light.h" />
     <ClInclude Include="src\engine\render\EntityRenderer.h" />
     <ClInclude Include="src\engine\render\MasterRenderer.h" />
+    <ClInclude Include="src\engine\render\TerrainRenderer.h" />
     <ClInclude Include="src\engine\ui\CameraUI.h" />
     <ClInclude Include="src\engine\WindowUserPointer.h" />
     <ClInclude Include="src\game\Game.h" />
