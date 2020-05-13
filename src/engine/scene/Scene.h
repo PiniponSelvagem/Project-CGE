@@ -22,7 +22,6 @@ class Scene {
 
 		// Renderers
 		MasterRenderer* masterRenderer;
-		EntityRenderer* entityRenderer;
 
 		// Meshes
 		std::vector<Mesh*> meshes;
@@ -47,7 +46,7 @@ class Scene {
 		glm::vec3 ambient;
 
 
-		virtual void initShaders() = 0;
+		virtual void initRenderer() = 0;
 		virtual void initMeshes() = 0;
 		virtual void initTextures() = 0;
 		virtual void initMaterials() = 0;

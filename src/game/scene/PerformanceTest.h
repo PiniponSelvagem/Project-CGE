@@ -3,7 +3,7 @@
 
 class PerformanceTest : public Scene {
 	private:
-		void initShaders();
+		void initRenderer();
 		void initMeshes();
 		void initTextures();
 		void initMaterials();

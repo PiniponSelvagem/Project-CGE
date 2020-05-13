@@ -31,13 +31,12 @@ enum mesh_enum {
 	MESH_CUBE
 };
 
-void PerformanceTest::initShaders() {
+void PerformanceTest::initRenderer() {
 	// SHADER_CORE_PROGRAM
 	shaders.push_back(new Shader("resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
 
 	// Renderers
 	masterRenderer = new MasterRenderer(shaders[SHADER_CORE_PROGRAM]);
-	entityRenderer = new EntityRenderer(shaders[SHADER_CORE_PROGRAM]);
 }
 void PerformanceTest::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));

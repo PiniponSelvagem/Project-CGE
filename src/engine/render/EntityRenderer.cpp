@@ -11,18 +11,18 @@ void EntityRenderer::bindTexture(Texture* texture, int textureUnit) {
 void EntityRenderer::render(Entity* entity) {
 	Model* model = entity->getModel();
 
-	shader->use();
+	shader.use();
 
-	shader->setVec3f(model->getMaterial()->getDiffuse(),  "material.diffuse");
-	shader->setVec3f(model->getMaterial()->getSpecular(), "material.specular");
-	shader->set1i(model->getMaterial()->getDiffuseTex(),  "material.diffuseTex");
-	shader->set1i(model->getMaterial()->getSpecularTex(), "material.specularTex");
+	shader.setVec3f(model->getMaterial()->getDiffuse(),  "material.diffuse");
+	shader.setVec3f(model->getMaterial()->getSpecular(), "material.specular");
+	shader.set1i(model->getMaterial()->getDiffuseTex(),  "material.diffuseTex");
+	shader.set1i(model->getMaterial()->getSpecularTex(), "material.specularTex");
 	
 	bindTexture(model->getDiffuseTex(), 0);
 	bindTexture(model->getSpecularTex(), 1);
 	
 	entity->updateModelMatrix();
-	shader->setMat4fv(entity->getModelMatrix(), "ModelMatrix");
+	shader.setMat4fv(entity->getModelMatrix(), "ModelMatrix");
 
 	glBindVertexArray(model->getMesh()->getVaoID());
 
@@ -40,7 +40,7 @@ void EntityRenderer::render(Entity* entity) {
 	
 	
 	glBindVertexArray(0);
-	shader->unuse();
+	shader.unuse();
 	glActiveTexture(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

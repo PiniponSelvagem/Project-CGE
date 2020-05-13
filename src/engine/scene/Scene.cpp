@@ -6,7 +6,6 @@ Scene::~Scene() {
 	delete camera;
 
 	delete masterRenderer;
-	delete entityRenderer;
 	for (size_t i = 0; i < shaders.size(); ++i)	  { delete shaders[i];   }
 	for (auto *&i : meshes) { delete i; }
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }
@@ -18,7 +17,7 @@ Scene::~Scene() {
 }
 
 void Scene::initScene() {
-	initShaders();
+	initRenderer();
 	initMeshes();
 	initTextures();
 	initMaterials();
@@ -30,9 +29,7 @@ void Scene::initScene() {
 
 void Scene::reloadShader() {
 	std::cout << "SHADER: reloading started..." << std::endl;
-	for (auto *i : shaders) {
-		i->reload();
-	}
+	masterRenderer->reloadShaders();
 	std::cout << "SHADER: reload complete" << std::endl;
 }
 
@@ -44,12 +41,8 @@ void Scene::update(float dTime) {
 
 }
 void Scene::render() {
-	masterRenderer->sendCamera(camera);
-	masterRenderer->sendFog(fog);
-	masterRenderer->sendAmbient(ambient);
-	masterRenderer->sendLightsPoint(lightsPoint);
-
-	for (auto *i : entities) {
-		entityRenderer->render(i);
-	}
+	masterRenderer->render(
+		*camera, *fog, ambient, lightsPoint,
+		entities
+	);
 }
