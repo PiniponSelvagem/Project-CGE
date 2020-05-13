@@ -12,21 +12,7 @@
 class MasterRenderer {
 	protected:
 		EntityRenderer entityRenderer;
-
-		void sendCamera(Shader &shader, Camera &camera);
-		void sendFog(Shader &shader, Fog &fog);
-		void sendAmbient(Shader &shader, glm::vec3 &ambient);
-		void sendLightsPoint(Shader &shader, std::vector<LightPoint*> &lightsPoint);
-
-		void sendToShader(
-			Shader &shader,
-			Camera &camera,
-			Fog &fog,
-			glm::vec3 &ambient,
-			std::vector<LightPoint*> &lightsPoint
-		);
-
-
+		
 	public:
 		MasterRenderer(Shader* shader) : entityRenderer(EntityRenderer(*shader)) { }
 		virtual ~MasterRenderer() { }
