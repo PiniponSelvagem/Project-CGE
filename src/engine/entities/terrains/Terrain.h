@@ -27,6 +27,7 @@ class Terrain {
 
 		inline float getWorldPosX() const { return worldPosX; }
 		inline float getWorldPosZ() const { return worldPosZ; }
+		inline float getVertexCount() const { return VERTEX_COUNT; }
 
 		inline Mesh* getMesh() { return mesh; }
 		inline Texture* getTexture() { return texture; }

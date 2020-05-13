@@ -49,6 +49,8 @@ void TerrainRenderer::sendToShader(Camera &camera, Fog &fog, glm::vec3 &ambient,
 
 void TerrainRenderer::render(Terrain* terrain) {
 	shader.use();
+	shader.set1f(terrain->getVertexCount(), "vertexCount");
+
 	//shader.set1i(terrain->getTexture(), "diffuseTex");
 	shader.set1i(0, "diffuseTex");
 
