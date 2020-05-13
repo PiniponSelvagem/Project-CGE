@@ -22,11 +22,11 @@ void EntityRenderer::sendLightsPoint(std::vector<LightPoint*> &lightsPoint) {
 	for (LightPoint* lightPoint : lightsPoint) {
 		std::string prefix = "lightPoint[" + std::to_string(idx++) + "].";
 		shader.setVec3f(lightPoint->getPosition(), (prefix + "position").c_str());
-		shader.setVec3f(lightPoint->getColor(), (prefix + "color").c_str());
-		shader.set1f(lightPoint->getIntensity(), (prefix + "intensity").c_str());
+		shader.setVec3f(lightPoint->getColor(),    (prefix + "color").c_str());
+		shader.set1f(lightPoint->getIntensity(),   (prefix + "intensity").c_str());
 		shader.set1f(lightPoint->getAttenuation(), (prefix + "attenuation").c_str());
 		shader.set1f(lightPoint->getFalloffNear(), (prefix + "falloffNear").c_str());
-		shader.set1f(lightPoint->getFalloffFar(), (prefix + "falloffFar").c_str());
+		shader.set1f(lightPoint->getFalloffFar(),  (prefix + "falloffFar").c_str());
 	}
 }
 

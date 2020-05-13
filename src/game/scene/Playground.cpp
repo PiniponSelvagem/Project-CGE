@@ -1,7 +1,7 @@
 #include "Playground.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
-#define SPEED_MULT 1
+#define SPEED_MULT 50
 
 enum shader_enum {
 	SHADER_CORE_PROGRAM
@@ -100,6 +100,16 @@ void Playground::initEntities() {
 	entities.push_back(new Entity(models[2], glm::vec3(0.f, 5.5f, -20.f))); //teapot
 	
 	entities.push_back(new Entity(models[3], glm::vec3(0.f, -2.f, 10.f)));  //stall
+
+	// TERRAIN
+	terrain = new Terrain(0, 0, textures[1]);
+	models.push_back(new Model(
+		terrain->getMesh(),
+		terrain->getTexture(),
+		textures[TEX_FRAGILE_SPECULAR],
+		materials[MAT_CRATE]
+	));
+	entities.push_back(new Entity(models[4], glm::vec3(0, 0, 0)));
 }
 void Playground::initLights() {
 	/*

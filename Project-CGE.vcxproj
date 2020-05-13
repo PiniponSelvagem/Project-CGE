@@ -22,6 +22,7 @@
     <ClCompile Include="src\engine\Engine.cpp" />
     <ClCompile Include="src\engine\entities\models\Entity.cpp" />
     <ClCompile Include="src\engine\entities\models\Loader.cpp" />
+    <ClCompile Include="src\engine\entities\terrains\Terrain.cpp" />
     <ClCompile Include="src\engine\input\Input.cpp" />
     <ClCompile Include="src\engine\input\MouseInput.cpp" />
     <ClCompile Include="src\engine\render\EntityRenderer.cpp" />
@@ -52,6 +53,7 @@
   <ItemGroup>
     <ClInclude Include="src\engine\entities\models\Entity.h" />
     <ClInclude Include="src\engine\entities\models\Loader.h" />
+    <ClInclude Include="src\engine\entities\terrains\Terrain.h" />
     <ClInclude Include="src\engine\enviroment\Fog.h" />
     <ClInclude Include="src\engine\Engine.h" />
     <ClInclude Include="src\engine\input\MouseInput.h" />

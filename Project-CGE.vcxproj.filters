@@ -84,6 +84,9 @@
     <ClCompile Include="src\engine\entities\models\Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\entities\terrains\Terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_core.glsl">
@@ -172,6 +175,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\entities\models\Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\entities\terrains\Terrain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

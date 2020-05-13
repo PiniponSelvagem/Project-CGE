@@ -8,6 +8,7 @@
 #include "../entities/models/Model.h"
 #include "../entities/models/Entity.h"
 #include "../entities/lights/LightPoint.h"
+#include "../entities/terrains/Terrain.h"
 #include "../enviroment/Fog.h"
 #include "../camera/Camera.h"
 #include "../ui/CameraUI.h"
@@ -37,6 +38,7 @@ class Scene {
 
 		// Entities
 		std::vector<Entity*> entities;
+		Terrain* terrain;
 
 		// Lights
 		std::vector<LightPoint*> lightsPoint;

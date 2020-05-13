@@ -13,6 +13,7 @@ Scene::~Scene() {
 	for (auto *&i : models) { delete i; }
 	for (auto *&i : entities) { delete i; }
 	for (size_t i = 0; i < lightsPoint.size(); ++i) { delete lightsPoint[i]; }
+	delete terrain;
 	delete fog;
 }
 
