@@ -8,8 +8,10 @@ class LightPoint : public Light {
 
 
 	public:
-		LightPoint(glm::vec3 position, glm::vec3 color = glm::vec3(1.f), float intensity = 1.f, float attenuation = 1.f, float falloffNear = 0.f, float falloffFar = 1.f) 
-		: Light(position, color, intensity) {
+		LightPoint(glm::vec3 position, glm::vec3 color = glm::vec3(1.f),
+				   float intensity = 1.f, float attenuation = 1.f,
+				   float falloffNear = 0.f, float falloffFar = 1.
+		) : Light(position, color, intensity) {
 			this->attenuation = attenuation;
 			this->falloffNear = falloffNear;
 			this->falloffFar = falloffFar;

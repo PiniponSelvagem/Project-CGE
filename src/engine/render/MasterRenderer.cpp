@@ -7,8 +7,8 @@ void MasterRenderer::reloadShaders() {
 }
 
 void MasterRenderer::render(
-	Camera &camera, Fog &fog, glm::vec3 &ambient, std::vector<LightPoint*> &lightsPoint,
-	std::vector<Entity*> &entities
+	Camera& camera, Fog& fog, glm::vec3& ambient, std::vector<LightPoint*>& lightsPoint,
+	std::vector<Entity*>& entities
 ) {
 	entityRenderer.sendToShader(camera, fog, ambient, lightsPoint);
 

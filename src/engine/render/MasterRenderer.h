@@ -20,10 +20,10 @@ class MasterRenderer {
 		void reloadShaders();
 
 		void render(
-			Camera &camera,
-			Fog &fog,
-			glm::vec3 &ambient,
-			std::vector<LightPoint*> &lightsPoint,
-			std::vector<Entity*> &entities
+			Camera& camera,
+			Fog& fog,
+			glm::vec3& ambient,
+			std::vector<LightPoint*>& lightsPoint,
+			std::vector<Entity*>& entities
 		);
 };
