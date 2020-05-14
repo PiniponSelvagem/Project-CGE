@@ -2,7 +2,7 @@
 #include "../../engine/entities/models/ObjLoader.h"
 
 #define LIGHT_POS 10.f
-#define LIGHT_INTENSITY 0.5f
+#define LIGHT_INTENSITY 1.f
 
 #define ENTITIES_NUMBER 1000
 #define ENTITIES_RANGE 50
@@ -76,7 +76,14 @@ void PerformanceTest::initEntities() {
 		entities.push_back(new Entity(models[0], glm::vec3(randX, randY, randZ)));
 	}
 	
-	
+	// TERRAIN
+	terrain = new Terrain(0, 1, textures[1]);
+	models.push_back(new Model(
+		terrain->getMesh(),
+		terrain->getTexture(),
+		textures[0],
+		materials[0]
+	));
 	
 	/*
 	for (int x = 0; x < MAX * SPACING; x+=SPACING) {

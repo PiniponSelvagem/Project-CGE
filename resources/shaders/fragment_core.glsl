@@ -87,10 +87,10 @@ void main() {
 		attenuationFinal = attenuationFinal + calculateAttenuation(vs_position, vs_normal, lightPoint[i]);
 		diffuseFinal = diffuseFinal + calculateDiffuse(material, vs_position, vs_normal, lightPoint[i]);
 		specularFinal = specularFinal + calculateSpecular(material, vs_position, vs_normal, lightPoint[i], cameraPos);
-	}
 
-	diffuseFinal  *= attenuationFinal;
-	specularFinal *= attenuationFinal;
+		diffuseFinal  *= attenuationFinal;
+		specularFinal *= attenuationFinal;
+	}
 
 	//Final Color / Light	
 	fs_color = texture(material.diffuseTex, vs_texcoord)
