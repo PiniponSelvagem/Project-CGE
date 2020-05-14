@@ -50,9 +50,9 @@ vec3 calculateSpecular(sampler2D diffuseTex, vec3 vs_position, vec3 vs_normal, L
 float calculateAttenuation(vec3 vs_position, vec3 vs_normal, LightPoint lightPoint) {
 	// http://learnwebgl.brown37.net/09_lights/lights_attenuation.html
 	float dist			   = length(lightPoint.position - vs_position);
-	float attenuationFinal = lightPoint.attenuation / (1.0 + lightPoint.falloffNear * dist + lightPoint.falloffFar * (dist * dist));
+	float attenuationFinal = lightPoint.attenuation + (lightPoint.falloffNear * dist) + (lightPoint.falloffFar * dist * dist);
 
-	return attenuationFinal * lightPoint.intensity;
+	return attenuationFinal / lightPoint.intensity;
 }
 
 float calculateFogVisibility() {
@@ -78,12 +78,9 @@ void main() {
 
 	
 	for (int i=0; i<4; ++i) {
-		attenuationFinal = attenuationFinal + calculateAttenuation(vs_position, vs_normal, lightPoint[i]);
-		diffuseFinal = diffuseFinal + calculateDiffuse(diffuseTex, vs_position, vs_normal, lightPoint[i]);
-		specularFinal = specularFinal + calculateSpecular(diffuseTex, vs_position, vs_normal, lightPoint[i], cameraPos);
-
-		diffuseFinal  *= attenuationFinal;
-		specularFinal *= attenuationFinal;
+		attenuationFinal = calculateAttenuation(vs_position, vs_normal, lightPoint[i]);
+		diffuseFinal += calculateDiffuse(diffuseTex, vs_position, vs_normal, lightPoint[i]) / attenuationFinal;
+		specularFinal += calculateSpecular(diffuseTex, vs_position, vs_normal, lightPoint[i], cameraPos) / attenuationFinal;
 	}
 
 	diffuseFinal = clamp(diffuseFinal, 0.0, 1.0);

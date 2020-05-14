@@ -65,9 +65,7 @@ void PerformanceTest::initModels() {
 		materials[MAT_CRATE]
 	));
 }
-void PerformanceTest::initEntities() {
-	//entities.push_back(new Entity(models[0], glm::vec3(0, 0, -1)));
-	
+void PerformanceTest::initEntities() {	
 	for (int i = 0; i < ENTITIES_NUMBER; ++i) {
 		float randX = rand() % ENTITIES_RANGE - ENTITIES_RANGE_OFFSET;
 		float randY = rand() % ENTITIES_RANGE - ENTITIES_RANGE_OFFSET;

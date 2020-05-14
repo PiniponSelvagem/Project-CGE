@@ -1,17 +1,15 @@
 #include "Playground.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
-#define SPEED_MULT 1
-
-enum shader_enum {
-	SHADER_CORE_PROGRAM
-};
+#define SPEED_MULT 10
 
 enum texture_enum {
 	TEX_DEFAULT,
 	TEX_CRATE, TEX_CRATE_SPECULAR,
 	TEX_FRAGILE, TEX_FRAGILE_SPECULAR,
-	TEX_GRASS, TEX_GRASS_SPECULAR
+	//TEX_GRASS, TEX_GRASS_SPECULAR,
+	//TEX_STALL, TEX_STALL_SPECULAR,
+	TEX_TERRAIN
 };
 
 enum material_enum {
@@ -21,13 +19,15 @@ enum material_enum {
 
 enum mesh_enum {
 	MESH_CUBE,
-	MESH_QUAD
+	MESH_FLOOR,
+	MESH_TEAPOT,
+	MESH_STALL
 };
 
 void Playground::initRenderer() {
 	// Renderer
 	masterRenderer = new MasterRenderer(
-		"resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl",		// EntityShader
+		"resources/shaders/vertex_core.glsl",    "resources/shaders/fragment_core.glsl",	// EntityShader
 		"resources/shaders/vertex_terrain.glsl", "resources/shaders/fragment_terrain.glsl"	// TerrainShader
 	);
 }
@@ -35,7 +35,6 @@ void Playground::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/floor.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/teapot.obj"));
-	meshes.push_back(ObjLoader::loadObj("resources/obj/stall.obj"));
 }
 void Playground::initTextures() {
 	// TEXTURE - DEFAULT
@@ -48,10 +47,9 @@ void Playground::initTextures() {
 	// TEXTURE 1
 	textures.push_back(new Texture("resources/png/fragile.png", GL_TEXTURE_2D));
 	textures.push_back(new Texture("resources/png/fragile_specular.png", GL_TEXTURE_2D));
-
+	
 	// TEXTURE 2
-	textures.push_back(new Texture("resources/png/stall.png", GL_TEXTURE_2D));
-	textures.push_back(new Texture("resources/png/stall_specular.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/synthwave.png", GL_TEXTURE_2D));
 }
 void Playground::initMaterials() {
 	materials.push_back(new Material(
@@ -63,46 +61,38 @@ void Playground::initMaterials() {
 }
 void Playground::initModels() {
 	models.push_back(new Model(
-		meshes[0],
+		meshes[MESH_CUBE],
 		textures[TEX_FRAGILE],
 		textures[TEX_FRAGILE_SPECULAR],
 		materials[MAT_CRATE]
 	));
 
 	models.push_back(new Model(
-		meshes[1],
+		meshes[MESH_FLOOR],
 		textures[TEX_DEFAULT],
 		textures[TEX_DEFAULT],
 		materials[MAT_CRATE]
 	));
 
 	models.push_back(new Model(
-		meshes[2],
+		meshes[MESH_TEAPOT],
 		textures[TEX_DEFAULT],
 		textures[TEX_DEFAULT],
-		materials[MAT_CRATE]
-	));
-
-	models.push_back(new Model(
-		meshes[3],
-		textures[5],
-		textures[6],
 		materials[MAT_CRATE]
 	));
 }
 void Playground::initEntities() {
-	entities.push_back(new Entity(models[0], glm::vec3(0.f, 0.f, -1.f)));	//cube 0
-	entities.push_back(new Entity(models[0], glm::vec3(0.f, 2.f, 2.f)));	//cube 1
-	entities.push_back(new Entity(models[0], glm::vec3(-2.f, 2.f, 0.f)));	//cube 2
+	entities.push_back(new Entity(models[0], glm::vec3(400.f, 2.f, 398.f)));	//cube 0
+	entities.push_back(new Entity(models[0], glm::vec3(398.f, 1.f, 397.f)));	//cube 1
+	entities.push_back(new Entity(models[0], glm::vec3(402.f, 1.f, 397.f)));	//cube 2
 	
-	entities.push_back(new Entity(models[1], glm::vec3(0.f, -2.f, 0.f)));   //floor
+	entities.push_back(new Entity(models[1], glm::vec3(400.f, 0.05f, 400.f)));	//floor
 	
-	entities.push_back(new Entity(models[2], glm::vec3(0.f, 5.5f, -20.f))); //teapot
+	entities.push_back(new Entity(models[2], glm::vec3(400.f, 7.8f, 360.f)));	//teapot
 	
-	entities.push_back(new Entity(models[3], glm::vec3(0.f, -2.f, 10.f)));  //stall
 
 	// TERRAIN
-	terrain = new Terrain(0, 0, textures[1]);
+	terrain = new Terrain(0, 0, textures[TEX_TERRAIN]);
 	models.push_back(new Model(
 		terrain->getMesh(),
 		terrain->getTexture(),
@@ -111,33 +101,28 @@ void Playground::initEntities() {
 	));
 }
 void Playground::initLights() {
-	/*
-	lightsPoint.push_back(new LightPoint(
-		glm::vec3(0.f, 0.f, 1.f)//, glm::vec3(1.f, 0.f, 0.f)
-	));
-	*/
 	float intensity = 1.f;
 
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(10.f, 0.f, 10.f), glm::vec3(1.f, 1.f, 0.f),
+		glm::vec3(410.f, 1.f, 410.f), glm::vec3(1.f, 1.f, 0.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(-10.f, 0.f, 10.f), glm::vec3(1.f, 0.f, 0.f),
+		glm::vec3(390.f, 1.f, 390.f), glm::vec3(1.f, 0.f, 0.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(-10.f, 0.f, -10.f), glm::vec3(0.f, 1.f, 0.f),
+		glm::vec3(390.f, 1.f, 410.f), glm::vec3(0.f, 1.f, 0.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(10.f, 0.f, -10.f), glm::vec3(0.f, 0.f, 1.f),
+		glm::vec3(410.f, 1.f, 390.f), glm::vec3(0.f, 0.f, 1.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
@@ -152,7 +137,7 @@ void Playground::initEnviroment() {
 
 
 Playground::Playground() : Scene() {
-	camera = new Camera3D(90.f, 0.1f, 1000.f, glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, -90.f, 0.f));
+	camera = new Camera3D(90.f, 0.1f, 1000.f, glm::vec3(400.f, 1.f, 400.f), glm::vec3(0.f, -90.f, 0.f));
 }
 Playground::~Playground() {
 }
