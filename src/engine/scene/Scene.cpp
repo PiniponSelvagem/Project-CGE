@@ -6,7 +6,6 @@ Scene::~Scene() {
 	delete camera;
 
 	delete masterRenderer;
-	for (size_t i = 0; i < shaders.size(); ++i)	  { delete shaders[i];   }
 	for (auto *&i : meshes) { delete i; }
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }
 	for (size_t i = 0; i < materials.size(); ++i) { delete materials[i]; }

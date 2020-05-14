@@ -16,9 +16,12 @@ class MasterRenderer {
 		TerrainRenderer terrainRenderer;
 		
 	public:
-		MasterRenderer(Shader* entityShader, Shader* terrainShader)
-		  : entityRenderer(EntityRenderer(*entityShader)),
-			terrainRenderer(TerrainRenderer(*terrainShader))
+		MasterRenderer(
+			const char* entityVertexFile,  const char* entityFragFile,
+			const char* terrainVertexFile, const char* terrainFragFiler
+		)
+		  : entityRenderer(EntityRenderer(entityVertexFile, entityFragFile)),
+			terrainRenderer(TerrainRenderer(terrainVertexFile, terrainFragFiler))
 		{ }
 		virtual ~MasterRenderer() { }
 

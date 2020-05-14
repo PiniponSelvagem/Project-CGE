@@ -4,13 +4,13 @@
 #define LIGHT_POS 10.f
 #define LIGHT_INTENSITY 1.f
 
-#define ENTITIES_NUMBER 1000
-#define ENTITIES_RANGE 50
+#define ENTITIES_NUMBER 8000
+#define ENTITIES_RANGE 100
 #define ENTITIES_RANGE_OFFSET ENTITIES_RANGE/2
 
 /*
 #define SPACING 10
-#define MAX 10
+#define MAX 20
 #define OFFSET (MAX*SPACING)*0.5
 */
 
@@ -32,12 +32,11 @@ enum mesh_enum {
 };
 
 void PerformanceTest::initRenderer() {
-	// SHADER_CORE_PROGRAM
-	shaders.push_back(new Shader("resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
-	shaders.push_back(new Shader("resources/shaders/vertex_terrain.glsl", "resources/shaders/fragment_terrain.glsl"));
-
-	// Renderers
-	masterRenderer = new MasterRenderer(shaders[0], shaders[1]);
+	// Renderer
+	masterRenderer = new MasterRenderer(
+		"resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl",		// EntityShader
+		"resources/shaders/vertex_terrain.glsl", "resources/shaders/fragment_terrain.glsl"	// TerrainShader
+	);
 }
 void PerformanceTest::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
@@ -98,6 +97,9 @@ void PerformanceTest::initEntities() {
 		}
 	}
 	*/
+
+	std::cout << "Entities loaded: " << entities.size() << std::endl;
+	
 }
 void PerformanceTest::initLights() {
 	float intensity = LIGHT_INTENSITY;

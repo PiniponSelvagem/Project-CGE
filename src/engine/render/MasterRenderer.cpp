@@ -3,8 +3,8 @@
 
 
 void MasterRenderer::reloadShaders() {
-	entityRenderer.getShader().reload();
-	terrainRenderer.getShader().reload();
+	entityRenderer.reloadShader();
+	terrainRenderer.reloadShader();
 }
 
 void MasterRenderer::render(

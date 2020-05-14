@@ -92,6 +92,9 @@ void main() {
 		specularFinal *= attenuationFinal;
 	}
 
+	diffuseFinal = clamp(diffuseFinal, 0.0, 1.0);
+	specularFinal = clamp(specularFinal, 0.0, 1.0);
+
 	//Final Color / Light	
 	fs_color = texture(material.diffuseTex, vs_texcoord)
 		* (vec4(ambient, 1.f)

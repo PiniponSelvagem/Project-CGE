@@ -90,6 +90,12 @@
     <ClCompile Include="src\engine\render\TerrainRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\shaders\EntityShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\shaders\TerrainShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_core.glsl">
@@ -98,8 +104,6 @@
     <None Include="resources\shaders\vertex_core.glsl">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\shaders\vertex_gui.glsl" />
-    <None Include="resources\shaders\fragment_gui.glsl" />
     <None Include="resources\shaders\vertex_terrain.glsl" />
     <None Include="resources\shaders\fragment_terrain.glsl" />
   </ItemGroup>
@@ -186,6 +190,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\render\TerrainRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\shaders\EntityShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\shaders\TerrainShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

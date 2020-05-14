@@ -1,7 +1,7 @@
 #include "Playground.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
-#define SPEED_MULT 50
+#define SPEED_MULT 1
 
 enum shader_enum {
 	SHADER_CORE_PROGRAM
@@ -25,12 +25,11 @@ enum mesh_enum {
 };
 
 void Playground::initRenderer() {
-	// SHADER_CORE_PROGRAM
-	shaders.push_back(new Shader("resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl"));
-	shaders.push_back(new Shader("resources/shaders/vertex_terrain.glsl", "resources/shaders/fragment_terrain.glsl"));
-
-	// Renderers
-	masterRenderer = new MasterRenderer(shaders[0], shaders[1]);
+	// Renderer
+	masterRenderer = new MasterRenderer(
+		"resources/shaders/vertex_core.glsl", "resources/shaders/fragment_core.glsl",		// EntityShader
+		"resources/shaders/vertex_terrain.glsl", "resources/shaders/fragment_terrain.glsl"	// TerrainShader
+	);
 }
 void Playground::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
@@ -117,7 +116,7 @@ void Playground::initLights() {
 		glm::vec3(0.f, 0.f, 1.f)//, glm::vec3(1.f, 0.f, 0.f)
 	));
 	*/
-	float intensity = 0.5f;
+	float intensity = 1.f;
 
 	lightsPoint.push_back(new LightPoint(
 		glm::vec3(10.f, 0.f, 10.f), glm::vec3(1.f, 1.f, 0.f),

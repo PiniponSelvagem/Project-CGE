@@ -19,16 +19,8 @@ class Shader {
 		void load();
 		void unload();
 
-	public:
-		Shader(const char* vertexFile, const char* fragmentFile);
-		virtual ~Shader();
 
-		void reload();
-
-		inline void use() {	glUseProgram(programID); }
-		inline void unuse() { glUseProgram(0); }
-
-
+	protected:
 		void set1i(GLint value, const GLchar* name);
 		void set1f(GLfloat value, const GLchar* name);
 
@@ -38,4 +30,17 @@ class Shader {
 
 		void setMat3fv(glm::mat3 value, const GLchar* name, GLboolean transpose = GL_FALSE);
 		void setMat4fv(glm::mat4 value, const GLchar* name, GLboolean transpose = GL_FALSE);
+	
+
+	public:
+		Shader(const char* vertexFile, const char* fragmentFile);
+		virtual ~Shader() { unload(); }
+
+		void reload() {
+			unload();
+			load();
+		}
+
+		inline void use() {	glUseProgram(programID); }
+		inline void unuse() { glUseProgram(0); }
 };

@@ -86,6 +86,8 @@ void main() {
 		specularFinal *= attenuationFinal;
 	}
 
+	diffuseFinal = clamp(diffuseFinal, 0.0, 1.0);
+	specularFinal = clamp(specularFinal, 0.0, 1.0);
 
 	//Final Color / lightPoint
 	fs_color = texture(diffuseTex, vs_texcoord)

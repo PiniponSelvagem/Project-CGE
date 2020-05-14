@@ -90,15 +90,6 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile) {
 	load();
 }
 
-Shader::~Shader() {
-	unload();
-}
-
-void Shader::reload() {
-	unload();
-	load();
-}
-
 void Shader::set1i(GLint value, const GLchar* name) {
 	glUniform1i(glGetUniformLocation(programID, name), value);
 }

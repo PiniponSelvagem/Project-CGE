@@ -18,10 +18,7 @@ class Scene {
 		// Camera
 		Camera* camera;
 
-		// Shaders
-		std::vector<Shader*> shaders;
-
-		// Renderers
+		// Renderer
 		MasterRenderer* masterRenderer;
 
 		// Meshes

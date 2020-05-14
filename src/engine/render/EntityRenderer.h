@@ -4,26 +4,23 @@
 #include "../camera/Camera.h"
 #include "../enviroment/Fog.h"
 #include "../entities/lights/LightPoint.h"
-
 #include "../entities/models/Entity.h"
+
+#include "../shaders/EntityShader.h"
 
 class EntityRenderer {
 	private:
-		Shader& shader;
-
-		void sendCamera(Camera& camera);
-		void sendFog(Fog& fog);
-		void sendAmbient(glm::vec3& ambient);
-		void sendLightsPoint(std::vector<LightPoint*>& lightsPoint);
+		EntityShader shader;
 
 		void bindTexture(Texture* texture, int textureUnit);
 
 	public:
-		EntityRenderer(Shader& shader) : shader(shader) { }
+		EntityRenderer(const char* vertexFile, const char* fragFile)
+		: shader(EntityShader(vertexFile, fragFile)) { }
 
 		void sendToShader(Camera& camera, Fog& fog, glm::vec3& ambient, std::vector<LightPoint*>& lightsPoint);
 
 		void render(Entity* entity);
 
-		Shader& getShader() { return shader; }
+		void reloadShader() { shader.reload(); }
 };
