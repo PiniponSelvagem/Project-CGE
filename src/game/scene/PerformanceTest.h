@@ -1,6 +1,7 @@
 #pragma once
 #include "../../engine/scene/Scene.h"
 
+/*
 class PerformanceTest : public Scene {
 	private:
 		void initRenderer();
@@ -18,7 +19,7 @@ class PerformanceTest : public Scene {
 
 		void update(float dTime);
 
-		/* TODO: Make Player class??? */
+		/* TODO: Make Player class??? *
 		void cameraPanTilt(double mouseOffsetX, double mouseOffsetY);
 		void cameraFoward(float dTime);
 		void cameraBackward(float dTime);
@@ -28,6 +29,7 @@ class PerformanceTest : public Scene {
 		void cameraDown(float dTime);
 
 		void lightSetPosition() { }
-		/******************************/
+		/******************************
 };
+*/
 

@@ -2,6 +2,7 @@
 
 #include "../models/Mesh.h"
 #include "../models/Texture.h"
+#include "TerrainTexturePack.h"
 
 class Terrain {
 	private:
@@ -11,7 +12,9 @@ class Terrain {
 		float worldPosX, worldPosZ;
 
 		Mesh* mesh;
-		Texture* texture;
+		TerrainTexturePack* texturePack;
+		Texture* blendMap;
+
 		glm::mat4 modelMatrix = glm::mat4(1.f);
 
 		Mesh* generateTerrain();
@@ -19,18 +22,22 @@ class Terrain {
 
 
 	public:
-		Terrain(int gridX, int gridZ, Texture* texture)
-		: worldPosX(gridX * SIZE), worldPosZ(gridZ * SIZE), texture(texture) {
+		Terrain(int gridX, int gridZ, TerrainTexturePack* texturePack, Texture* blendMap)
+		: worldPosX(gridX * SIZE), worldPosZ(gridZ * SIZE), texturePack(texturePack), blendMap(blendMap) {
 			this->mesh = generateTerrain();
 		}
-		virtual ~Terrain() { delete mesh; }
+		virtual ~Terrain() {
+			delete blendMap;
+			delete mesh;
+		}
 
 		inline float getWorldPosX() const { return worldPosX; }
 		inline float getWorldPosZ() const { return worldPosZ; }
 		inline float getVertexCount() const { return VERTEX_COUNT; }
 
-		inline Mesh* getMesh() { return mesh; }
-		inline Texture* getTexture() { return texture; }
+		inline Mesh* getMesh() const { return mesh; }
+		inline TerrainTexturePack* getTexturePack() const { return texturePack; }
+		inline Texture* getBlendMap() { return blendMap; }
 		
 		inline glm::mat4 getModelMatrix() const { return modelMatrix; }
 };

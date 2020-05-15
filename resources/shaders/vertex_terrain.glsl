@@ -12,11 +12,10 @@ out vec3 vs_normal;
 uniform mat4 ModelMatrix;
 uniform mat4 ViewMatrix;
 uniform mat4 ProjectionMatrix;
-uniform float vertexCount;
 
 void main() {
 	vs_position = vec4(ModelMatrix * vec4(vx_position, 1.f)).xyz;
-	vs_texcoord = vec2(vx_texcoord.x, vx_texcoord.y * -1.f) * vertexCount;
+	vs_texcoord = vec2(vx_texcoord.x, vx_texcoord.y * -1.f);
 	vs_normal	= mat3(ModelMatrix) * vx_normal;
 
 	gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * vec4(vx_position, 1.f);

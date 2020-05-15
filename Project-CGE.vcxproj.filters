@@ -198,5 +198,8 @@
     <ClInclude Include="src\engine\shaders\TerrainShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\entities\terrains\TerrainTexturePack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

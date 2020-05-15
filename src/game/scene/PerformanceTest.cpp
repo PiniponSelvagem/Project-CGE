@@ -1,6 +1,7 @@
 #include "PerformanceTest.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
+/*
 #define LIGHT_POS 10.f
 #define LIGHT_INTENSITY 1.f
 
@@ -12,7 +13,7 @@
 #define SPACING 10
 #define MAX 20
 #define OFFSET (MAX*SPACING)*0.5
-*/
+*
 
 enum shader_enum {
 	SHADER_CORE_PROGRAM
@@ -94,7 +95,7 @@ void PerformanceTest::initEntities() {
 			}
 		}
 	}
-	*/
+	*
 
 	std::cout << "Entities loaded: " << entities.size() << std::endl;
 	
@@ -146,7 +147,7 @@ void PerformanceTest::update(float dTime) {
 	for (int i = 0; i < ENTITIES_NUMBER; ++i) {
 		entities[i]->changeRotation(glm::vec3(dTime*10, dTime*10, dTime*10));
 	}
-	*/
+	*
 }
 
 void PerformanceTest::cameraPanTilt(double mouseOffsetX, double mouseOffsetY) {
@@ -158,3 +159,4 @@ void PerformanceTest::cameraLeft(float dTime)     { camera->moveWalk(dTime, LEFT
 void PerformanceTest::cameraRight(float dTime)    { camera->moveWalk(dTime, RIGHT);    }
 void PerformanceTest::cameraUp(float dTime)       { camera->moveWalk(dTime, UP);       }
 void PerformanceTest::cameraDown(float dTime)     { camera->moveWalk(dTime, DOWN);     }
+*/

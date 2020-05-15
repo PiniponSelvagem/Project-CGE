@@ -57,6 +57,7 @@
     <ClInclude Include="src\engine\entities\models\Entity.h" />
     <ClInclude Include="src\engine\entities\models\Loader.h" />
     <ClInclude Include="src\engine\entities\terrains\Terrain.h" />
+    <ClInclude Include="src\engine\entities\terrains\TerrainTexturePack.h" />
     <ClInclude Include="src\engine\enviroment\Fog.h" />
     <ClInclude Include="src\engine\Engine.h" />
     <ClInclude Include="src\engine\input\MouseInput.h" />

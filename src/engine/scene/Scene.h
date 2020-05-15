@@ -26,6 +26,7 @@ class Scene {
 
 		// Textures
 		std::vector<Texture*> textures;
+		std::vector<TerrainTexturePack*> terrainTexPacks;
 
 		// Materials
 		std::vector<Material*> materials;

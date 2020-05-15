@@ -31,7 +31,11 @@ void TerrainShader::sendLightsPoint(std::vector<LightPoint*> &lightsPoint) {
 }
 
 void TerrainShader::sendTerrainData(Terrain& terrain) {
-	set1i(0, "diffuseTex");
+	set1i(0, "backgroundTex");
+	set1i(1, "rTex");
+	set1i(2, "gTex");
+	set1i(3, "bTex");
+	set1i(4, "blendMap");
 	set1f(terrain.getVertexCount(), "vertexCount");
 }
 

@@ -12,7 +12,7 @@ class TerrainRenderer {
 	private:
 		TerrainShader shader;
 
-		void bindTexture(Texture* texture, int textureUnit);
+		void bindTextures(Terrain& terrain);
 
 	public:
 		TerrainRenderer(const char* vertexFile, const char* fragFile)
@@ -20,7 +20,7 @@ class TerrainRenderer {
 
 		void sendToShader(Camera& camera, Fog& fog, glm::vec3& ambient, std::vector<LightPoint*>& lightsPoint);
 
-		void render(Terrain* terrain);
+		void render(Terrain& terrain);
 
 		void reloadShader() { shader.reload(); }
 };

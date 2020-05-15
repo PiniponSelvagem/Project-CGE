@@ -1,7 +1,7 @@
 #include "Playground.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
-#define SPEED_MULT 1
+#define SPEED_MULT 50
 
 enum texture_enum {
 	TEX_DEFAULT,
@@ -56,6 +56,21 @@ void Playground::initTextures() {
 	// TEXTURE 3
 	textures.push_back(new Texture("resources/png/digital_grass.png", GL_TEXTURE_2D));
 	textures.push_back(new Texture("resources/png/digital_grass_spacular.png", GL_TEXTURE_2D));
+
+	//////////////////////////////
+	textures.push_back(new Texture("resources/png/terrain_grass.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/terrain_mud.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/terrain_flowers.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/terrain_path.png", GL_TEXTURE_2D));
+
+	// TERRAIN
+	terrainTexPacks.push_back(
+		new TerrainTexturePack(
+			textures[8],
+			textures[9], textures[10], textures[11]
+		)
+	);
+
 }
 void Playground::initMaterials() {
 	materials.push_back(new Material(
@@ -111,13 +126,15 @@ void Playground::initEntities() {
 	}
 
 	// TERRAIN
-	terrain = new Terrain(0, 0, textures[TEX_TERRAIN]);
+	terrain = new Terrain(0, 0, terrainTexPacks[0], new Texture("resources/png/blend_map.png", GL_TEXTURE_2D));
+	/*
 	models.push_back(new Model(
 		terrain->getMesh(),
 		terrain->getTexture(),
 		textures[0],
 		materials[0]
 	));
+	*/
 }
 void Playground::initLights() {
 	float intensity = 1.f;

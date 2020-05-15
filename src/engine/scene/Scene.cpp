@@ -6,13 +6,14 @@ Scene::~Scene() {
 	delete camera;
 
 	delete masterRenderer;
+	delete terrain;
+	for (auto *&i : terrainTexPacks) { delete i; }
 	for (auto *&i : meshes) { delete i; }
 	for (size_t i = 0; i < textures.size(); ++i)  { delete textures[i];  }
 	for (size_t i = 0; i < materials.size(); ++i) { delete materials[i]; }
 	for (auto *&i : models) { delete i; }
 	for (auto *&i : entities) { delete i; }
 	for (size_t i = 0; i < lightsPoint.size(); ++i) { delete lightsPoint[i]; }
-	delete terrain;
 	delete fog;
 }
 

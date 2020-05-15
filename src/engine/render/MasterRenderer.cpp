@@ -14,7 +14,7 @@ void MasterRenderer::render(
 	entityRenderer.sendToShader(camera, fog, ambient, lightsPoint);
 	terrainRenderer.sendToShader(camera, fog, ambient, lightsPoint);
 
-	terrainRenderer.render(&terrain);
+	terrainRenderer.render(terrain);
 
 	for (auto *i : entities) {
 		entityRenderer.render(i);
