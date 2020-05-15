@@ -1,16 +1,19 @@
 #include "Playground.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
-#define SPEED_MULT 50
+#define SPEED_MULT 1
 
 enum texture_enum {
-	TEX_DEFAULT,
+	TEX_DEFAULT, TEX_DEFAULT_SPECULAL,
 	TEX_CRATE, TEX_CRATE_SPECULAR,
 	TEX_FRAGILE, TEX_FRAGILE_SPECULAR,
-	//TEX_GRASS, TEX_GRASS_SPECULAR,
-	//TEX_STALL, TEX_STALL_SPECULAR,
-	TEX_TERRAIN,
-	TEX_DGRASS, TEX_DGRASS_SPECULAR
+	TEX_DGRASS, TEX_DGRASS_SPECULAR,
+	TEX_TERRAIN_GRASS,
+	TEX_TERRAIN_MUD,
+	TEX_TERRAIN_FLOWERS,
+	TEX_TERRAIN_PATH,
+	TEX_TERRAIN_MUD_SPECULAR,
+	TEX_TERRAIN_PATH_SPECULAR
 };
 
 enum material_enum {
@@ -41,6 +44,7 @@ void Playground::initMeshes() {
 void Playground::initTextures() {
 	// TEXTURE - DEFAULT
 	textures.push_back(new Texture("resources/png/NO_TEX.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/NO_SPECULAR.png", GL_TEXTURE_2D));
 
 	// TEXTURE 0
 	textures.push_back(new Texture("resources/png/crate.png", GL_TEXTURE_2D));
@@ -51,7 +55,7 @@ void Playground::initTextures() {
 	textures.push_back(new Texture("resources/png/fragile_specular.png", GL_TEXTURE_2D));
 	
 	// TEXTURE 2
-	textures.push_back(new Texture("resources/png/synthwave_v2.png", GL_TEXTURE_2D));
+	//textures.push_back(new Texture("resources/png/synthwave_v2.png", GL_TEXTURE_2D));
 
 	// TEXTURE 3
 	textures.push_back(new Texture("resources/png/digital_grass.png", GL_TEXTURE_2D));
@@ -63,11 +67,16 @@ void Playground::initTextures() {
 	textures.push_back(new Texture("resources/png/terrain_flowers.png", GL_TEXTURE_2D));
 	textures.push_back(new Texture("resources/png/terrain_path.png", GL_TEXTURE_2D));
 
+	textures.push_back(new Texture("resources/png/terrain_mud_specular.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/terrain_path_specular.png", GL_TEXTURE_2D));
+
 	// TERRAIN
 	terrainTexPacks.push_back(
 		new TerrainTexturePack(
-			textures[8],
-			textures[9], textures[10], textures[11]
+			textures[TEX_TERRAIN_GRASS],	textures[TEX_DEFAULT_SPECULAL],
+			textures[TEX_TERRAIN_MUD],		textures[TEX_TERRAIN_MUD_SPECULAR],
+			textures[TEX_TERRAIN_FLOWERS],	textures[TEX_DEFAULT_SPECULAL],
+			textures[TEX_TERRAIN_PATH],		textures[TEX_TERRAIN_PATH_SPECULAR]
 		)
 	);
 
@@ -140,7 +149,7 @@ void Playground::initLights() {
 	float intensity = 1.f;
 
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(410.f, 1.f, 410.f), glm::vec3(1.f, 1.f, 0.f),
+		glm::vec3(410.f, 1.f, 410.f), glm::vec3(1.f, 1.f, 1.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f

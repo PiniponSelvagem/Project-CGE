@@ -21,10 +21,14 @@ in float visibility;
 
 out vec4 fs_color;
 
-uniform sampler2D backgroundTex;
+uniform sampler2D backTex;
+uniform sampler2D backTexSpecular;
 uniform sampler2D rTex;
+uniform sampler2D rTexSpecular;
 uniform sampler2D gTex;
+uniform sampler2D gTexSpecular;
 uniform sampler2D bTex;
+uniform sampler2D bTexSpecular;
 uniform sampler2D blendMap;
 
 uniform Fog fog;
@@ -43,13 +47,12 @@ vec3 calculateDiffuse(vec4 diffuseTex, vec3 vs_position, vec3 vs_normal, LightPo
 	return diffuseFinal * lightPoint.color;
 }
 
-vec3 calculateSpecular(vec4 diffuseTex, vec3 vs_position, vec3 vs_normal, LightPoint lightPoint, vec3 cameraPos) {
+vec3 calculateSpecular(vec4 specular, vec3 vs_position, vec3 vs_normal, LightPoint lightPoint, vec3 cameraPos) {
 	vec3 lightToPosDirVec = normalize(vs_position - lightPoint.position);
 	vec3 reflectDirVec	  = normalize(reflect(lightToPosDirVec, normalize(vs_normal)));
 	vec3 posToViewDirVec  = normalize(cameraPos - vs_position);
 	float specularConst	  = pow(max(dot(posToViewDirVec, reflectDirVec), 0), 30);
-	//vec3 specularFinal	  = material.specular * specularConst * texture(material.specularTex, vs_texcoord).rgb;
-	vec3 specularFinal	  = vec3(1.f) * specularConst;
+	vec3 specularFinal	  = specularConst * specular.rgb;
 
 	return specularFinal * lightPoint.color;
 }
@@ -74,16 +77,32 @@ float calculateFogVisibility() {
 
 
 void main() {
+	// Diffuse
 	vec4 blendMapColor = texture(blendMap, vs_texcoord);
 	
-	float backTextureAmount = 1 - (blendMapColor.r + blendMapColor.g + blendMapColor.b);
+	float backTexAmount = 1 - (blendMapColor.r + blendMapColor.g + blendMapColor.b);
 	vec2 tiledCoords = vs_texcoord * vertexCount;
-	vec4 backgroundTextureColor = texture(backgroundTex, tiledCoords) * backTextureAmount;
+	vec4 backTexColor = texture(backTex, tiledCoords) * backTexAmount;
 	vec4 rTexColor = texture(rTex, tiledCoords) * blendMapColor.r;
 	vec4 gTexColor = texture(gTex, tiledCoords) * blendMapColor.g;
 	vec4 bTexColor = texture(bTex, tiledCoords) * blendMapColor.b;
 
-	vec4 totalColor = backgroundTextureColor + rTexColor + gTexColor + bTexColor;
+	vec4 totalColor = backTexColor + rTexColor + gTexColor + bTexColor;
+	///////////
+
+
+	// Specular
+	vec4 blendMapSpecularColor = texture(blendMap, vs_texcoord);
+	
+	float backTexSpecularAmount = 1 - (blendMapColor.r + blendMapColor.g + blendMapColor.b);
+	vec2 tiledSpecularCoords = vs_texcoord * vertexCount;
+	vec4 backTexSpecularColor = texture(backTexSpecular, tiledSpecularCoords) * backTexSpecularAmount;
+	vec4 rTexSpecularColor = texture(rTexSpecular, tiledSpecularCoords) * blendMapSpecularColor.r;
+	vec4 gTexSpecularColor = texture(gTexSpecular, tiledSpecularCoords) * blendMapSpecularColor.g;
+	vec4 bTexSpecularColor = texture(bTexSpecular, tiledSpecularCoords) * blendMapSpecularColor.b;
+
+	vec4 totalSpecularColor = backTexSpecularColor + rTexSpecularColor + gTexSpecularColor + bTexSpecularColor;
+	//////////
 
 
 	//Diffuse Light
@@ -99,7 +118,7 @@ void main() {
 	for (int i=0; i<4; ++i) {
 		attenuationFinal = calculateAttenuation(vs_position, vs_normal, lightPoint[i]);
 		diffuseFinal += calculateDiffuse(totalColor, vs_position, vs_normal, lightPoint[i]) / attenuationFinal;
-		specularFinal += calculateSpecular(totalColor, vs_position, vs_normal, lightPoint[i], cameraPos) / attenuationFinal;
+		specularFinal += calculateSpecular(totalSpecularColor, vs_position, vs_normal, lightPoint[i], cameraPos) / attenuationFinal;
 	}
 
 	diffuseFinal = clamp(diffuseFinal, 0.0, 1.0);

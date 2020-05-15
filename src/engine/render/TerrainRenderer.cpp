@@ -4,19 +4,35 @@
 void TerrainRenderer::bindTextures(Terrain& terrain) {
 	TerrainTexturePack& texturePack = *terrain.getTexturePack();
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texturePack.getBackgroundTex()->getID());
+	glActiveTexture(GL_TEXTURE0);	// Background Texture Diffuse
+	glBindTexture(GL_TEXTURE_2D, texturePack.getBackTex()->getID());
 
-	glActiveTexture(GL_TEXTURE1);
+	glActiveTexture(GL_TEXTURE1);	// Background Texture Specular
+	glBindTexture(GL_TEXTURE_2D, texturePack.getBackTexSpecular()->getID());
+
+
+	glActiveTexture(GL_TEXTURE2);	// Red Texture Diffuse
 	glBindTexture(GL_TEXTURE_2D, texturePack.getRTex()->getID());
 
-	glActiveTexture(GL_TEXTURE2);
+	glActiveTexture(GL_TEXTURE3);	// Red Texture Specular
+	glBindTexture(GL_TEXTURE_2D, texturePack.getRTexSpecular()->getID());
+
+
+	glActiveTexture(GL_TEXTURE4);	// Green Texture Diffuse
 	glBindTexture(GL_TEXTURE_2D, texturePack.getGTex()->getID());
 
-	glActiveTexture(GL_TEXTURE3);
+	glActiveTexture(GL_TEXTURE5);	// Green Texture Specular
+	glBindTexture(GL_TEXTURE_2D, texturePack.getGTexSpecular()->getID());
+
+
+	glActiveTexture(GL_TEXTURE6);	// Blue Texture Diffuse
 	glBindTexture(GL_TEXTURE_2D, texturePack.getBTex()->getID());
 
-	glActiveTexture(GL_TEXTURE4);
+	glActiveTexture(GL_TEXTURE7);	// Blue Texture Specular
+	glBindTexture(GL_TEXTURE_2D, texturePack.getBTexSpecular()->getID());
+
+
+	glActiveTexture(GL_TEXTURE8);
 	glBindTexture(GL_TEXTURE_2D, terrain.getBlendMap()->getID());
 }
 
