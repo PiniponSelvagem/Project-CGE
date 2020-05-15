@@ -1,7 +1,7 @@
 # Project-CGE
 Personal project "Custom Game Engine" written in C/C++.
 
-Following "Suraj Sharma" on youtube, on the learning process but making my own changes.
+Following "Suraj Sharma (C++)" and "ThinMatrix (Java)" on youtube, to learn OpenGL while making my own changes.
 
 ---
 ## Some useful links

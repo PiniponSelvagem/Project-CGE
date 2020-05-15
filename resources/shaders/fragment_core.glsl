@@ -73,6 +73,13 @@ float calculateFogVisibility() {
 
 
 void main() {
+	//Discard fragment if texture alpha value
+	//https://learnopengl.com/Advanced-OpenGL/Blending
+	vec4 texColor = texture(material.diffuseTex, vs_texcoord);
+    if(texColor.a < 0.1)
+        discard;
+
+
 	//Diffuse Light
 	vec3 diffuseFinal = vec3(0.f);
 
@@ -81,7 +88,6 @@ void main() {
 
 	//Attenuation
 	float attenuationFinal = 0.f;
-
 	
 	for (int i=0; i<4; ++i) {
 		attenuationFinal = calculateAttenuation(vs_position, vs_normal, lightPoint[i]);
