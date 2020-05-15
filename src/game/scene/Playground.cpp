@@ -1,7 +1,7 @@
 #include "Playground.h"
 #include "../../engine/entities/models/ObjLoader.h"
 
-#define SPEED_MULT 10
+#define SPEED_MULT 1
 
 enum texture_enum {
 	TEX_DEFAULT,
@@ -9,7 +9,8 @@ enum texture_enum {
 	TEX_FRAGILE, TEX_FRAGILE_SPECULAR,
 	//TEX_GRASS, TEX_GRASS_SPECULAR,
 	//TEX_STALL, TEX_STALL_SPECULAR,
-	TEX_TERRAIN
+	TEX_TERRAIN,
+	TEX_DGRASS, TEX_DGRASS_SPECULAR
 };
 
 enum material_enum {
@@ -21,7 +22,7 @@ enum mesh_enum {
 	MESH_CUBE,
 	MESH_FLOOR,
 	MESH_TEAPOT,
-	MESH_STALL
+	MESH_DGRASS
 };
 
 void Playground::initRenderer() {
@@ -35,6 +36,7 @@ void Playground::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/floor.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/teapot.obj"));
+	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/digital_grass.obj"));
 }
 void Playground::initTextures() {
 	// TEXTURE - DEFAULT
@@ -49,7 +51,11 @@ void Playground::initTextures() {
 	textures.push_back(new Texture("resources/png/fragile_specular.png", GL_TEXTURE_2D));
 	
 	// TEXTURE 2
-	textures.push_back(new Texture("resources/png/synthwave.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/synthwave_v2.png", GL_TEXTURE_2D));
+
+	// TEXTURE 3
+	textures.push_back(new Texture("resources/png/digital_grass.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("resources/png/digital_grass_spacular.png", GL_TEXTURE_2D));
 }
 void Playground::initMaterials() {
 	materials.push_back(new Material(
@@ -80,16 +86,29 @@ void Playground::initModels() {
 		textures[TEX_DEFAULT],
 		materials[MAT_CRATE]
 	));
+	
+	models.push_back(new Model(
+		meshes[MESH_DGRASS],
+		textures[TEX_DGRASS],
+		textures[TEX_DGRASS_SPECULAR],
+		materials[MAT_CRATE]
+	));
 }
 void Playground::initEntities() {
 	entities.push_back(new Entity(models[0], glm::vec3(400.f, 2.f, 398.f)));	//cube 0
 	entities.push_back(new Entity(models[0], glm::vec3(398.f, 1.f, 397.f)));	//cube 1
 	entities.push_back(new Entity(models[0], glm::vec3(402.f, 1.f, 397.f)));	//cube 2
 	
-	entities.push_back(new Entity(models[1], glm::vec3(400.f, 0.05f, 400.f)));	//floor
+	//entities.push_back(new Entity(models[1], glm::vec3(400.f, 0.05f, 400.f)));	//floor
 	
 	entities.push_back(new Entity(models[2], glm::vec3(400.f, 7.8f, 360.f)));	//teapot
-	
+
+	// digital grass
+	for (int i = 0; i < 400; ++i) {
+		float randX = rand() % 40 + 380;
+		float randZ = rand() % 40 + 380;
+		entities.push_back(new Entity(models[3], glm::vec3(randX, 0.f, randZ)));
+	}
 
 	// TERRAIN
 	terrain = new Terrain(0, 0, textures[TEX_TERRAIN]);
