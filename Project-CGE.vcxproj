@@ -20,9 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\engine\Engine.cpp" />
-    <ClCompile Include="src\engine\entities\models\Entity.cpp" />
-    <ClCompile Include="src\engine\entities\models\Loader.cpp" />
-    <ClCompile Include="src\engine\entities\terrains\Terrain.cpp" />
+    <ClCompile Include="src\engine\entities\Entity.cpp" />
+    <ClCompile Include="src\engine\models\Loader.cpp" />
+    <ClCompile Include="src\engine\terrains\Terrain.cpp" />
     <ClCompile Include="src\engine\input\Input.cpp" />
     <ClCompile Include="src\engine\input\MouseInput.cpp" />
     <ClCompile Include="src\engine\render\EntityRenderer.cpp" />
@@ -31,7 +31,7 @@
     <ClCompile Include="src\engine\shaders\EntityShader.cpp" />
     <ClCompile Include="src\engine\shaders\TerrainShader.cpp" />
     <ClCompile Include="src\engine\ui\CameraUI.cpp" />
-    <ClCompile Include="src\engine\entities\lights\LightPoint.h" />
+    <ClCompile Include="src\engine\lights\LightPoint.h" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\scene\PerformanceTest.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
@@ -41,8 +41,8 @@
     <ClCompile Include="src\engine\input\KeyInput.cpp" />
     <ClCompile Include="src\Func.cpp" />
     <ClCompile Include="src\engine\camera\Camera.cpp" />
-    <ClCompile Include="src\engine\entities\models\ObjLoader.cpp" />
-    <ClCompile Include="src\engine\entities\models\Texture.cpp" />
+    <ClCompile Include="src\engine\models\ObjLoader.cpp" />
+    <ClCompile Include="src\engine\models\Texture.cpp" />
     <ClCompile Include="src\engine\shaders\Shader.cpp" />
     <ClCompile Include="include\GLAD\glad.c" />
     <ClCompile Include="src\Main.cpp" />
@@ -54,15 +54,15 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\engine\entities\models\Entity.h" />
-    <ClInclude Include="src\engine\entities\models\Loader.h" />
-    <ClInclude Include="src\engine\entities\terrains\Terrain.h" />
-    <ClInclude Include="src\engine\entities\terrains\TerrainTexturePack.h" />
+    <ClInclude Include="src\engine\entities\Entity.h" />
+    <ClInclude Include="src\engine\models\Loader.h" />
+    <ClInclude Include="src\engine\terrains\Terrain.h" />
+    <ClInclude Include="src\engine\terrains\TerrainTexturePack.h" />
     <ClInclude Include="src\engine\enviroment\Fog.h" />
     <ClInclude Include="src\engine\Engine.h" />
     <ClInclude Include="src\engine\input\MouseInput.h" />
     <ClInclude Include="src\engine\input\Input.h" />
-    <ClInclude Include="src\engine\entities\lights\Light.h" />
+    <ClInclude Include="src\engine\lights\Light.h" />
     <ClInclude Include="src\engine\render\EntityRenderer.h" />
     <ClInclude Include="src\engine\render\MasterRenderer.h" />
     <ClInclude Include="src\engine\render\TerrainRenderer.h" />
@@ -76,15 +76,15 @@
     <ClInclude Include="src\engine\scene\Scene.h" />
     <ClInclude Include="src\engine\input\KeyboardInput.h" />
     <ClInclude Include="src\Func.h" />
-    <ClInclude Include="src\engine\entities\models\ObjLoader.h" />
-    <ClInclude Include="src\engine\entities\models\Model.h" />
+    <ClInclude Include="src\engine\models\ObjLoader.h" />
+    <ClInclude Include="src\engine\models\Model.h" />
     <ClInclude Include="src\engine\camera\Camera.h" />
-    <ClInclude Include="src\engine\entities\models\Mesh.h" />
-    <ClInclude Include="src\engine\entities\models\Material.h" />
+    <ClInclude Include="src\engine\models\Mesh.h" />
+    <ClInclude Include="src\engine\models\Material.h" />
     <ClInclude Include="src\engine\shaders\Shader.h" />
     <ClInclude Include="src\libs.h" />
-    <ClInclude Include="src\engine\entities\models\Texture.h" />
-    <ClInclude Include="src\engine\entities\models\Vertex.h" />
+    <ClInclude Include="src\engine\models\Texture.h" />
+    <ClInclude Include="src\engine\models\Vertex.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

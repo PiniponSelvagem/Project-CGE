@@ -1,5 +1,5 @@
 #include "PerformanceTest.h"
-#include "../../engine/entities/models/ObjLoader.h"
+#include "../../engine/models/ObjLoader.h"
 
 /*
 #define LIGHT_POS 10.f

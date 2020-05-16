@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../libs.h"
+#include "../../libs.h"
 #include "Entity.h"
 
 void Entity::updateModelMatrix() {

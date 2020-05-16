@@ -1,6 +1,6 @@
 #pragma once
-#include "../../../libs.h"
-#include "../../shaders/Shader.h"
+#include "../../libs.h"
+#include "../shaders/Shader.h"
 
 /*
 	NOTE:

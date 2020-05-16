@@ -3,8 +3,8 @@
 
 #include "../camera/Camera.h"
 #include "../enviroment/Fog.h"
-#include "../entities/lights/LightPoint.h"
-#include "../entities/models/Material.h"
+#include "../lights/LightPoint.h"
+#include "../models/Material.h"
 
 
 class EntityShader : public Shader {

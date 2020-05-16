@@ -3,8 +3,8 @@
 
 #include "../camera/Camera.h"
 #include "../enviroment/Fog.h"
-#include "../entities/lights/LightPoint.h"
-#include "../entities/terrains/Terrain.h"
+#include "../lights/LightPoint.h"
+#include "../terrains/Terrain.h"
 
 #include "../shaders/TerrainShader.h"
 

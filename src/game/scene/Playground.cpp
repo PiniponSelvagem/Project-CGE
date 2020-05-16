@@ -1,5 +1,5 @@
 #include "Playground.h"
-#include "../../engine/entities/models/ObjLoader.h"
+#include "../../engine/models/ObjLoader.h"
 
 #define SPEED_MULT 1
 

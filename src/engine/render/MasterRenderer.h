@@ -4,8 +4,8 @@
 #include "../shaders/Shader.h"
 #include "../camera/Camera.h"
 #include "../enviroment/Fog.h"
-#include "../entities/lights/LightPoint.h"
-#include "../entities/models/Entity.h"
+#include "../lights/LightPoint.h"
+#include "../entities/Entity.h"
 
 #include "EntityRenderer.h"
 #include "TerrainRenderer.h"

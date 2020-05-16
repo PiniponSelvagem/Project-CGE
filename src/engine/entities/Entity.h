@@ -1,6 +1,6 @@
 #pragma once
-#include "../../../libs.h"
-#include "Model.h"
+#include "../../libs.h"
+#include "../models/Model.h"
 
 class Entity {
 	private:
@@ -17,6 +17,7 @@ class Entity {
 		Entity(Model* model, glm::vec3 position, glm::vec3 origin = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f))
 			: model(model), position(position), origin(origin), rotation(rotation), scale(scale)
 		{ }
+		virtual ~Entity() { }
 
 		inline void setModel(Model* model) { this->model = model; }
 
