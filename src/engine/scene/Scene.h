@@ -7,11 +7,11 @@
 #include "../models/Mesh.h"
 #include "../models/Model.h"
 #include "../entities/Entity.h"
+#include "../entities/player/Player.h"
 #include "../lights/LightPoint.h"
 #include "../terrains/Terrain.h"
 #include "../enviroment/Fog.h"
 #include "../camera/Camera.h"
-#include "../ui/CameraUI.h"
 
 class Scene {
 	protected:
@@ -36,6 +36,9 @@ class Scene {
 
 		// Entities
 		std::vector<Entity*> entities;
+		Player* player;
+
+		// Terrains
 		Terrain* terrain;
 
 		// Lights
@@ -69,16 +72,14 @@ class Scene {
 		virtual void update(float dTime) = 0;
 		void render();
 
-		/* TODO: Make Player class??? */
 		virtual void cameraPanTilt(double mouseOffsetX, double mouseOffsetY) = 0;
-		virtual void cameraFoward(float dTime) = 0;
-		virtual void cameraBackward(float dTime) = 0;
-		virtual void cameraLeft(float dTime) = 0;
-		virtual void cameraRight(float dTime) = 0;
-		virtual void cameraUp(float dTime) = 0;
-		virtual void cameraDown(float dTime) = 0;
+		virtual void playerFoward() { }
+		virtual void playerBackward() { }
+		virtual void playerLeft() { }
+		virtual void playerRight() { }
+		virtual void playerJump() { }
+		virtual void cameraDown(float dTime) { }
 
-		virtual void lightSetPosition() = 0;
-		/******************************/
+		virtual void lightSetPosition() { }
 };
 

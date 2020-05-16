@@ -20,11 +20,11 @@ class Playground : public Scene {
 
 		/* TODO: Make Player class??? */
 		void cameraPanTilt(double mouseOffsetX, double mouseOffsetY);
-		void cameraFoward(float dTime);
-		void cameraBackward(float dTime);
-		void cameraLeft(float dTime);
-		void cameraRight(float dTime);
-		void cameraUp(float dTime);
+		void playerFoward();
+		void playerBackward();
+		void playerLeft();
+		void playerRight();
+		void playerJump();
 		void cameraDown(float dTime);
 
 		void lightSetPosition();

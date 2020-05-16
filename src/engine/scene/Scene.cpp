@@ -38,9 +38,6 @@ Camera* Scene::getMainCamera() {
 	return camera;
 }
 
-void Scene::update(float dTime) {
-
-}
 void Scene::render() {
 	masterRenderer->render(
 		*camera, *fog, ambient, lightsPoint,

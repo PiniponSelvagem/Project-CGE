@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\engine\Engine.cpp" />
     <ClCompile Include="src\engine\entities\Entity.cpp" />
+    <ClCompile Include="src\engine\entities\player\Player.cpp" />
     <ClCompile Include="src\engine\models\Loader.cpp" />
     <ClCompile Include="src\engine\terrains\Terrain.cpp" />
     <ClCompile Include="src\engine\input\Input.cpp" />
@@ -55,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\entities\Entity.h" />
+    <ClInclude Include="src\engine\entities\player\Player.h" />
     <ClInclude Include="src\engine\models\Loader.h" />
     <ClInclude Include="src\engine\terrains\Terrain.h" />
     <ClInclude Include="src\engine\terrains\TerrainTexturePack.h" />

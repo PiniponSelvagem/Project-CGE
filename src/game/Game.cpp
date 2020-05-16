@@ -43,18 +43,18 @@ void Game::updateKeyboardInput() {
 		glfwSwapInterval(1);
 
 	if (keyboardInput->isKeyActive(GLFW_KEY_W))
-		scene->cameraFoward(dTime);
+		scene->playerFoward();
 	if (keyboardInput->isKeyActive(GLFW_KEY_S))
-		scene->cameraBackward(dTime);
+		scene->playerBackward();
 	if (keyboardInput->isKeyActive(GLFW_KEY_A))
-		scene->cameraLeft(dTime);
+		scene->playerLeft();
 	if (keyboardInput->isKeyActive(GLFW_KEY_D))
-		scene->cameraRight(dTime);
+		scene->playerRight();
 
 	if (keyboardInput->isKeyActive(GLFW_KEY_SPACE))
-		scene->cameraUp(dTime);
-	if (keyboardInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
-		scene->cameraDown(dTime);
+		scene->playerJump();
+	//if (keyboardInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
+	//	scene->cameraDown(dTime);
 
 
 	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))

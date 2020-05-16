@@ -23,13 +23,24 @@ class Entity {
 
 		inline void changePosition(glm::vec3 position) { this->position += position; modelUpdated = true; }
 		inline void changeOrigin(glm::vec3 origin)     { this->origin += origin;     modelUpdated = true; }
-		inline void changeRotation(glm::vec3 rotation) { this->rotation += rotation; modelUpdated = true; }
+		inline void changeRotation(glm::vec3 rotation) {
+			this->rotation += rotation;
+			modelUpdated = true;
+
+			if (this->rotation.x > 360.f || this->rotation.x < -360.f) this->rotation.x = 0.f;
+			if (this->rotation.y > 360.f || this->rotation.y < -360.f) this->rotation.y = 0.f;
+			if (this->rotation.z > 360.f || this->rotation.z < -360.f) this->rotation.z = 0.f;
+		}
 		inline void changeScale(glm::vec3 scale)       { this->scale += scale;       modelUpdated = true; }
 		
 		inline void setPosition(glm::vec3 position) { this->position = position; modelUpdated = true; }
 		inline void setOrigin(glm::vec3 origin)     { this->origin = origin;     modelUpdated = true; }
 		inline void setRotation(glm::vec3 rotation) { this->rotation = rotation; modelUpdated = true; }
 		inline void setScale(glm::vec3 scale)       { this->scale = scale;       modelUpdated = true; }
+
+		inline void setPositionX(float x) { this->position.x = x; modelUpdated = true; }
+		inline void setPositionY(float y) { this->position.y = y; modelUpdated = true; }
+		inline void setPositionZ(float z) { this->position.z = z; modelUpdated = true; }
 
 		void updateModelMatrix();
 

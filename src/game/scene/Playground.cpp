@@ -1,8 +1,6 @@
 #include "Playground.h"
 #include "../../engine/models/ObjLoader.h"
 
-#define SPEED_MULT 1
-
 enum texture_enum {
 	TEX_DEFAULT, TEX_DEFAULT_SPECULAL,
 	TEX_CRATE, TEX_CRATE_SPECULAR,
@@ -117,8 +115,21 @@ void Playground::initModels() {
 		textures[TEX_DGRASS_SPECULAR],
 		materials[MAT_CRATE]
 	));
+
+	models.push_back(new Model(
+		meshes[MESH_CUBE],
+		textures[TEX_CRATE],
+		textures[TEX_CRATE_SPECULAR],
+		materials[MAT_CRATE]
+	));
 }
 void Playground::initEntities() {
+	player = new Player(
+		5.f, 200.f, -50.f, 10.f,
+		models[4], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f)
+	);
+	entities.push_back(player);
+
 	entities.push_back(new Entity(models[0], glm::vec3(400.f, 2.f, 398.f)));	//cube 0
 	entities.push_back(new Entity(models[0], glm::vec3(398.f, 1.f, 397.f)));	//cube 1
 	entities.push_back(new Entity(models[0], glm::vec3(402.f, 1.f, 397.f)));	//cube 2
@@ -182,15 +193,17 @@ void Playground::initEnviroment() {
 
 
 Playground::Playground() : Scene() {
-	camera = new Camera3D(90.f, 0.1f, 1000.f, glm::vec3(400.f, 1.f, 400.f), glm::vec3(0.f, -90.f, 0.f));
+	camera = new Camera3D(90.f, 0.001f, 1000.f, glm::vec3(400.f, 1.f, 400.f), glm::vec3(0.f, -90.f, 0.f));
 }
 Playground::~Playground() {
 }
 
 void Playground::update(float dTime) {
-	entities[0]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
+	player->move(dTime);
+
 	entities[1]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
 	entities[2]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
+	entities[3]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
 
 	//lightSetPosition();
 }
@@ -198,11 +211,23 @@ void Playground::update(float dTime) {
 void Playground::cameraPanTilt(double mouseOffsetX, double mouseOffsetY) {
 	camera->changePanTilt(mouseOffsetX, mouseOffsetY);
 }
+void Playground::playerFoward()   { player->setMoveFoward();   }
+void Playground::playerBackward() { player->setMoveBackward(); }
+void Playground::playerLeft()     { player->setRotateLeft();   }
+void Playground::playerRight()    { player->setRotateRight();  }
+void Playground::playerJump()     { player->setJump();         }
+void Playground::cameraDown(float dTime) { camera->moveWalk(dTime*1, DOWN); }
+void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }
+
+
+
+/*
+#define SPEED_MULT 1
+
 void Playground::cameraFoward(float dTime)   { camera->moveWalk(dTime*SPEED_MULT, FORWARD);  }
 void Playground::cameraBackward(float dTime) { camera->moveWalk(dTime*SPEED_MULT, BACKWARD); }
 void Playground::cameraLeft(float dTime)     { camera->moveWalk(dTime*SPEED_MULT, LEFT);     }
 void Playground::cameraRight(float dTime)    { camera->moveWalk(dTime*SPEED_MULT, RIGHT);    }
 void Playground::cameraUp(float dTime)       { camera->moveWalk(dTime*SPEED_MULT, UP);       }
 void Playground::cameraDown(float dTime)     { camera->moveWalk(dTime*SPEED_MULT, DOWN);     }
-
-void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }
+*/
