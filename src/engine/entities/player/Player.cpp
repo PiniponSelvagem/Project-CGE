@@ -21,8 +21,6 @@ void Player::move(float dTime) {
 
 	changePosition(glm::vec3(dX, 0, dZ));
 
-	std::cout << getPosition().y << std::endl;
-
 	currSpeed = 0;
 	currTurnSpeed = 0;
 }

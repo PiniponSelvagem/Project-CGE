@@ -1,6 +1,9 @@
 #include "Playground.h"
 #include "../../engine/models/ObjLoader.h"
 
+#define MOUSE_WHEEL_SENSIVITY 1.f
+#define MOUSE_SENSIVITY 0.1f
+
 enum texture_enum {
 	TEX_DEFAULT, TEX_DEFAULT_SPECULAL,
 	TEX_CRATE, TEX_CRATE_SPECULAR,
@@ -126,7 +129,7 @@ void Playground::initModels() {
 void Playground::initEntities() {
 	player = new Player(
 		5.f, 200.f, -50.f, 10.f,
-		models[4], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f)
+		models[4], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f, 180.f, 0.f)
 	);
 	entities.push_back(player);
 
@@ -188,18 +191,18 @@ void Playground::initEnviroment() {
 	fog = new Fog(0.003, 5.0);
 	ambient = glm::vec3(0.10f);
 }
+void Playground::initCamera() {
+	camera = new Camera3D_Player(
+		*player, -5.f, 180.f,
+		90.f, 0.001f, 1000.f, -35.f
+	);
+}
 
 ////////////////////////////////
 
-
-Playground::Playground() : Scene() {
-	camera = new Camera3D(90.f, 0.001f, 1000.f, glm::vec3(400.f, 1.f, 400.f), glm::vec3(0.f, -90.f, 0.f));
-}
-Playground::~Playground() {
-}
-
 void Playground::update(float dTime) {
 	player->move(dTime);
+	static_cast<Camera3D_Player*>(camera)->updatePosition();
 
 	entities[1]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
 	entities[2]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
@@ -216,8 +219,18 @@ void Playground::playerBackward() { player->setMoveBackward(); }
 void Playground::playerLeft()     { player->setRotateLeft();   }
 void Playground::playerRight()    { player->setRotateRight();  }
 void Playground::playerJump()     { player->setJump();         }
-void Playground::cameraDown(float dTime) { camera->moveWalk(dTime*1, DOWN); }
-void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }
+
+void Playground::cameraZoom(float zoom)  {
+	static_cast<Camera3D_Player*>(camera)->changeDistanceFromPlayer(zoom * MOUSE_WHEEL_SENSIVITY);
+}
+void Playground::cameraPith(float pitch) {
+	static_cast<Camera3D_Player*>(camera)->changePitch(pitch * MOUSE_SENSIVITY);
+}
+void Playground::cameraYaw(float yaw)    {
+	static_cast<Camera3D_Player*>(camera)->changeAngleAroundPlayer(yaw * MOUSE_SENSIVITY);
+}
+
+//void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }
 
 
 

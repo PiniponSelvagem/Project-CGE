@@ -26,6 +26,7 @@ void Scene::initScene() {
 	initEntities();
 	initLights();
 	initEnviroment();
+	initCamera();
 }
 
 void Scene::reloadShader() {

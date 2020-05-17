@@ -13,7 +13,7 @@ class Input {
 
 	public:
 		Input(std::vector<int> keysToMonitor);
-		~Input();
+		virtual ~Input() { }
 
 		void addKey(int key);
 		void removeKey(int key);

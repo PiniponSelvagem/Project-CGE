@@ -9,9 +9,6 @@ Input::Input(std::vector<int> keysToMonitor) {
 	}
 }
 
-Input::~Input() {
-}
-
 void Input::addKey(int key) {
 	keys.insert(std::map<int, bool>::value_type(key, false));
 }

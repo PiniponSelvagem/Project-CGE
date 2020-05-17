@@ -57,6 +57,7 @@ class Scene {
 		virtual void initEntities() = 0;
 		virtual void initLights() = 0;
 		virtual void initEnviroment() = 0;
+		virtual void initCamera() = 0;
 
 
 
@@ -72,13 +73,25 @@ class Scene {
 		virtual void update(float dTime) = 0;
 		void render();
 
-		virtual void cameraPanTilt(double mouseOffsetX, double mouseOffsetY) = 0;
 		virtual void playerFoward() { }
 		virtual void playerBackward() { }
 		virtual void playerLeft() { }
 		virtual void playerRight() { }
 		virtual void playerJump() { }
+
+		virtual void cameraZoom(float zoom) { }
+		virtual void cameraPith(float pitch) { }
+		virtual void cameraYaw(float yaw) { }
+
+		/* Useful for free camera */
+		virtual void cameraPanTilt(double mouseOffsetX, double mouseOffsetY) { }
+		virtual void cameraFoward(float dTime) { }
+		virtual void cameraBackward(float dTime) { }
+		virtual void cameraLeft(float dTime) { }
+		virtual void cameraRight(float dTime) { }
+		virtual void cameraUp(float dTime) { }
 		virtual void cameraDown(float dTime) { }
+		/**************************/
 
 		virtual void lightSetPosition() { }
 };

@@ -1,9 +1,6 @@
 #pragma once
 #include "Camera.h"
 
-#define BASE_SENSIVITY 0.01
-#define MAX_PITCH 89.9f	// Supported range: [0, 89.9]. Values outside this range might have unexpected behavior.
-
 Camera::Camera(float fov, float nearPlane, float farPlane, glm::vec3 position, glm::vec3 direction) {
 	this->fov = fov;
 	this->nearPlane = nearPlane;
@@ -87,11 +84,6 @@ void Camera::changePanTilt(const double &offsetX, const double &offsetY) {
 	pitch += static_cast<GLfloat>(offsetY) * sensivity * BASE_SENSIVITY;
 	yaw += static_cast<GLfloat>(offsetX) * sensivity * BASE_SENSIVITY;
 
-	if (pitch > MAX_PITCH)
-		pitch = MAX_PITCH;
-	else if (pitch < -MAX_PITCH)
-		pitch = -MAX_PITCH;
-
-	if (yaw > 360.f || yaw < -360.f)
-		yaw = 0.f;
+	setPitch(pitch);
+	setYaw(yaw);
 }

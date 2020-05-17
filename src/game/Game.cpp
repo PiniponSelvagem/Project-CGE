@@ -19,7 +19,7 @@ void Game::updateMouseInput() {
 	lastMouseX = mouseX;
 	lastMouseY = mouseY;
 
-	scene->cameraPanTilt(mouseOffsetX, mouseOffsetY);
+	//scene->cameraPanTilt(mouseOffsetX, mouseOffsetY);
 }
 void Game::updateKeyboardInput() {
 	if (keyboardInput->isKeyActive(GLFW_KEY_ESCAPE)) //if not pressed == GLFW_RELEASE
@@ -53,12 +53,24 @@ void Game::updateKeyboardInput() {
 
 	if (keyboardInput->isKeyActive(GLFW_KEY_SPACE))
 		scene->playerJump();
+
+	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_2)) {
+		scene->cameraPith(mouseOffsetY);
+		scene->cameraYaw(mouseOffsetX);
+	}
+
+	double wheelX = mouseInput->getWheelY();
+	if (wheelX != 0) {
+		scene->cameraZoom(wheelX);
+		mouseInput->resetWheel();
+	}
+
+
 	//if (keyboardInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
 	//	scene->cameraDown(dTime);
 
-
-	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))
-		scene->lightSetPosition();
+	//if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))
+	//	scene->lightSetPosition();
 }
 
 
@@ -102,6 +114,7 @@ void Game::initInput() {
 	// Mouse Input
 	std::vector<int> buttons;
 	buttons.push_back(GLFW_MOUSE_BUTTON_1);
+	buttons.push_back(GLFW_MOUSE_BUTTON_2);
 
 	mouseInput = new MouseInput(buttons);
 	mouseInput->setKeyCallback(window);

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\camera\Camera3D_Player3rd.cpp" />
     <ClCompile Include="src\engine\Engine.cpp" />
     <ClCompile Include="src\engine\entities\Entity.cpp" />
     <ClCompile Include="src\engine\entities\player\Player.cpp" />
@@ -55,6 +56,9 @@
     <None Include="resources\shaders\vertex_core.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\camera\Camera2D.h" />
+    <ClInclude Include="src\engine\camera\Camera3D.h" />
+    <ClInclude Include="src\engine\camera\Camera3D_Player3rd.h" />
     <ClInclude Include="src\engine\entities\Entity.h" />
     <ClInclude Include="src\engine\entities\player\Player.h" />
     <ClInclude Include="src\engine\models\Loader.h" />

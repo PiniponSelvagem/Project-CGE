@@ -18,4 +18,6 @@ void KeyboardInput::callback(GLFWwindow* window, int key, int scancode, int acti
 		WindowUserPointer* wup = static_cast<WindowUserPointer*>(glfwGetWindowUserPointer(window));
 		wup->keyboardInput->setKeyState(key, action != GLFW_RELEASE);
 	}
+
+	// std::cout << "KEY: " << key << " - SCANCODE: " << scancode << " - ACTION: " << action << " - MODS: " << mods << std::endl;
 }

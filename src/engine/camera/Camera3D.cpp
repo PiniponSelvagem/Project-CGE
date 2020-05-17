@@ -1,5 +1,5 @@
 #pragma once
-#include "Camera.h"
+#include "Camera3D.h"
 
 void Camera3D::updateCameraVectors() {
 	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -26,9 +26,6 @@ Camera3D::Camera3D(float fov, float nearPlane, float farPlane, glm::vec3 positio
 	sensivity = 5.f;
 
 	updateCameraVectors();
-}
-
-Camera3D::~Camera3D() {
 }
 
 void Camera3D::updateProjectionMatrix() {
