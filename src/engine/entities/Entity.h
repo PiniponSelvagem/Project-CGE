@@ -42,6 +42,10 @@ class Entity {
 		inline void setPositionY(float y) { this->position.y = y; modelUpdated = true; }
 		inline void setPositionZ(float z) { this->position.z = z; modelUpdated = true; }
 
+		inline void setRotationX(float x) { this->rotation.x = x; modelUpdated = true; }
+		inline void setRotationY(float y) { this->rotation.y = y; modelUpdated = true; }
+		inline void setRotationZ(float z) { this->rotation.z = z; modelUpdated = true; }
+
 		void updateModelMatrix();
 
 

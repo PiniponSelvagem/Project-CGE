@@ -129,7 +129,7 @@ void Playground::initModels() {
 void Playground::initEntities() {
 	player = new Player(
 		5.f, 200.f, -50.f, 10.f,
-		models[4], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f, 180.f, 0.f)
+		models[4], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f)//glm::vec3(0.f, 180.f, 0.f)
 	);
 	entities.push_back(player);
 
@@ -193,9 +193,15 @@ void Playground::initEnviroment() {
 }
 void Playground::initCamera() {
 	camera = new Camera3D_Player(
-		*player, -5.f, 180.f,
+		*player, 1.f, 5.f, 20.f, 180.f,
 		90.f, 0.001f, 1000.f, -35.f
 	);
+
+	/*
+	camera = new Camera3D(
+		90.f, 0.001f, 1000.f, glm::vec3(0.f), glm::vec3(0.f)
+	);
+	*/
 }
 
 ////////////////////////////////
@@ -220,14 +226,17 @@ void Playground::playerLeft()     { player->setRotateLeft();   }
 void Playground::playerRight()    { player->setRotateRight();  }
 void Playground::playerJump()     { player->setJump();         }
 
-void Playground::cameraZoom(float zoom)  {
-	static_cast<Camera3D_Player*>(camera)->changeDistanceFromPlayer(zoom * MOUSE_WHEEL_SENSIVITY);
+void Playground::cameraZoom(float zoomOffset)  {
+	static_cast<Camera3D_Player*>(camera)->changeDistanceFromPlayer(zoomOffset * MOUSE_WHEEL_SENSIVITY);
 }
-void Playground::cameraPith(float pitch) {
-	static_cast<Camera3D_Player*>(camera)->changePitch(pitch * MOUSE_SENSIVITY);
+void Playground::cameraPith(float pitchOffset) {
+	static_cast<Camera3D_Player*>(camera)->changePitch(pitchOffset * MOUSE_SENSIVITY);
 }
-void Playground::cameraYaw(float yaw)    {
-	static_cast<Camera3D_Player*>(camera)->changeAngleAroundPlayer(yaw * MOUSE_SENSIVITY);
+void Playground::cameraYaw(float yawOffset)    {
+	static_cast<Camera3D_Player*>(camera)->changeAngleAroundPlayer(yawOffset * MOUSE_SENSIVITY);
+}
+void Playground::cameraSetPlayerDirection(float yawOffset) {
+	static_cast<Camera3D_Player*>(camera)->setPlayerDirection(yawOffset * MOUSE_SENSIVITY);
 }
 
 //void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }

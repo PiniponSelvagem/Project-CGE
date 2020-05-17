@@ -54,7 +54,7 @@ void Game::updateKeyboardInput() {
 	if (keyboardInput->isKeyActive(GLFW_KEY_SPACE))
 		scene->playerJump();
 
-	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_2)) {
+	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1)) {
 		scene->cameraPith(mouseOffsetY);
 		scene->cameraYaw(mouseOffsetX);
 	}
@@ -69,8 +69,8 @@ void Game::updateKeyboardInput() {
 	//if (keyboardInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
 	//	scene->cameraDown(dTime);
 
-	//if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_1))
-	//	scene->lightSetPosition();
+	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_2))
+		scene->lightSetPosition();
 }
 
 

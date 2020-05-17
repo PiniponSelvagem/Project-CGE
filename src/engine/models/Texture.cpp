@@ -29,6 +29,9 @@ void Texture::load(const char* fileName) {
 	if (image) {
 		glTexImage2D(type, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(type);
+		//TODO: Possible graphical setting
+		glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameterf(type, GL_TEXTURE_LOD_BIAS, -1);
 	}
 	else {
 		std::cout << "ERROR::TEXTURE::LOAD: Failed to load texture " << fileName << ". " << soil_log << std::endl;

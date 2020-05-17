@@ -6,6 +6,7 @@ void Camera3D_Player::calcPosition(float horizDistance, float vertDistance) {
 	float angleRads = (angle * PI) / 180.f;
 	float offsetX = horizDistance * sin(angleRads);
 	float offsetZ = horizDistance * cos(angleRads);
+
 	glm::vec3 playerPos = player.getPosition();
 	position = glm::vec3(
 		playerPos.x - offsetX,
@@ -15,6 +16,8 @@ void Camera3D_Player::calcPosition(float horizDistance, float vertDistance) {
 }
 
 void Camera3D_Player::updatePosition() {
-	calcPosition(calcHorizontalDistance(), calcVerticalDistance());
+	if (distFromPlayer > 0) distFromPlayer = 0;
+	else if (distFromPlayer < maxDistFromPlayer) distFromPlayer = maxDistFromPlayer;
+	calcPosition(calcHorizontalDistance(), calcVerticalDistance() + playerViewHeight);
 	yaw = 270.f - (player.getRotation().y + angleAroundPlayer); // 270 should be 180, but due to some prev calc its this way (need to check)
 }

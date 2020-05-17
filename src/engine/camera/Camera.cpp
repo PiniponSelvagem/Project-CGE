@@ -8,9 +8,9 @@ Camera::Camera(float fov, float nearPlane, float farPlane, glm::vec3 position, g
 
 	this->position = position;
 
-	this->pitch = direction.x;
-	this->yaw   = direction.y;
-	this->roll  = direction.z;
+	this->pitch = direction.x;	// TODO ???????
+	this->yaw   = direction.y;	// TODO ???????
+	this->roll  = direction.z;	// TODO ???????
 }
 
 Camera::~Camera() {

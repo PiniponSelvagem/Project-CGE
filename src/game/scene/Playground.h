@@ -28,10 +28,19 @@ class Playground : public Scene {
 		void playerRight();
 		void playerJump();
 		
-		void cameraZoom(float zoom);
-		void cameraPith(float pitch);
-		void cameraYaw(float yaw);
+		void cameraZoom(float zoomOffset);
+		void cameraPith(float pitchOffset);
+		void cameraYaw(float yawOffset);
+		void cameraSetPlayerDirection(float yawOffset);
 
 		//void lightSetPosition();
+		/*
+		void cameraFoward(float dTime);
+		void cameraBackward(float dTime);
+		void cameraLeft(float dTime);
+		void cameraRight(float dTime);
+		void cameraUp(float dTime);
+		void cameraDown(float dTime);
+		*/
 };
 

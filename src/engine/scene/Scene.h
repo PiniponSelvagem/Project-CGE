@@ -79,9 +79,10 @@ class Scene {
 		virtual void playerRight() { }
 		virtual void playerJump() { }
 
-		virtual void cameraZoom(float zoom) { }
-		virtual void cameraPith(float pitch) { }
-		virtual void cameraYaw(float yaw) { }
+		virtual void cameraZoom(float zoomOffset) { }
+		virtual void cameraPith(float pitchOffset) { }
+		virtual void cameraYaw(float yawOffset) { }
+		virtual void cameraSetPlayerDirection(float yawOffset) { }
 
 		/* Useful for free camera */
 		virtual void cameraPanTilt(double mouseOffsetX, double mouseOffsetY) { }
