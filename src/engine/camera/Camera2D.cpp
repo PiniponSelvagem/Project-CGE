@@ -1,18 +1,6 @@
 #pragma once
 #include "Camera2D.h"
 
-void Camera2D::updateCameraVectors() {
-	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	front.y = sin(glm::radians(pitch));
-	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-
-	front = glm::normalize(front);
-	right = glm::normalize(glm::cross(front, worldUp));
-	up = glm::normalize(glm::cross(right, front));
-}
-
-
-
 Camera2D::Camera2D(float fov, float nearPlane, float farPlane, glm::vec3 position, glm::vec3 direction)
 	: Camera(fov, nearPlane, farPlane, position, direction) {
 

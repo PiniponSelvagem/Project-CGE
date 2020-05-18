@@ -27,9 +27,9 @@ class Camera {
 
 		GLfloat pitch;
 		GLfloat yaw;
-		GLfloat roll;
+		GLfloat roll;		// currently not supported
 
-		virtual void updateCameraVectors() = 0;
+		virtual void updateCameraVectors();
 
 		inline void setPitch(GLfloat pitch) {
 			this->pitch = pitch;
@@ -49,7 +49,7 @@ class Camera {
 
 	public:
 		Camera(float fov, float nearPlane, float farPlane, glm::vec3 position, glm::vec3 direction);
-		virtual ~Camera();
+		virtual ~Camera() { }
 
 		const glm::mat4 getViewMatrix();
 		const glm::mat4 getProjectionMatrix();

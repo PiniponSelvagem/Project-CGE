@@ -3,7 +3,7 @@
 
 void Camera3D_Player::calcPosition(float horizDistance, float vertDistance) {
 	float angle = player.getRotation().y + angleAroundPlayer;
-	float angleRads = (angle * PI) / 180.f;
+	float angleRads = glm::radians(angle);
 	float offsetX = horizDistance * sin(angleRads);
 	float offsetZ = horizDistance * cos(angleRads);
 
@@ -19,5 +19,11 @@ void Camera3D_Player::updatePosition() {
 	if (distFromPlayer > 0) distFromPlayer = 0;
 	else if (distFromPlayer < maxDistFromPlayer) distFromPlayer = maxDistFromPlayer;
 	calcPosition(calcHorizontalDistance(), calcVerticalDistance() + playerViewHeight);
-	yaw = 270.f - (player.getRotation().y + angleAroundPlayer); // 270 should be 180, but due to some prev calc its this way (need to check)
+	yaw = -90.f - (player.getRotation().y + angleAroundPlayer); // 180 in ThinMatrix tutorial
+}
+
+
+void Camera3D_Player::changePlayerDirection(float yawOffset) {
+	angleAroundPlayer = 180.f;
+	player.changeRotation(glm::vec3(0, -yawOffset, 0));
 }

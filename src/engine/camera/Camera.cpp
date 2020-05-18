@@ -1,6 +1,18 @@
 #pragma once
 #include "Camera.h"
 
+void Camera::updateCameraVectors() {
+	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	front.y = sin(glm::radians(pitch));
+	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+	front = glm::normalize(front);
+	right = glm::normalize(glm::cross(front, worldUp));
+	up = glm::normalize(glm::cross(right, front));
+}
+
+
+
 Camera::Camera(float fov, float nearPlane, float farPlane, glm::vec3 position, glm::vec3 direction) {
 	this->fov = fov;
 	this->nearPlane = nearPlane;
@@ -8,12 +20,9 @@ Camera::Camera(float fov, float nearPlane, float farPlane, glm::vec3 position, g
 
 	this->position = position;
 
-	this->pitch = direction.x;	// TODO ???????
-	this->yaw   = direction.y;	// TODO ???????
-	this->roll  = direction.z;	// TODO ???????
-}
-
-Camera::~Camera() {
+	this->yaw   = direction.x;
+	this->pitch = direction.y;
+	this->roll  = direction.z;
 }
 
 const glm::mat4 Camera::getViewMatrix() {

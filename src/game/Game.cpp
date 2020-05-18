@@ -70,7 +70,8 @@ void Game::updateKeyboardInput() {
 	//	scene->cameraDown(dTime);
 
 	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_2))
-		scene->lightSetPosition();
+		scene->cameraSetPlayerDirection(mouseOffsetX);
+		//scene->lightSetPosition();
 }
 
 

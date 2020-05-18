@@ -1,7 +1,6 @@
 #pragma once
 #include "Camera3D.h"
 #include <math.h>
-#define PI 3.1459
 
 #include "../entities/player/Player.h"
 
@@ -13,16 +12,16 @@ class Camera3D_Player : public Camera3D {
 		float distFromPlayer, maxDistFromPlayer;
 		float angleAroundPlayer;
 		
-		inline float calcHorizontalDistance() { return distFromPlayer * cos((pitch * PI) / 180.f); }
-		inline float calcVerticalDistance()   { return distFromPlayer * sin((pitch * PI) / 180.f); }
+		inline float calcHorizontalDistance() { return distFromPlayer * cos(glm::radians(pitch)); }
+		inline float calcVerticalDistance()   { return distFromPlayer * sin(glm::radians(pitch)); }
 
 		void calcPosition(float horizDistance, float vertDistance);
 
 
 	public:
-		Camera3D_Player(Player& player, float playerViewHeight, float distToPlayer, float maxDistFromPlayer, float angleAroundPlayer,
-						float fov, float nearPlane, float farPlane, float startAngleToPlayer)
-			: Camera3D(fov, nearPlane, farPlane, glm::vec3(0.f), glm::vec3(startAngleToPlayer, 0.f, 0.f)),
+		Camera3D_Player(Player& player, float playerViewHeight, float distToPlayer, float maxDistFromPlayer, float angleAroundPlayer, float startAngleToPlayer,
+						float fov, float nearPlane, float farPlane)
+			: Camera3D(fov, nearPlane, farPlane, glm::vec3(0.f), glm::vec3(0.f, startAngleToPlayer, 0.f)),
 			player(player), playerViewHeight(playerViewHeight), distFromPlayer(-distToPlayer), maxDistFromPlayer(-maxDistFromPlayer), angleAroundPlayer(angleAroundPlayer)
 		{ }
 		virtual ~Camera3D_Player() { }
@@ -38,19 +37,5 @@ class Camera3D_Player : public Camera3D {
 				angleAroundPlayer = 0.f;
 		}
 
-		inline void setPlayerDirection(float yawOffset) {
-			/*
-			changeAngleAroundPlayer(yawOffset);
-
-			std::cout <<
-				"AROUND: " << angleAroundPlayer <<
-				" - PLAYER.y: " << player.getRotation().y <<
-				" - YAW: " << yaw <<
-				std::endl;
-
-			player.changeRotation(glm::vec3(0.f, angleAroundPlayer, 0.f));
-			player.setRotationY(player.getRotation().y);
-			angleAroundPlayer = 0;
-			*/
-		}
+		void changePlayerDirection(float yawOffset);
 };

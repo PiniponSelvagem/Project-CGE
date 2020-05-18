@@ -193,8 +193,8 @@ void Playground::initEnviroment() {
 }
 void Playground::initCamera() {
 	camera = new Camera3D_Player(
-		*player, 1.f, 5.f, 20.f, 180.f,
-		90.f, 0.001f, 1000.f, -35.f
+		*player, 1.f, 5.f, 20.f, 180.f, -35.f,
+		90.f, 0.001f, 1000.f
 	);
 
 	/*
@@ -236,7 +236,7 @@ void Playground::cameraYaw(float yawOffset)    {
 	static_cast<Camera3D_Player*>(camera)->changeAngleAroundPlayer(yawOffset * MOUSE_SENSIVITY);
 }
 void Playground::cameraSetPlayerDirection(float yawOffset) {
-	static_cast<Camera3D_Player*>(camera)->setPlayerDirection(yawOffset * MOUSE_SENSIVITY);
+	static_cast<Camera3D_Player*>(camera)->changePlayerDirection(yawOffset * MOUSE_SENSIVITY);
 }
 
 //void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }
