@@ -129,27 +129,29 @@ void Playground::initModels() {
 void Playground::initEntities() {
 	player = new Player(
 		5.f, 200.f, -50.f, 10.f,
-		models[4], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f)//glm::vec3(0.f, 180.f, 0.f)
+		models[4], glm::vec3(400.f, 20.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f)//glm::vec3(0.f, 180.f, 0.f)
 	);
 	entities.push_back(player);
 
-	entities.push_back(new Entity(models[0], glm::vec3(400.f, 2.f, 398.f)));	//cube 0
-	entities.push_back(new Entity(models[0], glm::vec3(398.f, 1.f, 397.f)));	//cube 1
-	entities.push_back(new Entity(models[0], glm::vec3(402.f, 1.f, 397.f)));	//cube 2
+	entities.push_back(new Entity(models[0], glm::vec3(400.f, 24.f, 398.f)));	//cube 0
+	entities.push_back(new Entity(models[0], glm::vec3(398.f, 22.f, 397.f)));	//cube 1
+	entities.push_back(new Entity(models[0], glm::vec3(402.f, 22.f, 397.f)));	//cube 2
 	
 	//entities.push_back(new Entity(models[1], glm::vec3(400.f, 0.05f, 400.f)));	//floor
 	
-	entities.push_back(new Entity(models[2], glm::vec3(400.f, 7.8f, 360.f)));	//teapot
+	entities.push_back(new Entity(models[2], glm::vec3(400.f, 27.8f, 360.f)));	//teapot
 
 	// digital grass
 	for (int i = 0; i < 400; ++i) {
 		float randX = rand() % 40 + 380;
 		float randZ = rand() % 40 + 380;
-		entities.push_back(new Entity(models[3], glm::vec3(randX, 0.f, randZ)));
+		entities.push_back(new Entity(models[3], glm::vec3(randX, 20.f, randZ)));
 	}
 
 	// TERRAIN
-	terrain = new Terrain(0, 0, terrainTexPacks[0], new Texture("resources/png/blend_map.png", GL_TEXTURE_2D));
+	terrain = new Terrain(0, 0, "resources/png/heightmap.png", 800.f, 40.f,
+						  terrainTexPacks[0], new Texture("resources/png/blend_map.png", GL_TEXTURE_2D)
+	);
 	/*
 	models.push_back(new Model(
 		terrain->getMesh(),
@@ -190,6 +192,7 @@ void Playground::initLights() {
 void Playground::initEnviroment() {
 	fog = new Fog(0.003, 5.0);
 	ambient = glm::vec3(0.10f);
+	//ambient = glm::vec3(0.5f);
 }
 void Playground::initCamera() {
 	camera = new Camera3D_Player(
@@ -207,7 +210,7 @@ void Playground::initCamera() {
 ////////////////////////////////
 
 void Playground::update(float dTime) {
-	player->move(dTime);
+	player->move(dTime, *terrain);
 	static_cast<Camera3D_Player*>(camera)->updatePosition();
 
 	entities[1]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
@@ -220,11 +223,11 @@ void Playground::update(float dTime) {
 void Playground::cameraPanTilt(double mouseOffsetX, double mouseOffsetY) {
 	camera->changePanTilt(mouseOffsetX, mouseOffsetY);
 }
-void Playground::playerFoward()   { player->setMoveFoward();   }
-void Playground::playerBackward() { player->setMoveBackward(); }
-void Playground::playerLeft()     { player->setRotateLeft();   }
-void Playground::playerRight()    { player->setRotateRight();  }
-void Playground::playerJump()     { player->setJump();         }
+void Playground::playerFoward()      { player->setMoveFoward();   }
+void Playground::playerBackward()    { player->setMoveBackward(); }
+void Playground::playerLeft()        { player->setRotateLeft();   }
+void Playground::playerRight()       { player->setRotateRight();  }
+void Playground::playerJump()        { player->setJump();         }
 
 void Playground::cameraZoom(float zoomOffset)  {
 	static_cast<Camera3D_Player*>(camera)->changeDistanceFromPlayer(zoomOffset * MOUSE_WHEEL_SENSIVITY);
@@ -239,7 +242,7 @@ void Playground::cameraSetPlayerDirection(float yawOffset) {
 	static_cast<Camera3D_Player*>(camera)->changePlayerDirection(yawOffset * MOUSE_SENSIVITY);
 }
 
-//void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }
+void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }
 
 
 

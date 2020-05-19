@@ -1,13 +1,13 @@
 #pragma once
 #include "Player.h"
 #include <math.h>
-#define PI 3.1459
 
-void Player::move(float dTime) {
+void Player::move(float dTime, Terrain& terrain) {
 	changeRotation(glm::vec3(0, currTurnSpeed * dTime, 0));
 
 	currJumpSpeed += gravity * dTime;
 	changePosition(glm::vec3(0, currJumpSpeed * dTime, 0));
+	float terrainHeight = terrain.getHeight(getPosition().x, getPosition().z);
 	if (getPosition().y < terrainHeight) {
 		currJumpSpeed = 0.f;
 		inAir = false;
@@ -15,7 +15,8 @@ void Player::move(float dTime) {
 	}
 
 	float distance = currSpeed * dTime;
-	float radiansY = (getRotation().y * PI) / 180.f;
+	float radiansY = glm::radians(getRotation().y);
+
 	float dX = distance * sin(radiansY);
 	float dZ = distance * cos(radiansY);
 

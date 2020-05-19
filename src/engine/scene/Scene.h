@@ -77,6 +77,8 @@ class Scene {
 		virtual void playerBackward() { }
 		virtual void playerLeft() { }
 		virtual void playerRight() { }
+		virtual void playerStrafeLeft() { }
+		virtual void playerStrafeRight() { }
 		virtual void playerJump() { }
 
 		virtual void cameraZoom(float zoomOffset) { }

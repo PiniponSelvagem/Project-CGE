@@ -33,7 +33,7 @@ void Game::updateKeyboardInput() {
 	if (keyboardInput->isKeyActive(GLFW_KEY_R)) {
 		scene->reloadShader();
 	}
-	if (keyboardInput->isKeyActive(GLFW_KEY_E)) {
+	if (keyboardInput->isKeyActive(GLFW_KEY_T)) {
 		loadScene();
 	}
 
@@ -50,6 +50,10 @@ void Game::updateKeyboardInput() {
 		scene->playerLeft();
 	if (keyboardInput->isKeyActive(GLFW_KEY_D))
 		scene->playerRight();
+	if (keyboardInput->isKeyActive(GLFW_KEY_Q))
+		scene->playerStrafeLeft();
+	if (keyboardInput->isKeyActive(GLFW_KEY_E))
+		scene->playerStrafeRight();
 
 	if (keyboardInput->isKeyActive(GLFW_KEY_SPACE))
 		scene->playerJump();
@@ -69,9 +73,11 @@ void Game::updateKeyboardInput() {
 	//if (keyboardInput->isKeyActive(GLFW_KEY_LEFT_CONTROL))
 	//	scene->cameraDown(dTime);
 
-	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_2))
+	if (mouseInput->isKeyActive(GLFW_MOUSE_BUTTON_2)) {
+		scene->cameraPith(mouseOffsetY);
 		scene->cameraSetPlayerDirection(mouseOffsetX);
-		//scene->lightSetPosition();
+		scene->lightSetPosition();
+	}
 }
 
 
@@ -93,7 +99,7 @@ void Game::initInput() {
 	keys.push_back(GLFW_KEY_N);
 
 	keys.push_back(GLFW_KEY_R);
-	keys.push_back(GLFW_KEY_E);
+	keys.push_back(GLFW_KEY_T);
 
 	keys.push_back(GLFW_KEY_0);
 	keys.push_back(GLFW_KEY_9);
@@ -102,6 +108,8 @@ void Game::initInput() {
 	keys.push_back(GLFW_KEY_S);
 	keys.push_back(GLFW_KEY_A);
 	keys.push_back(GLFW_KEY_D);
+	keys.push_back(GLFW_KEY_Q);
+	keys.push_back(GLFW_KEY_E);
 	keys.push_back(GLFW_KEY_SPACE);
 	keys.push_back(GLFW_KEY_LEFT_CONTROL);
 

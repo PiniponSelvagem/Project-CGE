@@ -11,3 +11,5 @@
 #include <GLM/gtc/type_ptr.hpp>
 
 #include <SOIL/SOIL.h>
+
+#include <STB_IMAGE/stb_image.h>

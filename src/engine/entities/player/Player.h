@@ -1,5 +1,6 @@
 #pragma once
 #include "../Entity.h"
+#include "../../terrains/Terrain.h"
 
 class Player : public Entity {
 	private:
@@ -7,9 +8,7 @@ class Player : public Entity {
 		const float turnSpeed;
 		const float gravity;
 		const float jumpPower;
-
-		const float terrainHeight = 0.f;
-
+		
 		float currSpeed = 0;
 		float currTurnSpeed = 0;
 		float currJumpSpeed = 0;
@@ -26,7 +25,7 @@ class Player : public Entity {
 		{ }
 		virtual ~Player() { }
 		
-		void move(float dTime);
+		void move(float dTime, Terrain& terrain);
 
 		inline void setMoveFoward()   { currSpeed += runSpeed;  }
 		inline void setMoveBackward() { currSpeed += -runSpeed; }

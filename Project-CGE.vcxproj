@@ -34,6 +34,7 @@
     <ClCompile Include="src\engine\shaders\TerrainShader.cpp" />
     <ClCompile Include="src\engine\ui\CameraUI.cpp" />
     <ClCompile Include="src\engine\lights\LightPoint.h" />
+    <ClCompile Include="src\engine\Utils.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\scene\PerformanceTest.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
@@ -75,6 +76,7 @@
     <ClInclude Include="src\engine\shaders\TerrainShader.h" />
     <ClInclude Include="src\engine\shaders\EntityShader.h" />
     <ClInclude Include="src\engine\ui\CameraUI.h" />
+    <ClInclude Include="src\engine\Utils.h" />
     <ClInclude Include="src\engine\WindowUserPointer.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\game\scene\PerformanceTest.h" />

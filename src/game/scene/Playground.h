@@ -26,6 +26,8 @@ class Playground : public Scene {
 		void playerBackward();
 		void playerLeft();
 		void playerRight();
+		//void playerStrafeLeft();
+		//void playerStrafeRight();
 		void playerJump();
 		
 		void cameraZoom(float zoomOffset);
@@ -33,7 +35,7 @@ class Playground : public Scene {
 		void cameraYaw(float yawOffset);
 		void cameraSetPlayerDirection(float yawOffset);
 
-		//void lightSetPosition();
+		void lightSetPosition();
 		/*
 		void cameraFoward(float dTime);
 		void cameraBackward(float dTime);
