@@ -127,31 +127,33 @@ void Playground::initModels() {
 	));
 }
 void Playground::initEntities() {
+	// TERRAIN
+	terrain = new Terrain(0, 0, "resources/png/heightmap.png", 800.f, 40.f,
+						  terrainTexPacks[0], new Texture("resources/png/blend_map.png", GL_TEXTURE_2D)
+	);
+
+
 	player = new Player(
 		5.f, 200.f, -50.f, 10.f,
-		models[4], glm::vec3(400.f, 20.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f)//glm::vec3(0.f, 180.f, 0.f)
+		models[4], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f, 180.f, 0.f)
 	);
 	entities.push_back(player);
 
-	entities.push_back(new Entity(models[0], glm::vec3(400.f, 24.f, 398.f)));	//cube 0
-	entities.push_back(new Entity(models[0], glm::vec3(398.f, 22.f, 397.f)));	//cube 1
-	entities.push_back(new Entity(models[0], glm::vec3(402.f, 22.f, 397.f)));	//cube 2
+	entities.push_back(new Entity(models[0], glm::vec3(400.f, terrain->getHeight(400.f, 398.f) + 1.f, 398.f), glm::vec3(0.f, 0.5f, 0.f)));	//cube 0
+	entities.push_back(new Entity(models[0], glm::vec3(398.f, terrain->getHeight(398.f, 397.f) + 2.f, 397.f), glm::vec3(0.f, 0.5f, 0.f)));	//cube 1
+	entities.push_back(new Entity(models[0], glm::vec3(402.f, terrain->getHeight(402.f, 397.f) + 3.f, 397.f), glm::vec3(0.f, 0.5f, 0.f)));	//cube 2
 	
 	//entities.push_back(new Entity(models[1], glm::vec3(400.f, 0.05f, 400.f)));	//floor
 	
-	entities.push_back(new Entity(models[2], glm::vec3(400.f, 27.8f, 360.f)));	//teapot
+	entities.push_back(new Entity(models[2], glm::vec3(400.f, terrain->getHeight(400.f, 360.f), 360.f), glm::vec3(0.f, 7.8f, 0.f)));	//teapot
 
 	// digital grass
 	for (int i = 0; i < 400; ++i) {
 		float randX = rand() % 40 + 380;
 		float randZ = rand() % 40 + 380;
-		entities.push_back(new Entity(models[3], glm::vec3(randX, 20.f, randZ)));
+		entities.push_back(new Entity(models[3], glm::vec3(randX, terrain->getHeight(randX, randZ), randZ)));
 	}
 
-	// TERRAIN
-	terrain = new Terrain(0, 0, "resources/png/heightmap.png", 800.f, 40.f,
-						  terrainTexPacks[0], new Texture("resources/png/blend_map.png", GL_TEXTURE_2D)
-	);
 	/*
 	models.push_back(new Model(
 		terrain->getMesh(),
@@ -165,25 +167,25 @@ void Playground::initLights() {
 	float intensity = 1.f;
 
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(410.f, 1.f, 410.f), glm::vec3(1.f, 1.f, 1.f),
+		glm::vec3(410.f, 25.f, 410.f), glm::vec3(1.f, 1.f, 1.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(390.f, 1.f, 390.f), glm::vec3(1.f, 0.f, 0.f),
+		glm::vec3(390.f, 25.f, 390.f), glm::vec3(1.f, 0.f, 0.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(390.f, 1.f, 410.f), glm::vec3(0.f, 1.f, 0.f),
+		glm::vec3(390.f, 25.f, 410.f), glm::vec3(0.f, 1.f, 0.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f
 	));
 	lightsPoint.push_back(new LightPoint(
-		glm::vec3(410.f, 1.f, 390.f), glm::vec3(0.f, 0.f, 1.f),
+		glm::vec3(410.f, 25.f, 390.f), glm::vec3(0.f, 0.f, 1.f),
 		intensity,
 		1.f,
 		0.045f, 0.0075f

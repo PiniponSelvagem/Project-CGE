@@ -19,10 +19,10 @@ class Camera3D_Player : public Camera3D {
 
 
 	public:
-		Camera3D_Player(Player& player, float playerViewHeight, float distToPlayer, float maxDistFromPlayer, float angleAroundPlayer, float startAngleToPlayer,
+		Camera3D_Player(Player& player, float playerViewHeight, float distToPlayer, float maxDistFromPlayer, float startYawToPlayer, float startPitchToPlayer,
 						float fov, float nearPlane, float farPlane)
-			: Camera3D(fov, nearPlane, farPlane, glm::vec3(0.f), glm::vec3(0.f, startAngleToPlayer, 0.f)),
-			player(player), playerViewHeight(playerViewHeight), distFromPlayer(-distToPlayer), maxDistFromPlayer(-maxDistFromPlayer), angleAroundPlayer(angleAroundPlayer)
+			: Camera3D(fov, nearPlane, farPlane, glm::vec3(0.f), glm::vec3(0.f, startPitchToPlayer, 0.f)),
+			player(player), playerViewHeight(playerViewHeight), distFromPlayer(-distToPlayer), maxDistFromPlayer(-maxDistFromPlayer), angleAroundPlayer(startYawToPlayer)
 		{ }
 		virtual ~Camera3D_Player() { }
 
