@@ -16,7 +16,7 @@ class Playground : public Scene {
 		void initCamera();
 
 	public:
-		Playground() : Scene() { }
+		Playground() : Scene("resources/scenes/playground.scene") { }
 		virtual ~Playground() { }
 
 		void update(float dTime);

@@ -131,6 +131,6 @@ void main() {
 		);
 	
 	// Fog calculation
-	//fs_color = mix(vec4(vec3(0.0, 0.0, 0.0), 1.0), fs_color, calculateFogVisibility());
+	fs_color = mix(vec4(vec3(0.0, 0.0, 0.0), 1.0), fs_color, calculateFogVisibility());
 	//fs_color = mix(vec4(skyColor, 1.0), fs_color, visibility);
 }

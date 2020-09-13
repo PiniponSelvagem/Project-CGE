@@ -24,7 +24,6 @@ enum material_enum {
 
 enum mesh_enum {
 	MESH_CUBE,
-	MESH_FLOOR,
 	MESH_TEAPOT,
 	MESH_DGRASS
 };
@@ -38,7 +37,6 @@ void Playground::initRenderer() {
 }
 void Playground::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
-	meshes.push_back(ObjLoader::loadObj("resources/obj/floor.obj"));
 	meshes.push_back(ObjLoader::loadObj("resources/obj/teapot.obj"));
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/digital_grass.obj"));
 }
@@ -84,8 +82,8 @@ void Playground::initTextures() {
 }
 void Playground::initMaterials() {
 	materials.push_back(new Material(
-		glm::vec3(1.f),
-		glm::vec3(2.f),
+		glm::vec3(1.f, 0.f, 0.f),
+		glm::vec3(2.f, 0.f, 0.f), //glm::vec3(2.f),
 		0,
 		1
 	));
@@ -95,13 +93,6 @@ void Playground::initModels() {
 		meshes[MESH_CUBE],
 		textures[TEX_FRAGILE],
 		textures[TEX_FRAGILE_SPECULAR],
-		materials[MAT_CRATE]
-	));
-
-	models.push_back(new Model(
-		meshes[MESH_FLOOR],
-		textures[TEX_DEFAULT],
-		textures[TEX_DEFAULT],
 		materials[MAT_CRATE]
 	));
 
@@ -128,14 +119,13 @@ void Playground::initModels() {
 }
 void Playground::initEntities() {
 	// TERRAIN
-	terrain = new Terrain(0, 0, "resources/png/heightmap.png", 800.f, 40.f,
-						  terrainTexPacks[0], new Texture("resources/png/blend_map.png", GL_TEXTURE_2D)
-	);
-
+	//terrain = new Terrain(0, 0, "resources/png/heightmap.png", 800.f, 40.f,
+	//					  terrainTexPacks[0], new Texture("resources/png/blend_map.png", GL_TEXTURE_2D)
+	//);
 
 	player = new Player(
 		5.f, 200.f, -50.f, 10.f,
-		models[4], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f, 180.f, 0.f)
+		models[3], glm::vec3(400.f, 0.f, 398.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.f, 180.f, 0.f)
 	);
 	entities.push_back(player);
 
@@ -145,13 +135,13 @@ void Playground::initEntities() {
 	
 	//entities.push_back(new Entity(models[1], glm::vec3(400.f, 0.05f, 400.f)));	//floor
 	
-	entities.push_back(new Entity(models[2], glm::vec3(400.f, terrain->getHeight(400.f, 360.f), 360.f), glm::vec3(0.f, 7.8f, 0.f)));	//teapot
+	entities.push_back(new Entity(models[1], glm::vec3(400.f, terrain->getHeight(400.f, 360.f), 360.f), glm::vec3(0.f, 7.8f, 0.f)));	//teapot
 
 	// digital grass
 	for (int i = 0; i < 400; ++i) {
 		float randX = rand() % 40 + 380;
 		float randZ = rand() % 40 + 380;
-		entities.push_back(new Entity(models[3], glm::vec3(randX, terrain->getHeight(randX, randZ), randZ)));
+		entities.push_back(new Entity(models[2], glm::vec3(randX, terrain->getHeight(randX, randZ), randZ)));
 	}
 
 	/*

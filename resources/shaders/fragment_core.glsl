@@ -71,7 +71,6 @@ float calculateFogVisibility() {
 }
 
 
-
 void main() {
 	//Discard fragment if texture alpha value
 	//https://learnopengl.com/Advanced-OpenGL/Blending

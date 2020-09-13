@@ -1,0 +1,89 @@
+#Scene Playground
+
+shader core resources/shaders/vertex_core.glsl resources/shaders/fragment_core.glsl
+shader terrain resources/shaders/vertex_terrain.glsl resources/shaders/fragment_terrain.glsl
+
+
+mesh arrays resources/obj/cube.obj
+mesh elements resources/obj/teapot.obj
+mesh arrays resources/obj/digital_grass.obj
+
+
+#####texture resources/png/NO_TEX.png               0
+#####texture resources/png/NO_SPECULAR.png          1
+texture resources/png/crate.png                     0 + 2
+texture resources/png/crate_specular.png            1 + 2
+texture resources/png/fragile.png                   2 ...
+texture resources/png/fragile_specular.png          3
+texture resources/png/digital_grass.png             4
+texture resources/png/digital_grass_specular.png    5
+
+texture resources/png/terrain_grass.png             6
+texture resources/png/terrain_mud.png               7
+texture resources/png/terrain_flowers.png           8
+texture resources/png/terrain_path.png              9
+
+texture resources/png/terrain_mud_specular.png      10
+texture resources/png/terrain_path_specular.png     11
+
+#if -1 use default texture for that type (diffuse or specular)
+#terrainTexPack mainDif mainSpec 2ndDif 2ndSpec 3rdDif 3rdSpec 4thDif 4thSpec
+terrainTexPack 6 -1 7 10 8 -1 9 11
+
+
+#material diffuseReflectiveIntensity specularReflectiveIntensity
+material 1.0 2.0
+
+
+#if -1 use default texture for that type (diffuse or specular)
+#model mesh difTex specTex material
+model 0 2 3 0
+model 1 -1 -1 0
+model 2 4 5 0
+model 0 0 1 0
+
+
+#terrain gridX gridZ heightMap maxHeight terrainTexPack blenddMap
+terrainSize 800.0
+#CURRENTLY ONLY SUPPORTING 1 TERRAIN, IF MORE THAN ONE, ONLY THE LAST ONE COUNTS AND MEMORY LEAKS MIGHT HAPPEN
+terrain 0 0 resources/png/heightmap.png 40.0 0 resources/png/blend_map.png
+
+
+#worldGravity 1.0 // ~ earth gravity
+worldGravity 1.0
+#player runSpeed turnSpeed jumpPower modelID position origin rotation scale
+player 5.0 200.0 10.0 0   400.0 0.0 400.0   0.0 0.5 0.0   0.0 180.0 0.0   1.0 1.0 1.0
+#add player to entities. if more than one here, ignore it
+
+
+#entity model useTerrainOffset position origin rotation scale
+#useTerrainOffset [0..1], if outside of range -> 0
+entity 0 1   400.0 1.0 398.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0
+entity 0 1   398.0 2.0 397.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0
+entity 0 1   402.0 3.0 397.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0
+entity 1 1   400.0 0.0 360.0   0.0 7.8 0.0   0.0 0.0 0.0   1.0 1.0 1.0
+entity 2 1   395.0 0.0 395.0   0.0 0.0 0.0   0.0 0.0 0.0   1.0 1.0 1.0
+
+
+#light useTerrainOffset position color intensity attenuation falloffnear fallofffar
+#useTerrainOffset [0..1], if outside of range -> 0
+#currently max lights = 4, if more than that it will ignore lights after that
+light 1   410.0 1.0 410.0   1.0 1.0 1.0   1.0 1.0 0.045 0.0075
+light 1   390.0 1.0 390.0   1.0 0.0 0.0   1.0 1.0 0.045 0.0075
+light 1   390.0 1.0 410.0   0.0 1.0 0.0   1.0 1.0 0.045 0.0075
+light 1   410.0 1.0 390.0   0.0 0.0 1.0   1.0 1.0 0.045 0.0075
+
+
+#ambient color
+ambient 0.1 0.1 0.1
+
+
+#fog density gradient
+fog 0.003 5.0
+
+
+#camera 2D fov nearPlane farPlane position direction
+#camera 3D fov nearPlane farPlane position direction
+#camera 3D_3 fov nearPlane farPlane playerViewHeight startDistanceToPlayer maxDistanceToPlayer startYawToPlayer startPitchToPlayer
+#CURRENTLY ONLY SUPPORTING 1 CAMERA, IF MORE THAN ONE, MEMORY LEAKS MIGHT HAPPEN OR CRASH
+camera 3D_3 90.0 0.001 1000.0 1.5 5.0 20.0 180.0 -35.0

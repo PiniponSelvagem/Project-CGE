@@ -12,9 +12,16 @@
 #include "../terrains/Terrain.h"
 #include "../enviroment/Fog.h"
 #include "../camera/Camera.h"
+#include "../camera/Camera3D_Player3rd.h"
 
 class Scene {
+	private:
+		void loadFromFile();
+
+
 	protected:
+		const char* sceneFile;
+
 		// Camera
 		Camera* camera;
 
@@ -62,7 +69,7 @@ class Scene {
 
 
 	public:
-		Scene();
+		Scene(const char* sceneFile) : sceneFile(sceneFile) { }
 		virtual ~Scene();
 		void initScene();
 

@@ -7,9 +7,11 @@ Following "Suraj Sharma (C++)" and "ThinMatrix (Java)" on youtube, to learn Open
 ## Some useful links
 - GLFW - https://github.com/glfw/glfw
 - SOIL - https://www.lonesock.net/soil.html
+- STB_IMAGE - https://github.com/nothings/stb/blob/master/stb_image.h
 - https://learnopengl.com
 - https://github.com/Headturna
-- https://www.youtube.com/playlist?list=PL6xSOsbVA1eYSZTKBxnoXYboy7wc4yg-Z
+- Suraj Sharma - https://www.youtube.com/playlist?list=PL6xSOsbVA1eYSZTKBxnoXYboy7wc4yg-Z
+- ThinMatrix - https://www.youtube.com/playlist?list=PLRIWtICgwaX0u7Rf9zkZhLoLuZVfUksDP
 
 
 ---
