@@ -37,6 +37,11 @@ void EntityShader::sendMaterial(Material& material) {
 	set1i(material.getSpecularTex(), "material.specularTex");
 }
 
+void EntityShader::sendTextureInfo(Texture& texture, glm::vec2 offset) {
+	set1f(texture.getNOfRows(), "nOfRows");
+	setVec2f(offset, "offset");
+}
+
 void EntityShader::sendModelMatrix(glm::mat4& modelMatrix) {
 	setMat4fv(modelMatrix, "ModelMatrix");
 }

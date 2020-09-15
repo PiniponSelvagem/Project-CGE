@@ -6,7 +6,7 @@ shader terrain resources/shaders/vertex_terrain.glsl resources/shaders/fragment_
 
 mesh arrays resources/obj/cube.obj
 mesh elements resources/obj/teapot.obj
-mesh arrays resources/obj/digital_grass.obj
+mesh arrays resources/obj/fern.obj
 
 
 #####texture resources/png/NO_TEX.png               0
@@ -15,8 +15,8 @@ texture resources/png/crate.png                     0 + 2
 texture resources/png/crate_specular.png            1 + 2
 texture resources/png/fragile.png                   2 ...
 texture resources/png/fragile_specular.png          3
-texture resources/png/digital_grass.png             4
-texture resources/png/digital_grass_specular.png    5
+texture resources/png/fern.png                      4
+texture resources/png/NO_SPECULAR.png               5
 
 texture resources/png/terrain_grass.png             6
 texture resources/png/terrain_mud.png               7

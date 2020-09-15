@@ -44,8 +44,9 @@ void Texture::load(const char* fileName) {
 
 
 
-Texture::Texture(const char* fileName, GLenum type) {
+Texture::Texture(const char* fileName, GLenum type, int nOfRows) {
 	this->type = type;
+	this->nOfRows = nOfRows;
 	load(fileName);
 }
 

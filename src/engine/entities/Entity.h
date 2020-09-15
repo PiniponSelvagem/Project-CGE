@@ -5,6 +5,7 @@
 class Entity {
 	private:
 		Model* model;
+		int texIndex;
 
 		glm::vec3 position;
 		glm::vec3 origin;
@@ -14,8 +15,11 @@ class Entity {
 		bool modelUpdated = true;
 
 	public:
-		Entity(Model* model, glm::vec3 position, glm::vec3 origin = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f))
-			: model(model), position(position), origin(origin), rotation(rotation), scale(scale)
+		Entity(Model* model,
+			glm::vec3 position, glm::vec3 origin = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f),
+			int texIndex = 0
+		)
+			: model(model), position(position), origin(origin), rotation(rotation), scale(scale), texIndex(texIndex)
 		{ }
 		virtual ~Entity() { }
 
@@ -50,6 +54,16 @@ class Entity {
 
 
 		inline Model* getModel() { return model; }
+		inline float getTextureXOffset() {
+			int nOfRows = model->getDiffuseTex()->getNOfRows();
+			int column = texIndex % nOfRows;
+			return column / nOfRows;
+		}
+		inline float getTextureYOffset() {
+			int nOfRows = model->getDiffuseTex()->getNOfRows();
+			int row = texIndex / nOfRows;
+			return row / nOfRows;
+		}
 
 		inline glm::vec3 getPosition() { return position; }
 		inline glm::vec3 getOrigin()   { return origin; }

@@ -5,6 +5,7 @@
 #include "../enviroment/Fog.h"
 #include "../lights/LightPoint.h"
 #include "../models/Material.h"
+#include "../models/Texture.h"
 
 
 class EntityShader : public Shader {
@@ -20,6 +21,8 @@ class EntityShader : public Shader {
 		void sendLightsPoint(std::vector<LightPoint*>& lightsPoint);
 		
 		void sendMaterial(Material& material);
+
+		void sendTextureInfo(Texture& texture, glm::vec2 offset);
 
 		void sendModelMatrix(glm::mat4& modelMatrix);
 };

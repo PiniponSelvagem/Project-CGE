@@ -23,6 +23,7 @@ void EntityRenderer::render(Entity* entity) {
 
 	shader.use();
 	shader.sendMaterial(*model->getMaterial());
+	shader.sendTextureInfo(*model->getDiffuseTex(), glm::vec2(entity->getTextureXOffset(), entity->getTextureYOffset()));
 	
 	bindTexture(model->getDiffuseTex(), 0);
 	bindTexture(model->getSpecularTex(), 1);

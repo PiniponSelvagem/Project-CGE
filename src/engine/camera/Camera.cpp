@@ -28,6 +28,7 @@ Camera::Camera(float fov, float nearPlane, float farPlane, glm::vec3 position, g
 const glm::mat4 Camera::getViewMatrix() {
 	updateCameraVectors();
 	viewMatrix = glm::lookAt(position, position + front, up);
+	//viewMatrix = glm::lookAt(position, position + glm::vec3(0, 0, -1), glm::vec3(0, 1, 0));
 	return viewMatrix;
 }
 const glm::mat4 Camera::getProjectionMatrix() {
