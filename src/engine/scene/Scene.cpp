@@ -237,9 +237,37 @@ void Scene::loadFromFile() {
 					fov, nearPlane, farPlane
 				);
 			}
+			else if (type == "3D") {
+				float fov, nearPlane, farPlane;
+				glm::vec3 position, rotation;
+
+				ss >> fov;
+				ss >> nearPlane;
+				ss >> farPlane;
+				ss >> position.x >> position.y >> position.z;
+				ss >> rotation.x >> rotation.y >> rotation.z;
+
+				camera = new Camera3D(
+					fov, nearPlane, farPlane, position, rotation
+				);
+			}
+			else if (type == "2D") {
+				float fov, nearPlane, farPlane;
+				glm::vec3 position, rotation;
+
+				ss >> fov;
+				ss >> nearPlane;
+				ss >> farPlane;
+				ss >> position.x >> position.y >> position.z;
+				ss >> rotation.x >> rotation.y >> rotation.z;
+
+				camera = new Camera2D(
+					fov, nearPlane, farPlane, position, rotation
+				);
+			}
 		}
 
-		std::cout << "> " << line << std::endl;
+		//std::cout << "> " << line << std::endl;
 	}
 
 	masterRenderer = new MasterRenderer(

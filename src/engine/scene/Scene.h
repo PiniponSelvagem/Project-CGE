@@ -12,6 +12,7 @@
 #include "../terrains/Terrain.h"
 #include "../enviroment/Fog.h"
 #include "../camera/Camera.h"
+#include "../camera/Camera2D.h"
 #include "../camera/Camera3D_Player3rd.h"
 
 class Scene {
