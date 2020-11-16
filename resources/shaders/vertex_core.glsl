@@ -32,7 +32,7 @@ uniform Fog fog;
 void main() {
 	vs_position = vec4(ModelMatrix * vec4(vx_position, 1.f)).xyz;
 	vs_texcoord = (vx_texcoord/nOfRows) + offset;	// texture atlass
-	vs_texcoord = vec2(vx_texcoord.x, vx_texcoord.y * -1.f);	// check what the fuck is happening here, this should not be needed!!! texture Y axis is being inverted somewhere?
+	vs_texcoord = vec2(vx_texcoord.x, vx_texcoord.y);
 	vs_normal	= mat3(ModelMatrix) * vx_normal;
 	
 	/*
