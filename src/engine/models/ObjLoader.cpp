@@ -156,7 +156,7 @@ Mesh* ObjLoader::loadObj_arrays(const char* fileName) {
 		verticesData[i].position = vertexPositions[vertexPositionIndices[i]];
 
 		verticesData[i].texcoord.x = vertexTexCoords[vertexTexCoordIndices[i]].x;
-		verticesData[i].texcoord.y = vertexTexCoords[vertexTexCoordIndices[i]].y * -1.f;	// Flip vertically for OpenGL
+		verticesData[i].texcoord.y = (vertexTexCoords[vertexTexCoordIndices[i]].y * -1.f) + 1.f;	// Flip vertically for OpenGL
 
 		verticesData[i].normal = vertexNormals[vertexNormalIndices[i]];
 	}

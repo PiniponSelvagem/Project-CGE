@@ -9,22 +9,22 @@ mesh elements resources/obj/teapot.obj
 mesh arrays resources/obj/fern.obj
 
 
-#####texture resources/png/NO_TEX.png               0
-#####texture resources/png/NO_SPECULAR.png          1
-texture resources/png/crate.png                     0 + 2
-texture resources/png/crate_specular.png            1 + 2
-texture resources/png/fragile.png                   2 ...
-texture resources/png/fragile_specular.png          3
-texture resources/png/fern.png                      4
-texture resources/png/NO_SPECULAR.png               5
+#####texture resources/png/NO_TEX.png               textureAltas_numberOfRows        0
+#####texture resources/png/NO_SPECULAR.png          1        1
+texture resources/png/crate.png                     1        0 + 2
+texture resources/png/crate_specular.png            1        1 + 2
+texture resources/png/fragile.png                   1        2 ...
+texture resources/png/fragile_specular.png          1        3
+texture resources/png/fern.png                      2        4
+texture resources/png/NO_SPECULAR.png               1        5
 
-texture resources/png/terrain_grass.png             6
-texture resources/png/terrain_mud.png               7
-texture resources/png/terrain_flowers.png           8
-texture resources/png/terrain_path.png              9
+texture resources/png/terrain_grass.png             1        6
+texture resources/png/terrain_mud.png               1        7
+texture resources/png/terrain_flowers.png           1        8
+texture resources/png/terrain_path.png              1        9
 
-texture resources/png/terrain_mud_specular.png      10
-texture resources/png/terrain_path_specular.png     11
+texture resources/png/terrain_mud_specular.png      1        10
+texture resources/png/terrain_path_specular.png     1        11
 
 #if -1 use default texture for that type (diffuse or specular)
 #terrainTexPack mainDif mainSpec 2ndDif 2ndSpec 3rdDif 3rdSpec 4thDif 4thSpec
@@ -58,11 +58,14 @@ player 5.0 200.0 10.0 0   400.0 0.0 400.0   0.0 0.5 0.0   0.0 180.0 0.0   1.0 1.
 
 #entity model useTerrainOffset position origin rotation scale
 #useTerrainOffset [0..1], if outside of range -> 0
-entity 0 1   400.0 1.0 398.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0
-entity 0 1   398.0 2.0 397.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0
-entity 0 1   402.0 3.0 397.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0
-entity 1 1   400.0 0.0 360.0   0.0 7.8 0.0   0.0 0.0 0.0   1.0 1.0 1.0
-entity 2 1   395.0 0.0 395.0   0.0 0.0 0.0   0.0 0.0 0.0   1.0 1.0 1.0
+entity 0 1   400.0 1.0 398.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0   0
+entity 0 1   398.0 2.0 397.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0   0
+entity 0 1   402.0 3.0 397.0   0.0 0.5 0.0   0.0 0.0 0.0   1.0 1.0 1.0   0
+entity 1 1   400.0 0.0 360.0   0.0 7.8 0.0   0.0 0.0 0.0   1.0 1.0 1.0   0
+entity 2 1   395.0 0.0 375.0   0.0 0.0 0.0   0.0 0.0 0.0   1.0 1.0 1.0   0
+entity 2 1   395.0 0.0 385.0   0.0 0.0 0.0   0.0 0.0 0.0   1.0 1.0 1.0   1
+entity 2 1   395.0 0.0 395.0   0.0 0.0 0.0   0.0 0.0 0.0   1.0 1.0 1.0   2
+entity 2 1   395.0 0.0 405.0   0.0 0.0 0.0   0.0 0.0 0.0   1.0 1.0 1.0   3
 
 
 #light useTerrainOffset position color intensity attenuation falloffnear fallofffar

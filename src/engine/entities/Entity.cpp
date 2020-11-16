@@ -2,6 +2,22 @@
 #include "../../libs.h"
 #include "Entity.h"
 
+float Entity::getTextureXOffset() {
+	float nOfRows = model->getDiffuseTex()->getNOfRows();
+	float column = texIndex % (int)nOfRows;
+	float ret = column / nOfRows;
+	return ret;
+}
+
+float Entity::getTextureYOffset() {
+	float nOfRows = model->getDiffuseTex()->getNOfRows();
+	int row = texIndex / nOfRows;
+	float ret = (float)row / nOfRows;
+	return ret;
+}
+
+
+
 void Entity::updateModelMatrix() {
 	if (modelUpdated) {
 		modelMatrix = glm::mat4(1.f);

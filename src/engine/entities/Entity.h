@@ -14,13 +14,20 @@ class Entity {
 		glm::mat4 modelMatrix;
 		bool modelUpdated = true;
 
+		glm::vec2 texOffsetVector;
+
+		float getTextureXOffset();
+		float getTextureYOffset();
+
 	public:
 		Entity(Model* model,
 			glm::vec3 position, glm::vec3 origin = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f),
 			int texIndex = 0
 		)
 			: model(model), position(position), origin(origin), rotation(rotation), scale(scale), texIndex(texIndex)
-		{ }
+		{
+			texOffsetVector = glm::vec2(getTextureXOffset(), getTextureYOffset());
+		}
 		virtual ~Entity() { }
 
 		inline void setModel(Model* model) { this->model = model; }
@@ -54,16 +61,8 @@ class Entity {
 
 
 		inline Model* getModel() { return model; }
-		inline float getTextureXOffset() {
-			int nOfRows = model->getDiffuseTex()->getNOfRows();
-			int column = texIndex % nOfRows;
-			return column / nOfRows;
-		}
-		inline float getTextureYOffset() {
-			int nOfRows = model->getDiffuseTex()->getNOfRows();
-			int row = texIndex / nOfRows;
-			return row / nOfRows;
-		}
+
+		inline glm::vec2 getTextureOffsetVector() { return texOffsetVector; }
 
 		inline glm::vec3 getPosition() { return position; }
 		inline glm::vec3 getOrigin()   { return origin; }

@@ -205,9 +205,11 @@ void Playground::update(float dTime) {
 	player->move(dTime, *terrain);
 	static_cast<Camera3D_Player*>(camera)->updatePosition();
 
+	/*
 	entities[1]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
 	entities[2]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
 	entities[3]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
+	*/
 
 	//lightSetPosition();
 }

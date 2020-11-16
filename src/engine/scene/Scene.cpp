@@ -59,8 +59,10 @@ void Scene::loadFromFile() {
 		}
 		else if (prefix == "texture") {
 			std::string texFile;
+			int nOfRows;
 			ss >> texFile;
-			textures.push_back(new Texture(texFile.c_str(), GL_TEXTURE_2D));
+			ss >> nOfRows;
+			textures.push_back(new Texture(texFile.c_str(), GL_TEXTURE_2D, nOfRows));
 		}
 		else if (prefix == "terrainTexPack") {
 			int* texIdx = new int[8];
@@ -158,6 +160,7 @@ void Scene::loadFromFile() {
 			int modelID;
 			int useTerrainOffset;
 			glm::vec3 position, origin, rotation, scale;
+			int texIndex;	// texture number in texture atlas, starts at 0
 
 			ss >> modelID;
 			ss >> useTerrainOffset;
@@ -165,6 +168,7 @@ void Scene::loadFromFile() {
 			ss >> origin.x >> origin.y >> origin.z;
 			ss >> rotation.x >> rotation.y >> rotation.z;
 			ss >> scale.x >> scale.y >> scale.z;
+			ss >> texIndex;
 
 			if (useTerrainOffset == 1) {
 				position.y += terrain->getHeight(position.x, position.z);
@@ -174,7 +178,8 @@ void Scene::loadFromFile() {
 				new Entity(
 					models[modelID],
 					position, origin, rotation,
-					scale
+					scale,
+					texIndex
 				)
 			);
 		}
