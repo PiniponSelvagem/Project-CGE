@@ -139,9 +139,6 @@ void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height
 	if (wup->camera != nullptr) {
 		wup->camera->setAspectRatio(static_cast<float>(fbWidth) / fbHeight);
 	}
-	if (wup->cameraUI != nullptr) {
-		wup->cameraUI->setUIWindowSize(static_cast<float>(fbWidth), static_cast<float>(fbHeight));
-	}
 	glViewport(0, 0, width, height);
 }
 

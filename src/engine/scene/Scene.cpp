@@ -15,6 +15,7 @@ void Scene::loadFromFile() {
 	std::string line = "";
 	std::string prefix = "";
 
+	std::string* shaderUI = new std::string[2];
 	std::string* shaderEntity = new std::string[2];
 	std::string* shaderTerrain = new std::string[2];
 
@@ -29,7 +30,13 @@ void Scene::loadFromFile() {
 		if (prefix == "shader") {
 			std::string type = "";
 			ss >> type;
-			if (type == "core") {
+			if (type == "ui") {
+				std::string glslFile = "";
+				ss >> glslFile;
+				shaderUI[0] = glslFile;	// vertex
+				ss >> glslFile;
+				shaderUI[1] = glslFile;	// fragment
+			} else if (type == "core") {
 				std::string glslFile = "";
 				ss >> glslFile;
 				shaderEntity[0] = glslFile;	// vertex
@@ -237,7 +244,7 @@ void Scene::loadFromFile() {
 				ss >> startYawToPlayer;
 				ss >> startPitchToPlayer;
 
-				camera = new Camera3D_Player(
+				camera = new Camera3D_Player3rd(
 					*player, playerViewHeight, startDistToPlayer, maxDistToPlayer, startYawToPlayer, startPitchToPlayer,
 					fov, nearPlane, farPlane
 				);
@@ -276,6 +283,7 @@ void Scene::loadFromFile() {
 	}
 
 	masterRenderer = new MasterRenderer(
+		shaderUI[0].c_str(),      shaderUI[1].c_str(),		// UIShader
 		shaderEntity[0].c_str(),  shaderEntity[1].c_str(),	// EntityShader
 		shaderTerrain[0].c_str(), shaderTerrain[1].c_str()	// TerrainShader
 	);
@@ -314,6 +322,24 @@ void Scene::initScene() {
 	//initLights();
 	//initEnviroment();
 	//initCamera();
+
+	textures.push_back(new Texture("resources/png/transparency_test.png", GL_TEXTURE_2D));
+
+	//TODO: make this not hardcoded
+	ui.push_back(
+		new UI(textures[textures.size() - 2],
+			   glm::vec2(0.25f, 0.25f), glm::vec2(0.f),
+			   0.f,
+			   glm::vec2(0.15f, 0.25f)
+		)
+	);
+	ui.push_back(
+		new UI(textures[textures.size() - 1],
+			   glm::vec2(0.5f, 0.5f), glm::vec2(0.f),
+			   0.f,
+			   glm::vec2(0.25f, 0.25f)
+		)
+	);
 }
 
 void Scene::reloadShader() {
@@ -328,6 +354,7 @@ Camera* Scene::getMainCamera() {
 
 void Scene::render() {
 	masterRenderer->render(
+		ui,
 		*camera, *fog, ambient, lightsPoint,
 		entities, *terrain
 	);

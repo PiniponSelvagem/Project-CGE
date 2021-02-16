@@ -24,6 +24,8 @@
     <ClCompile Include="src\engine\entities\Entity.cpp" />
     <ClCompile Include="src\engine\entities\player\Player.cpp" />
     <ClCompile Include="src\engine\models\Loader.cpp" />
+    <ClCompile Include="src\engine\render\UIRenderer.cpp" />
+    <ClCompile Include="src\engine\shaders\UIShader.cpp" />
     <ClCompile Include="src\engine\terrains\Terrain.cpp" />
     <ClCompile Include="src\engine\input\Input.cpp" />
     <ClCompile Include="src\engine\input\MouseInput.cpp" />
@@ -32,9 +34,10 @@
     <ClCompile Include="src\engine\render\TerrainRenderer.cpp" />
     <ClCompile Include="src\engine\shaders\EntityShader.cpp" />
     <ClCompile Include="src\engine\shaders\TerrainShader.cpp" />
-    <ClCompile Include="src\engine\ui\CameraUI.cpp" />
     <ClCompile Include="src\engine\lights\LightPoint.h" />
-    <ClCompile Include="src\engine\Utils.cpp" />
+    <ClCompile Include="src\engine\ui\UI.cpp" />
+    <ClCompile Include="src\engine\utils\Maths.cpp" />
+    <ClCompile Include="src\engine\utils\Utils.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\scene\PerformanceTest.cpp" />
     <ClCompile Include="src\game\scene\Playground.cpp" />
@@ -52,9 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_terrain.glsl" />
+    <None Include="resources\shaders\fragment_ui.glsl" />
     <None Include="resources\shaders\vertex_terrain.glsl" />
     <None Include="resources\shaders\fragment_core.glsl" />
     <None Include="resources\shaders\vertex_core.glsl" />
+    <None Include="resources\shaders\vertex_ui.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\camera\Camera2D.h" />
@@ -63,6 +68,8 @@
     <ClInclude Include="src\engine\entities\Entity.h" />
     <ClInclude Include="src\engine\entities\player\Player.h" />
     <ClInclude Include="src\engine\models\Loader.h" />
+    <ClInclude Include="src\engine\render\UIRenderer.h" />
+    <ClInclude Include="src\engine\shaders\UIShader.h" />
     <ClInclude Include="src\engine\terrains\Terrain.h" />
     <ClInclude Include="src\engine\terrains\TerrainTexturePack.h" />
     <ClInclude Include="src\engine\enviroment\Fog.h" />
@@ -75,8 +82,9 @@
     <ClInclude Include="src\engine\render\TerrainRenderer.h" />
     <ClInclude Include="src\engine\shaders\TerrainShader.h" />
     <ClInclude Include="src\engine\shaders\EntityShader.h" />
-    <ClInclude Include="src\engine\ui\CameraUI.h" />
-    <ClInclude Include="src\engine\Utils.h" />
+    <ClInclude Include="src\engine\ui\UI.h" />
+    <ClInclude Include="src\engine\utils\Maths.h" />
+    <ClInclude Include="src\engine\utils\Utils.h" />
     <ClInclude Include="src\engine\WindowUserPointer.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\game\scene\PerformanceTest.h" />

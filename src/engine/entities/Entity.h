@@ -1,5 +1,6 @@
 #pragma once
 #include "../../libs.h"
+#include "../utils/Maths.h"
 #include "../models/Model.h"
 
 class Entity {

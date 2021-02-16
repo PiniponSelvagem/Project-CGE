@@ -14,6 +14,7 @@
 #include "../camera/Camera.h"
 #include "../camera/Camera2D.h"
 #include "../camera/Camera3D_Player3rd.h"
+#include "../ui/UI.h"
 
 class Scene {
 	private:
@@ -41,6 +42,9 @@ class Scene {
 
 		// Models
 		std::vector<Model*> models;
+
+		// UI Textures
+		std::vector<UI*> ui;
 
 		// Entities
 		std::vector<Entity*> entities;

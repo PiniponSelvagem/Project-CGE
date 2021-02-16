@@ -30,10 +30,12 @@ enum mesh_enum {
 
 void Playground::initRenderer() {
 	// Renderer
+	/*
 	masterRenderer = new MasterRenderer(
 		"resources/shaders/vertex_core.glsl",    "resources/shaders/fragment_core.glsl",	// EntityShader
 		"resources/shaders/vertex_terrain.glsl", "resources/shaders/fragment_terrain.glsl"	// TerrainShader
 	);
+	*/
 }
 void Playground::initMeshes() {
 	meshes.push_back(ObjLoader::loadObj_arrays("resources/obj/cube.obj"));
@@ -78,7 +80,6 @@ void Playground::initTextures() {
 			textures[TEX_TERRAIN_PATH],		textures[TEX_TERRAIN_PATH_SPECULAR]
 		)
 	);
-
 }
 void Playground::initMaterials() {
 	materials.push_back(new Material(
@@ -187,7 +188,7 @@ void Playground::initEnviroment() {
 	//ambient = glm::vec3(0.5f);
 }
 void Playground::initCamera() {
-	camera = new Camera3D_Player(
+	camera = new Camera3D_Player3rd(
 		*player, 1.f, 5.f, 20.f, 180.f, -35.f,
 		90.f, 0.001f, 1000.f
 	);
@@ -203,7 +204,8 @@ void Playground::initCamera() {
 
 void Playground::update(float dTime) {
 	player->move(dTime, *terrain);
-	static_cast<Camera3D_Player*>(camera)->updatePosition();
+	static_cast<Camera3D_Player3rd*>(camera)->updatePosition();
+	//static_cast<Camera2D*>(camera)->updateProjectionMatrix();
 
 	/*
 	entities[1]->changeRotation(glm::vec3(0.f, dTime*20.f, 0.f));
@@ -224,16 +226,16 @@ void Playground::playerRight()       { player->setRotateRight();  }
 void Playground::playerJump()        { player->setJump();         }
 
 void Playground::cameraZoom(float zoomOffset)  {
-	static_cast<Camera3D_Player*>(camera)->changeDistanceFromPlayer(zoomOffset * MOUSE_WHEEL_SENSIVITY);
+	static_cast<Camera3D_Player3rd*>(camera)->changeDistanceFromPlayer(zoomOffset * MOUSE_WHEEL_SENSIVITY);
 }
 void Playground::cameraPith(float pitchOffset) {
-	static_cast<Camera3D_Player*>(camera)->changePitch(pitchOffset * MOUSE_SENSIVITY);
+	static_cast<Camera3D_Player3rd*>(camera)->changePitch(pitchOffset * MOUSE_SENSIVITY);
 }
 void Playground::cameraYaw(float yawOffset)    {
-	static_cast<Camera3D_Player*>(camera)->changeAngleAroundPlayer(yawOffset * MOUSE_SENSIVITY);
+	static_cast<Camera3D_Player3rd*>(camera)->changeAngleAroundPlayer(yawOffset * MOUSE_SENSIVITY);
 }
 void Playground::cameraSetPlayerDirection(float yawOffset) {
-	static_cast<Camera3D_Player*>(camera)->changePlayerDirection(yawOffset * MOUSE_SENSIVITY);
+	static_cast<Camera3D_Player3rd*>(camera)->changePlayerDirection(yawOffset * MOUSE_SENSIVITY);
 }
 
 void Playground::lightSetPosition() { lightsPoint[0]->setPosition(camera->getPosition()); }

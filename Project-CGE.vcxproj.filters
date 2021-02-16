@@ -27,9 +27,6 @@
     <ClCompile Include="src\engine\camera\Camera3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\ui\CameraUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -102,7 +99,19 @@
     <ClCompile Include="src\engine\camera\Camera3D_Player3rd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\Utils.cpp">
+    <ClCompile Include="src\engine\render\UIRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\shaders\UIShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\utils\Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\utils\Maths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\ui\UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -115,6 +124,8 @@
     </None>
     <None Include="resources\shaders\vertex_terrain.glsl" />
     <None Include="resources\shaders\fragment_terrain.glsl" />
+    <None Include="resources\shaders\fragment_ui.glsl" />
+    <None Include="resources\shaders\vertex_ui.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libs.h">
@@ -127,9 +138,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\WindowUserPointer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\ui\CameraUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\scene\Scene.h">
@@ -222,7 +230,19 @@
     <ClInclude Include="src\engine\camera\Camera3D_Player3rd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\Utils.h">
+    <ClInclude Include="src\engine\render\UIRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ui\UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\shaders\UIShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\utils\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\utils\Maths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

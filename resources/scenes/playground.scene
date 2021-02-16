@@ -1,5 +1,6 @@
 #Scene Playground
 
+shader ui resources/shaders/vertex_ui.glsl resources/shaders/fragment_ui.glsl
 shader core resources/shaders/vertex_core.glsl resources/shaders/fragment_core.glsl
 shader terrain resources/shaders/vertex_terrain.glsl resources/shaders/fragment_terrain.glsl
 
@@ -89,6 +90,7 @@ fog 0.003 5.0
 #camera 3D fov nearPlane farPlane position direction
 #camera 3D_3 fov nearPlane farPlane playerViewHeight startDistanceToPlayer maxDistanceToPlayer startYawToPlayer startPitchToPlayer
 #CURRENTLY ONLY SUPPORTING 1 CAMERA, IF MORE THAN ONE, MEMORY LEAKS MIGHT HAPPEN OR CRASH
+#camera 2D 180.0 0.001 1000.0 1.5 5.0 20.0 180.0 -35.0
 camera 3D_3 90.0 0.001 1000.0 1.5 5.0 20.0 180.0 -35.0
 ##### Not perfectly supported atm, since in the scene Playground.scene it needs to be specified what camera it intensity
 ##### Maybe this isnt the right approach
