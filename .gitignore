@@ -1,6 +1,5 @@
-
 .vs
-libs
-Project-CGE.vcxproj.user
 x64
 Debug
+/x64/Debug/*
+/libraries/libs/*
