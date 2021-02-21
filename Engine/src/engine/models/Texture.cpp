@@ -10,7 +10,6 @@ void Texture::load(const char* fileName) {
 	multiple Texture instances by the constructor.
 	*/
 
-	int width, height;
 	unsigned char* image = SOIL_load_image(fileName, &width, &height, NULL, SOIL_LOAD_RGBA);
 	const char* soil_log = SOIL_last_result();
 

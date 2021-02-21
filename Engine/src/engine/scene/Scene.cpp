@@ -326,11 +326,15 @@ void Scene::initScene() {
 	textures.push_back(new Texture("resources/png/transparency_test.png", GL_TEXTURE_2D));
 
 	//TODO: make this not hardcoded
+	Texture* tex = textures[textures.size() - 2];
+	float scaleX = (float)tex->getWidth() / 1280;
+	float scaleY = (float)tex->getHeight() / 720;
 	ui.push_back(
-		new UI(textures[textures.size() - 2],
+		new UI(tex,
 			   glm::vec2(0.25f, 0.25f), glm::vec2(0.f),
 			   0.f,
-			   glm::vec2(0.15f, 0.25f)
+			   //glm::vec2(0.5f, 0.1f)
+			   glm::vec2(scaleX, scaleY)
 		)
 	);
 	ui.push_back(

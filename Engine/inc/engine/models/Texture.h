@@ -6,6 +6,7 @@ class Texture {
 		GLuint id;
 		int type;
 		int nOfRows;
+		int width, height;
 
 		void load(const char* fileName);
 
@@ -17,4 +18,7 @@ class Texture {
 		inline GLuint getID()	{ return id; }
 		inline int getType()	{ return type; }
 		inline int getNOfRows() { return nOfRows; }
+
+		inline int getWidth()	{ return width; }
+		inline int getHeight()	{ return height; }
 };
