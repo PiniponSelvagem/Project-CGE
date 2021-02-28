@@ -1,6 +1,11 @@
 #pragma once
 #include <engine/shaders/EntityShader.h>
 
+
+EntityShader::EntityShader(const char* vertexFile, const char* fragmentFile)
+	: Shader(vertexFile, fragmentFile) { }
+EntityShader::~EntityShader() { }
+
 void EntityShader::sendCamera(Camera &camera) {
 	setMat4fv(camera.getViewMatrix(), "ViewMatrix");
 	setVec3f(camera.getPosition(), "cameraPos");

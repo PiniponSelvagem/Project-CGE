@@ -48,7 +48,13 @@ Texture::Texture(const char* fileName, GLenum type, int nOfRows) {
 	this->nOfRows = nOfRows;
 	load(fileName);
 }
-
 Texture::~Texture() {
 	glDeleteTextures(1, &id);
 }
+
+GLuint Texture::getID()   { return id;      }
+int Texture::getType()    { return type;    }
+int Texture::getNOfRows() { return nOfRows; }
+
+int Texture::getWidth()  { return width;  }
+int Texture::getHeight() { return height; }

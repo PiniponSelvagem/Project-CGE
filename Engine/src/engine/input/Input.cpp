@@ -3,11 +3,21 @@
 #include <engine/WindowUserPointer.h>
 
 
+void Input::setKeyState(int key, bool isActive) {
+	std::map<int, bool>::iterator it = keys.find(key);
+	if (it != keys.end()) {
+		keys[key] = isActive;
+	}
+}
+
+
+
 Input::Input(std::vector<int> keysToMonitor) {
 	for (int i : keysToMonitor) {
 		keys[i] = false;
 	}
 }
+Input::~Input() { }
 
 void Input::addKey(int key) {
 	keys.insert(std::map<int, bool>::value_type(key, false));
@@ -24,11 +34,4 @@ bool Input::isKeyActive(int key) {
 		result = keys[key];
 	}
 	return result;
-}
-
-void Input::setKeyState(int key, bool isActive) {
-	std::map<int, bool>::iterator it = keys.find(key);
-	if (it != keys.end()) {
-		keys[key] = isActive;
-	}
 }

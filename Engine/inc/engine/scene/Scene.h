@@ -25,10 +25,10 @@ class Scene {
 		const char* sceneFile;
 
 		// Camera
-		Camera* camera;
+		Camera* camera = NULL;
 
 		// Renderer
-		MasterRenderer* masterRenderer;
+		MasterRenderer* masterRenderer = NULL;
 
 		// Meshes
 		std::vector<Mesh*> meshes;
@@ -51,14 +51,14 @@ class Scene {
 		Player* player;
 
 		// Terrains
-		Terrain* terrain;
+		Terrain* terrain = NULL;
 
 		// Lights
 		std::vector<LightPoint*> lightsPoint;
 
 		// Enviroment
-		Fog* fog;
-		glm::vec3 ambient;
+		Fog* fog = NULL;
+		glm::vec3 ambient = glm::vec3(0.f);
 
 
 		virtual void initRenderer() = 0;

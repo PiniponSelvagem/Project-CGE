@@ -3,11 +3,8 @@
 #include <engine/WindowUserPointer.h>
 
 
-KeyboardInput::KeyboardInput(std::vector<int> keysToMonitor) : Input(keysToMonitor) {
-}
-
-KeyboardInput::~KeyboardInput() {
-}
+KeyboardInput::KeyboardInput(std::vector<int> keysToMonitor) : Input(keysToMonitor) { }
+KeyboardInput::~KeyboardInput() { }
 
 void KeyboardInput::setKeyCallback(GLFWwindow* window) {
 	glfwSetKeyCallback(window, callback);

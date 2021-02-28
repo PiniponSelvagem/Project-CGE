@@ -33,7 +33,7 @@ terrainTexPack 6 -1 7 10 8 -1 9 11
 
 
 #material diffuseReflectiveIntensity specularReflectiveIntensity
-material 1.0 2.0
+material 1.0 1.0
 
 
 #if -1 use default texture for that type (diffuse or specular)

@@ -15,10 +15,10 @@ class Texture {
 		Texture(const char* fileName, GLenum type, int nOfRows = 1);
 		virtual ~Texture();
 
-		inline GLuint getID()	{ return id; }
-		inline int getType()	{ return type; }
-		inline int getNOfRows() { return nOfRows; }
+		GLuint getID();
+		int getType();
+		int getNOfRows();
 
-		inline int getWidth()	{ return width; }
-		inline int getHeight()	{ return height; }
+		int getWidth();
+		int getHeight();
 };

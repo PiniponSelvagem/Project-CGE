@@ -12,11 +12,9 @@ class UIRenderer {
 
 	public:
 		UIRenderer(const char* vertexFile, const char* fragFile);
-		virtual ~UIRenderer() {
-			delete quad;
-		}
+		virtual ~UIRenderer();
+
+		void reloadShader();
 
 		void render(std::vector<UI*> uis);
-
-		void reloadShader() { shader.reload(); }
 };

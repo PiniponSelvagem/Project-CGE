@@ -190,7 +190,7 @@ void Playground::initEnviroment() {
 }
 void Playground::initCamera() {
 	camera = new Camera3D_Player3rd(
-		*player, 1.f, 5.f, 20.f, 180.f, -35.f,
+		player, 1.f, 5.f, 20.f, 180.f, -35.f,
 		90.f, 0.001f, 1000.f
 	);
 
@@ -220,11 +220,11 @@ void Playground::update(float dTime) {
 void Playground::cameraPanTilt(double mouseOffsetX, double mouseOffsetY) {
 	camera->changePanTilt(mouseOffsetX, mouseOffsetY);
 }
-void Playground::playerFoward()      { player->setMoveFoward();   }
-void Playground::playerBackward()    { player->setMoveBackward(); }
-void Playground::playerLeft()        { player->setRotateLeft();   }
-void Playground::playerRight()       { player->setRotateRight();  }
-void Playground::playerJump()        { player->setJump();         }
+void Playground::playerFoward()      { player->moveFoward();   }
+void Playground::playerBackward()    { player->moveBackward(); }
+void Playground::playerLeft()        { player->rotateLeft();   }
+void Playground::playerRight()       { player->rotateRight();  }
+void Playground::playerJump()        { player->jump();         }
 
 void Playground::cameraZoom(float zoomOffset)  {
 	static_cast<Camera3D_Player3rd*>(camera)->changeDistanceFromPlayer(zoomOffset * MOUSE_WHEEL_SENSIVITY);

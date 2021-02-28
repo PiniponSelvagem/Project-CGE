@@ -19,15 +19,11 @@ class MasterRenderer {
 		
 	public:
 		MasterRenderer(
-			const char* uiVertexFile,      const char* uiFragFile,
-			const char* entityVertexFile,  const char* entityFragFile,
+			const char* uiVertexFile, const char* uiFragFile,
+			const char* entityVertexFile, const char* entityFragFile,
 			const char* terrainVertexFile, const char* terrainFragFiler
-		)
-		  : uiRenderer(UIRenderer(uiVertexFile, uiFragFile)),
-			entityRenderer(EntityRenderer(entityVertexFile, entityFragFile)),
-			terrainRenderer(TerrainRenderer(terrainVertexFile, terrainFragFiler))
-		{ }
-		virtual ~MasterRenderer() { }
+		);
+		virtual ~MasterRenderer();
 
 		void reloadShaders();
 

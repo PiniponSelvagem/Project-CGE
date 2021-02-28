@@ -15,12 +15,11 @@ class TerrainRenderer {
 		void bindTextures(Terrain& terrain);
 
 	public:
-		TerrainRenderer(const char* vertexFile, const char* fragFile)
-		: shader(TerrainShader(vertexFile, fragFile)) { }
+		TerrainRenderer(const char* vertexFile, const char* fragFile);
 
 		void sendToShader(Camera& camera, Fog& fog, glm::vec3& ambient, std::vector<LightPoint*>& lightsPoint);
 
-		void render(Terrain& terrain);
+		void reloadShader();
 
-		void reloadShader() { shader.reload(); }
+		void render(Terrain& terrain);
 };

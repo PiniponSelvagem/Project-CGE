@@ -8,16 +8,13 @@ class Fog {
 		float gradient;
 
 	public:
-		Fog(float density, float gradient) {
-			this->density = density;
-			this->gradient = gradient;
-		}
-		~Fog() { }
+		Fog(float density, float gradient);
+		virtual ~Fog();
 
-		inline void setDensity(float density) { this->density = density; }
-		inline void setGradient(float gradient) { this->gradient = gradient; }
+		void setDensity(float density);
+		void setGradient(float gradient);
 
-		inline float getDensity()   { return density; }
-		inline float getGradient() { return gradient; }
+		float getDensity();
+		float getGradient();
 };
 

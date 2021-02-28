@@ -38,6 +38,10 @@ void TerrainRenderer::bindTextures(Terrain& terrain) {
 
 
 
+TerrainRenderer::TerrainRenderer(const char* vertexFile, const char* fragFile)
+	: shader(TerrainShader(vertexFile, fragFile)) {
+}
+
 void TerrainRenderer::sendToShader(Camera &camera, Fog &fog, glm::vec3 &ambient, std::vector<LightPoint*> &lightsPoint) {
 	shader.use();
 	shader.sendCamera(camera);
@@ -45,6 +49,10 @@ void TerrainRenderer::sendToShader(Camera &camera, Fog &fog, glm::vec3 &ambient,
 	shader.sendAmbient(ambient);
 	shader.sendLightsPoint(lightsPoint);
 	shader.unuse();
+}
+
+void TerrainRenderer::reloadShader() {
+	shader.reload();
 }
 
 void TerrainRenderer::render(Terrain& terrain) {

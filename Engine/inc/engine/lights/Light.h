@@ -28,18 +28,14 @@ class Light {
 
 
 	public:
-		Light(glm::vec3 position, glm::vec3 color = glm::vec3(1.f), float intensity = 1.f) {
-			this->position = position;
-			this->color = color;
-			this->intensity = intensity;
-		}
-		virtual ~Light() { }
+		Light(glm::vec3 position, glm::vec3 color = glm::vec3(1.f), float intensity = 1.f);
+		virtual ~Light();
 
-		inline void setPosition(const glm::vec3 position) { this->position = position; }
-		inline void setColor(const glm::vec3 color)       { this->color = color; }
-		inline void serIntensity(const float intensity)   { this->intensity = intensity; }
+		void setPosition(const glm::vec3 position);
+		void setColor(const glm::vec3 color);
+		void setIntensity(const float intensity);
 
-		inline glm::vec3 getPosition() { return position; }
-		inline glm::vec3 getColor()    { return color; }
-		inline float getIntensity()    { return intensity; }
+		glm::vec3 getPosition();
+		glm::vec3 getColor();
+		float getIntensity();
 };

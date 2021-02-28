@@ -30,25 +30,18 @@ class Terrain {
 	public:
 		Terrain(int gridX, int gridZ,
 				const char* heightMap, float size, float maxHeight,
-				TerrainTexturePack* texturePack, Texture* blendMap)
-		: worldPosX(gridX * size), worldPosZ(gridZ * size), SIZE(size), MAX_HEIGHT(maxHeight),
-				texturePack(texturePack), blendMap(blendMap) {
-			this->mesh = generateTerrain(heightMap);
-		}
-		virtual ~Terrain() {
-			delete blendMap;
-			delete mesh;
-		}
+				TerrainTexturePack* texturePack, Texture* blendMap);
+		virtual ~Terrain();
 
-		inline float getWorldPosX() const { return worldPosX; }
-		inline float getWorldPosZ() const { return worldPosZ; }
-		inline int getVertexCount() const { return vertexCount; }
+		float getWorldPosX();
+		float getWorldPosZ();
+		int getVertexCount();
 
 		float getHeight(float worldX, float worldZ);
 
-		inline Mesh* getMesh() const { return mesh; }
-		inline TerrainTexturePack* getTexturePack() const { return texturePack; }
-		inline Texture* getBlendMap() { return blendMap; }
+		Mesh* getMesh();
+		TerrainTexturePack* getTexturePack();
+		Texture* getBlendMap();
 		
-		inline glm::mat4 getModelMatrix() const { return modelMatrix; }
+		glm::mat4 getModelMatrix();
 };

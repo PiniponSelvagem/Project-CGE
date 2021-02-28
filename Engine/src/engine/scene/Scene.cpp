@@ -245,7 +245,7 @@ void Scene::loadFromFile() {
 				ss >> startPitchToPlayer;
 
 				camera = new Camera3D_Player3rd(
-					*player, playerViewHeight, startDistToPlayer, maxDistToPlayer, startYawToPlayer, startPitchToPlayer,
+					player, playerViewHeight, startDistToPlayer, maxDistToPlayer, startYawToPlayer, startPitchToPlayer,
 					fov, nearPlane, farPlane
 				);
 			}
@@ -327,8 +327,8 @@ void Scene::initScene() {
 
 	//TODO: make this not hardcoded
 	Texture* tex = textures[textures.size() - 2];
-	float scaleX = (float)tex->getWidth() / 1280;
-	float scaleY = (float)tex->getHeight() / 720;
+	float scaleX = ((float)tex->getWidth() / 1280) * 0.25f;
+	float scaleY = ((float)tex->getHeight() / 720) * 0.25f;
 	ui.push_back(
 		new UI(tex,
 			   glm::vec2(0.25f, 0.25f), glm::vec2(0.f),

@@ -9,10 +9,8 @@
 
 class TerrainShader : public Shader {
 	public:
-		TerrainShader(const char* vertexFile, const char* fragmentFile)
-			: Shader(vertexFile, fragmentFile)
-		{ }
-		virtual ~TerrainShader() { }
+		TerrainShader(const char* vertexFile, const char* fragmentFile);
+		virtual ~TerrainShader();
 
 		void sendCamera(Camera& camera);
 		void sendFog(Fog& fog);

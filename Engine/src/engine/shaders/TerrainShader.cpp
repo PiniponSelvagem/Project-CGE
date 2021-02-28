@@ -1,6 +1,12 @@
 #pragma once
 #include <engine/shaders/TerrainShader.h>
 
+
+TerrainShader::TerrainShader(const char* vertexFile, const char* fragmentFile)
+	: Shader(vertexFile, fragmentFile) {
+}
+TerrainShader::~TerrainShader() { }
+
 void TerrainShader::sendCamera(Camera &camera) {
 	setMat4fv(camera.getViewMatrix(), "ViewMatrix");
 	setVec3f(camera.getPosition(), "cameraPos");

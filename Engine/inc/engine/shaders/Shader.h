@@ -34,13 +34,10 @@ class Shader {
 
 	public:
 		Shader(const char* vertexFile, const char* fragmentFile);
-		virtual ~Shader() { unload(); }
+		virtual ~Shader();
 
-		void reload() {
-			unload();
-			load();
-		}
+		void reload();
 
-		inline void use() {	glUseProgram(programID); }
-		inline void unuse() { glUseProgram(0); }
+		void use();
+		void unuse();
 };

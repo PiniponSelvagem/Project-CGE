@@ -4,10 +4,10 @@
 
 class Player : public Entity {
 	private:
-		const float runSpeed;
-		const float turnSpeed;
-		const float gravity;
-		const float jumpPower;
+		float runSpeed;
+		float turnSpeed;
+		float gravity;
+		float jumpPower;
 		
 		float currSpeed = 0;
 		float currTurnSpeed = 0;
@@ -18,25 +18,23 @@ class Player : public Entity {
 
 	public:
 		Player(float runSpeed, float turnSpeed, float gravity, float jumpPower,
-			Model* model, glm::vec3 position, glm::vec3 origin = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f)
-		)
-			: runSpeed(runSpeed), turnSpeed(turnSpeed), gravity(gravity), jumpPower(jumpPower),
-			Entity(model, position, origin, rotation, scale)
-		{ }
-		virtual ~Player() { }
+			   Model* model, glm::vec3 position, glm::vec3 origin = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f)
+		);
+		virtual ~Player();
+
+		void setRunSpeed(float speed);
+		void setTurnSpeed(float speed);
+		void setGravity(float gravity);
+		void setJumpPower(float jumpPower);
 		
+
 		void move(float dTime, Terrain& terrain);
 
-		inline void setMoveFoward()   { currSpeed += runSpeed;  }
-		inline void setMoveBackward() { currSpeed += -runSpeed; }
+		void moveFoward();
+		void moveBackward();
 
-		inline void setRotateLeft()  { currTurnSpeed += turnSpeed;  }
-		inline void setRotateRight() { currTurnSpeed += -turnSpeed; }
+		void rotateLeft();
+		void rotateRight();
 
-		inline void setJump() {
-			if (!inAir) {
-				currJumpSpeed = jumpPower;
-				inAir = true;
-			}
-		}
+		void jump();
 };

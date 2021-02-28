@@ -112,6 +112,28 @@ float Terrain::getVertexHeight(float x, float z) {
 
 
 
+Terrain::Terrain(int gridX, int gridZ,
+		const char* heightMap, float size, float maxHeight,
+		TerrainTexturePack* texturePack, Texture* blendMap
+) : worldPosX(gridX* size), worldPosZ(gridZ* size), SIZE(size), MAX_HEIGHT(maxHeight),
+	texturePack(texturePack), blendMap(blendMap)
+{
+	this->mesh = generateTerrain(heightMap);
+}
+Terrain::~Terrain() {
+	delete blendMap;
+	delete mesh;
+}
+
+float Terrain::getWorldPosX() {
+	return worldPosX;
+}
+float Terrain::getWorldPosZ() {
+	return worldPosZ;
+}
+int Terrain::getVertexCount() {
+	return vertexCount;
+}
 
 float Terrain::getHeight(float worldX, float worldZ) {
 	float terrainX = worldX - worldPosX;
@@ -145,4 +167,18 @@ float Terrain::getHeight(float worldX, float worldZ) {
 	}
 	
 	return res;
+}
+
+Mesh* Terrain::getMesh() {
+	return mesh;
+}
+TerrainTexturePack* Terrain::getTexturePack() {
+	return texturePack;
+}
+Texture* Terrain::getBlendMap() {
+	return blendMap;
+}
+
+glm::mat4 Terrain::getModelMatrix() {
+	return modelMatrix;
 }

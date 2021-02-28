@@ -15,6 +15,7 @@ Camera3D::Camera3D(float fov, float nearPlane, float farPlane, glm::vec3 positio
 
 	updateCameraVectors();
 }
+Camera3D::~Camera3D() { }
 
 void Camera3D::updateProjectionMatrix() {
 	projectionMatrix = glm::perspective(

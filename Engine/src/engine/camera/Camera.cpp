@@ -1,6 +1,18 @@
 #pragma once
 #include <engine/camera/Camera.h>
 
+void Camera::setPitch(GLfloat pitch) {
+	this->pitch = pitch;
+
+	if (this->pitch > MAX_PITCH)
+		this->pitch = MAX_PITCH;
+	else if (this->pitch < -MAX_PITCH)
+		this->pitch = -MAX_PITCH;
+}
+void Camera::setYaw(GLfloat yaw) {
+	this->yaw = fmod(yaw, 360.f);
+}
+
 void Camera::updateCameraVectors() {
 	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	front.y = sin(glm::radians(pitch));
@@ -10,6 +22,7 @@ void Camera::updateCameraVectors() {
 	right = glm::normalize(glm::cross(front, worldUp));
 	up = glm::normalize(glm::cross(right, front));
 }
+
 
 
 
@@ -24,6 +37,7 @@ Camera::Camera(float fov, float nearPlane, float farPlane, glm::vec3 position, g
 	this->pitch = direction.y;
 	this->roll  = direction.z;
 }
+Camera::~Camera() { }
 
 const glm::mat4 Camera::getViewMatrix() {
 	updateCameraVectors();
@@ -90,9 +104,9 @@ void Camera::moveWalk(const float &dTime, const int direction) {
 	}
 }
 
-void Camera::changePanTilt(const double &offsetX, const double &offsetY) {
-	pitch += static_cast<GLfloat>(offsetY) * sensivity * BASE_SENSIVITY;
-	yaw += static_cast<GLfloat>(offsetX) * sensivity * BASE_SENSIVITY;
+void Camera::changePanTilt(const float &offsetX, const float &offsetY) {
+	pitch += static_cast<GLfloat>(offsetY * sensivity * BASE_SENSIVITY);
+	yaw += static_cast<GLfloat>(offsetX * sensivity * BASE_SENSIVITY);
 
 	setPitch(pitch);
 	setYaw(yaw);

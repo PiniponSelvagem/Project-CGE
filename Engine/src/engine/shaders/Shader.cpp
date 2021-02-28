@@ -83,13 +83,6 @@ void Shader::unload() {
 
 
 
-Shader::Shader(const char* vertexFile, const char* fragmentFile) {
-	this->vertexFile = vertexFile;
-	this->fragmentFile = fragmentFile;
-
-	load();
-}
-
 void Shader::set1i(GLint value, const GLchar* name) {
 	glUniform1i(glGetUniformLocation(programID, name), value);
 }
@@ -112,4 +105,29 @@ void Shader::setMat3fv(glm::mat3 value, const GLchar* name, GLboolean transpose)
 }
 void Shader::setMat4fv(glm::mat4 value, const GLchar* name, GLboolean transpose) {
 	glUniformMatrix4fv(glGetUniformLocation(programID, name), 1, transpose, glm::value_ptr(value));
+}
+
+
+
+
+Shader::Shader(const char* vertexFile, const char* fragmentFile) {
+	this->vertexFile = vertexFile;
+	this->fragmentFile = fragmentFile;
+
+	load();
+}
+Shader::~Shader() {
+	unload();
+}
+
+void Shader::reload() {
+	unload();
+	load();
+}
+
+void Shader::use() {
+	glUseProgram(programID);
+}
+void Shader::unuse() {
+	glUseProgram(0);
 }

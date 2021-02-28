@@ -15,12 +15,11 @@ class EntityRenderer {
 		void bindTexture(Texture* texture, int textureUnit);
 
 	public:
-		EntityRenderer(const char* vertexFile, const char* fragFile)
-		: shader(EntityShader(vertexFile, fragFile)) { }
+		EntityRenderer(const char* vertexFile, const char* fragFile);
 
 		void sendToShader(Camera& camera, Fog& fog, glm::vec3& ambient, std::vector<LightPoint*>& lightsPoint);
 
-		void render(Entity* entity);
+		void reloadShader();
 
-		void reloadShader() { shader.reload(); }
+		void render(Entity* entity);
 };

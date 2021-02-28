@@ -22,53 +22,42 @@ class Entity {
 
 	public:
 		Entity(Model* model,
-			glm::vec3 position, glm::vec3 origin = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f),
-			int texIndex = 0
-		)
-			: model(model), position(position), origin(origin), rotation(rotation), scale(scale), texIndex(texIndex)
-		{
-			texOffsetVector = glm::vec2(getTextureXOffset(), getTextureYOffset());
-		}
-		virtual ~Entity() { }
+			   glm::vec3 position, glm::vec3 origin = glm::vec3(0.f), glm::vec3 rotation = glm::vec3(0.f), glm::vec3 scale = glm::vec3(1.f),
+			   int texIndex = 0
+		);
+		virtual ~Entity();
 
-		inline void setModel(Model* model) { this->model = model; }
+		void setModel(Model* model);
 
-		inline void changePosition(glm::vec3 position) { this->position += position; modelUpdated = true; }
-		inline void changeOrigin(glm::vec3 origin)     { this->origin += origin;     modelUpdated = true; }
-		inline void changeRotation(glm::vec3 rotation) {
-			this->rotation += rotation;
-			modelUpdated = true;
-
-			if (this->rotation.x > 360.f || this->rotation.x < -360.f) this->rotation.x = 0.f;
-			if (this->rotation.y > 360.f || this->rotation.y < -360.f) this->rotation.y = 0.f;
-			if (this->rotation.z > 360.f || this->rotation.z < -360.f) this->rotation.z = 0.f;
-		}
-		inline void changeScale(glm::vec3 scale)       { this->scale += scale;       modelUpdated = true; }
+		void changePosition(glm::vec3 position);
+		void changeOrigin(glm::vec3 origin);
+		void changeRotation(glm::vec3 rotation);
+		void changeScale(glm::vec3 scale);
 		
-		inline void setPosition(glm::vec3 position) { this->position = position; modelUpdated = true; }
-		inline void setOrigin(glm::vec3 origin)     { this->origin = origin;     modelUpdated = true; }
-		inline void setRotation(glm::vec3 rotation) { this->rotation = rotation; modelUpdated = true; }
-		inline void setScale(glm::vec3 scale)       { this->scale = scale;       modelUpdated = true; }
+		void setPosition(glm::vec3 position);
+		void setOrigin(glm::vec3 origin);
+		void setRotation(glm::vec3 rotation);
+		void setScale(glm::vec3 scale);
 
-		inline void setPositionX(float x) { this->position.x = x; modelUpdated = true; }
-		inline void setPositionY(float y) { this->position.y = y; modelUpdated = true; }
-		inline void setPositionZ(float z) { this->position.z = z; modelUpdated = true; }
+		void setPositionX(float x);
+		void setPositionY(float y);
+		void setPositionZ(float z);
 
-		inline void setRotationX(float x) { this->rotation.x = x; modelUpdated = true; }
-		inline void setRotationY(float y) { this->rotation.y = y; modelUpdated = true; }
-		inline void setRotationZ(float z) { this->rotation.z = z; modelUpdated = true; }
+		void setRotationX(float x);
+		void setRotationY(float y);
+		void setRotationZ(float z);
 
 		void updateModelMatrix();
 
 
-		inline Model* getModel() { return model; }
+		Model* getModel();
 
-		inline glm::vec2 getTextureOffsetVector() { return texOffsetVector; }
+		glm::vec2 getTextureOffsetVector();
 
-		inline glm::vec3 getPosition() { return position; }
-		inline glm::vec3 getOrigin()   { return origin; }
-		inline glm::vec3 getRotation() { return rotation; }
-		inline glm::vec3 getScale()    { return scale; }
+		glm::vec3 getPosition();
+		glm::vec3 getOrigin();
+		glm::vec3 getRotation();
+		glm::vec3 getScale();
 
-		inline glm::mat4 getModelMatrix() { return modelMatrix; }
+		glm::mat4 getModelMatrix();
 };

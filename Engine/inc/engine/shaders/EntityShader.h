@@ -10,10 +10,8 @@
 
 class EntityShader : public Shader {
 	public:
-		EntityShader(const char* vertexFile, const char* fragmentFile)
-			: Shader(vertexFile, fragmentFile)
-		{ }
-		virtual ~EntityShader() { }
+		EntityShader(const char* vertexFile, const char* fragmentFile);
+		virtual ~EntityShader();
 
 		void sendCamera(Camera& camera);
 		void sendFog(Fog& fog);

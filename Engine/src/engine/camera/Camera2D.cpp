@@ -15,6 +15,7 @@ Camera2D::Camera2D(float fov, float nearPlane, float farPlane, glm::vec3 positio
 
 	updateCameraVectors();
 }
+Camera2D::~Camera2D() { }
 
 void Camera2D::updateProjectionMatrix() {
 	float aspectRatioWidth = (aspectRatio / 2.f) * fov;

@@ -8,6 +8,9 @@ void EntityRenderer::bindTexture(Texture* texture, int textureUnit) {
 
 
 
+EntityRenderer::EntityRenderer(const char* vertexFile, const char* fragFile) : shader(EntityShader(vertexFile, fragFile)) {
+}
+
 void EntityRenderer::sendToShader(Camera &camera, Fog &fog, glm::vec3 &ambient, std::vector<LightPoint*> &lightsPoint) {
 	shader.use();
 	shader.sendCamera(camera);
@@ -16,6 +19,10 @@ void EntityRenderer::sendToShader(Camera &camera, Fog &fog, glm::vec3 &ambient, 
 	shader.sendAmbient(ambient);
 	shader.sendLightsPoint(lightsPoint);
 	shader.unuse();
+}
+
+void EntityRenderer::reloadShader() {
+	shader.reload();
 }
 
 void EntityRenderer::render(Entity* entity) {

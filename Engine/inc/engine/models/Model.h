@@ -7,29 +7,20 @@
 
 class Model {
 	private:
-
-		/*
-			TODO:
-			maybe use reference instead of pointers
-
-			check possible other places too
-		*/
 		Mesh* mesh;
 		Texture* diffuseTex, *specularTex;
 		Material* material;
 
 
 	public:
-		Model(Mesh* mesh, Texture* diffuseTex, Texture* specularTex, Material* material)
-			: mesh(mesh), diffuseTex(diffuseTex), specularTex(specularTex), material(material)
-		{ }
-		virtual ~Model() { }
+		Model(Mesh* mesh, Texture* diffuseTex, Texture* specularTex, Material* material);
+		virtual ~Model();
 
-		inline Mesh* getMesh() { return mesh; }
+		Mesh* getMesh();
 
-		inline Texture* getDiffuseTex()  { return diffuseTex; }
-		inline Texture* getSpecularTex() { return specularTex; }
+		Texture* getDiffuseTex();
+		Texture* getSpecularTex();
 
-		inline Material* getMaterial() { return material; }
+		Material* getMaterial();
 
 };

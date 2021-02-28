@@ -1,12 +1,18 @@
 #pragma once
 #include <engine/render/UIRenderer.h>
-
 #include <engine/models/Loader.h>
 
 UIRenderer::UIRenderer(const char* vertexFile, const char* fragFile) 
 : shader(UIShader(vertexFile, fragFile)) {
 	std::vector<glm::vec2> positions = { {-1,1}, {-1,-1}, {1,1}, {1,-1} };
 	quad = Loader::load_simple2D(positions);
+}
+UIRenderer::~UIRenderer() {
+	delete quad;
+}
+
+void UIRenderer::reloadShader() {
+	shader.reload();
 }
 
 void UIRenderer::render(std::vector<UI*> uis) {

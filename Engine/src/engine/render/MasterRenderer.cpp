@@ -2,6 +2,17 @@
 #include <engine/render/MasterRenderer.h>
 
 
+MasterRenderer::MasterRenderer(
+	const char* uiVertexFile,      const char* uiFragFile,
+	const char* entityVertexFile,  const char* entityFragFile,
+	const char* terrainVertexFile, const char* terrainFragFiler
+) : uiRenderer(UIRenderer(uiVertexFile, uiFragFile)),
+	entityRenderer(EntityRenderer(entityVertexFile, entityFragFile)),
+	terrainRenderer(TerrainRenderer(terrainVertexFile, terrainFragFiler)) {
+}
+
+MasterRenderer::~MasterRenderer() { }
+
 void MasterRenderer::reloadShaders() {
 	uiRenderer.reloadShader();
 	entityRenderer.reloadShader();
