@@ -115,8 +115,8 @@ Engine::~Engine() {
 void Engine::getWindowSize(float &width, float &height) {
 	int int_width, int_height;
 	glfwGetWindowSize(window, &int_width, &int_height);
-	width = int_width;
-	height = int_height;
+	width = (float)int_width;
+	height = (float)int_height;
 }
 
 float Engine::getWindowAspectRatio() {

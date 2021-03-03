@@ -27,7 +27,7 @@ Mesh* Loader::load(std::vector<Vertex> vertex) {
 	// UNBIND VAO
 	glBindVertexArray(0);
 
-	return new Mesh(VAO, buffers, vertex.size(), 0);
+	return new Mesh(VAO, buffers, (unsigned int)vertex.size(), 0);
 }
 
 Mesh* Loader::load_wIndices(std::vector<glm::vec3> positions, std::vector<GLuint> indices, std::vector<VertexData> vertexData) {
@@ -71,7 +71,7 @@ Mesh* Loader::load_wIndices(std::vector<glm::vec3> positions, std::vector<GLuint
 	// UNBIND VAO
 	glBindVertexArray(0);
 
-	return new Mesh(VAO, buffers, positions.size(), indices.size());
+	return new Mesh(VAO, buffers, (unsigned int)positions.size(), (unsigned int)indices.size());
 }
 
 Mesh* Loader::load_simple2D(std::vector<glm::vec2> positions) {
@@ -96,5 +96,5 @@ Mesh* Loader::load_simple2D(std::vector<glm::vec2> positions) {
 	// UNBIND VAO
 	glBindVertexArray(0);
 
-	return new Mesh(VAO, buffers, positions.size(), 0);
+	return new Mesh(VAO, buffers, (unsigned int)positions.size(), 0);
 }

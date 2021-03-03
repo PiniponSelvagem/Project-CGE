@@ -10,7 +10,7 @@ class Terrain {
 		const float MAX_PIXEL_COLOR = 256 * 256 * 256;
 
 		float worldPosX, worldPosZ;
-		int vertexCount = 0;
+		unsigned int vertexCount = 0;
 		std::vector<std::vector<float>> heights;
 
 		Mesh* mesh;
@@ -21,8 +21,8 @@ class Terrain {
 
 		Mesh* generateTerrain(const char* heightMap);
 
-		float getHeightOfHMap(unsigned x, unsigned z, unsigned char *hMap, unsigned imgWidth, unsigned channels);
-		glm::vec3 calcNormal(unsigned x, unsigned z, unsigned char *hMap, unsigned imgWidth, unsigned channels);
+		float getHeightOfHMap(unsigned int x, unsigned int z, unsigned char *hMap, unsigned int imgWidth, unsigned int channels);
+		glm::vec3 calcNormal(unsigned int x, unsigned int z, unsigned char *hMap, unsigned int imgWidth, unsigned int channels);
 
 		float getVertexHeight(float x, float z);
 
@@ -35,7 +35,7 @@ class Terrain {
 
 		float getWorldPosX();
 		float getWorldPosZ();
-		int getVertexCount();
+		unsigned int getVertexCount();
 
 		float getHeight(float worldX, float worldZ);
 

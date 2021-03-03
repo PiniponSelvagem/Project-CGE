@@ -43,7 +43,7 @@ void EntityShader::sendMaterial(Material& material) {
 }
 
 void EntityShader::sendTextureInfo(Texture& texture, glm::vec2 offset) {
-	set1f(texture.getNOfRows(), "nOfRows");
+	set1f((GLfloat)texture.getNOfRows(), "nOfRows");
 	setVec2f(offset, "offset");
 }
 

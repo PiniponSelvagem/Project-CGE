@@ -16,7 +16,6 @@ Mesh* Terrain::generateTerrain(const char* heightMap) {
 	
 	vertexCount = width;
 
-	float count = vertexCount * vertexCount;
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec3> normals;
 	std::vector<glm::vec2> texcoords;
@@ -28,7 +27,7 @@ Mesh* Terrain::generateTerrain(const char* heightMap) {
 	int vertexPointer = 0;
 	for (float i = 0; i < vertexCount; i++) {
 		for (float j = 0; j < vertexCount; j++) {
-			float height = getHeightOfHMap(j, i, hMap, width, channels);
+			float height = getHeightOfHMap((unsigned int)j, (unsigned int)i, hMap, width, channels);
 			heightsRow.push_back(height);
 			vertices.push_back(
 				glm::vec3(
@@ -37,7 +36,7 @@ Mesh* Terrain::generateTerrain(const char* heightMap) {
 					i / (vertexCount - 1) * SIZE
 				)
 			);
-			normals.push_back(calcNormal(j, i, hMap, width, channels));
+			normals.push_back(calcNormal((unsigned int)j, (unsigned int)i, hMap, width, channels));
 			texcoords.push_back(
 				glm::vec2(
 					j / (vertexCount - 1),
@@ -51,8 +50,8 @@ Mesh* Terrain::generateTerrain(const char* heightMap) {
 		heightsRow.clear();
 	}
 	int pointer = 0;
-	for (int gz = 0; gz < vertexCount - 1; gz++) {
-		for (int gx = 0; gx < vertexCount - 1; gx++) {
+	for (unsigned int gz = 0; gz < vertexCount - 1; gz++) {
+		for (unsigned int gx = 0; gx < vertexCount - 1; gx++) {
 			int topLeft = (gz*vertexCount) + gx;
 			int topRight = topLeft + 1;
 			int bottomLeft = ((gz + 1)*vertexCount) + gx;
@@ -78,25 +77,26 @@ Mesh* Terrain::generateTerrain(const char* heightMap) {
 	return Loader::load_wIndices(vertices, indices, vertexData);
 }
 
-float Terrain::getHeightOfHMap(unsigned x, unsigned z, unsigned char *hMap, unsigned imgWidth, unsigned channels) {
+float Terrain::getHeightOfHMap(unsigned int x, unsigned int z, unsigned char *hMap, unsigned int imgWidth, unsigned int channels) {
 	if (x >= imgWidth || z >= imgWidth) {
 		return 0;
 	}
 	
 	unsigned bytePerPixel = channels;
-	unsigned char* pixelOffset = hMap + (x + imgWidth * z) * bytePerPixel;
+	unsigned int pixel = (x + imgWidth * z) * bytePerPixel;
+	unsigned char* pixelOffset = hMap + pixel;
 	unsigned char r = pixelOffset[0];
 	unsigned char g = pixelOffset[1];
 	unsigned char b = pixelOffset[2];
 	//unsigned char a = channels >= 4 ? pixelOffset[3] : 0xff;
 
-	float height = (r << 8 * 2) | (g << 8) | b;
+	float height = (float)((r << 8 * 2) | (g << 8) | b);
 	height *= MAX_HEIGHT;
 	height /= MAX_PIXEL_COLOR;
 	return height;
 }
 
-glm::vec3 Terrain::calcNormal(unsigned x, unsigned z, unsigned char *hMap, unsigned imgWidth, unsigned channels) {
+glm::vec3 Terrain::calcNormal(unsigned int x, unsigned int z, unsigned char *hMap, unsigned int imgWidth, unsigned int channels) {
 	float heightL = getHeightOfHMap(x - 1, z, hMap, imgWidth, channels);
 	float heightR = getHeightOfHMap(x + 1, z, hMap, imgWidth, channels);
 	float heightD = getHeightOfHMap(x, z - 1, hMap, imgWidth, channels);
@@ -107,7 +107,7 @@ glm::vec3 Terrain::calcNormal(unsigned x, unsigned z, unsigned char *hMap, unsig
 }
 
 float Terrain::getVertexHeight(float x, float z) {
-	return heights[z][x];
+	return heights[(int)z][(int)x];
 }
 
 
@@ -131,7 +131,7 @@ float Terrain::getWorldPosX() {
 float Terrain::getWorldPosZ() {
 	return worldPosZ;
 }
-int Terrain::getVertexCount() {
+unsigned int Terrain::getVertexCount() {
 	return vertexCount;
 }
 
@@ -139,8 +139,8 @@ float Terrain::getHeight(float worldX, float worldZ) {
 	float terrainX = worldX - worldPosX;
 	float terrainZ = worldZ - worldPosZ;
 	float gridSquareSize = SIZE / (heights.size()-1);
-	int gridX = glm::floor(terrainX / gridSquareSize);
-	int gridZ = glm::floor(terrainZ / gridSquareSize);
+	float gridX = glm::floor(terrainX / gridSquareSize);
+	float gridZ = glm::floor(terrainZ / gridSquareSize);
 
 	if (gridX >= heights.size() - 1 || gridZ >= heights.size() - 1 || gridX < 0 || gridZ < 0)
 		return 0;

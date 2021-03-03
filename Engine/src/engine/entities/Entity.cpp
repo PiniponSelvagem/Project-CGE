@@ -2,14 +2,14 @@
 #include <engine/entities/Entity.h>
 
 float Entity::getTextureXOffset() {
-	float nOfRows = model->getDiffuseTex()->getNOfRows();
-	float column = texIndex % (int)nOfRows;
+	float nOfRows = (float)model->getDiffuseTex()->getNOfRows();
+	float column = fmod((float)texIndex, nOfRows);
 	return column / nOfRows;
 }
 
 float Entity::getTextureYOffset() {
-	float nOfRows = model->getDiffuseTex()->getNOfRows();
-	int row = texIndex / nOfRows;
+	float nOfRows = (float)model->getDiffuseTex()->getNOfRows();
+	int row = texIndex / (int)nOfRows;
 	return (float)row / nOfRows;
 }
 

@@ -42,7 +42,7 @@ void TerrainShader::sendTerrainData(Terrain& terrain) {
 	set1i(4, "gTex");		set1i(5, "gTexSpecular");
 	set1i(6, "bTex");		set1i(7, "bTexSpecular");
 	set1i(8, "blendMap");
-	set1f(terrain.getVertexCount(), "vertexCount");
+	set1f((GLfloat)terrain.getVertexCount(), "vertexCount");
 }
 
 void TerrainShader::sendModelMatrix(glm::mat4& modelMatrix) {
